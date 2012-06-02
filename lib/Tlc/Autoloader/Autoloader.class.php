@@ -1,4 +1,5 @@
 <?php
+namespace Tlc\Autoloader;
 
 /**
  * Description of Autoloader
