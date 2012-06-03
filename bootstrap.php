@@ -8,7 +8,7 @@
 define('ROOT_DIR', __DIR__ . '/');
 
 require_once ROOT_DIR . '/lib/Tlc/Autoloader/Autoloader.class.php';
-spl_autoload_register(array('\Tlc\Autoloader\Autoloader', 'registerAutoload'));
+spl_autoload_register(array('\Tlc\Autoloader\Autoloader', 'loadClass'));
 
 \Tlc\Conf\Conf::loadConfig(ROOT_DIR . 'etc/tlc.ini');
 
