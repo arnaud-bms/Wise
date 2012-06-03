@@ -8,18 +8,6 @@ namespace Tlc\Autoloader;
  */
 class Autoloader 
 {
-    
-    /**
-     * Register autoload
-     * 
-     * @return type 
-     */
-    public static function registerAutoload()
-    {
-        return spl_autoload_register(array(__CLASS__, 'loadClass'));
-    }
-   
-    
     /**
      * Register autoload
      * 
@@ -28,10 +16,10 @@ class Autoloader
     public static function loadClass($class)
     {
         echo $class . "\n";
-        if(strtolower(substr($class, 0, 3)) === 'app') {
-            require_once realpath(__DIR__ . '/../../../') . '/' . strtr($class, '_\\', '//') . '.class.php';
+        if(strtolower(substr($class, 0, 3)) === 'App') {
+            require_once ROOT_DIR . 'app/' . strtr($class, '_\\', '//') . '.class.php';
         } else {
-            require_once realpath(__DIR__ . '/../../') . '/' . strtr($class, '_\\', '//') . '.class.php';
+            require_once ROOT_DIR . 'lib/' . strtr($class, '_\\', '//') . '.class.php';
         }
     }
 }
