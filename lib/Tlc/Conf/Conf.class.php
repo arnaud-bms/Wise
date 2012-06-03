@@ -20,12 +20,24 @@ class Conf extends Component
     /**
      * Set config
      * 
-     * @param array $config
-     * @param string $configName 
+     * @param string $iniFile
      */
-    public static function setConfig($config, $configName = null)
+    public static function loadConfig($iniFile)
     {
-        self::$_config[$configName] = $config;
+        self::$_config = parse_ini_file($iniFile, true);
+    }
+    
+    
+    /**
+     * Overwrite main config 
+     * 
+     * @param string $iniFile
+     */
+    public static function mergeConfig($iniFile)
+    {
+        self::$_config = array_merge(
+                self::$_config, 
+                parse_ini_file($iniFile, true));
     }
     
     
@@ -33,10 +45,12 @@ class Conf extends Component
      * Retrieve config
      * 
      * @param string $section
-     * @param string $configName 
      */
-    public static function getConfig($section, $configName = null)
+    public static function getConfig($section = null)
     {
-        return self::$_config[$configName][$section];
+        if($section !== null) {
+            return self::$_config[$section];
+        }
+        return self::$_config;
     }
 }
