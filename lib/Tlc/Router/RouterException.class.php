@@ -4,7 +4,7 @@ namespace Tlc\Router;
 use Tlc\Component\ComponentException;
 
 /**
- * Description of RouterException
+ * RouterException
  *
  * @author gdievart
  */

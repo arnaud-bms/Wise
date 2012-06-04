@@ -6,7 +6,7 @@ use Tlc\Router\RouterException;
 use Tlc\Conf\Conf;
 
 /**
- * Description of Bootstrap
+ * Router extract informations from route
  *
  * @author gdievart
  */
