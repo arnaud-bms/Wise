@@ -43,6 +43,11 @@ class Bootstrap extends Component
     protected static $_method;
     
     /**
+     * @var string Format
+     */
+    protected static $_format;
+    
+    /**
      * @var array Args to pass to controller 
      */
     protected static $_argv = array();
@@ -90,6 +95,7 @@ class Bootstrap extends Component
         self::$_pattern = $routeInfos['pattern'];
         self::$_controller = $routeInfos['controller'];
         self::$_method = $routeInfos['method'];
+        self::$_format = $routeInfos['format'];
         self::$_argv = $routeInfos['argv'];
         self::$_plugins[self::PLUGIN_PRECALL] = isset($routeInfos['precall']) ? $routeInfos['precall'] : array();
         self::$_plugins[self::PLUGIN_POSTCALL] = isset($routeInfos['postcall']) ? $routeInfos['postcall'] : array();
@@ -199,5 +205,16 @@ class Bootstrap extends Component
     public static function setResponse($response)
     {
         self::$_response = $response;
+    }
+    
+    
+    /**
+     * Retrieve format
+     * 
+     * @return string
+     */
+    public static function getFormat()
+    {
+        return self::$_format;
     }
 }
