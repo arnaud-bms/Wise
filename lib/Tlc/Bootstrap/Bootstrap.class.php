@@ -165,7 +165,7 @@ class Bootstrap extends Component
      */
     public static function getRouteId()
     {
-        return self::getRouteId();
+        return self::$_routeId;
     }
     
     
