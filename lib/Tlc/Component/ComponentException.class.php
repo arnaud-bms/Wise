@@ -16,6 +16,7 @@ class ComponentException extends \Exception
      */
     public function __toString() 
     {
-        
+        $message = $this->getMessage() . '(' . $e->getCode() . ')';
+        return $message;
     }
 }
