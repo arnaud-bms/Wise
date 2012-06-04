@@ -1,6 +1,8 @@
 <?php
 namespace Tlc\Autoloader;
 
+use Tlc\Autoloader\AutoloaderException;
+
 /**
  * Description of Autoloader
  *
@@ -9,17 +11,47 @@ namespace Tlc\Autoloader;
 class Autoloader 
 {
     /**
+     * @var array List alias 
+     */
+    private static $_alias = array();
+    
+    /**
      * Register autoload
      * 
      * @return type 
      */
     public static function loadClass($class)
     {
-        echo $class . "\n";
-        if(strtolower(substr($class, 0, 3)) === 'App') {
-            require_once ROOT_DIR . 'app/' . strtr($class, '_\\', '//') . '.class.php';
-        } else {
-            require_once ROOT_DIR . 'lib/' . strtr($class, '_\\', '//') . '.class.php';
+        foreach(self::$_alias as $prefix => $path) {
+            if(substr($class, 0, strlen($prefix)) === $prefix) {
+                require_once $path . '/' . strtr($class, '\\', '/') . '.class.php';
+                return;
+            }
         }
+        
+        throw new AutoloaderException("Class '$class' not found", 400);
+    }
+    
+    
+    /**
+     * Set alias
+     * 
+     * @param array $alias
+     */
+    public static function setAlias($alias)
+    {
+        self::$_alias = $alias;
+    }
+    
+    
+    /**
+     * Add alias
+     * 
+     * @param string $prefix
+     * @param string $path
+     */
+    public static function addAlias($prefix, $path)
+    {
+        self::$_alias[$prefix] = $path;
     }
 }
