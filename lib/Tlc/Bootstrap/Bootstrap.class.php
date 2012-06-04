@@ -196,7 +196,7 @@ class Bootstrap extends Component
      * 
      * @return string
      */
-    public static function setResponse($reponse)
+    public static function setResponse($response)
     {
         self::$_response = $response;
     }
