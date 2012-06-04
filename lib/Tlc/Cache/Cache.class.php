@@ -40,7 +40,7 @@ class Cache extends Component
         $class = 'Tlc\Cache\Engine\\' . ucfirst($config['engine']);
         $this->_engine = new $class($config[$config['engine']]);
         
-        $this->_enable = $config['enable'];
+        $this->_enable = (boolean)$config['enable'];
     }
     
     
@@ -52,7 +52,11 @@ class Cache extends Component
      */
     public function getCache($uniqId)
     {
-        return $this->_engine->getCache($uniqId);
+        if($this->_enable) {
+            return $this->_engine->getCache($uniqId);
+        }
+        
+        return false;
     }
     
     
@@ -64,6 +68,8 @@ class Cache extends Component
      */
     public function setCache($uniqId, $content)
     {
-        $this->_engine->setCache($uniqId, $content);
+        if($this->_enable) {
+            $this->_engine->setCache($uniqId, $content);
+        }
     }
 }
