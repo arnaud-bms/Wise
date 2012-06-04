@@ -43,7 +43,11 @@ class DB extends Component
 		$user     = $config['user'];
 		$password = $config['password'];
 		
-		$this->_PDO = new PDO($dsn, $user, $password);
+        try {
+            $this->_PDO = new PDO($dsn, $user, $password);
+        } catch(PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode());
+        }
     }
     
     
