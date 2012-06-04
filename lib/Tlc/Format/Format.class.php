@@ -25,22 +25,24 @@ class Format extends Component
      */
     public function formatData($format, $data)
     {
-        if(!in_array($format, $this->_formatAvailable)) {
-            throw new FormatException("Format '$format' is not valid", 400);
+        switch($format) {
+            case 'json':
+                $return = $this->_arrayToJson($data);
+                break;
+            case 'xml':
+                $return = $this->_arrayToXml($data);
+                break;
+            case 'csv':
+                $return = $this->_arrayToCsv($data);
+                break;
+            case 'serialize':
+                $return = $this->_arrayToSerialize($data);
+                break;
+            default:
+                throw new FormatException("Format '$format' is not valid", 400);
         }
         
-        $method = '_arrayTo' . $format;
-        return $this->$method($data);
-        switch($this->_sFormat) {
-            case 'json':
-                return $this->_arrayToJson();
-            case 'xml':
-                return $this->_arrayToXml();
-            case 'csv':
-                return $this->_arrayToCsv();
-            case 'serialize':
-                return $this->_arrayToSerialize();
-        }
+        return $return;
     }
     
     
