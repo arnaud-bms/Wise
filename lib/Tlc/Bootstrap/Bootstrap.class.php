@@ -1,7 +1,8 @@
 <?php
 namespace Tlc\Bootstrap;
 
-use \Tlc\Component\Component;
+use Tlc\Component\Component;
+use Tlc\Router\Router;
 
 /**
  * Description of Bootstrap
@@ -71,7 +72,7 @@ class Bootstrap extends Component
      */
     public static function run() 
     {
-        $router = new \Tlc\Router\Router();
+        $router = new Router();
         self::_setRouteInfos($router->getRouteInfos());
         self::_executeRoute();
     }
