@@ -31,6 +31,16 @@ class Format extends Component
         
         $method = '_arrayTo' . $format;
         return $this->$method($data);
+        switch($this->_sFormat) {
+            case 'json':
+                return $this->_arrayToJson();
+            case 'xml':
+                return $this->_arrayToXml();
+            case 'csv':
+                return $this->_arrayToCsv();
+            case 'serialize':
+                return $this->_arrayToSerialize();
+        }
     }
     
     
@@ -40,9 +50,22 @@ class Format extends Component
      * @param type $data 
      * @return string XML
      */
-    protected function _arrayToXML($data)
+    protected function _arrayToXML($data, $sxe = null, $rootNode = 'xml')
     {
-        
+        if ($sxe === null) {
+            $sxe = simplexml_load_string('<?xml version="1.0" encoding="utf-8"?><' . $rootNode . ' />');
+        }
+
+        foreach($data as $key => $value) {
+            $key = is_numeric($key) ? 'node' : preg_replace('/[^a-z:_-]/i', '', $key);
+            if (is_array($value)) {
+                $this->_arrayToXml($value, $sxe->addChild($key));
+            } else {
+                $sxe->addChild($key, $value);
+            }
+        }
+
+        return $sxe->asXML();
     }
     
     
