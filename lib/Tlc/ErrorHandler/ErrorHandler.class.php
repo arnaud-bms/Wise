@@ -2,9 +2,11 @@
 namespace Tlc\ErrorHandler;
 
 use Tlc\Component\Component;
+use Tlc\Conf\Conf;
+use Tlc\Logger\Logger;
 
 /**
- * Description of ExceptionHandler
+ * Catch all error and log
  *
  * @author gdievart
  */
@@ -18,6 +20,9 @@ class ErrorHandler extends Component
      */
     public static function catchError($errno, $message)
     {
-        echo "Error: " . $message . " (" . $errno . ")\n";
+        if($loggerConfig = Conf::getConfig('logger')) {
+            $logger = new Logger($loggerConfig);
+            $logger->log("Error: " . $message . " (" . $errno . ")\n");
+        }
     }
 }

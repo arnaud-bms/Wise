@@ -64,7 +64,7 @@ class Conf extends Component
     public static function getConfig($section = null)
     {
         if($section !== null) {
-            return self::$_config[$section];
+            return isset(self::$_config[$section]) ? self::$_config[$section] : false;
         }
         return self::$_config;
     }

@@ -2,9 +2,12 @@
 namespace Tlc\ExceptionHandler;
 
 use Tlc\Component\Component;
+use Tlc\Conf\Conf;
+use Tlc\Logger\Logger;
+use Exception;
 
 /**
- * Description of ExceptionHandler
+ * Catch all exception and log
  *
  * @author gdievart
  */
@@ -15,8 +18,11 @@ class ExceptionHandler extends Component
      * 
      * @param Exception $e
      */
-    public static function catchException(\Exception $e)
+    public static function catchException(Exception $e)
     {
-        echo "Exception: " . $e->getMessage() . " (" . $e->getCode() . ")\n";
+        if($loggerConfig = Conf::getConfig('logger')) {
+            $logger = new Logger($loggerConfig);
+            $logger->log((string)$e);
+        }
     }
 }

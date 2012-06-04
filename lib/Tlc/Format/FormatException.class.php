@@ -4,7 +4,7 @@ namespace Tlc\Format;
 use Tlc\Component\ComponentException;
 
 /**
- * Description of RouterException
+ * FormatException
  *
  * @author gdievart
  */

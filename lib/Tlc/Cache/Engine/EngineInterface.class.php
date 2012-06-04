@@ -2,7 +2,7 @@
 namespace Tlc\Cache\Engine;
 
 /**
- * Description of File
+ * Interface of the engine cache
  *
  * @author gdievart
  */

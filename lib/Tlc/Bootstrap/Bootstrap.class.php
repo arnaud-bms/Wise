@@ -5,7 +5,7 @@ use Tlc\Component\Component;
 use Tlc\Router\Router;
 
 /**
- * Description of Bootstrap
+ * Load route application, execute plugin and controller
  *
  * @author gdievart
  */

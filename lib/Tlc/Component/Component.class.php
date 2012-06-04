@@ -2,7 +2,7 @@
 namespace Tlc\Component;
 
 /**
- * Description of Component
+ * Class base 
  *
  * @author gdievart
  */

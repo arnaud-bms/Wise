@@ -2,7 +2,7 @@
 namespace Tlc\Controller;
 
 /**
- * Description of Controller
+ * Abstract Controller
  *
  * @author gdievart
  */
