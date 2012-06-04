@@ -4,7 +4,7 @@ namespace Tlc\Autoloader;
 use Tlc\Autoloader\AutoloaderException;
 
 /**
- * Description of Autoloader
+ * Include class file
  *
  * @author gdievart
  */
