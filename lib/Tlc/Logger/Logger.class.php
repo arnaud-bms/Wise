@@ -29,6 +29,14 @@ class Logger extends Component
     );
     
     /**
+     * @var array Required fields 
+     */
+    protected $_requiredFields = array(
+        'engine',
+        'enable'
+    );
+    
+    /**
      * @var engine Ref to engine
      */
     protected $_engine;
