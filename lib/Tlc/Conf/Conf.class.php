@@ -1,7 +1,7 @@
 <?php
 namespace Tlc\Conf;
 
-use Tlc\Component\Component;
+use Tlc\Component\ComponentStatic;
 use Tlc\Conf\ConfException;
 
 /**
@@ -9,7 +9,7 @@ use Tlc\Conf\ConfException;
  *
  * @author gdievart
  */
-class Conf extends Component 
+class Conf extends ComponentStatic
 {
     
     /**
@@ -63,9 +63,19 @@ class Conf extends Component
      */
     public static function getConfig($section = null)
     {
+        $config = null;
         if($section !== null) {
-            return isset(self::$_config[$section]) ? self::$_config[$section] : false;
+            if(isset(self::$_config[$section])) {
+                if(isset(self::$_config['global'])) {
+                    $config = array_merge(self::$_config['global'], self::$_config[$section]);
+                } else {
+                    $config = self::$_config[$section];
+                }
+            }
+        } else {
+            $config = self::$_config;
         }
-        return self::$_config;
+        
+        return $config;
     }
 }
