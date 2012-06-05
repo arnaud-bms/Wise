@@ -22,11 +22,11 @@ class Cache extends Plugin
      */
     public function precall()
     {
-        echo __METHOD__ . "\n";
         $this->_initCache();
         if($content = $this->_cache->getCache(Bootstrap::getRouteId())) {
-            Bootstrap::setResponse($content);
             Bootstrap::interruptRequest();
+            Bootstrap::setResponse($content);
+            echo $content;
         }
     }
     
@@ -36,7 +36,6 @@ class Cache extends Plugin
      */
     public function postcall()
     {
-        echo __METHOD__ . "\n";
         $this->_initCache();
         $this->_cache->setCache(Bootstrap::getRouteId(), Bootstrap::getResponse());
     }

@@ -24,7 +24,6 @@ class Format extends Plugin
      */
     public function postcall()
     {
-        echo __METHOD__ . "\n";
         $format = new \Tlc\Format\Format();
         Bootstrap::setResponse(
                 $format->formatData(Bootstrap::getFormat(), 

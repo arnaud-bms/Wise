@@ -24,7 +24,6 @@ class Generate extends Plugin
      */
     public function postcall()
     {
-        echo __METHOD__ . "\n";
         $generate = new \Tlc\Generate\Generate(Conf::getConfig('generate'));
         $generate->generateFile(
                 Bootstrap::getRouteName() . ':' . Bootstrap::getFormat(),

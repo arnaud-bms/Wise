@@ -23,7 +23,6 @@ class Output extends Plugin
      */
     public function postcall()
     {
-        echo __METHOD__ . "\n";
         echo Bootstrap::getResponse();
     }
 }
