@@ -1,7 +1,7 @@
 <?php
 namespace Tlc\Bootstrap;
 
-use Tlc\Component\Component;
+use Tlc\Component\ComponentStatic;
 use Tlc\Router\Router;
 
 /**
@@ -9,7 +9,7 @@ use Tlc\Router\Router;
  *
  * @author gdievart
  */
-class Bootstrap extends Component 
+class Bootstrap extends ComponentStatic
 {
     /**
      * @staticvar string Method name call on plugins 
