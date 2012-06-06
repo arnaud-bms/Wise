@@ -21,8 +21,8 @@ class ExceptionHandler extends Component
     public static function catchException(Exception $e)
     {
         if($loggerConfig = Conf::getConfig('logger')) {
-            $logger = new Logger($loggerConfig);
-            $logger->log((string)$e);
+            Logger::init($loggerConfig);
+            Logger::log((string)$e);
         }
     }
 }
