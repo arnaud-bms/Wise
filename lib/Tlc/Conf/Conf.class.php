@@ -63,19 +63,9 @@ class Conf extends ComponentStatic
      */
     public static function getConfig($section = null)
     {
-        $config = null;
         if($section !== null) {
-            if(isset(self::$_config[$section])) {
-                if(isset(self::$_config['global'])) {
-                    $config = array_merge(self::$_config['global'], self::$_config[$section]);
-                } else {
-                    $config = self::$_config[$section];
-                }
-            }
-        } else {
-            $config = self::$_config;
+            return isset(self::$_config[$section]) ? self::$_config[$section] : false;
         }
-        
-        return $config;
+        return self::$_config;
     }
 }
