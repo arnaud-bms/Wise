@@ -18,11 +18,13 @@ class ErrorHandler extends Component
      * @param int $errno
      * @param string $message
      */
-    public static function catchError($errno, $message)
+    public static function catchError($errno, $message, $file, $line)
     {
         if($loggerConfig = Conf::getConfig('logger')) {
-            $logger = new Logger($loggerConfig);
-            $logger->log("Error: " . $message . " (" . $errno . ")\n");
+            $message = 'Error [' . $errno . '] ' . $message . ' ' .
+                       'on file ' . $file . ' (' . $line . ')';
+            Logger::init($loggerConfig);
+            Logger::log($message);
         }
     }
 }
