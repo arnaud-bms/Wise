@@ -4,6 +4,7 @@ namespace Test\Controllers;
 use Test\TestController;
 use Tlc\DB\DB;
 use Tlc\Conf\Conf;
+use PDO;
 
 /**
  * Description of Main
@@ -20,8 +21,10 @@ class Main extends TestController
      */
     public function index($var, $var2)
     {
-        $db = new DB();
-        $return = array($var, $var2);
+        $db = DB::getInstance(Conf::getConfig('database'));
+        $stmt = $db->query("SELECT * FROM test");
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $return['page'] = 'TOTO';
         
         return $return;
     }
