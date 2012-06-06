@@ -20,7 +20,7 @@ Autoloader::setAlias(array(
     'PlugTest'      => ROOT_DIR . 'plugins'
 ));
 
-Conf::loadConfig(ROOT_DIR . 'etc/tlc.ini');
+Conf::loadConfig(ROOT_DIR . 'etc/telco.ini');
 Conf::mergeConfig(ROOT_DIR . 'etc/routing.ini');
 
 if($handlerConfig = Conf::getConfig('exception_handler')) {
@@ -31,4 +31,5 @@ if($errorConfig = Conf::getConfig('error_handler')) {
     set_error_handler(array($errorConfig['class'], $errorConfig['method']));
 }
 
+Bootstrap::init(Conf::getConfig('bootstrap'));
 Bootstrap::run();
