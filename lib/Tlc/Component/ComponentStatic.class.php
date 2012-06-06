@@ -20,7 +20,8 @@ abstract class ComponentStatic
             self::_checkRequiredFields($config);
         }
         
-        self::_init($config);
+        $class = get_called_class();
+        $class::_init($config);
     }
     
     
