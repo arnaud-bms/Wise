@@ -17,6 +17,6 @@ class ComponentException extends \Exception
     public function __toString() 
     {
         return 'Exception [' . $this->getCode() . '] ' .$this->getMessage() . ' ' .
-               'on file ' . $this->getFile() . ' (' . $this->getLine() . ')' . "\n";
+               'on file ' . $this->getFile() . ' (' . $this->getLine() . ')';
     }
 }
