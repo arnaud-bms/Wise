@@ -31,5 +31,5 @@ if($errorConfig = Conf::getConfig('error_handler')) {
     set_error_handler(array($errorConfig['class'], $errorConfig['method']));
 }
 
-Bootstrap::init(Conf::getConfig('bootstrap'));
+Bootstrap::init();
 Bootstrap::run();
