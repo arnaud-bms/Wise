@@ -1,22 +1,14 @@
 <?php
 namespace Telco\Component;
 
+use \Telco\Exception\Exception;
+
 /**
  * Description of ComponentException
  *
  * @author gdievart
  */
-class ComponentException extends \Exception
+class ComponentException extends Exception
 {
     
-    /**
-     * Format message exception
-     * 
-     * @return string message formatted
-     */
-    public function __toString() 
-    {
-        return 'Exception [' . $this->getCode() . '] ' .$this->getMessage() . ' ' .
-               'on file ' . $this->getFile() . ' (' . $this->getLine() . ')';
-    }
 }
