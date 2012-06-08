@@ -97,9 +97,7 @@ class Logger extends ComponentStatic
         if(self::$_enable) {
             self::_loadDriver();
             
-            $message = date('Y-m-d H:i:s') . 
-                       ' [' . self::$_listLevel[$level] . '] ' . 
-                       $message . PHP_EOL;
+            $message = date('Y-m-d H:i:s').' ['.self::$_listLevel[$level].'] '.$message.PHP_EOL;
             self::$_driver->log($message, $level);
             
             if(self::$_output) {
