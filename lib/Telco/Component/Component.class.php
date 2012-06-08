@@ -6,7 +6,7 @@ namespace Telco\Component;
  *
  * @author gdievart
  */
-abstract class Component 
+abstract class Component extends AbstractComponent
 {
     
     /**
@@ -16,26 +16,14 @@ abstract class Component
      */
     public function __construct($config = null) 
     {
+        $class = get_called_class();
+        $config = self::_getComponentConfig($class, $config);
+        
         if($config !== null && is_array($config) && isset($this->_requiredFields)) {
-            $this->_checkRequiredFields($config);
+            self::_checkRequiredFields($this->_requiredFields, $config);
         }
         
         $this->_init($config);
-    }
-    
-    
-    /**
-     * Check is required fields is present
-     * 
-     * @param array $config
-     */
-    private function _checkRequiredFields($config) 
-    {
-        foreach($this->_requiredFields as $field) {
-            if(!array_key_exists($field, $config)) {
-                throw new ComponentException("The field '$field' is required", 400);
-            }
-        }
     }
     
     

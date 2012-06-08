@@ -1,12 +1,14 @@
 <?php
 namespace Telco\Component;
 
+use Telco\Conf\Conf;
+
 /**
  * Class base 
  *
  * @author gdievart
  */
-abstract class ComponentStatic 
+abstract class ComponentStatic extends AbstractComponent
 {
     
     /**
@@ -14,29 +16,16 @@ abstract class ComponentStatic
      * 
      * @param type $config 
      */
-    public static function init($config = null) 
+    public static function init($config = null)
     {
+        $class = get_called_class();
+        $config = self::_getComponentConfig($class, $config);
+        
         if($config !== null && is_array($config) && isset(self::$_requiredFields)) {
-            self::_checkRequiredFields($config);
+            self::_checkRequiredFields(self::$_requiredFields, $config);
         }
         
-        $class = get_called_class();
         $class::_init($config);
-    }
-    
-    
-    /**
-     * Check is required fields is present
-     * 
-     * @param array $config
-     */
-    private static function _checkRequiredFields($config) 
-    {
-        foreach(self::_requiredFields as $field) {
-            if(!array_key_exists($field, $config)) {
-                throw new ComponentException("The field '$field' is required", 400);
-            }
-        }
     }
     
     
