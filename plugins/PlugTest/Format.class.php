@@ -1,9 +1,9 @@
 <?php
 namespace PlugTest;
 
-use Tlc\Bootstrap\Bootstrap;
-use Tlc\Plugin\Plugin;
-use Tlc\Conf\Conf;
+use Telco\Bootstrap\Bootstrap;
+use Telco\Plugin\Plugin;
+use Telco\Conf\Conf;
 
 /**
  * Description of Cache
@@ -24,7 +24,7 @@ class Format extends Plugin
      */
     public function postcall()
     {
-        $format = new \Tlc\Format\Format();
+        $format = new \Telco\Format\Format();
         Bootstrap::setResponse(
                 $format->formatData(Bootstrap::getFormat(), 
                 Bootstrap::getResponse()));

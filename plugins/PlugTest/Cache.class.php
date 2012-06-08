@@ -1,9 +1,9 @@
 <?php
 namespace PlugTest;
 
-use Tlc\Bootstrap\Bootstrap;
-use Tlc\Plugin\Plugin;
-use Tlc\Conf\Conf;
+use Telco\Bootstrap\Bootstrap;
+use Telco\Plugin\Plugin;
+use Telco\Conf\Conf;
 
 /**
  * Description of Cache
@@ -47,7 +47,7 @@ class Cache extends Plugin
     private function _initCache()
     {
         if($this->_cache === null) {
-            $this->_cache = new \Tlc\Cache\Cache(Conf::getConfig('cache'));
+            $this->_cache = new \Telco\Cache\Cache(Conf::getConfig('cache'));
         }
     }
 }

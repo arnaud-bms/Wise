@@ -5,17 +5,17 @@
  * @author gdievart
  */
 
-use Tlc\Autoloader\Autoloader;
-use Tlc\Conf\Conf;
-use Tlc\Bootstrap\Bootstrap;
+use Telco\Autoloader\Autoloader;
+use Telco\Conf\Conf;
+use Telco\Bootstrap\Bootstrap;
 
 define('ROOT_DIR', __DIR__ . '/');
 
-require_once ROOT_DIR . '/lib/Tlc/Autoloader/Autoloader.class.php';
-spl_autoload_register(array('Tlc\Autoloader\Autoloader', 'loadClass'));
+require_once ROOT_DIR . '/lib/Telco/Autoloader/Autoloader.class.php';
+spl_autoload_register(array('Telco\Autoloader\Autoloader', 'loadClass'));
 
 Autoloader::setAlias(array(
-    'Tlc'           => ROOT_DIR . 'lib',
+    'Telco'         => ROOT_DIR . 'lib',
     'Test'          => ROOT_DIR . 'app',
     'PlugTest'      => ROOT_DIR . 'plugins'
 ));

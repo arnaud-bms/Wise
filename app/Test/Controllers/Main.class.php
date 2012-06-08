@@ -2,8 +2,8 @@
 namespace Test\Controllers;
 
 use Test\TestController;
-use Tlc\DB\DB;
-use Tlc\Conf\Conf;
+use Telco\DB\DB;
+use Telco\Conf\Conf;
 use PDO;
 
 /**

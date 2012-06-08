@@ -1,9 +1,9 @@
 <?php
 namespace PlugTest;
 
-use Tlc\Bootstrap\Bootstrap;
-use Tlc\Plugin\Plugin;
-use Tlc\Conf\Conf;
+use Telco\Bootstrap\Bootstrap;
+use Telco\Plugin\Plugin;
+use Telco\Conf\Conf;
 
 /**
  * Description of Cache
@@ -24,7 +24,7 @@ class Generate extends Plugin
      */
     public function postcall()
     {
-        $generate = new \Tlc\Generate\Generate(Conf::getConfig('generate'));
+        $generate = new \Telco\Generate\Generate(Conf::getConfig('generate'));
         $generate->generateFile(
                 Bootstrap::getRouteName() . ':' . Bootstrap::getFormat(),
                 Bootstrap::getResponse());

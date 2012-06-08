@@ -1,8 +1,8 @@
 <?php
 namespace Test;
 
-use Tlc\Controller\Controller;
-use Tlc\Conf\Conf;
+use Telco\Controller\Controller;
+use Telco\Conf\Conf;
 
 /**
  * Description of Main

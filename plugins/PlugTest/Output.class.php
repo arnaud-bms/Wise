@@ -1,8 +1,8 @@
 <?php
 namespace PlugTest;
 
-use Tlc\Bootstrap\Bootstrap;
-use Tlc\Plugin\Plugin;
+use Telco\Bootstrap\Bootstrap;
+use Telco\Plugin\Plugin;
 
 /**
  * Description of Cache
