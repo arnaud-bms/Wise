@@ -1,15 +1,15 @@
 <?php
-namespace Telco\Logger\Engine;
+namespace Telco\Logger\Driver;
 
-use Telco\Component\Component;
-use Telco\Logger\Engine\EngineInterface;
+use Telco\Logger\Driver\AbstractDriver;
+use Telco\Logger\LoggerException;
 
 /**
- * File engine for Logger
+ * File driver for Logger
  *
  * @author gdievart
  */
-class File extends Component implements EngineInterface 
+class File extends AbstractDriver
 {
     /**
      * @var array Required fields 
@@ -29,13 +29,17 @@ class File extends Component implements EngineInterface
     protected $_handle;
     
     /**
-     * Init File engine
+     * Init File driver
      * 
      * @param array $config 
      */
-    public function _init($config)
+    public function __construct($config)
     {
-        $this->_file = $config['file'];
+        if(isset($config['file'])) {
+            $this->_file = $config['file'];
+        } else {
+            throw new LoggerException('Driver File required field "file"');
+        }
     }
     
     /**

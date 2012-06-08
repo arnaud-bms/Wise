@@ -2,6 +2,7 @@
 namespace Telco\Logger;
 
 use Telco\Component\ComponentStatic;
+use Telco\Logger\LoggerException;
 
 /**
  * Format data from array to csv, json, xml, serialize ...
@@ -32,29 +33,29 @@ class Logger extends ComponentStatic
      * @var array Required fields 
      */
     protected static $_requiredFields = array(
-        'engine',
+        'driver',
         'enable'
     );
     
     /**
-     * @var engine Engine to load
+     * @var driver Driver to load
      */
-    protected static $_engineToLoad;
+    protected static $_driverToLoad;
     
     /**
-     * @var engine Engine loaded
+     * @var driver Driver loaded
      */
-    protected static $_engineLoaded;
+    protected static $_driverLoaded;
     
     /**
-     * @var engine Engine load
+     * @var driver Driver load
      */
-    protected static $_engineConfig;
+    protected static $_driverConfig;
     
     /**
-     * @var engine Ref to engine
+     * @var driver Ref to driver
      */
-    protected static $_engine;
+    protected static $_driver;
     
     /**
      * @var boolean Enable log
@@ -73,15 +74,15 @@ class Logger extends ComponentStatic
      */
     protected static function _init($config)
     {
-        self::$_engineLoaded = false;
-        self::$_engineToLoad = $config['engine'];
-        self::$_engineConfig = $config[$config['engine']];
-        
         self::$_enable = (boolean)$config['enable'];
         
         if(isset($config['output'])) {
             self::$_output = (boolean)$config['output'];
         }
+        
+        self::$_driverLoaded = false;
+        self::$_driverToLoad = $config['driver'];
+        self::$_driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
     }
     
     
@@ -94,12 +95,12 @@ class Logger extends ComponentStatic
     public static function log($message, $level = self::LOG_INFO)
     {
         if(self::$_enable) {
-            self::_loadEngine();
+            self::_loadDriver();
             
             $message = date('Y-m-d H:i:s') . 
                        ' [' . self::$_listLevel[$level] . '] ' . 
                        $message . PHP_EOL;
-            self::$_engine->log($message, $level);
+            self::$_driver->log($message, $level);
             
             if(self::$_output) {
                 echo $message;
@@ -109,14 +110,14 @@ class Logger extends ComponentStatic
     
     
     /**
-     * Load engine Logger
+     * Load driver Logger
      */
-    protected static function _loadEngine()
+    protected static function _loadDriver()
     {
-        if(self::$_engine === null || self::$_engineToLoad === false) {
-            $class = 'Telco\Logger\Engine\\' . ucfirst(self::$_engineToLoad);
-            self::$_engine = new $class(self::$_engineConfig);
-            self::$_engineLoaded = true;
+        if(self::$_driver === null || self::$_driverToLoad === false) {
+            $class = 'Telco\Logger\Driver\\' . ucfirst(self::$_driverToLoad);
+            self::$_driver = new $class(self::$_driverConfig);
+            self::$_driverLoaded = true;
         }
     }
 }
