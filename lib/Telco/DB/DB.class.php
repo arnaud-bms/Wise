@@ -57,7 +57,7 @@ class DB extends Component
 	 * @param array $config
 	 * @return DB
 	 */
-	public static function getInstance($config) {
+	public static function getInstance($config = null) {
 		if(!self::$_instance instanceOf DB) {
 			self::$_instance = new DB($config);
 		}
