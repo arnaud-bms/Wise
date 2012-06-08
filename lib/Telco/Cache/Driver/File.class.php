@@ -1,15 +1,15 @@
 <?php
-namespace Telco\Cache\Engine;
+namespace Telco\Cache\Driver;
 
 use Telco\Component\Component;
-use Telco\Cache\Engine\EngineInterface;
+use Telco\Cache\Driver\AbstractDriver;
 
 /**
- * Engine Cache with file system
+ * Driver Cache with file system
  *
  * @author gdievart
  */
-class File extends Component implements EngineInterface 
+class File extends AbstractDriver
 {
     /**
      * @var array Required fields 
@@ -30,12 +30,18 @@ class File extends Component implements EngineInterface
     protected $_ttl;
     
     /**
-     * Init File engine
+     * Init File driver
      * 
      * @param array $config 
      */
     public function _init($config)
     {
+        foreach($this->_requiredFields as $field) {
+            if(!array_key_exists($field, $config)) {
+                throw new CacheException("The field '$field' is required on drivre File", 400);
+            }
+        }
+        
         $this->_path = $config['path'];
         $this->_ttl  = $config['ttl'];
     }

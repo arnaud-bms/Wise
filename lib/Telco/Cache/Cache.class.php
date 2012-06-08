@@ -12,9 +12,9 @@ class Cache extends Component
 {
     
     /**
-     * @var CacheEngine 
+     * @var CacheDriver 
      */
-    protected $_engine;
+    protected $_driver;
     
     /**
      * @var boolean Enable Cache 
@@ -26,7 +26,7 @@ class Cache extends Component
      */
     protected $_requiredFields = array(
         'enable',
-        'engine'
+        'driver'
     );
     
     
@@ -37,8 +37,9 @@ class Cache extends Component
      */
     protected function _init($config)
     {
-        $class = 'Telco\Cache\Engine\\' . ucfirst($config['engine']);
-        $this->_engine = new $class($config[$config['engine']]);
+        $class = 'Telco\Cache\Driver\\' . ucfirst($config['driver']);
+        $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
+        $this->_driver = new $class($driverConfig);
         
         $this->_enable = (boolean)$config['enable'];
     }
@@ -53,7 +54,7 @@ class Cache extends Component
     public function getCache($uniqId)
     {
         if($this->_enable) {
-            return $this->_engine->getCache($uniqId);
+            return $this->_driver->getCache($uniqId);
         }
         
         return false;
@@ -69,7 +70,7 @@ class Cache extends Component
     public function setCache($uniqId, $content)
     {
         if($this->_enable) {
-            $this->_engine->setCache($uniqId, $content);
+            $this->_driver->setCache($uniqId, $content);
         }
     }
 }
