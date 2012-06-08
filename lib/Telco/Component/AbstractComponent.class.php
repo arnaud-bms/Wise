@@ -19,12 +19,14 @@ abstract class AbstractComponent
      * @return array
      */
     protected static function _getComponentConfig($class, $config) {
-        $configName = substr($class, strlen('Telco\\'));
-        $configName = substr($configName, 0, strpos($configName, '\\'));
-        $configName = strtolower($configName);
-        
-        if($componentConfig = Conf::getConfig($configName)) {
-            $config = $componentConfig;
+        if($config === null) {
+            $configName = substr($class, strlen('Telco\\'));
+            $configName = substr($configName, 0, strpos($configName, '\\'));
+            $configName = strtolower($configName);
+
+            if($componentConfig = Conf::getConfig($configName)) {
+                $config = $componentConfig;
+            }
         }
         
         return $config;
