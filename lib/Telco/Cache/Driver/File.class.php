@@ -34,7 +34,7 @@ class File extends AbstractDriver
      * 
      * @param array $config 
      */
-    public function _init($config)
+    public function __construct($config)
     {
         foreach($this->_requiredFields as $field) {
             if(!array_key_exists($field, $config)) {
