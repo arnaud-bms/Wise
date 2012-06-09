@@ -46,11 +46,10 @@ class Autoloader
     /**
      * Add alias
      * 
-     * @param string $prefix
-     * @param string $path
+     * @param array $alias
      */
-    public static function addAlias($prefix, $path)
+    public static function addAlias($alias)
     {
-        self::$_alias[$prefix] = $path;
+        self::$_alias = array_merge(self::$_alias, $alias);
     }
 }
