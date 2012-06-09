@@ -15,7 +15,8 @@ require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
 spl_autoload_register(array('Telco\Autoloader\Autoloader', 'loadClass'));
 
 Autoloader::setAlias(array(
-    'Telco'         => ROOT_DIR.'core/components'
+    'Telco'         => ROOT_DIR.'core/components',
+    'Plugin'        => ROOT_DIR.'plugins/Plugin'
 ));
 
 Conf::loadConfig(ROOT_DIR.'etc/telco.ini');
