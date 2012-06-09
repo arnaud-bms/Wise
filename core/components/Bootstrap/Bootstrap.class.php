@@ -75,10 +75,10 @@ class Bootstrap extends ComponentStatic
     /**
      * Run application
      */
-    public static function run() 
+    public static function run($route = null) 
     {
         $router = new Router();
-        self::_setRouteInfos($router->getRouteInfos());
+        self::_setRouteInfos($router->getRouteInfos($route));
         self::_executeRoute();
     }
     

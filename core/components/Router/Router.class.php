@@ -38,15 +38,18 @@ class Router extends Component
     /**
      * Extract route informatios from argv
      * 
+     * @param string $route
      * @return array 
      */
-    public function getRouteInfos()
+    public function getRouteInfos($route = null)
     {
-        if($this->_sapiName === self::SAPI_CLI) {
-            array_shift($_SERVER['argv']);
-            $route = implode($_SERVER['argv'], ' ');
-        }  else {
-            $route = $_SERVER['REQUEST_URI'];
+        if($route === null) {
+            if($this->_sapiName === self::SAPI_CLI) {
+                array_shift($_SERVER['argv']);
+                $route = implode($_SERVER['argv'], ' ');
+            }  else {
+                $route = $_SERVER['REQUEST_URI'];
+            }
         }
         
         return $this->_getRouteInfos($route);

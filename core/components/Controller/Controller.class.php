@@ -16,18 +16,10 @@ abstract class Controller
      * Redirect
      * 
      * @param type $route
-     * @param type $type 
      */
-    protected function _redirect($route, $type = Router::SAPI_CGI)
+    protected function _redirect($route)
     {
-        if($type === Router::SAPI_CGI) {
-            $_SERVER['REQUEST_URI'] = $route;
-        } else {
-            $_SERVER['argv'][0] = '';
-            $_SERVER['argv'] = array_merge($_SERVER['argv'], explode(' ', $route));
-        }
-        
-        Bootstrap::run();
+        Bootstrap::run($route);
         Bootstrap::interruptRequest();
     }
 }
