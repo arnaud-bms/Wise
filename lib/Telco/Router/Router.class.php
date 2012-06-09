@@ -12,6 +12,11 @@ use Telco\Conf\Conf;
  */
 class Router extends Component 
 {
+    /**
+     * @staticvar SAPI 
+     */
+    const SAPI_CLI = 'cli';
+    const SAPI_CGI = 'cgi';
     
     /**
      * @var type current sapi_name
@@ -37,7 +42,7 @@ class Router extends Component
      */
     public function getRouteInfos()
     {
-        if($this->_sapiName === 'cli') {
+        if($this->_sapiName === self::SAPI_CLI) {
             array_shift($_SERVER['argv']);
             $route = implode($_SERVER['argv'], ' ');
         }  else {
