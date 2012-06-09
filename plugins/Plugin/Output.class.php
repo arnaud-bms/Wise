@@ -1,16 +1,15 @@
 <?php
-namespace PlugTest;
+namespace Plugin;
 
 use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
-use Telco\Conf\Conf;
 
 /**
- * Format data
+ * Description of Cache
  *
  * @author gdievart
  */
-class Format extends Plugin
+class Output extends Plugin
 {
     
     /**
@@ -24,9 +23,6 @@ class Format extends Plugin
      */
     public function postcall()
     {
-        $format = new \Telco\Format\Format();
-        Bootstrap::setResponse(
-                $format->formatData(Bootstrap::getFormat(), 
-                Bootstrap::getResponse()));
+        echo Bootstrap::getResponse();
     }
 }

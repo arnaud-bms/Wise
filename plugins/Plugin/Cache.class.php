@@ -1,5 +1,5 @@
 <?php
-namespace PlugTest;
+namespace Plugin;
 
 use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
