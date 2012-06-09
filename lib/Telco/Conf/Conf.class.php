@@ -60,12 +60,38 @@ class Conf extends ComponentStatic
      * Retrieve config
      * 
      * @param string $section
+     * @return mixed
      */
     public static function getConfig($section = null)
     {
+        $config = self::$_config;
         if($section !== null) {
-            return isset(self::$_config[$section]) ? self::$_config[$section] : false;
+            $section = explode('.', $section);
+            foreach($section as $field) {
+                $config = isset($config[$field]) ? $config[$field] : false;
+            }
         }
-        return self::$_config;
+        return $config;
+    }
+    
+    
+    /**
+     * Retrieve config
+     * 
+     * @param string $section
+     * @param mixed  $newConfig
+     */
+    public static function setConfig($section, $newConfig)
+    {
+        $config =& self::$_config;
+        $section = explode('.', $section);
+        foreach($section as $field) {
+            if(isset($config[$field])) {
+                $config =& $config[$field];
+            } else {
+                $config[$field] = null;
+            }
+        }
+        $config = $newConfig;
     }
 }
