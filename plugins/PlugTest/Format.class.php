@@ -6,7 +6,7 @@ use Telco\Plugin\Plugin;
 use Telco\Conf\Conf;
 
 /**
- * Description of Cache
+ * Format data
  *
  * @author gdievart
  */
