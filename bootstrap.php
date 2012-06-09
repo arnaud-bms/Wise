@@ -11,13 +11,13 @@ use Telco\Bootstrap\Bootstrap;
 
 define('ROOT_DIR', __DIR__.'/');
 
-require_once ROOT_DIR.'/lib/Telco/Autoloader/Autoloader.class.php';
+require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
 spl_autoload_register(array('Telco\Autoloader\Autoloader', 'loadClass'));
 
 Autoloader::setAlias(array(
-    'Telco'         => ROOT_DIR.'lib',
-    'Test'          => ROOT_DIR.'app',
-    'PlugTest'      => ROOT_DIR.'plugins'
+    'Telco'         => ROOT_DIR.'core/components',
+    'Test'          => ROOT_DIR.'app/Test',
+    'PlugTest'      => ROOT_DIR.'plugins/PlugTest'
 ));
 
 Conf::loadConfig(ROOT_DIR.'etc/telco.json');

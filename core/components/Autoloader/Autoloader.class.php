@@ -24,6 +24,7 @@ class Autoloader
     {
         foreach(self::$_alias as $prefix => $path) {
             if(substr($class, 0, strlen($prefix)) === $prefix) {
+                $class = substr($class, strlen($prefix)+1);
                 require_once $path.'/'.strtr($class, '\\', '/').'.class.php';
                 return;
             }
