@@ -23,7 +23,6 @@ abstract class Controller
         if($type === Router::SAPI_CGI) {
             $_SERVER['REQUEST_URI'] = $route;
         } else {
-            echo $route . "\n";
             $_SERVER['argv'][0] = '';
             $_SERVER['argv'] = array_merge($_SERVER['argv'], explode(' ', $route));
         }
