@@ -112,8 +112,6 @@ class Bootstrap extends ComponentStatic
         self::_executePlugins(self::PLUGIN_PRECALL);
         self::_executeAction();
         self::_executePlugins(self::PLUGIN_POSTCALL);
-        
-        return self::$_response;
     }
     
     
