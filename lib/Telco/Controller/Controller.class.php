@@ -26,6 +26,8 @@ abstract class Controller
             $_SERVER['argv'][0] = '';
             $_SERVER['argv'] = array_merge($_SERVER['argv'], explode(' ', $route));
         }
+        
         Bootstrap::run();
+        Bootstrap::interruptRequest();
     }
 }
