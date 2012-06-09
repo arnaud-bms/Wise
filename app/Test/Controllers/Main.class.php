@@ -4,6 +4,7 @@ namespace Test\Controllers;
 use Test\TestController;
 use Telco\DB\DB;
 use Telco\Conf\Conf;
+use Telco\Router\Router;
 use PDO;
 
 /**
@@ -21,11 +22,22 @@ class Main extends TestController
      */
     public function index($var, $var2)
     {
-        $db = DB::getInstance(Conf::getConfig('database'));
+        $db = DB::getInstance();
         $stmt = $db->query("SELECT * FROM test");
         $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $return['page'] = 'TOTO';
         
         return $return;
+    }
+    
+    
+    /**
+     * Method redirect
+     * 
+     * @param string $var 
+     */
+    public function redirect()
+    {
+        $this->_redirect('/Test titi chuc', Router::SAPI_CLI);
     }
 }
