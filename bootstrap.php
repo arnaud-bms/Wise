@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of bootstrap
+ * Bootstrap of application
  *
  * @author gdievart
  */
@@ -15,9 +15,7 @@ require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
 spl_autoload_register(array('Telco\Autoloader\Autoloader', 'loadClass'));
 
 Autoloader::setAlias(array(
-    'Telco'         => ROOT_DIR.'core/components',
-    'Test'          => ROOT_DIR.'app/Test',
-    'PlugTest'      => ROOT_DIR.'plugins/PlugTest'
+    'Telco'         => ROOT_DIR.'core/components'
 ));
 
 Conf::loadConfig(ROOT_DIR.'etc/telco.ini');
