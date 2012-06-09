@@ -20,7 +20,7 @@ Autoloader::setAlias(array(
     'PlugTest'      => ROOT_DIR . 'plugins'
 ));
 
-Conf::loadConfig(ROOT_DIR . 'etc/telco.ini');
+Conf::loadConfig(ROOT_DIR . 'etc/telco.json');
 Conf::mergeConfig(ROOT_DIR . 'etc/routing.ini');
 
 if($handlerConfig = Conf::getConfig('exception_handler')) {
