@@ -90,19 +90,19 @@ class Bootstrap extends ComponentStatic
      */
     protected static function _setRouteInfos($routeInfos)
     {
-        self::$_routeId = md5(serialize($routeInfos));
-        self::$_routeName = $routeInfos['name'];
-        self::$_pattern = $routeInfos['pattern'];
+        self::$_routeId    = md5(serialize($routeInfos));
+        self::$_routeName  = $routeInfos['name'];
+        self::$_pattern    = $routeInfos['pattern'];
         self::$_controller = $routeInfos['controller'];
-        self::$_method = $routeInfos['method'];
-        self::$_format = $routeInfos['format'];
-        self::$_argv = $routeInfos['argv'];
+        self::$_method     = $routeInfos['method'];
+        self::$_format     = isset($routeInfos['format']) ? $routeInfos['format'] : null;
+        self::$_argv       = $routeInfos['argv'];
         self::$_plugins[self::PLUGIN_PRECALL] = isset($routeInfos['precall']) 
-                                                ? explode(';', $routeInfos['precall']) 
-                                                : array();
+                                                    ? explode(';', $routeInfos['precall']) 
+                                                    : array();
         self::$_plugins[self::PLUGIN_POSTCALL] = isset($routeInfos['postcall']) 
-                                                 ? explode(';', $routeInfos['postcall']) 
-                                                 : array();
+                                                    ? explode(';', $routeInfos['postcall']) 
+                                                    : array();
     }
     
     
