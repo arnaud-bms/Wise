@@ -28,6 +28,24 @@ class Router extends Component
      */
     private $_appLoaded = null;
     
+    /**
+     * @var array Required fields to route app 
+     */
+    private $_requiredFieldsRouteApp = array(
+        'type',
+        'prefix',
+        'app'
+    );
+    
+    /**
+     * @var array Required fields to route 
+     */
+    private $_requiredFieldsRoute = array(
+        'pattern',
+        'controller',
+        'method'
+    );
+    
     
     /**
      * Init Router
@@ -73,6 +91,7 @@ class Router extends Component
         $routeInfos = false;
         $routing = $this->_getRoutingApp($route);
         foreach($routing as $routeName => $routeTest) {
+            $this->_checkFieldsRoute($routeTest);
             $pattern = '#'.$routeTest['pattern'].'#';
             if(preg_match($pattern, $route, $argv )) {
                 $routeInfos = $routeTest;
@@ -92,6 +111,21 @@ class Router extends Component
     
     
     /**
+     * Check require fields for routeApp
+     * 
+     * @param array $routeApp
+     */
+    private function _checkFieldsRoute($route)
+    {
+        foreach($this->_requiredFieldsRoute as $field) {
+            if(!array_key_exists($field, $route)) {
+                throw new RouterException("The field '$field' is required in route", 407);
+            }
+        }
+    }
+    
+    
+    /**
      * Extract informations from main routing
      * 
      * @param string $route
@@ -101,13 +135,11 @@ class Router extends Component
     {
         $routing = false;
         if($routeConfig = Conf::getConfig('route_apps')) {
-            foreach($routeConfig as $routingName => $routingInfos) {
-                $prefix = substr($route, 0, strlen($routingInfos['prefix']));
-                if($routingInfos['type'] === $this->_sapiName 
-                        && $routingInfos['prefix'] === $prefix
-                        && isset($routingInfos['app'])) {
-                    $this->_appLoaded = $routingInfos['app'];
-                    require_once ROOT_DIR.'app/'.$routingInfos['app'].'/bootstrap.php';
+            foreach($routeConfig as $routeApp) {
+                $this->_checkFieldsRouteApp($routeApp);
+                $prefix = substr($route, 0, strlen($routeApp['prefix']));
+                if($routeApp['type'] === $this->_sapiName  && $routeApp['prefix'] === $prefix) {
+                    $this->_loadApp($routeApp['app']);
                     $routing = Conf::getConfig('routing');
                     break;
                 }
@@ -119,5 +151,37 @@ class Router extends Component
         }
         
         return $routing;
+    }
+    
+    
+    /**
+     * Check require fields for routeApp
+     * 
+     * @param array $routeApp
+     */
+    private function _checkFieldsRouteApp($routeApp)
+    {
+        foreach($this->_requiredFieldsRouteApp as $field) {
+            if(!array_key_exists($field, $routeApp)) {
+                throw new RouterException("The field '$field' is required in routeApp", 406);
+            }
+        }
+    }
+    
+    
+    /**
+     * Load bootstrap application
+     * 
+     * @param string $appName
+     */
+    private function _loadApp($appName)
+    {
+        $bootstrapFile = ROOT_DIR.'app/'.$appName.'/bootstrap.php';
+        if(file_exists($bootstrapFile)) {
+            require_once $bootstrapFile;
+            $this->_appLoaded = $appName;
+        } else {
+            throw RouterException("Require bootstrap.php for '$appName' application", 410);
+        }
     }
 }
