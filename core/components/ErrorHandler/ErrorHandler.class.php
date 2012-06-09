@@ -22,7 +22,7 @@ class ErrorHandler extends Component
     {
         if($loggerConfig = Conf::getConfig('logger')) {
             $message = 'Error ['.$errno.'] '.$message.' ' .
-                       'on file '.$file.' ('.$line.')';
+                       'in file '.$file.' on line '.$line;
             Logger::init($loggerConfig);
             Logger::log($message);
         }

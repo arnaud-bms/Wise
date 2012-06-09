@@ -16,7 +16,7 @@ class Exception extends \Exception
      */
     public function __toString() 
     {
-        return 'Exception ['.$this->getCode().'] ' .$this->getMessage().' ' .
-               'on file '.$this->getFile().' ('.$this->getLine().')';
+        return get_class($this).' ['.$this->getCode().'] ' .$this->getMessage().' ' .
+               'in file '.$this->getFile().' on line '.$this->getLine();
     }
 }
