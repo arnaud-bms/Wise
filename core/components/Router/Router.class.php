@@ -19,9 +19,14 @@ class Router extends Component
     const SAPI_CGI = 'cgi';
     
     /**
-     * @var type current sapi_name
+     * @var string current sapi_name
      */
     private $_sapiName = null;
+    
+    /**
+     * @var string Name of app loaded
+     */
+    private $_appLoaded = null;
     
     
     /**
@@ -31,7 +36,8 @@ class Router extends Component
      */
     protected function _init($config)
     {
-        $this->_sapiName = php_sapi_name();
+        $this->_sapiName  = php_sapi_name();
+        $this->_appLoaded = null;
     }
     
     
@@ -66,13 +72,13 @@ class Router extends Component
     {
         $routeInfos = false;
         $routing = $this->_getRoutingApp($route);
-        foreach($routing['routing'] as $routeName => $routeTest) {
+        foreach($routing as $routeName => $routeTest) {
             $pattern = '#'.$routeTest['pattern'].'#';
             if(preg_match($pattern, $route, $argv )) {
                 $routeInfos = $routeTest;
                 array_shift($argv);
                 $routeInfos['argv'] = $argv;
-                $routeInfos['name'] = $routing['name'].':'.$routeName;
+                $routeInfos['name'] = $this->_appLoaded.':'.$routeName;
                 break;
             }
         }
@@ -94,12 +100,17 @@ class Router extends Component
     private function _getRoutingApp($route)
     {
         $routing = false;
-        foreach(Conf::getConfig('route') as $routingName => $routingInfos) {
-            $prefix = substr($route, 0, strlen($routingInfos['prefix']));
-            if($routingInfos['type'] === $this->_sapiName && $routingInfos['prefix'] === $prefix) {
-                $routing['name'] = $routingName;
-                $routing['routing'] = parse_ini_file($routingInfos['routing'], true);
-                break;
+        if($routeConfig = Conf::getConfig('route_apps')) {
+            foreach($routeConfig as $routingName => $routingInfos) {
+                $prefix = substr($route, 0, strlen($routingInfos['prefix']));
+                if($routingInfos['type'] === $this->_sapiName 
+                        && $routingInfos['prefix'] === $prefix
+                        && isset($routingInfos['app'])) {
+                    $this->_appLoaded = $routingInfos['app'];
+                    require_once ROOT_DIR.'app/'.$routingInfos['app'].'/bootstrap.php';
+                    $routing = Conf::getConfig('routing');
+                    break;
+                }
             }
         }
         
