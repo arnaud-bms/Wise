@@ -97,8 +97,12 @@ class Bootstrap extends ComponentStatic
         self::$_method = $routeInfos['method'];
         self::$_format = $routeInfos['format'];
         self::$_argv = $routeInfos['argv'];
-        self::$_plugins[self::PLUGIN_PRECALL] = isset($routeInfos['precall']) ? $routeInfos['precall'] : array();
-        self::$_plugins[self::PLUGIN_POSTCALL] = isset($routeInfos['postcall']) ? $routeInfos['postcall'] : array();
+        self::$_plugins[self::PLUGIN_PRECALL] = isset($routeInfos['precall']) 
+                                                ? explode(';', $routeInfos['precall']) 
+                                                : array();
+        self::$_plugins[self::PLUGIN_POSTCALL] = isset($routeInfos['postcall']) 
+                                                 ? explode(';', $routeInfos['postcall']) 
+                                                 : array();
     }
     
     
