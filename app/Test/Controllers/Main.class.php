@@ -38,6 +38,6 @@ class Main extends TestController
      */
     public function redirect()
     {
-        $this->_redirect('/Test titi chuc', Router::SAPI_CLI);
+        $this->_redirect('/Test titi chuc');
     }
 }
