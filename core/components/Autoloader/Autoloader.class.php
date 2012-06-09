@@ -29,8 +29,6 @@ class Autoloader
                 return;
             }
         }
-        
-        throw new AutoloaderException("Class '$class' not found", 400);
     }
     
     
