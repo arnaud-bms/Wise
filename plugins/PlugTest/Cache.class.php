@@ -25,7 +25,6 @@ class Cache extends Plugin
         $this->_initCache();
         if($content = $this->_cache->getCache(Bootstrap::getRouteId())) {
             Bootstrap::interruptRequest();
-            Bootstrap::setResponse($content);
             echo $content;
         }
     }
@@ -47,7 +46,7 @@ class Cache extends Plugin
     private function _initCache()
     {
         if($this->_cache === null) {
-            $this->_cache = new \Telco\Cache\Cache(Conf::getConfig('cache'));
+            $this->_cache = new \Telco\Cache\Cache();
         }
     }
 }
