@@ -49,8 +49,20 @@ class Conf extends ComponentStatic
      */
     private static function _getConfFromFile($fileConf)
     {
-        if(!$config = @parse_ini_file($fileConf, true)) {
-            throw new ConfException("File '$fileConf' it's not valid", 400);
+        $typeFile = substr($fileConf, strrpos($fileConf, '.')+1);
+        switch($typeFile) {
+            case 'json':
+                if(!$config = @json_decode(file_get_contents($fileConf), true)) {
+                    throw new ConfException("Json file '$fileConf' is not valid", 401);
+                }
+                break;
+            case 'ini':
+                if(!$config = @parse_ini_file($fileConf, true)) {
+                    throw new ConfException("Ini file '$fileConf' is not valid", 402);
+                }
+                break;
+            default:
+                throw new ConfException("File '$fileConf' it's not valid", 400);
         }
         return $config;
     }
