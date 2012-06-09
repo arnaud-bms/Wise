@@ -26,7 +26,7 @@ class Generate extends Plugin
     {
         $generate = new \Telco\Generate\Generate(Conf::getConfig('generate'));
         $generate->generateFile(
-                Bootstrap::getRouteName() . ':' . Bootstrap::getFormat(),
+                Bootstrap::getRouteName().':'.Bootstrap::getFormat(),
                 Bootstrap::getResponse());
     }
 }

@@ -21,8 +21,8 @@ class ErrorHandler extends Component
     public static function catchError($errno, $message, $file, $line)
     {
         if($loggerConfig = Conf::getConfig('logger')) {
-            $message = 'Error [' . $errno . '] ' . $message . ' ' .
-                       'on file ' . $file . ' (' . $line . ')';
+            $message = 'Error ['.$errno.'] '.$message.' ' .
+                       'on file '.$file.' ('.$line.')';
             Logger::init($loggerConfig);
             Logger::log($message);
         }

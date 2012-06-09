@@ -64,12 +64,12 @@ class Router extends Component
         $routeInfos = false;
         $routing = $this->_getRoutingApp($route);
         foreach($routing['routing'] as $routeName => $routeTest) {
-            $pattern = '#' . $routeTest['pattern'] . '#';
+            $pattern = '#'.$routeTest['pattern'].'#';
             if(preg_match($pattern, $route, $argv )) {
                 $routeInfos = $routeTest;
                 array_shift($argv);
                 $routeInfos['argv'] = $argv;
-                $routeInfos['name'] = $routing['name'] . ':' . $routeName;
+                $routeInfos['name'] = $routing['name'].':'.$routeName;
                 break;
             }
         }

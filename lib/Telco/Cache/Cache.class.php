@@ -37,7 +37,7 @@ class Cache extends Component
      */
     protected function _init($config)
     {
-        $class = 'Telco\Cache\Driver\\' . ucfirst($config['driver']);
+        $class = 'Telco\Cache\Driver\\'.ucfirst($config['driver']);
         $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
         $this->_driver = new $class($driverConfig);
         

@@ -113,7 +113,7 @@ class Logger extends ComponentStatic
     protected static function _loadDriver()
     {
         if(self::$_driver === null || self::$_driverToLoad === false) {
-            $class = 'Telco\Logger\Driver\\' . ucfirst(self::$_driverToLoad);
+            $class = 'Telco\Logger\Driver\\'.ucfirst(self::$_driverToLoad);
             self::$_driver = new $class(self::$_driverConfig);
             self::$_driverLoaded = true;
         }

@@ -53,7 +53,7 @@ class File extends AbstractDriver
      */
     public function getCache($uniqId)
     {
-        $file = $this->_path . '/' . $uniqId . '.cache';
+        $file = $this->_path.'/'.$uniqId.'.cache';
         if(file_exists($file)) {
             if(filemtime($file) > (time() - $this->_ttl)) {
                 return file_get_contents($file);
@@ -72,7 +72,7 @@ class File extends AbstractDriver
      */
     public function setCache($uniqId, $content)
     {
-        $file = $this->_path . '/' . $uniqId . '.cache';
+        $file = $this->_path.'/'.$uniqId.'.cache';
         file_put_contents($file, $content);
     }
 }

@@ -17,6 +17,6 @@ abstract class TestController extends Controller
      */
     public function __construct()
     {
-        Conf::mergeConfig(__DIR__ . '/etc/config.ini');
+        Conf::mergeConfig(__DIR__.'/etc/config.ini');
     }
 }
