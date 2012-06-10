@@ -3,10 +3,9 @@ namespace Plugin;
 
 use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
-use Telco\Conf\Conf;
 
 /**
- * Description of Cache
+ * Plugin generate, use to generate files
  *
  * @author gdievart
  */
@@ -24,7 +23,7 @@ class Generate extends Plugin
      */
     public function postcall()
     {
-        $generate = new \Telco\Generate\Generate(Conf::getConfig('generate'));
+        $generate = new \Telco\Generate\Generate();
         $generate->generateFile(
                 Bootstrap::getRouteName().':'.Bootstrap::getFormat(),
                 Bootstrap::getResponse());
