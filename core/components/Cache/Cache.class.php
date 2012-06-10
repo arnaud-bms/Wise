@@ -4,7 +4,7 @@ namespace Telco\Cache;
 use Telco\Component\Component;
 
 /**
- * Description of Conf
+ * Cache component
  *
  * @author gdievart
  */
