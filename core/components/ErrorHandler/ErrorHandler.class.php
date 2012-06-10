@@ -20,10 +20,10 @@ class ErrorHandler extends Component
      */
     public static function catchError($errno, $message, $file, $line)
     {
-        if($loggerConfig = Conf::getConfig('logger')) {
+        if((boolean)Conf::getConfig('logger.enable')) {
             $message = 'Error ['.$errno.'] '.$message.' ' .
                        'in file '.$file.' on line '.$line;
-            Logger::init($loggerConfig);
+            Logger::init();
             Logger::log($message);
         }
     }
