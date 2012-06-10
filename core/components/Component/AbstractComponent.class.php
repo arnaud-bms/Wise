@@ -4,7 +4,7 @@ namespace Telco\Component;
 use Telco\Conf\Conf;
 
 /**
- * Class base 
+ * Class base component
  *
  * @author gdievart
  */
