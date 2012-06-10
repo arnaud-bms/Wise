@@ -202,7 +202,7 @@ class Bootstrap extends ComponentStatic
     /**
      * Set response
      * 
-     * @return string
+     * @param mixed $response
      */
     public static function setResponse($response)
     {
