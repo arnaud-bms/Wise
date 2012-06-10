@@ -5,7 +5,7 @@ use Telco\Component\ComponentStatic;
 use Telco\Conf\ConfException;
 
 /**
- * Configuration Class from ini files
+ * Configuration Class from files
  *
  * @author gdievart
  */
