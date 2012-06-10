@@ -5,7 +5,7 @@ use Telco\Component\Component;
 use PDO, PDOException;
 
 /**
- * Description of DB
+ * Connector to database
  *
  * @author gdievart
  */
