@@ -3,7 +3,6 @@ namespace Plugin;
 
 use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
-use Telco\Conf\Conf;
 
 /**
  * Format data
