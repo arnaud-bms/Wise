@@ -1,7 +1,6 @@
 <?php
 namespace Telco\Cache\Driver;
 
-use Telco\Component\Component;
 use Telco\Cache\Driver\AbstractDriver;
 
 /**
