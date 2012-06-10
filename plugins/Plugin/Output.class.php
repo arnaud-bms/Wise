@@ -5,7 +5,7 @@ use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
 
 /**
- * Description of Cache
+ * Plugin output, use to write on stdout
  *
  * @author gdievart
  */
