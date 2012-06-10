@@ -1,14 +1,14 @@
 <?php
 namespace Telco\Cache\Driver;
 
-use Telco\Cache\Driver\AbstractDriver;
+use Telco\Cache\Driver\Driver;
 
 /**
  * Driver Cache with file system
  *
  * @author gdievart
  */
-class File extends AbstractDriver
+class File extends Driver
 {
     /**
      * @var array Required fields 

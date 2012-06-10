@@ -6,7 +6,7 @@ namespace Telco\Cache\Driver;
  *
  * @author gdievart
  */
-abstract class AbstractDriver 
+abstract class Driver 
 {   
     abstract public function getCache($uniqId);
     
