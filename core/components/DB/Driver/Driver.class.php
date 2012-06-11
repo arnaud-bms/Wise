@@ -27,4 +27,12 @@ interface Driver
      * @return 
      */
     public function query($query);
+    
+    /**
+     * Execute query and return row affected
+     * 
+     * @param string  $query
+     * @return int
+     */
+    public function exec($query);
 }
