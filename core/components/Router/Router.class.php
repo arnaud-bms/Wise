@@ -54,8 +54,8 @@ class Router extends Component
      */
     protected function _init($config)
     {
-        $this->_sapiName  = php_sapi_name();
-        $this->_appLoaded = null;
+        $this->_sapiName       = php_sapi_name();
+        $this->_routeAppLoaded = null;
     }
     
     
