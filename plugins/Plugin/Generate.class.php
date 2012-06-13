@@ -23,9 +23,9 @@ class Generate extends Plugin
      */
     public function postcall()
     {
-        $generate = new \Telco\Generate\Generate();
-        $generate->generateFile(
-                Bootstrap::getRouteName().':'.Bootstrap::getFormat(),
-                Bootstrap::getResponse());
+        if($alias = Bootstrap::getProperty('generate')) {
+            $generate = new \Telco\Generate\Generate();
+            $generate->generateFile($alias, Bootstrap::getResponse());
+        }
     }
 }
