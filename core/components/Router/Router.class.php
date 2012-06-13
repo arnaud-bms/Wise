@@ -24,9 +24,9 @@ class Router extends Component
     private $_sapiName = null;
     
     /**
-     * @var string Name of app loaded
+     * @var string Name of route app loaded
      */
-    private $_appLoaded = null;
+    private $_routeAppLoaded = null;
     
     /**
      * @var array Required fields to route app 
@@ -54,8 +54,8 @@ class Router extends Component
      */
     protected function _init($config)
     {
-        $this->_sapiName  = php_sapi_name();
-        $this->_appLoaded = null;
+        $this->_sapiName       = php_sapi_name();
+        $this->_routeAppLoaded = null;
     }
     
     
@@ -97,7 +97,7 @@ class Router extends Component
                 $routeInfos = $routeTest;
                 array_shift($argv);
                 $routeInfos['argv'] = $argv;
-                $routeInfos['name'] = $this->_appLoaded.':'.$routeName;
+                $routeInfos['name'] = $this->_routeAppLoaded.':'.$routeName;
                 break;
             }
         }
@@ -135,12 +135,13 @@ class Router extends Component
     {
         $routing = false;
         if($routeConfig = Conf::getConfig('route_apps')) {
-            foreach($routeConfig as $routeApp) {
+            foreach($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
                 $prefix = substr($route, 0, strlen($routeApp['prefix']));
                 if($routeApp['type'] === $this->_sapiName  && $routeApp['prefix'] === $prefix) {
                     $this->_loadApp($routeApp['app']);
                     $routing = Conf::getConfig('routing');
+                    $this->_routeAppLoaded = $routeName;
                     break;
                 }
             }
@@ -179,7 +180,6 @@ class Router extends Component
         $bootstrapFile = ROOT_DIR.'app/'.$appName.'/bootstrap.php';
         if(file_exists($bootstrapFile)) {
             require_once $bootstrapFile;
-            $this->_appLoaded = $appName;
         } else {
             throw RouterException("Require bootstrap.php for '$appName' application", 410);
         }

@@ -4,26 +4,25 @@ namespace Plugin;
 use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
 use Telco\Conf\Conf;
-use Telco\Str\Str;
 
 /**
- * Plugin Cache, use Telco\Cache
+ * Plugin View, use Telco\View
  *
  * @author gdievart
  */
-class Cache extends Plugin
+class View extends Plugin
 {
     /**
      * @var Cache Ref to \Telco\Cache\Cache
      */
-    private $_cache = null;
+    private $_view = null;
     
     /**
      * Init Plugin Cache
      */
     public function __construct()
     {
-        $this->_cache = new \Telco\Cache\Cache();
+        $this->_view = new \Telco\View\View();
     }
     
     /**
@@ -31,10 +30,7 @@ class Cache extends Plugin
      */
     public function precall()
     {
-        if($content = $this->_cache->getCache(Bootstrap::getRouteId())) {
-            Bootstrap::interruptRequest();
-            echo $content;
-        }
+        
     }
     
     
@@ -43,7 +39,9 @@ class Cache extends Plugin
      */
     public function postcall()
     {
-        $cacheId = Bootstrap::getRouteId().'.'.Str::url(Bootstrap::getRouteName(), '.');
-        $this->_cache->setCache($cacheId, Bootstrap::getResponse());
+        if(is_array(Bootstrap::getResponse())) {
+            $this->_view->setDataList(Bootstrap::getResponse());
+            Bootstrap::setResponse($this->_view->fetch(Conf::getConfig('view.default_template')));
+        }
     }
 }

@@ -68,7 +68,7 @@ class Generate extends Component
                 foreach($argv as $key => $value) {
                     $filename = str_replace('$'.($key+1), $value, $filename);
                 }
-                file_put_contents($this->_dir.'/'.$filename, $content);
+                file_put_contents($this->_dir.$filename, $content);
             }
         }
     }
