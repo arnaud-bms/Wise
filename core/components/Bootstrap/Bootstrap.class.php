@@ -223,7 +223,7 @@ class Bootstrap extends ComponentStatic
      */
     public static function getProperty($name)
     {
-        if(array_key_exists(self::$_properties, $name)) {
+        if(array_key_exists($name, self::$_properties)) {
             $property = self::$_properties[$name];
         } else {
             $property = false;
