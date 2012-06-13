@@ -36,6 +36,17 @@ class Main extends TestController
      * 
      * @param string $var 
      */
+    public function generateIndex($var, $var2)
+    {
+        $this->index($var, $var2);
+    }
+    
+    
+    /**
+     * Method redirect
+     * 
+     * @param string $var 
+     */
     public function redirect()
     {
         $this->_redirect('/Test titi chuc');
