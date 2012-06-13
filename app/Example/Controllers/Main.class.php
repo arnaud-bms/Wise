@@ -1,18 +1,16 @@
 <?php
-namespace Test\Controllers;
+namespace Example\Controllers;
 
-use Test\TestController;
+use Example\ExampleController;
 use Telco\DB\DB;
-use Telco\Conf\Conf;
-use Telco\Router\Router;
-use PDO;
+use Telco\Bootstrap\Bootstrap;
 
 /**
  * Description of Main
  *
  * @author gdievart
  */
-class Main extends TestController 
+class Main extends ExampleController 
 {
     
     /**
@@ -22,9 +20,6 @@ class Main extends TestController
      */
     public function index($var, $var2)
     {
-        $db = DB::getInstance();
-        $stmt = $db->query("SELECT * FROM test");
-        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $return['page'] = 'TOTO';
         
         return $return;
@@ -38,7 +33,8 @@ class Main extends TestController
      */
     public function generateIndex($var, $var2)
     {
-        $this->index($var, $var2);
+        Bootstrap::setProperty('generate', 'home');
+        return $this->index($var, $var2);
     }
     
     
