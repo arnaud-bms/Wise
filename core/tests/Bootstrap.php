@@ -16,12 +16,12 @@ class Bootstrap extends atoum\test
     public function testRun()
     {   
         $this->assert->exception(function(){
-                                \Telco\Bootstrap\Bootstrap::run('/Test truc');
+                                \Telco\Bootstrap\Bootstrap::run('/Example truc');
                             })
                      ->isInstanceOf('\Telco\Router\RouterException')
                      ->hasCode(404);
         
-        \Telco\Bootstrap\Bootstrap::run('/Test truc truc');
+        \Telco\Bootstrap\Bootstrap::run('/Example/home truc truc');
         $this->assert->string(\Telco\Bootstrap\Bootstrap::getResponse());
     }
 }
