@@ -64,6 +64,12 @@ class Str extends ComponentStatic
     }
     
     
+    /**
+     * Accent
+     * 
+     * @param string $string
+     * @return string 
+     */
     public static function removeAccent($string)
     {
         if(mb_detect_encoding($string) === 'UTF-8') {
