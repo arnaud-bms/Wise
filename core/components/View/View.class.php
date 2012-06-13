@@ -31,9 +31,16 @@ class View extends Component
      */
     protected function _init($config)
     {
-        $class = 'Telco\View\Driver\\'.ucfirst($config['driver']);
+        switch($config['driver']) {
+            case 'smarty':
+                $driver = 'Telco\View\Driver\Smarty';
+                break;
+            default:
+                throw new ViewException("Driver '{$config['driver']}' does'nt exists", 400);
+        }
+        
         $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
-        $this->_driver = new $class($driverConfig);
+        $this->_driver = new $driver($driverConfig);
     }
     
     
