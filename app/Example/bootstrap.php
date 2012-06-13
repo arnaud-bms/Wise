@@ -9,7 +9,7 @@ use Telco\Autoloader\Autoloader;
 use Telco\Conf\Conf;
 
 Autoloader::addAlias(array(
-    'Test'      => ROOT_DIR.'app/Test'
+    'Example'      => ROOT_DIR.'app/Example'
 ));
 
 Conf::mergeConfig(__DIR__.'/etc/config.ini');
