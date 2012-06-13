@@ -31,15 +31,6 @@ class DB extends Component
         'password'
     );
     
-    /**
-     * @var array Drivers available 
-     */
-    private $_driverAvailable = array(
-        'pdo'    => 'PDO',
-        'mysql'  => 'MySQL',
-        'mysqli' => 'MySQLI'
-    );
-    
     
     /**
      * Init DB
@@ -48,17 +39,22 @@ class DB extends Component
      */
     protected function _init($config)
     {
-        if(!array_key_exists($config['driver'], $this->_driverAvailable)) {
-            throw new DBException("Driver '{$config['driver']}' does'nt exists", 400);
+        switch($config['driver']) {
+            case 'pdo':
+                $driver = 'Telco\DB\Driver\PDO';
+                break;
+            case 'mysql':
+                $driver = 'Telco\DB\Driver\MySQL';
+                break;
+            case 'mysqli':
+                $driver = 'Telco\DB\Driver\MySQLi';
+                break;
+            default:
+                throw new DBException("Driver '{$config['driver']}' does'nt exists", 400);
         }
         
-        $host      = $config['host'];
-        $dbname    = $config['dbname'];
-        $user      = $config['user'];
-        $password  = $config['password'];
-        $driver    = 'Telco\DB\Driver\\'.$this->_driverAvailable[$config['driver']];
-        
-        $this->_driver = new $driver($host, $dbname, $user, $password);
+        $this->_driver = new $driver(
+                $config['host'], $config['dbname'], $config['user'], $config['password']);
     }
     
     
@@ -73,79 +69,17 @@ class DB extends Component
             self::$_instance = new DB($config);
         }
         
-        return self::$_instance;
+        return self::$_instance->getDriver();
     }
     
     
     /**
-     * Execute query read
+     * Return driver loaded
      * 
-     * @param string $query
-     * @return PDOStatement
+     * @return Driver 
      */
-    public function query($query) {
-        return $this->_driver->query($query);
-    }
-    
-    
-    /**
-     * Execute query write
-     * 
-     * @param string $query
-     * @return PDOStatement
-     */
-    public function exec($query) {
-        return $this->_driver->exec($query);
-    }
-    
-    
-    /**
-     * Prepare query
-     * 
-     * @param string $sQuery
-     * @return PDOStatement
-     */
-    public function prepare($sQuery) {
-        return $this->_driver->prepare($sQuery);
-    }
-    
-    
-    /**
-     * Get last id insert
-     * 
-     * @return int
-     */
-    public function lastInsertId() {
-        return $this->_driver->lastInsertId();
-    }
-    
-    
-    /**
-     * Get errorInfo
-     * 
-     * @return array 
-     */
-    public function errorInfo() {
-        return $this->_driver->errorInfo();
-    }
-    
-    
-    /**
-     * Protect string to inject
-     * 
-     * @param string $sString
-     * @return string
-     */
-    public function quote($sString) {
-        return $this->_driver->quote($sString);
-    }
-    
-    
-    /**
-     * close connection to DB
-     */
-    public static function close() {
-        self::$_instance = null;
-        $this->_driver = null;
+    public function getDriver()
+    {
+        return $this->_driver;
     }
 }
