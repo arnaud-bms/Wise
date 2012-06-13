@@ -19,7 +19,7 @@ class Str extends ComponentStatic
      */
     public static function lower($string)
     {
-        
+        return strtolower($string);
     }
     
     
@@ -31,7 +31,7 @@ class Str extends ComponentStatic
      */
     public static function upper($string)
     {
-        
+        return strtoupper($string);
     }
     
     
@@ -43,7 +43,7 @@ class Str extends ComponentStatic
      */
     public static function ucfirst($string)
     {
-        
+        return ucfirst($string);
     }
     
     
@@ -72,11 +72,11 @@ class Str extends ComponentStatic
      */
     public static function removeAccent($string)
     {
-        if(mb_detect_encoding($string) === 'UTF-8') {
-            $string = utf8_decode($string);
+        if(mb_detect_encoding($string) !== 'UTF-8') {
+            $string = utf8_encode($string);
         }
         
-        $string = htmlentities($string, ENT_NOQUOTES);
+        $string = htmlentities($string, ENT_NOQUOTES, 'UTF-8');
         return preg_replace('#&([a-zA-Z])[a-zA-Z]+;#', '$1', $string);
     }
 }
