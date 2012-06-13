@@ -10,9 +10,13 @@ use Telco\DB\DBException;
  */
 class PDO implements Driver
 {
+    /**
+     * @var PDO Ref to PDO 
+     */
+    private $_PDO;
     
     /**
-     * 
+     * Init PDO Driver
      *  
      * @param type $host
      * @param type $dbname
@@ -35,9 +39,22 @@ class PDO implements Driver
      * Execute query and return result
      * 
      * @param type $query 
+     * @return stmt
      */
     public function query($query)
     {
-        
+        return $this->_PDO->query($query);
+    }
+    
+    
+    /**
+     * Execute query and return rows affected
+     * 
+     * @param type $query 
+     * @return int
+     */
+    public function exec($query)
+    {
+        return $this->_PDO->exec($query);
     }
 }
