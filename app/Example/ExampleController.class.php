@@ -1,5 +1,5 @@
 <?php
-namespace Test;
+namespace Example;
 
 use Telco\Controller\Controller;
 use Telco\Conf\Conf;
@@ -10,7 +10,7 @@ use Telco\Autoloader\Autoloader;
  *
  * @author gdievart
  */
-abstract class TestController extends Controller 
+abstract class ExampleController extends Controller 
 {
     
 }
