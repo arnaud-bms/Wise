@@ -4,6 +4,7 @@ namespace Plugin;
 use Telco\Bootstrap\Bootstrap;
 use Telco\Plugin\Plugin;
 use Telco\Conf\Conf;
+use Telco\Str\Str;
 
 /**
  * Plugin Cache, use Telco\Cache
@@ -42,6 +43,7 @@ class Cache extends Plugin
      */
     public function postcall()
     {
-        $this->_cache->setCache(Bootstrap::getRouteId(), Bootstrap::getResponse());
+        $cacheId = Bootstrap::getRouteId().'.'.Str::url(Bootstrap::getRouteName(), '.');
+        $this->_cache->setCache($cacheId, Bootstrap::getResponse());
     }
 }
