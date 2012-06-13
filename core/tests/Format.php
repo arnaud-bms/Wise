@@ -16,39 +16,36 @@ class Format extends atoum\test
     
     private $_format;
     
+    private $_data;
     
-    public function setUp()
+    
+    public function beforeTestMethod($testMethod)
     {
         $this->_format = new \Telco\Format\Format();
+        $this->_data  = array('key_one' => 'value_one', 'key_two' => 'value_two');
     }
     
     
     public function testJson()
     {
-        $arrayTest = array('key_one' => 'value_one', 'key_two' => 'value_two');
-        $this->assert->string($this->_format->formatData('json', $arrayTest))
-                     ->isEqualTo(json_encode($arrayTest));
+        $this->assert->string($this->_format->formatData('json', $this->_data))
+                     ->isEqualTo(json_encode($this->_data));
     }
     
     
     public function testXML()
     {
-        $format    = new \Telco\Format\Format();
-        $arrayTest = array('key_one' => 'value_one', 'key_two' => 'value_two');
         $stdout    = '<?xml version="1.0" encoding="utf-8"?>'."\n".
                      '<xml><key_one>value_one</key_one><key_two>value_two</key_two></xml>'."\n";
         
-        $this->assert->string($format->formatData('xml', $arrayTest))
+        $this->assert->string($this->_format->formatData('xml', $this->_data))
                      ->isEqualTo($stdout);
     }
     
     
     public function testSerialize()
     {
-        $format    = new \Telco\Format\Format();
-        $arrayTest = array('key_one' => 'value_one', 'key_two' => 'value_two');
-        
-        $this->assert->string($format->formatData('serialize', $arrayTest))
-                     ->isEqualTo(serialize($arrayTest));
+        $this->assert->string($this->_format->formatData('serialize', $this->_data))
+                     ->isEqualTo(serialize($this->_data));
     }
 }
