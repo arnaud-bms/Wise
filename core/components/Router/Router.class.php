@@ -181,7 +181,7 @@ class Router extends Component
         if(file_exists($bootstrapFile)) {
             require_once $bootstrapFile;
         } else {
-            throw RouterException("Require bootstrap.php for '$appName' application", 410);
+            throw new RouterException("Require bootstrap.php for '$appName' application", 410);
         }
     }
 }
