@@ -20,6 +20,8 @@ class Main extends ExampleController
      */
     public function index($var, $var2)
     {
+        $stmt = DB::getInstance()->query("SELECT * FROM test");
+        $return['rows'] = $stmt->fetchAll();
         $return['page'] = 'TOTO';
         
         return $return;
@@ -45,6 +47,6 @@ class Main extends ExampleController
      */
     public function redirect()
     {
-        $this->_redirect('/Test titi chuc');
+        $this->_redirect('/Example/home titi chuc');
     }
 }
