@@ -10,8 +10,8 @@ define('ROOT_DIR', __DIR__.'/../../');
 require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
 spl_autoload_register(array('\Telco\Autoloader\Autoloader', 'loadClass'));
 Autoloader::setAlias(array(
-    'Telco'         => ROOT_DIR.'core/components',
-    'Test'          => ROOT_DIR.'app/Test',
+    'Telco'       => ROOT_DIR.'core/components',
+    'Example'     => ROOT_DIR.'app/Example',
     'Plugin'      => ROOT_DIR.'plugins/Plugin'
 ));
 
