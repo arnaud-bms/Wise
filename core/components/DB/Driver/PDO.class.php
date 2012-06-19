@@ -56,7 +56,7 @@ class PDO implements Driver
      */
     public function exec($query)
     {
-        return new PDOStatement($this->_PDO->exec($query));
+        return $this->_PDO->exec($query);
     }
     
     
