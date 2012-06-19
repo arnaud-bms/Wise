@@ -2,6 +2,7 @@
 namespace Telco\DB\Driver;
 
 use Telco\DB\DBException;
+use Telco\DB\Driver\PDOStatement;
 
 /**
  * Connector to database
@@ -43,7 +44,7 @@ class PDO implements Driver
      */
     public function query($query)
     {
-        return $this->_PDO->query($query);
+        return new PDOStatement($this->_PDO->query($query));
     }
     
     
@@ -55,6 +56,6 @@ class PDO implements Driver
      */
     public function exec($query)
     {
-        return $this->_PDO->exec($query);
+        return new PDOStatement($this->_PDO->exec($query));
     }
 }
