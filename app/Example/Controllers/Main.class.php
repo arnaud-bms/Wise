@@ -4,6 +4,7 @@ namespace Example\Controllers;
 use Example\ExampleController;
 use Telco\DB\DB;
 use Telco\Bootstrap\Bootstrap;
+use Telco\DB\Driver\Statement;
 
 /**
  * Description of Main
@@ -21,7 +22,7 @@ class Main extends ExampleController
     public function index($var, $var2)
     {
         $stmt = DB::getInstance()->query("SELECT * FROM test");
-        $return['rows'] = $stmt->fetchAll();
+        $return['rows'] = $stmt->fetchAll(Statement::FETCH_ASSOC);
         $return['page'] = 'TOTO';
         
         return $return;
