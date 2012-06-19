@@ -20,8 +20,11 @@ class Main extends ExampleController
      */
     public function index($var, $var2)
     {
-        $this->getRepository('Example\Models\TestRepository')->insert(array('name' => 'truc'));
-        $stmt = $this->getRepository('Example\Models\TestRepository')->select('*');
+        $testRepository = $this->getRepository('Example\Models\TestRepository');
+        
+        $testRepository->insert(array('name' => uniqid()));
+        
+        $stmt = $testRepository->select('*');
         $return['rows'] = $stmt->fetchAll();
         $return['page'] = 'TOTO';
         

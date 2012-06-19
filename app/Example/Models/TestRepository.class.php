@@ -1,7 +1,7 @@
 <?php
 namespace Example\Models;
 
-use Telco\Model\Repository;
+use Telco\Repository\Repository;
 
 /**
  * Description of Test

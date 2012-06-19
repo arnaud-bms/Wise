@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Model;
+namespace Telco\Entity;
 
 /**
  * Entity

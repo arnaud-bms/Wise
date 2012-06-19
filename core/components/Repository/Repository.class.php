@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Model;
+namespace Telco\Repository;
 
 use Telco\Component\Component;
 use Telco\DB\DB;
