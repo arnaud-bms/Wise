@@ -58,4 +58,16 @@ class PDO implements Driver
     {
         return new PDOStatement($this->_PDO->exec($query));
     }
+    
+    
+    /**
+     * Execute query and return rows affected
+     * 
+     * @param string $query 
+     * @return string
+     */
+    public function escape($string)
+    {
+        return $this->_PDO->quote($string);
+    }
 }

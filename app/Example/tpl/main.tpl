@@ -3,5 +3,5 @@
 {$page}
 
 {foreach from=$rows item=row}
-{$row.name}
+    {$row.name}
 {/foreach}

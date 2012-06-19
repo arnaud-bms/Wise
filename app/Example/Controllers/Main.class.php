@@ -2,7 +2,6 @@
 namespace Example\Controllers;
 
 use Example\ExampleController;
-use Telco\DB\DB;
 use Telco\Bootstrap\Bootstrap;
 use Telco\DB\Driver\Statement;
 
@@ -21,9 +20,12 @@ class Main extends ExampleController
      */
     public function index($var, $var2)
     {
-        $stmt = DB::getInstance()->query("SELECT * FROM test");
-        $return['rows'] = $stmt->fetchAll(Statement::FETCH_ASSOC);
+        $this->getRepository('Example\Models\TestRepository')->insert(array('name' => 'truc'));
+        $stmt = $this->getRepository('Example\Models\TestRepository')->select('*');
+        $return['rows'] = $stmt->fetchAll();
         $return['page'] = 'TOTO';
+        
+        $test['name'] = 'test';
         
         return $return;
     }

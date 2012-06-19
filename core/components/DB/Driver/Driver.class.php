@@ -35,4 +35,12 @@ interface Driver
      * @return int
      */
     public function exec($query);
+    
+    /**
+     * Escape string
+     * 
+     * @param string $query
+     * @return int
+     */
+    public function escape($query);
 }
