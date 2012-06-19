@@ -9,5 +9,4 @@ namespace Telco\Entity;
 abstract class Entity
 {
     
-    
 }

@@ -8,7 +8,8 @@ use Iterator;
  *
  * @author gdievart
  */
-abstract class Statement {
+abstract class Statement 
+{
     
     const FETCH_OBJECT = 0;
     const FETCH_NUM    = 1;
