@@ -138,7 +138,7 @@ class Router extends Component
             foreach($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
                 $prefix = substr($route, 0, strlen($routeApp['prefix']));
-                if($routeApp['type'] === $this->_sapiName  && $routeApp['prefix'] === $prefix) {
+                if(strtolower($routeApp['type']) === $this->_sapiName  && $routeApp['prefix'] === $prefix) {
                     $this->_loadApp($routeApp['app']);
                     $routing = Conf::getConfig('routing');
                     $this->_routeAppLoaded = $routeName;
