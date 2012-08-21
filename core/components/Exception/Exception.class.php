@@ -4,7 +4,7 @@ namespace Telco\Exception;
 /**
  * Exception
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Exception extends \Exception
 {

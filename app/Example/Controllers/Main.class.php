@@ -8,7 +8,7 @@ use Telco\DB\Driver\Statement;
 /**
  * Description of Main
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Main extends ExampleController 
 {

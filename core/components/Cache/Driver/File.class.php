@@ -6,7 +6,7 @@ use Telco\Cache\Driver\Driver;
 /**
  * Driver Cache with file system
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class File extends Driver
 {

@@ -6,7 +6,7 @@ use Iterator;
 /**
  * Statement query
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Statement 
 {

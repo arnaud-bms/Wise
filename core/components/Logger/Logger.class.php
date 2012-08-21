@@ -7,7 +7,7 @@ use Telco\Logger\LoggerException;
 /**
  * Format data from array to csv, json, xml, serialize ...
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Logger extends ComponentStatic 
 {

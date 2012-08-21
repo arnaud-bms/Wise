@@ -6,7 +6,7 @@ use Telco\Autoloader\AutoloaderException;
 /**
  * Include class file
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Autoloader 
 {

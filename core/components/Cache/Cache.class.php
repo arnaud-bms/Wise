@@ -6,7 +6,7 @@ use Telco\Component\Component;
 /**
  * Cache component
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Cache extends Component 
 {

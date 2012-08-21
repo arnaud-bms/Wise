@@ -9,7 +9,7 @@ use Exception;
 /**
  * Catch all exception and log
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class ExceptionHandler extends Component
 {

@@ -6,7 +6,7 @@ use Telco\Component\Component;
 /**
  * Connector to database
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class DB extends Component
 {

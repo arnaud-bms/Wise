@@ -4,7 +4,7 @@ namespace Telco\View\Driver;
 /**
  * AbstractDriver
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Driver 
 {

@@ -7,7 +7,7 @@ use Telco\DB\Driver\PDOStatement;
 /**
  * Connector to database
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class PDO implements Driver
 {

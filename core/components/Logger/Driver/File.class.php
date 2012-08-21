@@ -7,7 +7,7 @@ use Telco\Logger\LoggerException;
 /**
  * File driver for Logger
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class File extends AbstractDriver
 {

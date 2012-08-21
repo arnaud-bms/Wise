@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * StrException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class StrException extends ComponentException 
 {

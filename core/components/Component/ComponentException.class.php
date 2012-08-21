@@ -6,7 +6,7 @@ use \Telco\Exception\Exception;
 /**
  * Description of ComponentException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class ComponentException extends Exception
 {

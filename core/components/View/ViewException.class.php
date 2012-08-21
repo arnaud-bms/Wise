@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * ViewException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class ViewException extends ComponentException 
 {

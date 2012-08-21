@@ -6,7 +6,7 @@ use Telco\Repository\Repository;
 /**
  * Description of Test
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class TestRepository extends Repository 
 {

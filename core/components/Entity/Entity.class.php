@@ -4,7 +4,7 @@ namespace Telco\Entity;
 /**
  * Entity
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Entity
 {

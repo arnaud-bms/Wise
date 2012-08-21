@@ -6,7 +6,7 @@ use Telco\View\Driver\Driver;
 /**
  * Driver Smarty
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Smarty extends Driver
 {

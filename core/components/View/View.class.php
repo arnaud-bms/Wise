@@ -6,7 +6,7 @@ use Telco\Component\Component;
 /**
  * View component
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class View extends Component 
 {

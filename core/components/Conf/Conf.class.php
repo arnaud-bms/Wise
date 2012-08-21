@@ -7,7 +7,7 @@ use Telco\Conf\ConfException;
 /**
  * Configuration Class from files
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Conf extends ComponentStatic
 {

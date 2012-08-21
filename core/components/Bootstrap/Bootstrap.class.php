@@ -7,7 +7,7 @@ use Telco\Router\Router;
 /**
  * Load route application, execute plugin and controller
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Bootstrap extends ComponentStatic
 {

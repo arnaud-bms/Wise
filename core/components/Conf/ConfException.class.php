@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * ConfException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class ConfException extends ComponentException 
 {

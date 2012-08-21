@@ -8,7 +8,7 @@ use Telco\Logger\Logger;
 /**
  * Catch all error and log
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class ErrorHandler extends Component
 {

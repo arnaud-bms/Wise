@@ -2,7 +2,7 @@
 /**
  * Bootstrap of Example application
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 
 use Telco\Autoloader\Autoloader;

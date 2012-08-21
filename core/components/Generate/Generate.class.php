@@ -6,7 +6,7 @@ use \Telco\Component\Component;
 /**
  * Generate file
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Generate extends Component 
 {

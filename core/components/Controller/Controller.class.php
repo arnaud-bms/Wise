@@ -6,7 +6,7 @@ use Telco\Bootstrap\Bootstrap;
 /**
  * Abstract Controller
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Controller 
 {

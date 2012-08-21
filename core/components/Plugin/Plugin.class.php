@@ -6,7 +6,7 @@ use Telco\Component\Component;
 /**
  * Abstract class Plugin
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Plugin extends Component
 {

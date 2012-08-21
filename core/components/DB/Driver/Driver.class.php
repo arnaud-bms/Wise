@@ -5,7 +5,7 @@ namespace Telco\DB\Driver;
 /**
  * Abstract class driver
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 interface Driver
 {

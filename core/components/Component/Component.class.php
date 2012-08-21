@@ -4,7 +4,7 @@ namespace Telco\Component;
 /**
  * Class base 
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Component extends AbstractComponent
 {

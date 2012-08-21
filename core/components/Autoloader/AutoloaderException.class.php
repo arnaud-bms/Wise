@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * AutoloaderException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class AutoloaderException extends ComponentException 
 {

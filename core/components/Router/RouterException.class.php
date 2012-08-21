@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * RouterException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class RouterException extends ComponentException 
 {

@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * RepositoryException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class RepositoryException extends ComponentException 
 {

@@ -7,7 +7,7 @@ use Telco\DB\DB;
 /**
  * Default method to request database
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Repository extends Component
 {

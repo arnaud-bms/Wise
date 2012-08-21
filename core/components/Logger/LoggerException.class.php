@@ -6,7 +6,7 @@ use Telco\Component\ComponentException;
 /**
  * FormatException
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class LoggerException extends ComponentException 
 {

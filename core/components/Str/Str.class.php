@@ -6,7 +6,7 @@ use \Telco\Component\ComponentStatic;
 /**
  * String
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Str extends ComponentStatic 
 {

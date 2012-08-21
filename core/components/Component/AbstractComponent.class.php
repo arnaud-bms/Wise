@@ -6,7 +6,7 @@ use Telco\Conf\Conf;
 /**
  * Class base component
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class AbstractComponent
 {

@@ -4,7 +4,7 @@ namespace Telco\Logger\Driver;
 /**
  * EngineInterface
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class AbstractDriver 
 {   

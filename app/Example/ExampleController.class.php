@@ -8,7 +8,7 @@ use Telco\Autoloader\Autoloader;
 /**
  * Description of Main
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class ExampleController extends Controller 
 {

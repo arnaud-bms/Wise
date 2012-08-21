@@ -8,7 +8,7 @@ use Telco\Conf\Conf;
 /**
  * Router extract informations from route
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 class Router extends Component 
 {
