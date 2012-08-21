@@ -18,6 +18,7 @@ abstract class Repository extends Component
     
     
     /**
+     * Init repository
      * 
      * @param type $config 
      */
