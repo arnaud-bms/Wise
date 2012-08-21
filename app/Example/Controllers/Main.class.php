@@ -3,6 +3,7 @@ namespace Example\Controllers;
 
 use Example\ExampleController;
 use Telco\Bootstrap\Bootstrap;
+use Telco\DB\Driver\Statement;
 
 /**
  * Description of Main
@@ -19,9 +20,11 @@ class Main extends ExampleController
      */
     public function index($var, $var2)
     {
-        $this->getRepository('Example\Models\TestRepository')->insert(array('name' => 'truc'));
+        $testRepository = $this->getRepository('Example\Models\TestRepository');
         
-        $stmt = $this->getRepository('Example\Models\TestRepository')->select('*');
+        $testRepository->insert(array('name' => uniqid()));
+        
+        $stmt = $testRepository->select('*');
         $return['rows'] = $stmt->fetchAll();
         $return['page'] = 'TOTO';
         

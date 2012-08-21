@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Model;
+namespace Telco\Repository;
 
 use Telco\Component\ComponentException;
 

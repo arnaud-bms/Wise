@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Model;
+namespace Telco\Repository;
 
 use Telco\Component\Component;
 use Telco\DB\DB;
@@ -33,7 +33,8 @@ abstract class Repository extends Component
      * @param array $rows
      * @param bool  $ignore
      */
-    public function insert($rows, $ignore = false) {
+    public function insert($rows, $ignore = false) 
+    {
         $rows   = (array)$rows;
         $query  = "INSERT %s INTO %s (%s) VALUES(%s)";
         $ignore = $ignore ? 'IGNORE' : '';
@@ -57,7 +58,8 @@ abstract class Repository extends Component
     * @param array $where
     * @param bool  $ignore
     */
-    public function update($rows, $where = array(), $ignore = false) {
+    public function update($rows, $where = array(), $ignore = false) 
+    {
         $query  = "UPDATE %s %s SET %s WHERE %s";
         $ignore = $ignore ? 'IGNORE' : '';
 
@@ -75,7 +77,8 @@ abstract class Repository extends Component
     *
     * @param array $where
     */
-    public function delete($where = array()) {
+    public function delete($where = array())
+    {
         $query = "DELETE FROM %s WHERE %s";
 
         $whereQuery = $this->_queryAssign($where, 'AND');
@@ -94,7 +97,8 @@ abstract class Repository extends Component
     * @param array $where
     * @return 
     */
-    public function select($select, $where = array()) {
+    public function select($select, $where = array()) 
+    {
         $query = "SELECT %s FROM %s WHERE %s";
 
         $selectQuery = '';
@@ -127,7 +131,8 @@ abstract class Repository extends Component
     * @param array $value
     * @param string $separator
     */
-    protected function _queryAssign($values, $separator) {
+    protected function _queryAssign($values, $separator) 
+    {
         $query = '';
         foreach($values as $field => $value) {
             if($value[0] === '!') {
@@ -150,7 +155,8 @@ abstract class Repository extends Component
      * @param array $valueList
      * @return array
      */
-    public function escapeValues($valueList) {
+    public function escapeValues($valueList) 
+    {
         foreach($valueList as &$value) {
             $value = $this->escape($value);
         }
@@ -165,7 +171,8 @@ abstract class Repository extends Component
      * @param mixed $value
      * @return mixed
      */
-    public function escape($value) {
+    public function escape($value) 
+    {
         if(is_int($value) || is_float($value)) {
             return $value;
         }

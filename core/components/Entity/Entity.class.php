@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Model;
+namespace Telco\Entity;
 
 /**
  * Entity
@@ -8,6 +8,5 @@ namespace Telco\Model;
  */
 abstract class Entity
 {
-    
     
 }
