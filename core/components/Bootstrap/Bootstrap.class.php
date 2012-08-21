@@ -137,7 +137,11 @@ class Bootstrap extends ComponentStatic
                     self::$_pluginsLoaded[$plugin] = new $plugin();
                 }
 
-                self::$_pluginsLoaded[$plugin]->$method();
+                if($method === self::PLUGIN_PRECALL) {
+                    self::$_pluginsLoaded[$plugin]->precall();
+                } else {
+                    self::$_pluginsLoaded[$plugin]->postCall();
+                }
 
                 if(self::$_interrupRequest) {
                     break;
