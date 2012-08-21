@@ -1,8 +1,8 @@
 <?php
 /**
- * Bootstrap of application
+ * Bootstrap of the application
  *
- * @author gdievart
+ * @author gdievart <dievartg@gmail.com>
  */
 
 use Telco\Autoloader\Autoloader;
@@ -19,13 +19,18 @@ Autoloader::setAlias(array(
     'Plugin'        => ROOT_DIR.'plugins/Plugin'
 ));
 
+// Load the default configuration
 Conf::loadConfig(ROOT_DIR.'etc/telco.ini');
+
+// Load the file which contains routes
 Conf::mergeConfig(ROOT_DIR.'etc/routing.ini');
 
+// Set exception handler if exists
 if($handlerConfig = Conf::getConfig('exception_handler')) {
     set_exception_handler(array($handlerConfig['class'], $handlerConfig['method']));
 }
 
+// Set error handler if exists
 if($errorConfig = Conf::getConfig('error_handler')) {
     set_error_handler(array($errorConfig['class'], $errorConfig['method']));
 }

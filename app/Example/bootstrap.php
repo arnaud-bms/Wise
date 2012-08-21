@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap of Test application
+ * Bootstrap of Example application
  *
  * @author gdievart
  */
