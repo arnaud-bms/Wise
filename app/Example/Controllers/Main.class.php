@@ -47,6 +47,22 @@ class Main extends ExampleController
     
     
     /**
+     * 
+     */
+    public function generateList()
+    {
+        $testRepository = $this->getRepository('Example\Models\TestRepository');
+        
+        $stmt = $testRepository->select('*');
+        $return['rows'] = $stmt->fetchAll();
+        
+        Bootstrap::setProperty('generate', 'list');
+        
+        return $return;
+    }
+    
+    
+    /**
      * Method redirect
      * 
      * @param string $var 
