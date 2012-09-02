@@ -17,20 +17,27 @@ class Main extends ExampleController
      * Method test
      * 
      * @param string $var 
+     * @param string $var 
+     * @return array $response
      */
     public function index($var, $var2)
     {
+        // Instanciate repository of the table test
         $testRepository = $this->getRepository('Example\Models\TestRepository');
         
+        // Insert row in table test
         $testRepository->insert(array('name' => uniqid()));
         
+        // Select all from table test
         $stmt = $testRepository->select('*');
-        $return['rows'] = $stmt->fetchAll();
-        $return['page'] = 'TOTO';
+        $response['rows'] = $stmt->fetchAll();
         
-        $test['name'] = 'test';
+        $response['page'] = 'TOTO';
         
-        return $return;
+        // Set property format for plugin Format
+        Bootstrap::setProperty('format', 'xml');
+        
+        return $response;
     }
     
     
@@ -41,6 +48,7 @@ class Main extends ExampleController
      */
     public function generateIndex($var, $var2)
     {
+        Bootstrap::setProperty('format', 'xml');
         Bootstrap::setProperty('generate', 'home');
         return $this->index($var, $var2);
     }
@@ -54,11 +62,12 @@ class Main extends ExampleController
         $testRepository = $this->getRepository('Example\Models\TestRepository');
         
         $stmt = $testRepository->select('*');
-        $return['rows'] = $stmt->fetchAll();
+        $response['rows'] = $stmt->fetchAll();
         
+        Bootstrap::setProperty('format', 'xml');
         Bootstrap::setProperty('generate', 'list');
         
-        return $return;
+        return $response;
     }
     
     
