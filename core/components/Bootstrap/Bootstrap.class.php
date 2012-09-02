@@ -43,11 +43,6 @@ class Bootstrap extends ComponentStatic
     protected static $_method;
     
     /**
-     * @var string Format
-     */
-    protected static $_format;
-    
-    /**
      * @var array Args to pass to controller 
      */
     protected static $_argv = array();
@@ -100,7 +95,6 @@ class Bootstrap extends ComponentStatic
         self::$_pattern    = $routeInfos['pattern'];
         self::$_controller = $routeInfos['controller'];
         self::$_method     = $routeInfos['method'];
-        self::$_format     = isset($routeInfos['format']) ? $routeInfos['format'] : null;
         self::$_argv       = $routeInfos['argv'];
         self::$_plugins[self::PLUGIN_PRECALL] = isset($routeInfos['precall']) 
                                                     ? explode(';', $routeInfos['precall']) 
@@ -246,16 +240,5 @@ class Bootstrap extends ComponentStatic
     public static function setProperty($name, $value)
     {
         self::$_properties[$name] = $value;
-    }
-    
-    
-    /**
-     * Retrieve format
-     * 
-     * @return string
-     */
-    public static function getFormat()
-    {
-        return self::$_format;
     }
 }
