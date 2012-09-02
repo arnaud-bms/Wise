@@ -23,9 +23,12 @@ class Format extends Plugin
      */
     public function postcall()
     {
-        $format = new \Telco\Format\Format();
-        Bootstrap::setResponse(
-                $format->formatData(Bootstrap::getFormat(), 
-                Bootstrap::getResponse()));
+        if($responseFormat = Bootstrap::getProperty('format')) 
+        {
+            $format = new \Telco\Format\Format();
+            Bootstrap::setResponse(
+                    $format->formatData($responseFormat, 
+                    Bootstrap::getResponse()));
+        }
     }
 }
