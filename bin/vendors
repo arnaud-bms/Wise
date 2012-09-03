@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "TODO";
+exit 0
+
+
+sudo apt-get install subversion
+
+# Install smarty 3
+svn checkout http://smarty-php.googlecode.com/svn/trunk/distribution smarty
