@@ -1,4 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "TODO";
-exit 0
+if test "$1" = ""
+then
+    echo "Usage: ./admin appName";
+    exit 1;
+fi
+
+APP_NAME=$1;
+
+echo $APP_NAME;
