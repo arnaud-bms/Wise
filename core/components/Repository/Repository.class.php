@@ -180,4 +180,14 @@ abstract class Repository extends Component
         }
         return $this->_db->escape($value);
     }
+    
+    
+    /**
+     * Reset connection with database
+     */
+    public function resetDB()
+    {
+        $this->_db = null;
+        $this->_db = DB::getInstance();
+    }
 }
