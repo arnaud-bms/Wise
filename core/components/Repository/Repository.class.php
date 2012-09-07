@@ -97,7 +97,7 @@ abstract class Repository extends Component
     * @param array $where
     * @return 
     */
-    public function select($select, $where = array()) 
+    public function select($select, $where = array(), $limit = null) 
     {
         $query = "SELECT %s FROM %s WHERE %s";
 
@@ -120,6 +120,8 @@ abstract class Repository extends Component
         $query = sprintf($query, $selectQuery,
                     $this->_table,
                     $whereQuery);
+        
+        $query.= $limit !== null ? ' LIMIT '.$limit : null;
 
         return $this->_db->query($query);
     }
