@@ -185,9 +185,8 @@ abstract class Repository extends Component
     /**
      * Reset connection with database
      */
-    public function resetDB()
+    public function closeConnection()
     {
-        $this->_db = null;
-        $this->_db = DB::getInstance();
+        $this->_db->close();
     }
 }
