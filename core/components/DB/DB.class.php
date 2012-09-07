@@ -69,7 +69,20 @@ class DB extends Component
             self::$_instance = new DB($config);
         }
         
-        return self::$_instance->getDriver();
+        return self::$_instance;
+    }
+    
+    
+    /**
+     * Call method on driver
+     * 
+     * @param string $method
+     * @param array $argv
+     * @return mixed
+     */
+    public function __call($method, $argv)
+    {
+        return call_user_func_array(array($this->_driver, $method), $argv);
     }
     
     
@@ -78,8 +91,9 @@ class DB extends Component
      * 
      * @return Driver 
      */
-    public function getDriver()
+    public function close()
     {
-        return $this->_driver;
+        self::$_instance = null;
+        $this->_driver->close();
     }
 }
