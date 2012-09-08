@@ -1,8 +1,6 @@
 <?php
 namespace Telco\DB\Driver;
 
-use Iterator;
-
 /**
  * Statement query
  *
