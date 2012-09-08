@@ -1,10 +1,8 @@
 <?php
 namespace Telco\Autoloader;
 
-use Telco\Autoloader\AutoloaderException;
-
 /**
- * Include class file
+ * Autoloader: Include class file
  *
  * @author gdievart <dievartg@gmail.com>
  */
@@ -26,7 +24,7 @@ class Autoloader
             if(substr($class, 0, strlen($prefix)) === $prefix) {
                 $class = substr($class, strlen($prefix)+1);
                 require_once $path.'/'.strtr($class, '\\', '/').'.class.php';
-                return;
+                break;
             }
         }
     }
