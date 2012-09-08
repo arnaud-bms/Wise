@@ -1,12 +1,14 @@
 <?php
 namespace Telco\View\Driver;
 
+use Telco\Component\Component;
+
 /**
  * AbstractDriver
  *
  * @author gdievart <dievartg@gmail.com>
  */
-abstract class Driver 
+abstract class Driver extends Component
 {
     
     public function setDataList($dataList)
