@@ -32,18 +32,7 @@ class Curl extends Component
      *
      * @param string $url
      */
-    public function __construct($url = null) 
-    {
-        $this->_initCurl($url);
-    }
-
-
-    /**
-     * Init basic option Curl
-     *
-     * @param string $url
-     */
-    private function _initCurl($url) 
+    protected function _init($url) 
     {
         $this->_curl = curl_init();
         $this->setUrl($url);
