@@ -87,7 +87,7 @@ class DB extends Component
     
     
     /**
-     * Return driver loaded
+     * Close connection on driver and remove ref to driver
      * 
      * @return Driver 
      */
