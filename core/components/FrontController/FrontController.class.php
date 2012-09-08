@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Bootstrap;
+namespace Telco\FrontController;
 
 use Telco\Component\ComponentStatic;
 use Telco\Router\Router;
@@ -9,7 +9,7 @@ use Telco\Router\Router;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Bootstrap extends ComponentStatic
+class FrontController extends ComponentStatic
 {
     /**
      * @staticvar string Method name call on plugins 
@@ -75,7 +75,7 @@ class Bootstrap extends ComponentStatic
     /**
      * Run application
      */
-    public static function run($route = null) 
+    public static function run($route = null)
     {
         $router = new Router();
         self::_setRouteInfos($router->getRouteInfos($route));

@@ -1,7 +1,7 @@
 <?php
 namespace Telco\Controller;
 
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 
 /**
  * Abstract Controller
@@ -23,8 +23,8 @@ abstract class Controller
      */
     protected function _redirect($route)
     {
-        Bootstrap::run($route);
-        Bootstrap::interruptRequest();
+        FrontController::run($route);
+        FrontController::interruptRequest();
     }
     
     

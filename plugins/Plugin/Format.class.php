@@ -1,7 +1,7 @@
 <?php
 namespace Plugin;
 
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 use Telco\Plugin\Plugin;
 
 /**
@@ -23,12 +23,12 @@ class Format extends Plugin
      */
     public function postcall()
     {
-        if($responseFormat = Bootstrap::getProperty('format')) 
+        if($responseFormat = FrontController::getProperty('format')) 
         {
             $format = new \Telco\Format\Format();
-            Bootstrap::setResponse(
+            FrontController::setResponse(
                     $format->formatData($responseFormat, 
-                    Bootstrap::getResponse()));
+                    FrontController::getResponse()));
         }
     }
 }

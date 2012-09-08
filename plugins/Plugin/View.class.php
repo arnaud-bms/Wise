@@ -1,7 +1,7 @@
 <?php
 namespace Plugin;
 
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 use Telco\Plugin\Plugin;
 use Telco\Conf\Conf;
 
@@ -39,9 +39,9 @@ class View extends Plugin
      */
     public function postcall()
     {
-        if(is_array(Bootstrap::getResponse())) {
-            $this->_view->setDataList(Bootstrap::getResponse());
-            Bootstrap::setResponse($this->_view->fetch(Conf::getConfig('view.default_template')));
+        if(is_array(FrontController::getResponse())) {
+            $this->_view->setDataList(FrontController::getResponse());
+            FrontController::setResponse($this->_view->fetch(Conf::getConfig('view.default_template')));
         }
     }
 }

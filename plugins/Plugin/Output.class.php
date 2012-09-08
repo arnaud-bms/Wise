@@ -1,7 +1,7 @@
 <?php
 namespace Plugin;
 
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 use Telco\Plugin\Plugin;
 
 /**
@@ -23,6 +23,6 @@ class Output extends Plugin
      */
     public function postcall()
     {
-        echo Bootstrap::getResponse();
+        echo FrontController::getResponse();
     }
 }

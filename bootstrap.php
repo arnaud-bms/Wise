@@ -1,13 +1,13 @@
 <?php
 /**
- * Bootstrap of the application
+ * FrontController of the application
  *
  * @author gdievart <dievartg@gmail.com>
  */
 
 use Telco\Autoloader\Autoloader;
 use Telco\Conf\Conf;
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 
 define('ROOT_DIR', __DIR__.'/');
 
@@ -35,5 +35,5 @@ if($errorConfig = Conf::getConfig('error_handler')) {
     set_error_handler(array($errorConfig['class'], $errorConfig['method']));
 }
 
-Bootstrap::init();
-Bootstrap::run();
+FrontController::init();
+FrontController::run();

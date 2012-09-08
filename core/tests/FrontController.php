@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Bootstrap\tests\units;
+namespace Telco\FrontController\tests\units;
 
 require_once __DIR__.'/atoum/mageekguy.atoum.phar';
 require_once __DIR__.'/config.php';
@@ -7,21 +7,21 @@ require_once __DIR__.'/config.php';
 use mageekguy\atoum;
 
 /**
- * Test  \Telco\Bootstrap
+ * Test  \Telco\FrontController
  * 
  * @author Guillaume Dievart <dievartg@gmail.com>
  */
-class Bootstrap extends atoum\test
+class FrontController extends atoum\test
 {
     public function testRun()
     {   
         $this->assert->exception(function(){
-                                \Telco\Bootstrap\Bootstrap::run('/Example truc');
+                                \Telco\FrontController\FrontController::run('/Example truc');
                             })
                      ->isInstanceOf('\Telco\Router\RouterException')
                      ->hasCode(404);
         
-        \Telco\Bootstrap\Bootstrap::run('/Example/home truc truc');
-        $this->assert->string(\Telco\Bootstrap\Bootstrap::getResponse());
+        \Telco\FrontController\FrontController::run('/Example/home truc truc');
+        $this->assert->string(\Telco\FrontController\FrontController::getResponse());
     }
 }

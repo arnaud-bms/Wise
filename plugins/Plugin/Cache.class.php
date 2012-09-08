@@ -1,9 +1,8 @@
 <?php
 namespace Plugin;
 
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 use Telco\Plugin\Plugin;
-use Telco\Conf\Conf;
 use Telco\Str\Str;
 
 /**
@@ -31,8 +30,8 @@ class Cache extends Plugin
      */
     public function precall()
     {
-        if($content = $this->_cache->getCache(Bootstrap::getRouteId())) {
-            Bootstrap::interruptRequest();
+        if($content = $this->_cache->getCache(FrontController::getRouteId())) {
+            FrontController::interruptRequest();
             echo $content;
         }
     }
@@ -43,7 +42,7 @@ class Cache extends Plugin
      */
     public function postcall()
     {
-        $cacheId = Bootstrap::getRouteId().'.'.Str::url(Bootstrap::getRouteName(), '.');
-        $this->_cache->setCache($cacheId, Bootstrap::getResponse());
+        $cacheId = FrontController::getRouteId().'.'.Str::url(FrontController::getRouteName(), '.');
+        $this->_cache->setCache($cacheId, FrontController::getResponse());
     }
 }

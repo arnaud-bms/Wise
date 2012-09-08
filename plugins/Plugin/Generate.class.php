@@ -1,7 +1,7 @@
 <?php
 namespace Plugin;
 
-use Telco\Bootstrap\Bootstrap;
+use Telco\FrontController\FrontController;
 use Telco\Plugin\Plugin;
 
 /**
@@ -23,9 +23,9 @@ class Generate extends Plugin
      */
     public function postcall()
     {
-        if($alias = Bootstrap::getProperty('generate')) {
+        if($alias = FrontController::getProperty('generate')) {
             $generate = new \Telco\Generate\Generate();
-            $generate->generateFile($alias, Bootstrap::getResponse());
+            $generate->generateFile($alias, FrontController::getResponse());
         }
     }
 }
