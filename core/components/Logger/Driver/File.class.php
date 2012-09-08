@@ -33,14 +33,11 @@ class File extends AbstractDriver
      * 
      * @param array $config 
      */
-    public function __construct($config)
+    protected function _init($config)
     {
-        if(isset($config['file'])) {
-            $this->_file = $config['file'];
-        } else {
-            throw new LoggerException('Driver File required field "file"');
-        }
+        $this->_file = $config['file'];
     }
+    
     
     /**
      * Retrieve valid cache
