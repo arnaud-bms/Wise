@@ -1,8 +1,6 @@
 <?php
 namespace Telco\Component;
 
-use Telco\Conf\Conf;
-
 /**
  * Class base 
  *
