@@ -1,11 +1,50 @@
 #!/bin/bash
 
+# Check param appName exists
 if test "$1" = ""
 then
     echo "Usage: ./admin appName";
     exit 1;
 fi
 
+# Include functions
+CURRENT_DIR=$(pwd)/$(dirname $0)/;
+source $CURRENT_DIR/functions;
+
+# Init var
+TELCO_PATH=$(dirname CURRENT_DIR)/;
+APP_PATH=$TELCO_PATH/app/;
 APP_NAME=$1;
 
-echo $APP_NAME;
+if test -d "$APP_PATH$APP_NAME"
+then
+    echo $APP_NAME" exists already";
+    exit 1;
+fi
+
+echo "Creation de l'arborescence de l'application "$APP_NAME;
+mkdir $APP_PATH$APP_NAME;
+mkdir $APP_PATH$APP_NAME/{Controllers,etc,Models,Plugins,tpl};
+
+echo "Copie des fichiers de base de l'application "$APP_NAME;
+cp $CURRENT_DIR"/tpl_app/AppController.class.php" $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";
+cp $CURRENT_DIR"/tpl_app/AppRepository.class.php" $APP_PATH$APP_NAME"/Models/AppRepository.class.php";
+cp $CURRENT_DIR"/tpl_app/Main.class.php" $APP_PATH$APP_NAME"/Controllers/Main.class.php";
+cp $CURRENT_DIR"/tpl_app/bootstrap.php" $APP_PATH$APP_NAME"/bootstrap.php";
+cp $CURRENT_DIR"/tpl_app/config.ini" $APP_PATH$APP_NAME"/etc/config.ini";
+cp $CURRENT_DIR"/tpl_app/main.tpl" $APP_PATH$APP_NAME"/tpl/main.tpl";
+
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";
+
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/Models/AppRepository.class.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Models/AppRepository.class.php";
+
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/Controllers/Main.class.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Controllers/Main.class.php";
+
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/bootstrap.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/bootstrap.php";
+
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/etc/config.ini";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/etc/config.ini";

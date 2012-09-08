@@ -1,36 +1,10 @@
 #!/bin/bash
 
-TELCO_PATH=$(dirname $(pwd)/$(dirname $0))/;
+CURRENT_DIR=$(pwd)/$(dirname $0)/;
+source $CURRENT_DIR/functions
+
+TELCO_PATH=$(dirname CURRENT_DIR)/;
 VENDOR_PATH=$TELCO_PATH"vendor";
-
-# Show action
-show_action () {
-    echo -e "\033[34m\n"${1}"\033[00m";
-    sleep 1;
-}
-
-# Show error
-show_error() {
-    echo -e "\nError: "${1};
-}
-
-# Install package if isn't install
-install_package() {
-    if test "`dpkg -l | grep ${1} | wc -l`" = "0"
-    then
-        show_action "- Install ${1}";
-        apt-get install ${1}
-    fi
-}
-
-# Create directory if does'nt exists
-create_dir() {
-    if ! test -d ${1}
-    then
-        show_action "- Create dir ${1}";
-        mkdir -vp ${1}
-    fi
-}
 
 # Need subversion
 install_package subversion
