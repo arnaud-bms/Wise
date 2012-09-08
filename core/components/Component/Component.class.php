@@ -14,7 +14,7 @@ abstract class Component extends AbstractComponent
      * 
      * @param type $config 
      */
-    public function __construct($config = null) 
+    final public function __construct($config = null) 
     {
         $class = get_called_class();
         $config = self::_getComponentConfig($class, $config);
