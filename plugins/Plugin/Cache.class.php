@@ -20,7 +20,7 @@ class Cache extends Plugin
     /**
      * Init Plugin Cache
      */
-    public function __construct()
+    public function _init()
     {
         $this->_cache = new \Telco\Cache\Cache();
     }

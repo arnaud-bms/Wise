@@ -20,7 +20,7 @@ class View extends Plugin
     /**
      * Init Plugin Cache
      */
-    public function __construct()
+    public function _init()
     {
         $this->_view = new \Telco\View\View();
     }
