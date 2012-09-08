@@ -41,6 +41,9 @@ class Cache extends Component
             case 'file':
                 $driver = 'Telco\Cache\Driver\File';
                 break;
+            case 'memcache':
+                $driver = 'Telco\Cache\Driver\Memcache';
+                break;
             default:
                 throw new CacheException("Driver '{$config['driver']}' does'nt exists", 400);
         }
