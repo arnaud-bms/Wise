@@ -17,28 +17,28 @@ class Memcache extends Driver
     protected $_memcache;
     
     /**
+     * @var int ttl
+     */
+    protected $_ttl;
+    
+    /**
      * @var array Required fields 
      */
     protected $_requiredFields = array(
         'host',
-        'port'
+        'port',
+        'ttl'
     );
     
     /**
-     * Init File driver
      * 
-     * @param array $config 
+     * @param type $config
      */
-    public function __construct($config)
+    protected function _init($config)
     {
-        foreach($this->_requiredFields as $field) {
-            if(!array_key_exists($field, $config)) {
-                throw new CacheException("The field '$field' is required on drivre Mem", 400);
-            }
-        }
-        
         $this->_memcache = new \Memcache();
         $this->_memcache->connect($config['host'], $config['port']);
+        $this->_ttl = $config['ttl'];
     }
     
     /**
@@ -60,6 +60,6 @@ class Memcache extends Driver
      */
     public function setCache($uniqId, $content)
     {
-        $this->_memcache->add($uniqId, $content);
+        $this->_memcache->add($uniqId, $content, $this->_ttl);
     }
 }

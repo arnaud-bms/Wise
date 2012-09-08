@@ -33,17 +33,12 @@ class File extends Driver
      * 
      * @param array $config 
      */
-    public function __construct($config)
+    public function _init($config)
     {
-        foreach($this->_requiredFields as $field) {
-            if(!array_key_exists($field, $config)) {
-                throw new CacheException("The field '$field' is required on drivre File", 400);
-            }
-        }
-        
         $this->_path = $config['path'];
         $this->_ttl  = $config['ttl'];
     }
+    
     
     /**
      * Retrieve valid cache

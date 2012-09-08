@@ -1,12 +1,14 @@
 <?php
 namespace Telco\Cache\Driver;
 
+use Telco\Component\Component;
+
 /**
- * DriverInterface
+ * Driver
  *
  * @author gdievart <dievartg@gmail.com>
  */
-abstract class Driver 
+abstract class Driver extends Component
 {   
     abstract public function getCache($uniqId);
     
