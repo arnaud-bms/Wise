@@ -2,13 +2,14 @@
 namespace Telco\Controller;
 
 use Telco\FrontController\FrontController;
+use Telco\Component\Component;
 
 /**
  * Abstract Controller
  *
  * @author gdievart <dievartg@gmail.com>
  */
-abstract class Controller 
+abstract class Controller extends Component
 {
     
     /**
