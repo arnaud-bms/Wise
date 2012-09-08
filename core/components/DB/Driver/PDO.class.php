@@ -70,4 +70,13 @@ class PDO implements Driver
     {
         return $this->_PDO->quote($string);
     }
+    
+    
+    /**
+     * Close connection with database
+     */
+    public function close()
+    {
+        unset($this->_PDO);
+    }
 }
