@@ -41,8 +41,6 @@ class MySQL implements Driver
     {
         if($resource = mysql_query($query, $this->_link)) {
             return new MySQLStatement($resource);
-        } else {
-            echo mysql_error();
         }
         
         return false;
@@ -57,11 +55,7 @@ class MySQL implements Driver
      */
     public function exec($query)
     {
-        if(mysql_query($query)) {
-            return mysql_affected_rows();
-        } else {
-            return 0;
-        }
+        return mysql_query($query) ? mysql_affected_rows() : 0;
     }
     
     
