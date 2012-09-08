@@ -27,6 +27,7 @@ abstract class Repository extends Component
         $this->_db = DB::getInstance();
     }
     
+    
     /**
      * Insert row into table
      *
@@ -121,7 +122,7 @@ abstract class Repository extends Component
                     $this->_table,
                     $whereQuery);
         
-        $query.= $limit !== null ? ' LIMIT '.$limit : null;
+        $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
 
         return $this->_db->query($query);
     }
