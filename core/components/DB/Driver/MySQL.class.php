@@ -17,7 +17,7 @@ class MySQL implements Driver
     private $_link;
     
     /**
-     * Init PDO Driver
+     * Init link MySQL
      *  
      * @param string $host
      * @param string $dbname
