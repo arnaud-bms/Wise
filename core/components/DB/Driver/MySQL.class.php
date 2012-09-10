@@ -1,7 +1,6 @@
 <?php
 namespace Telco\DB\Driver;
 
-use Telco\DB\DBException;
 use Telco\DB\Driver\MySQLStatement;
 
 /**
@@ -9,16 +8,16 @@ use Telco\DB\Driver\MySQLStatement;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class MySQL implements Driver 
+class MySQL implements Driver
 {
     /**
      * @var handle Ref to link
      */
     private $_link;
-    
+
     /**
      * Init link MySQL
-     *  
+     *
      * @param string $host
      * @param string $dbname
      * @param string $user
@@ -26,15 +25,15 @@ class MySQL implements Driver
      */
     public function __construct($host, $dbname, $user, $password)
     {
-        $this->_link = mysql_connect($host, $user, $password, true);
+        $this->_link = mysql_connect($host, $user, $password);
         mysql_select_db($dbname);
     }
-    
-    
+
+
     /**
      * Execute query and return result
-     * 
-     * @param type $query 
+     *
+     * @param type $query
      * @return stmt
      */
     public function query($query)
@@ -42,35 +41,35 @@ class MySQL implements Driver
         if($resource = mysql_query($query, $this->_link)) {
             return new MySQLStatement($resource);
         }
-        
+
         return false;
     }
-    
-    
+
+
     /**
      * Execute query and return rows affected
-     * 
-     * @param type $query 
+     *
+     * @param type $query
      * @return int Rows affected
      */
     public function exec($query)
     {
         return mysql_query($query) ? mysql_affected_rows() : 0;
     }
-    
-    
+
+
     /**
      * Execute query and return rows affected
-     * 
-     * @param string $query 
+     *
+     * @param string $query
      * @return string
      */
     public function escape($string)
     {
         return mysql_real_escape_string($string);
     }
-    
-    
+
+
     /**
      * Close connection with database
      */
