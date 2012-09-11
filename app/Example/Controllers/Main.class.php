@@ -9,41 +9,41 @@ use Telco\FrontController\FrontController;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Main extends ExampleController 
+class Main extends ExampleController
 {
-    
+
     /**
      * Method test
-     * 
-     * @param string $var 
-     * @param string $var 
+     *
+     * @param string $var
+     * @param string $var
      * @return array $response
      */
     public function index($var, $var2)
     {
         // Instanciate repository of the table test
         $testRepository = $this->getRepository('Example\Models\TestRepository');
-        
+
         // Insert row in table test
         $testRepository->insert(array('name' => uniqid()));
-        
+
         // Select all from table test
         $stmt = $testRepository->select('*');
         $response['rows'] = $stmt->fetchAll();
-        
+
         $response['page'] = 'TOTO';
-        
+
         // Set property format for plugin Format
         FrontController::setProperty('format', 'xml');
-        
+
         return $response;
     }
-    
-    
+
+
     /**
      * Method redirect
-     * 
-     * @param string $var 
+     *
+     * @param string $var
      */
     public function generateIndex($var, $var2)
     {
@@ -51,29 +51,42 @@ class Main extends ExampleController
         FrontController::setProperty('generate', 'home');
         return $this->index($var, $var2);
     }
-    
-    
+
+
     /**
-     * 
+     *
      */
     public function generateList()
     {
         $testRepository = $this->getRepository('Example\Models\TestRepository');
-        
+
         $stmt = $testRepository->select('*');
         $response['rows'] = $stmt->fetchAll();
-        
+
         FrontController::setProperty('format', 'xml');
         FrontController::setProperty('generate', 'list');
-        
+
         return $response;
     }
-    
-    
+
+
+    /**
+     * Test redis
+     */
+    public function testRedis()
+    {
+        $redis = new \Telco\Redis\Redis();
+
+        $redis->set('test', 'values');
+
+        echo $redis->get('test')."\n";
+    }
+
+
     /**
      * Method redirect
-     * 
-     * @param string $var 
+     *
+     * @param string $var
      */
     public function redirect()
     {
