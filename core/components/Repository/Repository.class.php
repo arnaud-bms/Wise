@@ -12,29 +12,29 @@ use Telco\DB\DB;
 abstract class Repository extends Component
 {
     /**
-     * @var DB 
+     * @var DB
      */
     protected $_db;
-    
-    
+
+
     /**
      * Init repository
-     * 
-     * @param type $config 
+     *
+     * @param type $config
      */
     public function _init($config)
     {
         $this->_db = DB::getInstance();
     }
-    
-    
+
+
     /**
      * Insert row into table
      *
      * @param array $rows
      * @param bool  $ignore
      */
-    public function insert($rows, $ignore = false) 
+    public function insert($rows, $ignore = false)
     {
         $rows   = (array)$rows;
         $query  = "INSERT %s INTO %s (%s) VALUES(%s)";
@@ -59,7 +59,7 @@ abstract class Repository extends Component
     * @param array $where
     * @param bool  $ignore
     */
-    public function update($rows, $where = array(), $ignore = false) 
+    public function update($rows, $where = array(), $ignore = false)
     {
         $query  = "UPDATE %s %s SET %s WHERE %s";
         $ignore = $ignore ? 'IGNORE' : '';
@@ -96,9 +96,9 @@ abstract class Repository extends Component
     *
     * @param array $select
     * @param array $where
-    * @return 
+    * @return
     */
-    public function select($select, $where = array(), $limit = null) 
+    public function select($select, $where = array(), $limit = null)
     {
         $query = "SELECT %s FROM %s WHERE %s";
 
@@ -121,7 +121,7 @@ abstract class Repository extends Component
         $query = sprintf($query, $selectQuery,
                     $this->_table,
                     $whereQuery);
-        
+
         $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
 
         return $this->_db->query($query);
@@ -134,7 +134,7 @@ abstract class Repository extends Component
     * @param array $value
     * @param string $separator
     */
-    protected function _queryAssign($values, $separator) 
+    protected function _queryAssign($values, $separator)
     {
         $query = '';
         foreach($values as $field => $value) {
@@ -158,7 +158,7 @@ abstract class Repository extends Component
      * @param array $valueList
      * @return array
      */
-    public function escapeValues($valueList) 
+    public function escapeValues($valueList)
     {
         foreach($valueList as &$value) {
             $value = $this->escape($value);
@@ -174,15 +174,15 @@ abstract class Repository extends Component
      * @param mixed $value
      * @return mixed
      */
-    public function escape($value) 
+    public function escape($value)
     {
         if(is_int($value) || is_float($value)) {
             return $value;
         }
-        return $this->_db->escape($value);
+        return "'".$this->_db->escape($value)."'";
     }
-    
-    
+
+
     /**
      * Reset connection with database
      */
