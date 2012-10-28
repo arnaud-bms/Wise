@@ -1,5 +1,4 @@
 !/app/
-
 /app/*
 !/app/etc/
 /app/etc/*
