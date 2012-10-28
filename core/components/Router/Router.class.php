@@ -10,46 +10,46 @@ use Telco\Conf\Conf;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Router extends Component 
+class Router extends Component
 {
     /**
-     * @staticvar SAPI 
+     * @staticvar SAPI
      */
     const SAPI_CLI = 'cli';
     const SAPI_CGI = 'cgi';
-    
+
     /**
      * @var string current sapi_name
      */
     private $_sapiName = null;
-    
+
     /**
      * @var string Name of route app loaded
      */
     private $_routeAppLoaded = null;
-    
+
     /**
-     * @var array Required fields to route app 
+     * @var array Required fields to route app
      */
     private $_requiredFieldsRouteApp = array(
         'type',
         'prefix',
         'app'
     );
-    
+
     /**
-     * @var array Required fields to route 
+     * @var array Required fields to route
      */
     private $_requiredFieldsRoute = array(
         'pattern',
         'controller',
         'method'
     );
-    
-    
+
+
     /**
      * Init Router
-     * 
+     *
      * @param array $config
      */
     protected function _init($config)
@@ -57,13 +57,13 @@ class Router extends Component
         $this->_sapiName       = php_sapi_name();
         $this->_routeAppLoaded = null;
     }
-    
-    
+
+
     /**
      * Extract route informatios from argv
-     * 
+     *
      * @param string $route
-     * @return array 
+     * @return array
      */
     public function getRouteInfos($route = null)
     {
@@ -75,14 +75,14 @@ class Router extends Component
                 $route = $_SERVER['REQUEST_URI'];
             }
         }
-        
+
         return $this->_getRouteInfos($route);
     }
-    
-    
+
+
     /**
      * Extract informations from route
-     * 
+     *
      * @param string $route
      * @return array
      */
@@ -101,18 +101,18 @@ class Router extends Component
                 break;
             }
         }
-        
+
         if($routeInfos === false) {
             throw new RouterException("Route '$route' not matches", 404);
         }
-        
+
         return $routeInfos;
     }
-    
-    
+
+
     /**
      * Check require fields for routeApp
-     * 
+     *
      * @param array $routeApp
      */
     private function _checkFieldsRoute($route)
@@ -123,11 +123,11 @@ class Router extends Component
             }
         }
     }
-    
-    
+
+
     /**
      * Extract informations from main routing
-     * 
+     *
      * @param string $route
      * @return array
      */
@@ -146,18 +146,18 @@ class Router extends Component
                 }
             }
         }
-        
+
         if($routing === false) {
-            throw new RouterException("Route '$route' not matches", 404);
+            throw new RouterException("Route app '$route' not matches", 404);
         }
-        
+
         return $routing;
     }
-    
-    
+
+
     /**
      * Check require fields for routeApp
-     * 
+     *
      * @param array $routeApp
      */
     private function _checkFieldsRouteApp($routeApp)
@@ -168,11 +168,11 @@ class Router extends Component
             }
         }
     }
-    
-    
+
+
     /**
      * Load bootstrap application
-     * 
+     *
      * @param string $appName
      */
     private function _loadApp($appName)
