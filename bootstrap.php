@@ -20,10 +20,10 @@ Autoloader::setAlias(array(
 ));
 
 // Load the default configuration
-Conf::loadConfig(ROOT_DIR.'etc/telco.ini');
+Conf::loadConfig(ROOT_DIR.'app/etc/app.ini');
 
 // Load the file which contains routes
-Conf::mergeConfig(ROOT_DIR.'etc/routing.ini');
+Conf::mergeConfig(ROOT_DIR.'app/etc/routing.ini');
 
 // Set exception handler if exists
 if($handlerConfig = Conf::getConfig('exception_handler')) {
