@@ -9,7 +9,7 @@ use Telco\Autoloader\Autoloader;
 use Telco\Conf\Conf;
 use Telco\FrontController\FrontController;
 
-define('ROOT_DIR', __DIR__.'/');
+define('ROOT_DIR', __DIR__.'/../');
 
 require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
 spl_autoload_register(array('Telco\Autoloader\Autoloader', 'loadClass'));
