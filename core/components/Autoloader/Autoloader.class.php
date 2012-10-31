@@ -20,6 +20,16 @@ class Autoloader
      */
     public static function loadClass($class)
     {
+	list($alias) = explode('\\', $class);
+	echo $alias;
+        foreach(self::$_alias as $prefix => $path) {
+            if($alias === $prefix) {
+                $class = substr($class, strlen($prefix)+1);
+                require_once $path.'/'.strtr($class, '\\', '/').'.class.php';
+                break;
+            }
+        }
+return;
         foreach(self::$_alias as $prefix => $path) {
             if(substr($class, 0, strlen($prefix)) === $prefix) {
                 $class = substr($class, strlen($prefix)+1);
