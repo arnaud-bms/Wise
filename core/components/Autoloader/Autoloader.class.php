@@ -21,7 +21,6 @@ class Autoloader
     public static function loadClass($class)
     {
 	list($alias) = explode('\\', $class);
-	echo $alias;
         foreach(self::$_alias as $prefix => $path) {
             if($alias === $prefix) {
                 $class = substr($class, strlen($prefix)+1);
