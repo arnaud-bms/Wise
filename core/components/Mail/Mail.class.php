@@ -232,7 +232,7 @@ class Mail extends Component {
      *
      * @throws MS_Exception
      */
-    private function _getBody() {
+    private function _getBody($message) {
         $body = "";
         if(!empty($this->_attachments)) {
             $body.= "--".$this->_boundary.self::MAIL_EOF ;
