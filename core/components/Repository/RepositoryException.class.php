@@ -8,7 +8,7 @@ use Telco\Component\ComponentException;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class RepositoryException extends ComponentException 
+class RepositoryException extends ComponentException
 {
-    
+
 }

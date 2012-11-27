@@ -36,7 +36,7 @@ class Redis extends Component
         $timeout = isset($config['timeout']) ? $config['timeout'] : null;
         $this->_redis->connect($config['host'], $port, $timeout);
 
-        if(isset($config['prefix'])) {
+        if (isset($config['prefix'])) {
             $this->setOption(\Redis::OPT_PREFIX, $config['prefix']);
         }
     }

@@ -56,8 +56,8 @@ class File extends Driver
      */
     private function _initHandle()
     {
-        if($this->_handle === null) {
-			if(!is_dir(dirname($this->_file))) {
+        if ($this->_handle === null) {
+			if (!is_dir(dirname($this->_file))) {
 				mkdir(dirname($this->_file), 0755, true);
 			}
             $this->_handle = fopen($this->_file, 'a+');
@@ -70,7 +70,7 @@ class File extends Driver
      */
     public function __destruct()
     {
-        if($this->_handle !== null) {
+        if ($this->_handle !== null) {
             fclose($this->_handle);
         }
     }

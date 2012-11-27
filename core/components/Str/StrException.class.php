@@ -8,7 +8,7 @@ use Telco\Component\ComponentException;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class StrException extends ComponentException 
+class StrException extends ComponentException
 {
-    
+
 }

@@ -8,7 +8,7 @@ use Telco\Component\ComponentException;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class RouterException extends ComponentException 
+class RouterException extends ComponentException
 {
-    
+
 }

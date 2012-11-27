@@ -16,7 +16,7 @@ class View extends Plugin
      * @var Cache Ref to \Telco\Cache\Cache
      */
     private $_view = null;
-    
+
     /**
      * Init Plugin Cache
      */
@@ -24,24 +24,26 @@ class View extends Plugin
     {
         $this->_view = new \Telco\View\View();
     }
-    
+
     /**
      * Method call on precall
      */
     public function precall()
     {
-        
+
     }
-    
-    
+
+
     /**
      * Method call on postcall
      */
     public function postcall()
     {
-        if(is_array(FrontController::getResponse())) {
+        if (is_array(FrontController::getResponse())) {
             $this->_view->setDataList(FrontController::getResponse());
-            FrontController::setResponse($this->_view->fetch(Conf::getConfig('view.default_template')));
+            FrontController::setResponse(
+                $this->_view->fetch(Conf::getConfig('view.default_template'))
+            );
         }
     }
 }

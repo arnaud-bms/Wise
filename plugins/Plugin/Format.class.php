@@ -11,24 +11,29 @@ use Telco\Plugin\Plugin;
  */
 class Format extends Plugin
 {
-    
+
     /**
      * Method call on precall
      */
-    public function precall() { }
-    
-    
+    public function precall()
+    {
+
+    }
+
+
     /**
      * Method call on postcall
      */
     public function postcall()
     {
-        if($responseFormat = FrontController::getProperty('format')) 
-        {
+        if ($responseFormat = FrontController::getProperty('format')) {
             $format = new \Telco\Format\Format();
             FrontController::setResponse(
-                    $format->formatData($responseFormat, 
-                    FrontController::getResponse()));
+                $format->formatData(
+                    $responseFormat,
+                    FrontController::getResponse()
+                )
+            );
         }
     }
 }

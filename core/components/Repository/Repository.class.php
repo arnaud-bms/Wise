@@ -42,11 +42,13 @@ abstract class Repository extends Component
         $fields = array_keys($rows);
         $values = $this->escapeValues($rows);
 
-        $query = sprintf($query,
+        $query = sprintf(
+            $query,
             $ignore,
             $this->_table,
             implode(',', $fields),
-            implode(',', $values));
+            implode(',', $values)
+        );
 
         return $this->_db->exec($query);
     }
@@ -67,7 +69,9 @@ abstract class Repository extends Component
         $setQuery   = $this->_queryAssign($rows, ',');
         $whereQuery = $this->_queryAssign($where, 'AND');
 
-        $query = sprintf($query, $ignore, $this->_table, $setQuery, $whereQuery);
+        $query = sprintf(
+            $query, $ignore, $this->_table, $setQuery, $whereQuery
+        );
 
         return $this->_db->exec($query);
     }
@@ -83,9 +87,11 @@ abstract class Repository extends Component
         $query = "DELETE FROM %s WHERE %s";
 
         $whereQuery = $this->_queryAssign($where, 'AND');
-        $query = sprintf($query,
+        $query = sprintf(
+            $query,
             $this->_table,
-            $whereQuery);
+            $whereQuery
+        );
 
         return $this->_db->exec($query);
     }
@@ -103,8 +109,8 @@ abstract class Repository extends Component
         $query = "SELECT %s FROM %s WHERE %s";
 
         $selectQuery = '';
-        foreach((array)$select as $alias => $field) {
-            if(!is_int($alias)) {
+        foreach ((array)$select as $alias => $field) {
+            if (!is_int($alias)) {
                 $selectQuery.= $field.' as '.$alias.',';
             } else {
                 $selectQuery.= $field.',';
@@ -112,15 +118,13 @@ abstract class Repository extends Component
         }
         $selectQuery = rtrim($selectQuery, ',');
 
-        if(count($where) > 0) {
+        if (count($where) > 0) {
             $whereQuery = $this->_queryAssign($where, 'AND');
         } else {
             $whereQuery = '1';
         }
 
-        $query = sprintf($query, $selectQuery,
-                    $this->_table,
-                    $whereQuery);
+        $query = sprintf($query, $selectQuery, $this->_table, $whereQuery);
 
         $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
 
@@ -137,15 +141,16 @@ abstract class Repository extends Component
     protected function _queryAssign($values, $separator)
     {
         $query = '';
-        foreach($values as $field => $value) {
-            if($value[0] === '!') {
+        foreach ($values as $field => $value) {
+            if ($value[0] === '!') {
                 $value = substr($value, 1);
                 $operator = '!=';
             } else {
                 $operator = '=';
             }
 
-            $query.= $field.' '.$operator.' '.$this->escape($value).' '.$separator.' ';
+            $query.= $field.' '.$operator.' '
+                   . $this->escape($value).' '.$separator.' ';
         }
 
         return rtrim($query, $separator.' ');
@@ -160,7 +165,7 @@ abstract class Repository extends Component
      */
     public function escapeValues($valueList)
     {
-        foreach($valueList as &$value) {
+        foreach ($valueList as &$value) {
             $value = $this->escape($value);
         }
 
@@ -176,7 +181,7 @@ abstract class Repository extends Component
      */
     public function escape($value)
     {
-        if(is_int($value) || is_float($value)) {
+        if (is_int($value) || is_float($value)) {
             return $value;
         }
         return "'".$this->_db->escape($value)."'";

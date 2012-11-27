@@ -11,13 +11,16 @@ use Telco\Plugin\Plugin;
  */
 class Output extends Plugin
 {
-    
+
     /**
      * Method call on precall
      */
-    public function precall() { }
-    
-    
+    public function precall()
+    {
+        
+    }
+
+
     /**
      * Method call on postcall
      */

@@ -19,22 +19,14 @@ class Main extends ExampleController
      * @param string $var
      * @return array $response
      */
-    public function index($var, $var2)
+    public function index()
     {
-        // Instanciate repository of the table test
-        $testRepository = $this->getRepository('Example\Models\TestRepository');
-
-        // Insert row in table test
-        $testRepository->insert(array('name' => uniqid()));
-
-        // Select all from table test
-        $stmt = $testRepository->select('*');
-        $response['rows'] = $stmt->fetchAll();
+        $response['rows'] = array('name' => 'value');
 
         $response['page'] = 'TOTO';
 
         // Set property format for plugin Format
-        FrontController::setProperty('format', 'xml');
+        FrontController::setProperty('format', 'html');
 
         return $response;
     }

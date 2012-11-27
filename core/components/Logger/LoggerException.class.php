@@ -8,7 +8,7 @@ use Telco\Component\ComponentException;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class LoggerException extends ComponentException 
+class LoggerException extends ComponentException
 {
-    
+
 }

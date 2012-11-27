@@ -67,11 +67,11 @@ class Router extends Component
      */
     public function getRouteInfos($route = null)
     {
-        if($route === null) {
-            if($this->_sapiName === self::SAPI_CLI) {
+        if ($route === null) {
+            if ($this->_sapiName === self::SAPI_CLI) {
                 array_shift($_SERVER['argv']);
                 $route = implode($_SERVER['argv'], ' ');
-            }  else {
+            } else {
                 $route = $_SERVER['REQUEST_URI'];
             }
         }
@@ -90,10 +90,10 @@ class Router extends Component
     {
         $routeInfos = false;
         $routing = $this->_getRoutingApp($route);
-        foreach($routing as $routeName => $routeTest) {
+        foreach ($routing as $routeName => $routeTest) {
             $this->_checkFieldsRoute($routeTest);
             $pattern = '#'.$routeTest['pattern'].'#';
-            if(preg_match($pattern, $route, $argv )) {
+            if (preg_match($pattern, $route, $argv)) {
                 $routeInfos = $routeTest;
                 array_shift($argv);
                 $routeInfos['argv'] = $argv;
@@ -102,7 +102,7 @@ class Router extends Component
             }
         }
 
-        if($routeInfos === false) {
+        if ($routeInfos === false) {
             throw new RouterException("Route '$route' not matches", 404);
         }
 
@@ -117,9 +117,11 @@ class Router extends Component
      */
     private function _checkFieldsRoute($route)
     {
-        foreach($this->_requiredFieldsRoute as $field) {
-            if(!array_key_exists($field, $route)) {
-                throw new RouterException("The field '$field' is required in route", 407);
+        foreach ($this->_requiredFieldsRoute as $field) {
+            if (!array_key_exists($field, $route)) {
+                throw new RouterException(
+                    "The field '$field' is required in route", 407
+                );
             }
         }
     }
@@ -134,11 +136,13 @@ class Router extends Component
     private function _getRoutingApp($route)
     {
         $routing = false;
-        if($routeConfig = Conf::getConfig('route_apps')) {
-            foreach($routeConfig as $routeName => $routeApp) {
+        if ($routeConfig = Conf::getConfig('route_apps')) {
+            foreach ($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
                 $prefix = substr($route, 0, strlen($routeApp['prefix']));
-                if(strtolower($routeApp['type']) === $this->_sapiName  && $routeApp['prefix'] === $prefix) {
+                if (strtolower($routeApp['type']) === $this->_sapiName
+                    && $routeApp['prefix'] === $prefix
+                ) {
                     $this->_loadApp($routeApp['app']);
                     $routing = Conf::getConfig('routing');
                     $this->_routeAppLoaded = $routeName;
@@ -147,7 +151,7 @@ class Router extends Component
             }
         }
 
-        if($routing === false) {
+        if ($routing === false) {
             throw new RouterException("Route app '$route' not matches", 404);
         }
 
@@ -162,9 +166,11 @@ class Router extends Component
      */
     private function _checkFieldsRouteApp($routeApp)
     {
-        foreach($this->_requiredFieldsRouteApp as $field) {
-            if(!array_key_exists($field, $routeApp)) {
-                throw new RouterException("The field '$field' is required in routeApp", 406);
+        foreach ($this->_requiredFieldsRouteApp as $field) {
+            if (!array_key_exists($field, $routeApp)) {
+                throw new RouterException(
+                    "The field '$field' is required in routeApp", 406
+                );
             }
         }
     }
@@ -178,10 +184,12 @@ class Router extends Component
     private function _loadApp($appName)
     {
         $bootstrapFile = ROOT_DIR.'app/'.$appName.'/bootstrap.php';
-        if(file_exists($bootstrapFile)) {
+        if (file_exists($bootstrapFile)) {
             require_once $bootstrapFile;
         } else {
-            throw new RouterException("Require bootstrap.php for '$appName' application", 410);
+            throw new RouterException(
+                "Require bootstrap.php for '$appName' application", 410
+            );
         }
     }
 }

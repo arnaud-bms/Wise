@@ -8,32 +8,32 @@ use Telco\Component\Component;
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Cache extends Component 
+class Cache extends Component
 {
-    
+
     /**
-     * @var CacheDriver 
+     * @var CacheDriver
      */
     protected $_driver;
-    
+
     /**
-     * @var boolean Enable Cache 
+     * @var boolean Enable Cache
      */
     protected $_enable;
-    
+
     /**
-     * @var array Required fields 
+     * @var array Required fields
      */
     protected $_requiredFields = array(
         'enable',
         'driver'
     );
-    
-    
+
+
     /**
      * Init Cache
-     * 
-     * @param array $config 
+     *
+     * @param array $config
      */
     protected function _init($config)
     {
@@ -47,39 +47,39 @@ class Cache extends Component
             default:
                 throw new CacheException("Driver '{$config['driver']}' does'nt exists", 400);
         }
-        
+
         $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
         $this->_driver = new $driver($driverConfig);
-        
+
         $this->_enable = (boolean)$config['enable'];
     }
-    
-    
+
+
     /**
      * Retrieve cache
-     * 
+     *
      * @param string $uniqId
      * @return string $content
      */
     public function getCache($uniqId)
     {
-        if($this->_enable) {
+        if ($this->_enable) {
             return $this->_driver->getCache($uniqId);
         }
-        
+
         return false;
     }
-    
-    
+
+
     /**
      * Set content to Cache
-     * 
+     *
      * @param string $uniqId
-     * @param string $content 
+     * @param string $content
      */
     public function setCache($uniqId, $content)
     {
-        if($this->_enable) {
+        if ($this->_enable) {
             $this->_driver->setCache($uniqId, $content);
         }
     }
