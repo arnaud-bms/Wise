@@ -12,18 +12,6 @@ use Telelab\Conf\Conf;
  */
 class View extends Plugin
 {
-    /**
-     * @var Cache Ref to \Telelab\Cache\Cache
-     */
-    private $_view = null;
-
-    /**
-     * Init Plugin Cache
-     */
-    public function _init($config)
-    {
-        $this->_view = new \Telelab\View\View();
-    }
 
     /**
      * Method call on precall
@@ -40,10 +28,23 @@ class View extends Plugin
     public function postcall()
     {
         if (is_array(FrontController::getResponse())) {
-            $this->_view->setDataList(FrontController::getResponse());
-            FrontController::setResponse(
-                $this->_view->fetch(Conf::getConfig('view.default_template'))
-            );
+            if ($responseFormat = FrontController::getProperty('format')) {
+                if ($responseFormat !== 'html') {
+                    $format = new \Telelab\Format\Format();
+                    FrontController::setResponse(
+                        $format->formatData(
+                            $responseFormat,
+                            FrontController::getResponse()
+                        )
+                    );
+                } else {
+                    $view = new \Telelab\View\View();
+                    $view->setDataList(FrontController::getResponse());
+                    FrontController::setResponse(
+                        $view->fetch(Conf::getConfig('view.default_template'))
+                    );
+                }
+            }
         }
     }
 }
