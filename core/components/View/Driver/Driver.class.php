@@ -1,7 +1,7 @@
 <?php
-namespace Telco\View\Driver;
+namespace Telelab\View\Driver;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * AbstractDriver

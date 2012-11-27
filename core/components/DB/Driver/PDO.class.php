@@ -1,8 +1,8 @@
 <?php
-namespace Telco\DB\Driver;
+namespace Telelab\DB\Driver;
 
-use Telco\DB\DBException;
-use Telco\DB\Driver\PDOStatement;
+use Telelab\DB\DBException;
+use Telelab\DB\Driver\PDOStatement;
 
 /**
  * Connector to database
@@ -12,71 +12,71 @@ use Telco\DB\Driver\PDOStatement;
 class PDO implements Driver
 {
     /**
-     * @var PDO Ref to PDO 
+     * @var PDO Ref to PDO
      */
-    private $_PDO;
-    
+    private $_pdo;
+
     /**
      * Init PDO Driver
-     *  
+     *
      * @param type $host
      * @param type $dbname
      * @param type $user
      * @param type $password
-     * @throws DBException 
+     * @throws DBException
      */
     public function __construct($host, $dbname, $user, $password)
     {
         $dsn      = sprintf('mysql:host=%s;dbname=%s;', $host, $dbname);
         try {
-            $this->_PDO = new \PDO($dsn, $user, $password);
+            $this->_pdo = new \PDO($dsn, $user, $password);
         } catch(\PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode());
         }
     }
-    
-    
+
+
     /**
      * Execute query and return result
-     * 
-     * @param type $query 
+     *
+     * @param type $query
      * @return stmt
      */
     public function query($query)
     {
-        return new PDOStatement($this->_PDO->query($query));
+        return new PDOStatement($this->_pdo->query($query));
     }
-    
-    
+
+
     /**
      * Execute query and return rows affected
-     * 
-     * @param type $query 
+     *
+     * @param type $query
      * @return int
      */
     public function exec($query)
     {
-        return $this->_PDO->exec($query);
+        return $this->_pdo->exec($query);
     }
-    
-    
+
+
     /**
      * Execute query and return rows affected
-     * 
-     * @param string $query 
+     *
+     * @param string $query
      * @return string
      */
     public function escape($string)
     {
-        return $this->_PDO->quote($string);
+        return $this->_pdo->quote($string);
     }
-    
-    
+
+
     /**
      * Close connection with database
      */
     public function close()
     {
-        unset($this->_PDO);
+        unset($this->_pdo);
     }
 }

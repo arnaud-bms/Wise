@@ -5,18 +5,18 @@
  * @author gdievart <dievartg@gmail.com>
  */
 
-use Telco\Autoloader\Autoloader;
-use Telco\Conf\Conf;
-use Telco\FrontController\FrontController;
+use Telelab\Autoloader\Autoloader;
+use Telelab\Conf\Conf;
+use Telelab\FrontController\FrontController;
 
 define('ROOT_DIR', __DIR__.'/../');
 
 require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
-spl_autoload_register(array('Telco\Autoloader\Autoloader', 'loadClass'));
+spl_autoload_register(array('Telelab\Autoloader\Autoloader', 'loadClass'));
 
 Autoloader::setAlias(
     array(
-        'Telco'         => ROOT_DIR.'core/components',
+        'Telelab'         => ROOT_DIR.'core/components',
         'Plugin'        => ROOT_DIR.'plugins/Plugin'
     )
 );

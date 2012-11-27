@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Autoloader;
+namespace Telelab\Autoloader;
 
 /**
  * Autoloader: Include class file

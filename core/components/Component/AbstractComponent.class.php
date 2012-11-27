@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Component;
+namespace Telelab\Component;
 
-use Telco\Conf\Conf;
+use Telelab\Conf\Conf;
 
 /**
  * Class base component
@@ -18,9 +18,10 @@ abstract class AbstractComponent
      * @param array $config
      * @return array
      */
-    protected static function _getComponentConfig($class, $config) {
+    protected static function _getComponentConfig($class, $config)
+    {
         if ($config === null) {
-            $configName = substr($class, strlen('Telco\\'));
+            $configName = substr($class, strlen('Telelab\\'));
             $configName = substr($configName, 0, strpos($configName, '\\'));
             $configName = strtolower($configName);
 

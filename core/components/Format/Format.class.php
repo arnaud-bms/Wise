@@ -1,27 +1,27 @@
 <?php
-namespace Telco\Format;
+namespace Telelab\Format;
 
-use \Telco\Component\Component;
+use \Telelab\Component\Component;
 
 /**
  * Format data from array to csv, json, xml, serialize ...
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Format extends Component 
+class Format extends Component
 {
     /**
-     * @var array Format valid 
+     * @var array Format valid
      */
     protected $_formatAvailable = array(
         'json', 'xml', 'csv', 'serialize'
     );
-    
+
     /**
      * Format array
-     * 
+     *
      * @param string $format
-     * @param array $data 
+     * @param array $data
      */
     public function formatData($format, $data)
     {
@@ -41,25 +41,29 @@ class Format extends Component
             default:
                 throw new FormatException("Format '$format' is not valid", 400);
         }
-        
+
         return $return;
     }
-    
-    
+
+
     /**
      * Format array to XML
-     * 
-     * @param type $data 
+     *
+     * @param type $data
      * @return string XML
      */
     protected function _arrayToXML($data, $sxe = null, $rootNode = 'xml')
     {
         if ($sxe === null) {
-            $sxe = simplexml_load_string('<?xml version="1.0" encoding="utf-8"?><'.$rootNode.' />');
+            $sxe = simplexml_load_string(
+                '<?xml version="1.0" encoding="utf-8"?><'.$rootNode.' />'
+            );
         }
 
-        foreach($data as $key => $value) {
-            $key = is_numeric($key) ? 'node' : preg_replace('/[^a-z:_-]/i', '', $key);
+        foreach ($data as $key => $value) {
+            $key = is_numeric($key)
+                ? 'node'
+                : preg_replace('/[^a-z:_-]/i', '', $key);
             if (is_array($value)) {
                 $this->_arrayToXml($value, $sxe->addChild($key));
             } else {
@@ -69,24 +73,24 @@ class Format extends Component
 
         return $sxe->asXML();
     }
-    
-    
+
+
     /**
      * Format array to Json
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return string json
      */
     protected function _arrayToJson($data)
     {
         return json_encode($data);
     }
-    
-    
+
+
     /**
      * Format array to serialize
-     * 
-     * @param type $data 
+     *
+     * @param type $data
      */
     protected function _arrayToSerialize($data)
     {

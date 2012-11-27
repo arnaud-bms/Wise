@@ -3,17 +3,17 @@
  * Default configuration for UnitTests 
  */
 
-use Telco\Autoloader\Autoloader;
-use Telco\Conf\Conf;
+use Telelab\Autoloader\Autoloader;
+use Telelab\Conf\Conf;
 
 define('ROOT_DIR', __DIR__.'/../../');
 require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
-spl_autoload_register(array('\Telco\Autoloader\Autoloader', 'loadClass'));
+spl_autoload_register(array('\Telelab\Autoloader\Autoloader', 'loadClass'));
 Autoloader::setAlias(array(
-    'Telco'       => ROOT_DIR.'core/components',
+    'Telelab'       => ROOT_DIR.'core/components',
     'Example'     => ROOT_DIR.'app/Example',
     'Plugin'      => ROOT_DIR.'plugins/Plugin'
 ));
 
-Conf::loadConfig(ROOT_DIR.'etc/telco.ini');
+Conf::loadConfig(ROOT_DIR.'etc/telelab.ini');
 Conf::mergeConfig(ROOT_DIR.'etc/routing.ini');

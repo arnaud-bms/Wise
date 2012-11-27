@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Curl;
+namespace Telelab\Curl;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
  /**
   * Class Curl
@@ -32,7 +32,7 @@ class Curl extends Component
      *
      * @param string $url
      */
-    protected function _init($url) 
+    protected function _init($url)
     {
         $this->_curl = curl_init();
         $this->setUrl($url);
@@ -46,9 +46,9 @@ class Curl extends Component
      *
      * @return mixed
      */
-    public function exec() 
+    public function exec()
     {
-        if(($return = curl_exec($this->_curl)) === false) {
+        if (($return = curl_exec($this->_curl)) === false) {
             throw new CurlException(curl_error($this->_curl));
         }
         return $return;
@@ -60,7 +60,7 @@ class Curl extends Component
      *
      * @return resource
      */
-    public function getHandle() 
+    public function getHandle()
     {
         return $this->_curl;
     }
@@ -71,7 +71,7 @@ class Curl extends Component
      *
      * @return array
      */
-    public function getInfo() 
+    public function getInfo()
     {
         return curl_getinfo($this->_curl);
     }
@@ -82,7 +82,7 @@ class Curl extends Component
      *
      * @return string
      */
-    public function getError() 
+    public function getError()
     {
         return $this->_error;
     }
@@ -93,9 +93,9 @@ class Curl extends Component
      *
      * @param string $url
      */
-    public function setUrl($url) 
+    public function setUrl($url)
     {
-        if($url !== null) {
+        if ($url !== null) {
             $this->setOpt(CURLOPT_URL, $url);
         }
     }
@@ -107,7 +107,7 @@ class Curl extends Component
      * @param int $option
      * @param mixed $value
      */
-    public function setOpt($option, $value) 
+    public function setOpt($option, $value)
     {
         curl_setopt($this->_curl, $option, $value);
     }
@@ -118,7 +118,7 @@ class Curl extends Component
      *
      * @param int $listOptions
      */
-    public function setOptArray(array $listOptions) 
+    public function setOptArray(array $listOptions)
     {
         curl_setopt_array($this->_curl, $listOptions);
     }
@@ -127,8 +127,8 @@ class Curl extends Component
     /**
      * Close curl
      */
-    public function __destruct() 
+    public function __destruct()
     {
         curl_close($this->_curl);
     }
-} 
+}

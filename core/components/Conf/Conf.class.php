@@ -1,8 +1,8 @@
 <?php
-namespace Telco\Conf;
+namespace Telelab\Conf;
 
-use Telco\Component\ComponentStatic;
-use Telco\Conf\ConfException;
+use Telelab\Component\ComponentStatic;
+use Telelab\Conf\ConfException;
 
 /**
  * Configuration Class from files
@@ -11,39 +11,40 @@ use Telco\Conf\ConfException;
  */
 class Conf extends ComponentStatic
 {
-    
+
     /**
-     * @var array List config setted 
+     * @var array List config setted
      */
     protected static $_config = array();
-    
+
     /**
      * Set config
-     * 
+     *
      * @param string $fileConf
      */
     public static function loadConfig($fileConf)
     {
         self::$_config = self::_getConfFromFile($fileConf);
     }
-    
-    
+
+
     /**
-     * Overwrite main config 
-     * 
+     * Overwrite main config
+     *
      * @param string $fileConf
      */
     public static function mergeConfig($fileConf)
     {
         self::$_config = array_merge(
-                self::$_config, 
-                self::_getConfFromFile($fileConf));
+            self::$_config,
+            self::_getConfFromFile($fileConf)
+        );
     }
-    
-    
+
+
     /**
      * Retrieve conf from file
-     * 
+     *
      * @param string $fileConf
      * @return array
      */
@@ -52,12 +53,12 @@ class Conf extends ComponentStatic
         $typeFile = substr($fileConf, strrpos($fileConf, '.')+1);
         switch($typeFile) {
             case 'json':
-                if(!$config = @json_decode(file_get_contents($fileConf), true)) {
+                if (!$config = @json_decode(file_get_contents($fileConf), true)) {
                     throw new ConfException("Json file '$fileConf' is not valid", 401);
                 }
                 break;
             case 'ini':
-                if(!$config = @parse_ini_file($fileConf, true)) {
+                if (!$config = @parse_ini_file($fileConf, true)) {
                     throw new ConfException("Ini file '$fileConf' is not valid", 402);
                 }
                 break;
@@ -66,30 +67,30 @@ class Conf extends ComponentStatic
         }
         return $config;
     }
-    
-    
+
+
     /**
      * Retrieve config
-     * 
+     *
      * @param string $section
      * @return mixed
      */
     public static function getConfig($section = null)
     {
         $config = self::$_config;
-        if($section !== null) {
+        if ($section !== null) {
             $section = explode('.', $section);
-            foreach($section as $field) {
+            foreach ($section as $field) {
                 $config = isset($config[$field]) ? $config[$field] : false;
             }
         }
         return $config;
     }
-    
-    
+
+
     /**
      * Retrieve config
-     * 
+     *
      * @param string $section
      * @param mixed  $newConfig
      */
@@ -97,8 +98,8 @@ class Conf extends ComponentStatic
     {
         $config =& self::$_config;
         $section = explode('.', $section);
-        foreach($section as $field) {
-            if(isset($config[$field])) {
+        foreach ($section as $field) {
+            if (isset($config[$field])) {
                 $config =& $config[$field];
             } else {
                 $config[$field] = null;

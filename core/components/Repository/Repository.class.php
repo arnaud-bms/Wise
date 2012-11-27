@@ -1,8 +1,8 @@
 <?php
-namespace Telco\Repository;
+namespace Telelab\Repository;
 
-use Telco\Component\Component;
-use Telco\DB\DB;
+use Telelab\Component\Component;
+use Telelab\DB\DB;
 
 /**
  * Default method to request database

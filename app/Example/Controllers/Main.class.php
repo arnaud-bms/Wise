@@ -2,7 +2,7 @@
 namespace Example\Controllers;
 
 use Example\ExampleController;
-use Telco\FrontController\FrontController;
+use Telelab\FrontController\FrontController;
 
 /**
  * Description of Main
@@ -67,7 +67,7 @@ class Main extends ExampleController
      */
     public function testRedis()
     {
-        $redis = new \Telco\Redis\Redis();
+        $redis = new \Telelab\Redis\Redis();
 
         $redis->set('test', 'values');
 

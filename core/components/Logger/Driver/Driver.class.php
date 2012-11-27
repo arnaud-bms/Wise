@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Logger\Driver;
+namespace Telelab\Logger\Driver;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Driver logger
@@ -9,6 +9,6 @@ use Telco\Component\Component;
  * @author gdievart <dievartg@gmail.com>
  */
 abstract class Driver extends Component
-{   
+{
     abstract public function log($message, $level);
 }

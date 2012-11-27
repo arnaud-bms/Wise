@@ -26,7 +26,7 @@ class Scheduler extends ExampleController {
             $fifo = new \Example\Controllers\Fifo;
             do {
                 $stmt = $fifo->select('*', array('status' => 0), 100);
-                $jobs = $stmt->fetchAll(\Telco\DB\Driver\Statement::FETCH_ASSOC);
+                $jobs = $stmt->fetchAll(\Telelab\DB\Driver\Statement::FETCH_ASSOC);
                 echo count($jobs)." ".count($this->_currentJobs)."\n";
                 if(empty($jobs)) {
                     usleep(5000000);

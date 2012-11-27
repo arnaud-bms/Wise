@@ -1,19 +1,19 @@
 <?php
 namespace Plugin;
 
-use Telco\FrontController\FrontController;
-use Telco\Plugin\Plugin;
-use Telco\Conf\Conf;
+use Telelab\FrontController\FrontController;
+use Telelab\Plugin\Plugin;
+use Telelab\Conf\Conf;
 
 /**
- * Plugin View, use Telco\View
+ * Plugin View, use Telelab\View
  *
  * @author gdievart
  */
 class View extends Plugin
 {
     /**
-     * @var Cache Ref to \Telco\Cache\Cache
+     * @var Cache Ref to \Telelab\Cache\Cache
      */
     private $_view = null;
 
@@ -22,7 +22,7 @@ class View extends Plugin
      */
     public function _init($config)
     {
-        $this->_view = new \Telco\View\View();
+        $this->_view = new \Telelab\View\View();
     }
 
     /**

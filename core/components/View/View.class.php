@@ -1,7 +1,7 @@
 <?php
-namespace Telco\View;
+namespace Telelab\View;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * View component
@@ -33,7 +33,7 @@ class View extends Component
     {
         switch($config['driver']) {
             case 'smarty':
-                $driver = 'Telco\View\Driver\Smarty';
+                $driver = 'Telelab\View\Driver\Smarty';
                 break;
             default:
                 throw new ViewException(

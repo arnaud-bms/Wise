@@ -1,7 +1,7 @@
 <?php
 namespace Example;
 
-use Telco\Controller\Controller;
+use Telelab\Controller\Controller;
 
 /**
  * Description of Main

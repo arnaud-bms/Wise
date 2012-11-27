@@ -1,7 +1,7 @@
 <?php
-namespace Telco\View\Driver;
+namespace Telelab\View\Driver;
 
-use Telco\View\Driver\Driver;
+use Telelab\View\Driver\Driver;
 
 /**
  * Driver Smarty

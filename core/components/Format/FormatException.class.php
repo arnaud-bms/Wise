@@ -1,14 +1,14 @@
 <?php
-namespace Telco\Format;
+namespace Telelab\Format;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * FormatException
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class FormatException extends ComponentException 
+class FormatException extends ComponentException
 {
-    
+
 }

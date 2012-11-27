@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Logger;
+namespace Telelab\Logger;
 
-use Telco\Component\ComponentStatic;
+use Telelab\Component\ComponentStatic;
 
 /**
  * Format data from array to csv, json, xml, serialize ...
@@ -115,7 +115,7 @@ class Logger extends ComponentStatic
     protected static function _loadDriver()
     {
         if (self::$_driver === null || self::$_driverToLoad === false) {
-            $class = 'Telco\Logger\Driver\\'.ucfirst(self::$_driverToLoad);
+            $class = 'Telelab\Logger\Driver\\'.ucfirst(self::$_driverToLoad);
             self::$_driver = new $class(self::$_driverConfig);
             self::$_driverLoaded = true;
         }

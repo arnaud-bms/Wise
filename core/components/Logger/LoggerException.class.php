@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Logger;
+namespace Telelab\Logger;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * FormatException

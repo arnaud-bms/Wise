@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Mail;
+namespace Telelab\Mail;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
  /**
   * Class Mail

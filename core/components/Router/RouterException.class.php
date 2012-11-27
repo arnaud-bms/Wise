@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Router;
+namespace Telelab\Router;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * RouterException

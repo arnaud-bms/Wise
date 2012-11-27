@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Cache\Driver;
+namespace Telelab\Cache\Driver;
 
-use Telco\Cache\Driver\Driver;
+use Telelab\Cache\Driver\Driver;
 
 /**
  * Driver Cache with memcached

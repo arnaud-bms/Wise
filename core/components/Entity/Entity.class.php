@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Entity;
+namespace Telelab\Entity;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Entity

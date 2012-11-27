@@ -1,8 +1,8 @@
 <?php
 namespace Plugin;
 
-use Telco\FrontController\FrontController;
-use Telco\Plugin\Plugin;
+use Telelab\FrontController\FrontController;
+use Telelab\Plugin\Plugin;
 
 /**
  * Format data
@@ -27,7 +27,7 @@ class Format extends Plugin
     public function postcall()
     {
         if ($responseFormat = FrontController::getProperty('format')) {
-            $format = new \Telco\Format\Format();
+            $format = new \Telelab\Format\Format();
             FrontController::setResponse(
                 $format->formatData(
                     $responseFormat,

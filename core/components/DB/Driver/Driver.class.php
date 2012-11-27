@@ -1,5 +1,5 @@
 <?php
-namespace Telco\DB\Driver;
+namespace Telelab\DB\Driver;
 
 
 /**

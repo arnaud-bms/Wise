@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Redis;
+namespace Telelab\Redis;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Connector to redis

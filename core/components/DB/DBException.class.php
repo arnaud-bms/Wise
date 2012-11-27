@@ -1,14 +1,14 @@
 <?php
-namespace Telco\DB;
+namespace Telelab\DB;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * DBException
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class DBException extends ComponentException 
+class DBException extends ComponentException
 {
-    
+
 }

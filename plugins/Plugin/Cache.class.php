@@ -1,19 +1,19 @@
 <?php
 namespace Plugin;
 
-use Telco\FrontController\FrontController;
-use Telco\Plugin\Plugin;
-use Telco\Str\Str;
+use Telelab\FrontController\FrontController;
+use Telelab\Plugin\Plugin;
+use Telelab\Str\Str;
 
 /**
- * Plugin Cache, use Telco\Cache
+ * Plugin Cache, use Telelab\Cache
  *
  * @author gdievart
  */
 class Cache extends Plugin
 {
     /**
-     * @var Cache Ref to \Telco\Cache\Cache
+     * @var Cache Ref to \Telelab\Cache\Cache
      */
     private $_cache = null;
 
@@ -22,7 +22,7 @@ class Cache extends Plugin
      */
     public function _init($config)
     {
-        $this->_cache = new \Telco\Cache\Cache();
+        $this->_cache = new \Telelab\Cache\Cache();
     }
 
     /**

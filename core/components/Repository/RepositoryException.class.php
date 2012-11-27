@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Repository;
+namespace Telelab\Repository;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * RepositoryException

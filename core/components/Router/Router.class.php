@@ -1,9 +1,9 @@
 <?php
-namespace Telco\Router;
+namespace Telelab\Router;
 
-use Telco\Component\Component;
-use Telco\Router\RouterException;
-use Telco\Conf\Conf;
+use Telelab\Component\Component;
+use Telelab\Router\RouterException;
+use Telelab\Conf\Conf;
 
 /**
  * Router extract informations from route
@@ -32,7 +32,6 @@ class Router extends Component
      * @var array Required fields to route app
      */
     private $_requiredFieldsRouteApp = array(
-        'type',
         'prefix',
         'app'
     );
@@ -140,8 +139,9 @@ class Router extends Component
             foreach ($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
                 $prefix = substr($route, 0, strlen($routeApp['prefix']));
-                if (strtolower($routeApp['type']) === $this->_sapiName
-                    && $routeApp['prefix'] === $prefix
+                if (!isset($routeApp['type'])
+                    || (strtolower($routeApp['type']) === $this->_sapiName
+                        && $routeApp['prefix'] === $prefix)
                 ) {
                     $this->_loadApp($routeApp['app']);
                     $routing = Conf::getConfig('routing');

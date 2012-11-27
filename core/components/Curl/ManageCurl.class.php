@@ -1,8 +1,8 @@
 <?php
-namespace Telco\Curl;
+namespace Telelab\Curl;
 
-use Telco\Component\Component;
-use Telco\Router\CurlException;
+use Telelab\Component\Component;
+use Telelab\Router\CurlException;
 
  /**
   * Class ManageCurl
@@ -44,10 +44,10 @@ class ManageCurl extends Component
 
     /**
      * Execute request
-     * 
+     *
      * @param string $url
      */
-    public function addRequest($url) 
+    public function addRequest($url)
     {
         return $this->addCurl(new Curl($url));
     }
@@ -56,7 +56,7 @@ class ManageCurl extends Component
     /**
      * Execute multi_exec
      */
-    public function request() 
+    public function request()
     {
         $multiHandle = $this->_initMultiHandle();
         $this->_execMultiHandle($multiHandle);
@@ -66,7 +66,7 @@ class ManageCurl extends Component
 
     /**
      * Add Curl to execute on multi
-     * 
+     *
      * @param Curl $curl
      */
     public function addCurl(Curl $curl)
@@ -80,13 +80,13 @@ class ManageCurl extends Component
 
     /**
      * Init multi_handle
-     * 
+     *
      * @return resource
      */
-    private function _initMultiHandle() 
+    private function _initMultiHandle()
     {
         $multiHandle = curl_multi_init();
-        foreach($this->_listCurlToExecute as $uniqId) {
+        foreach ($this->_listCurlToExecute as $uniqId) {
             $curl = $this->_getCurl($uniqId);
             curl_multi_add_handle($multiHandle, $curl->getHandle());
         }
@@ -96,29 +96,29 @@ class ManageCurl extends Component
 
     /**
      * Execute curl in multi
-     * 
+     *
      * @param resource $multiHandle
      */
-    private function _execMultiHandle($multiHandle) 
+    private function _execMultiHandle($multiHandle)
     {
         $running = 0;
         $startTime = microtime(true);
         do {
-            curl_multi_exec($multiHandle, $running );
+            curl_multi_exec($multiHandle, $running);
         } while ($running != 0 && (microtime(true) < $startTime + $this->_timeout));
     }
 
 
     /**
      * Read response to request
-     * 
+     *
      * @param resource $multiHandle
      */
     private function _readResponseRequest($multiHandle)
     {
-        while($curlDone = curl_multi_info_read($multiHandle, $nbMsg = 0)) {
-            if(curl_errno($curlDone['handle']) == CURLE_OK) {
-                foreach($this->_listCurlToExecute as $key => $uniqId) {
+        while ($curlDone = curl_multi_info_read($multiHandle, $nbMsg = 0)) {
+            if (curl_errno($curlDone['handle']) == CURLE_OK) {
+                foreach ($this->_listCurlToExecute as $key => $uniqId) {
                     $curl = $this->_getCurl($uniqId);
                     if ($curl->getHandle() === $curlDone['handle']) {
                         $this->_addToCallback($curl, $uniqId);
@@ -133,12 +133,12 @@ class ManageCurl extends Component
 
     /**
      * Method called in call back
-     * 
+     *
      * @param string $content
      * @param string $uniqId
      * @param array $infos
      */
-    private function _callBack($content, $uniqId, array $infos) 
+    private function _callBack($content, $uniqId, array $infos)
     {
         $this->_listInfos[$uniqId] = $infos;
         $this->_listResponse[$uniqId] = $content;
@@ -147,29 +147,30 @@ class ManageCurl extends Component
 
     /**
      * Add callback for handle
-     * 
+     *
      * @param Curl $curl
      * @param string $uniqId
      */
-    private function _addToCallback(Curl $curl, $uniqId) 
+    private function _addToCallback(Curl $curl, $uniqId)
     {
         call_user_func(
-                array($this, '_callBack'), 
-                curl_multi_getcontent($curl->getHandle()), 
-                $uniqId, 
-                $curl->getInfo());
+            array($this, '_callBack'),
+            curl_multi_getcontent($curl->getHandle()),
+            $uniqId,
+            $curl->getInfo()
+        );
     }
 
 
     /**
      * Execute request Curl
-     * 
+     *
      * @param string $uniqId
      */
-    private function _execCurl($uniqId) 
+    private function _execCurl($uniqId)
     {
         $curl = $this->_getCurl($uniqId);
-        if($this->_autoExec) {
+        if ($this->_autoExec) {
             $this->_listResponse[$uniqId] = $curl->exec();
         } else {
             $this->_listCurlToExecute[] = $uniqId;
@@ -179,13 +180,13 @@ class ManageCurl extends Component
 
     /**
      * Return response to request
-     * 
+     *
      * @param string $uniqId
      * @return string
      */
-    public function getResponse($uniqId) 
+    public function getResponse($uniqId)
     {
-        if(array_key_exists($uniqId, $this->_listResponse)) {
+        if (array_key_exists($uniqId, $this->_listResponse)) {
             return $this->_listResponse[$uniqId];
         }
     }
@@ -193,11 +194,11 @@ class ManageCurl extends Component
 
     /**
      * Return informations about request
-     * 
+     *
      * @param string $uniqId
      * @return array
      */
-    public function getInfos($uniqId) 
+    public function getInfos($uniqId)
     {
         return $this->_listInfos[$uniqId];
     }
@@ -205,12 +206,12 @@ class ManageCurl extends Component
 
     /**
      * Set option to Curl
-     * 
+     *
      * @param string $uniqId
      * @param int $option
      * @param mixed $value
      */
-    public function setOpt($uniqId, $option, $value) 
+    public function setOpt($uniqId, $option, $value)
     {
         $curl = $this->_getCurl($uniqId);
         $curl->setOpt($option, $value);
@@ -219,11 +220,11 @@ class ManageCurl extends Component
 
     /**
      * Set list options to Curl
-     * 
+     *
      * @param string $uniqId
      * @param array $listOptions
      */
-    public function setOptArray($uniqId, array $listOptions) 
+    public function setOptArray($uniqId, array $listOptions)
     {
         $curl = $this->_getCurl($uniqId);
         $curl->setOptArray($listOptions);
@@ -232,21 +233,21 @@ class ManageCurl extends Component
 
     /**
      * Set auto exec
-     * 
+     *
      * @param boolean $autoExec
      */
-    public function setAutoExec($autoExec) 
-   {
+    public function setAutoExec($autoExec)
+    {
         $this->_autoExec = $autoExec;
     }
 
 
     /**
      * Set timeout
-     * 
+     *
      * @param int $second
      */
-    public function setTimeout($second) 
+    public function setTimeout($second)
     {
         $this->_timeout = $second;
     }
@@ -254,13 +255,13 @@ class ManageCurl extends Component
 
     /**
      * Return ref on Curl
-     * 
+     *
      * @param string $uniqId
      * @return Curl
      */
-    private function _getCurl($uniqId) 
+    private function _getCurl($uniqId)
     {
-        if(array_key_exists($uniqId, $this->_listCurl)) {
+        if (array_key_exists($uniqId, $this->_listCurl)) {
             return $this->_listCurl[$uniqId];
         } else {
             throw new CurlException('Uniq id doesn\'t exists');

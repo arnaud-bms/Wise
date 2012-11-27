@@ -5,8 +5,8 @@
  * @author {{user}}
  */
 
-use Telco\Autoloader\Autoloader;
-use Telco\Conf\Conf;
+use Telelab\Autoloader\Autoloader;
+use Telelab\Conf\Conf;
 
 Autoloader::addAlias(array(
     '{{app_name}}'  => ROOT_DIR.'app/{{app_name}}'

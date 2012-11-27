@@ -1,8 +1,8 @@
 <?php
 namespace Plugin;
 
-use Telco\FrontController\FrontController;
-use Telco\Plugin\Plugin;
+use Telelab\FrontController\FrontController;
+use Telelab\Plugin\Plugin;
 
 /**
  * Plugin output, use to write on stdout

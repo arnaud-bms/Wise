@@ -5,8 +5,8 @@
  * @author gdievart <dievartg@gmail.com>
  */
 
-use Telco\Autoloader\Autoloader;
-use Telco\Conf\Conf;
+use Telelab\Autoloader\Autoloader;
+use Telelab\Conf\Conf;
 
 Autoloader::addAlias(array(
     'Example'      => ROOT_DIR.'app/Example'

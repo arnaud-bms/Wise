@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Str;
+namespace Telelab\Str;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * StrException

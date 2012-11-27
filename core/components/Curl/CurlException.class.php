@@ -1,14 +1,14 @@
 <?php
-namespace Telco\Curl;
+namespace Telelab\Curl;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * CurlException
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class CurlException extends ComponentException 
+class CurlException extends ComponentException
 {
-    
+
 }

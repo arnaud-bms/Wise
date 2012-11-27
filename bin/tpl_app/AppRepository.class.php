@@ -1,7 +1,7 @@
 <?php
 namespace {{app_name}}\Models;
 
-use Telco\Repository\Repository;
+use Telelab\Repository\Repository;
 
 /**
  * Description of Test

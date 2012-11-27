@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Component;
+namespace Telelab\Component;
 
-use \Telco\Exception\Exception;
+use \Telelab\Exception\Exception;
 
 /**
  * Description of ComponentException

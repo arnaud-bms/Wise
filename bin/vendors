@@ -3,8 +3,8 @@
 CURRENT_DIR=$(pwd)/$(dirname $0)/;
 source $CURRENT_DIR/functions
 
-TELCO_PATH=$(dirname CURRENT_DIR)/;
-VENDOR_PATH=$TELCO_PATH"vendor";
+TELELAB_PATH=$(dirname CURRENT_DIR)/;
+VENDOR_PATH=$TELELAB_PATH"vendor";
 
 # Need subversion
 install_package subversion

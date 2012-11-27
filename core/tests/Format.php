@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Format\tests\units;
+namespace Telelab\Format\tests\units;
 
 require_once __DIR__.'/atoum/mageekguy.atoum.phar';
 require_once __DIR__.'/config.php';
@@ -7,7 +7,7 @@ require_once __DIR__.'/config.php';
 use mageekguy\atoum;
 
 /**
- * Test  \Telco\Format
+ * Test  \Telelab\Format
  * 
  * @author Guillaume Dievart <dievartg@gmail.com>
  */
@@ -21,7 +21,7 @@ class Format extends atoum\test
     
     public function beforeTestMethod($testMethod)
     {
-        $this->_format = new \Telco\Format\Format();
+        $this->_format = new \Telelab\Format\Format();
         $this->_data  = array('key_one' => 'value_one', 'key_two' => 'value_two');
     }
     

@@ -1,8 +1,8 @@
 <?php
-namespace Telco\Controller;
+namespace Telelab\Controller;
 
-use Telco\FrontController\FrontController;
-use Telco\Component\Component;
+use Telelab\FrontController\FrontController;
+use Telelab\Component\Component;
 
 /**
  * Abstract Controller
@@ -11,15 +11,15 @@ use Telco\Component\Component;
  */
 abstract class Controller extends Component
 {
-    
+
     /**
-     * @var array Repository loaded 
+     * @var array Repository loaded
      */
     protected $_repositoryLoaded = array();
-    
+
     /**
      * Redirect
-     * 
+     *
      * @param type $route
      */
     protected function _redirect($route)
@@ -27,20 +27,20 @@ abstract class Controller extends Component
         FrontController::run($route);
         FrontController::interruptRequest();
     }
-    
-    
+
+
     /**
      * Get ref to repository
-     * 
-     * @param string $repository 
+     *
+     * @param string $repository
      * @return Repository
      */
     public function getRepository($repository)
     {
-        if(!isset($this->_repositoryLoaded[$repository])) {
+        if (!isset($this->_repositoryLoaded[$repository])) {
             $this->_repositoryLoaded[$repository] = new $repository();
         }
-        
+
         return $this->_repositoryLoaded[$repository];
     }
 }

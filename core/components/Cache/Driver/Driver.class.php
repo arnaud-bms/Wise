@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Cache\Driver;
+namespace Telelab\Cache\Driver;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Driver
@@ -9,8 +9,8 @@ use Telco\Component\Component;
  * @author gdievart <dievartg@gmail.com>
  */
 abstract class Driver extends Component
-{   
+{
     abstract public function getCache($uniqId);
-    
+
     abstract public function setCache($uniqId, $content);
 }

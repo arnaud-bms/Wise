@@ -1,7 +1,7 @@
 <?php
 namespace Example\Plugins;
 
-use Telco\Plugin\Plugin;
+use Telelab\Plugin\Plugin;
 
 /**
  * Plugin PID, create pid file

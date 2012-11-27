@@ -1,7 +1,7 @@
 <?php
 namespace {{app_name}};
 
-use Telco\Controller\Controller;
+use Telelab\Controller\Controller;
 
 /**
  * Abstract controller of the app {{app_name}}

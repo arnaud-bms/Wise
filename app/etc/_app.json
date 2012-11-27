@@ -3,11 +3,11 @@
         "env":"dev"
     },
     "exception_handler":{
-        "class":"Telco\\ExceptionHandler\\ExceptionHandler",
+        "class":"Telelab\\ExceptionHandler\\ExceptionHandler",
         "method":"catchException"
     },
     "error_handler":{
-        "class":"Telco\\ErrorHandler\\ErrorHandler",
+        "class":"Telelab\\ErrorHandler\\ErrorHandler",
         "method":"catchError"
     },
     "db":{
@@ -21,7 +21,7 @@
         "driver":"file",
         "file":{
             "ttl":"5",
-            "path":"/data/Projects/www/telco/var/cache/core"
+            "path":"/data/Projects/www/telelab/var/cache/core"
         }
     },
     "logger":{
@@ -29,11 +29,11 @@
         "driver":"file",
         "output":"1",
         "file":{
-            "file":"/data/Projects/www/telco/var/log/core.log"
+            "file":"/data/Projects/www/telelab/var/log/core.log"
         }
     },
     "generate":{
-        "dir":"/data/Projects/www/telco/var/data/",
+        "dir":"/data/Projects/www/telelab/var/data/",
         "alias":{
             "test:home:([a-z]+)":"index-$1.html"
         }
@@ -42,11 +42,11 @@
         "test":{
             "type":"cli",
             "prefix":"/Test",
-            "routing":"/data/Projects/www/telco/app/Test/etc/routing.ini"
+            "routing":"/data/Projects/www/telelab/app/Test/etc/routing.ini"
         },
         "test2":{
             "type":"cgi","prefix":"/test",
-            "routing":"/data/Projects/www/telco/app/Test/etc/routing.ini"
+            "routing":"/data/Projects/www/telelab/app/Test/etc/routing.ini"
         }
     }
 }

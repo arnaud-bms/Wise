@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Plugin;
+namespace Telelab\Plugin;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Abstract class Plugin

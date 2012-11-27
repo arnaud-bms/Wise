@@ -1,14 +1,14 @@
 <?php
-namespace Telco\Autoloader;
+namespace Telelab\Autoloader;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * AutoloaderException
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class AutoloaderException extends ComponentException 
+class AutoloaderException extends ComponentException
 {
-    
+
 }

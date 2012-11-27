@@ -12,8 +12,8 @@ CURRENT_DIR=$(pwd)/$(dirname $0)/;
 source $CURRENT_DIR/functions;
 
 # Init var
-TELCO_PATH=$(dirname CURRENT_DIR)/;
-APP_PATH=$TELCO_PATH/app/;
+TELELAB_PATH=$(dirname CURRENT_DIR)/;
+APP_PATH=$TELELAB_PATH/app/;
 APP_NAME=$1;
 
 if test -d "$APP_PATH$APP_NAME"

@@ -1,7 +1,7 @@
 <?php
 namespace ACL;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Package ACL

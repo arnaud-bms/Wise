@@ -1,14 +1,14 @@
 <?php
-namespace Telco\Conf;
+namespace Telelab\Conf;
 
-use Telco\Component\ComponentException;
+use Telelab\Component\ComponentException;
 
 /**
  * ConfException
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class ConfException extends ComponentException 
+class ConfException extends ComponentException
 {
-    
+
 }

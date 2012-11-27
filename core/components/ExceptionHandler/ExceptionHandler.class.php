@@ -1,9 +1,9 @@
 <?php
-namespace Telco\ExceptionHandler;
+namespace Telelab\ExceptionHandler;
 
-use Telco\Component\Component;
-use Telco\Conf\Conf;
-use Telco\Logger\Logger;
+use Telelab\Component\Component;
+use Telelab\Conf\Conf;
+use Telelab\Logger\Logger;
 use Exception;
 
 /**
@@ -15,12 +15,12 @@ class ExceptionHandler extends Component
 {
     /**
      * Catch all Exception no catch
-     * 
+     *
      * @param Exception $e
      */
     public static function catchException(Exception $e)
     {
-        if((boolean)Conf::getConfig('logger.enable')) {
+        if ((boolean)Conf::getConfig('logger.enable')) {
             Logger::init();
             Logger::log((string)$e);
         }

@@ -1,8 +1,8 @@
 <?php
 namespace Plugin;
 
-use Telco\FrontController\FrontController;
-use Telco\Plugin\Plugin;
+use Telelab\FrontController\FrontController;
+use Telelab\Plugin\Plugin;
 
 /**
  * Plugin generate, use to generate files
@@ -27,7 +27,7 @@ class Generate extends Plugin
     public function postcall()
     {
         if ($alias = FrontController::getProperty('generate')) {
-            $generate = new \Telco\Generate\Generate();
+            $generate = new \Telelab\Generate\Generate();
             $generate->generateFile($alias, FrontController::getResponse());
         }
     }

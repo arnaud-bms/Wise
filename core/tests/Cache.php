@@ -1,5 +1,5 @@
 <?php
-namespace Telco\Cache\tests\units;
+namespace Telelab\Cache\tests\units;
 
 require_once __DIR__.'/atoum/mageekguy.atoum.phar';
 require_once __DIR__.'/config.php';
@@ -7,7 +7,7 @@ require_once __DIR__.'/config.php';
 use mageekguy\atoum;
 
 /**
- * Test  \Telco\Autoloader
+ * Test  \Telelab\Autoloader
  * 
  * @author Guillaume Dievart <dievartg@gmail.com>
  */
@@ -15,7 +15,7 @@ class Cache extends atoum\test
 {
     public function testSetCache()
     {   
-        $cache = new \Telco\Cache\Cache();
+        $cache = new \Telelab\Cache\Cache();
         $cache->setCache('test', 'content');
         $this->assert->string($cache->getCache('test'))
                      ->isEqualTo('content');

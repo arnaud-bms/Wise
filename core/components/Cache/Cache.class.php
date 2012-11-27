@@ -1,7 +1,7 @@
 <?php
-namespace Telco\Cache;
+namespace Telelab\Cache;
 
-use Telco\Component\Component;
+use Telelab\Component\Component;
 
 /**
  * Cache component
@@ -39,10 +39,10 @@ class Cache extends Component
     {
         switch($config['driver']) {
             case 'file':
-                $driver = 'Telco\Cache\Driver\File';
+                $driver = 'Telelab\Cache\Driver\File';
                 break;
             case 'memcache':
-                $driver = 'Telco\Cache\Driver\Memcache';
+                $driver = 'Telelab\Cache\Driver\Memcache';
                 break;
             default:
                 throw new CacheException("Driver '{$config['driver']}' does'nt exists", 400);

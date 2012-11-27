@@ -1,7 +1,7 @@
 <?php
-namespace Telco\DB\Driver;
+namespace Telelab\DB\Driver;
 
-use Telco\DB\Driver\MySQLStatement;
+use Telelab\DB\Driver\MySQLStatement;
 
 /**
  * Connector to database
@@ -38,7 +38,7 @@ class MySQL implements Driver
      */
     public function query($query)
     {
-        if($resource = mysql_query($query, $this->_link)) {
+        if ($resource = mysql_query($query, $this->_link)) {
             return new MySQLStatement($resource);
         }
 
