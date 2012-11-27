@@ -138,10 +138,12 @@ class Router extends Component
         if ($routeConfig = Conf::getConfig('route_apps')) {
             foreach ($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
-                $prefix = substr($route, 0, strlen($routeApp['prefix']));
-                if (!isset($routeApp['type'])
-                    || (strtolower($routeApp['type']) === $this->_sapiName
-                        && $routeApp['prefix'] === $prefix)
+                
+                $prefix   = substr($route, 0, strlen($routeApp['prefix']));
+                $hostname = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+                if ((empty($routeApp['type']) || strtolower($routeApp['type']) === $this->_sapiName)
+                    && (empty($routeApp['host']) || strtolower($routeApp['host']) === $hostname)
+                    && $routeApp['prefix'] === $prefix
                 ) {
                     $this->_loadApp($routeApp);
                     $routing = Conf::getConfig('routing');
