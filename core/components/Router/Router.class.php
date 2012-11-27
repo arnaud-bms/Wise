@@ -143,7 +143,7 @@ class Router extends Component
                     || (strtolower($routeApp['type']) === $this->_sapiName
                         && $routeApp['prefix'] === $prefix)
                 ) {
-                    $this->_loadApp($routeApp['app']);
+                    $this->_loadApp($routeApp);
                     $routing = Conf::getConfig('routing');
                     $this->_routeAppLoaded = $routeName;
                     break;
@@ -179,16 +179,21 @@ class Router extends Component
     /**
      * Load bootstrap application
      *
-     * @param string $appName
+     * @param array $routeApp
      */
-    private function _loadApp($appName)
+    private function _loadApp($routeApp)
     {
-        $bootstrapFile = ROOT_DIR.'app/'.$appName.'/bootstrap.php';
+        if(isset($routeApp['path'])) {
+            $bootstrapFile = $routeApp['path'].'/bootstrap.php';
+        } else {
+            $bootstrapFile = ROOT_DIR.'app/'.$routeApp['app'].'/bootstrap.php';
+        }
+
         if (file_exists($bootstrapFile)) {
             require $bootstrapFile;
         } else {
             throw new RouterException(
-                "Require bootstrap.php for '$appName' application", 410
+                "Require bootstrap.php for '{$routeApp['app']}' application", 410
             );
         }
     }
