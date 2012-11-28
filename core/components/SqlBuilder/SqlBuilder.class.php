@@ -108,9 +108,10 @@ class SqlBuilder extends Component
     *
     * @param array $select
     * @param array $where
+    * @param array $order
     * @return
     */
-    public function select($select, $where = array(), $limit = null)
+    public function select($select, $where = array(), $order = null, $limit = null, $offset = null)
     {
         $query = "SELECT %s FROM %s WHERE %s";
 
@@ -131,6 +132,10 @@ class SqlBuilder extends Component
         }
 
         $query = sprintf($query, $selectQuery, $this->_table, $whereQuery);
+
+        /**
+         * @todo order by
+         */
 
         $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
 
