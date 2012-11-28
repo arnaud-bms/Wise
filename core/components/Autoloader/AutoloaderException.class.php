@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * AutoloaderException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class AutoloaderException extends ComponentException
 {

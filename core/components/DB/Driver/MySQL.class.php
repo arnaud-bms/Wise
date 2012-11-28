@@ -6,7 +6,7 @@ use Telelab\DB\Driver\MySQLStatement;
 /**
  * Connector to database
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class MySQL implements Driver
 {

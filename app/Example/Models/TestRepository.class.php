@@ -6,7 +6,7 @@ use Telelab\Repository\Repository;
 /**
  * Description of Test
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class TestRepository extends Repository
 {

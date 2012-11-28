@@ -4,7 +4,7 @@ namespace Telelab\Exception;
 /**
  * Exception
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Exception extends \Exception
 {

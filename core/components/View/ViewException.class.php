@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * ViewException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class ViewException extends ComponentException
 {

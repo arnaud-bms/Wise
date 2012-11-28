@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * RouterException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class RouterException extends ComponentException
 {

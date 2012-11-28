@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * StrException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class StrException extends ComponentException
 {

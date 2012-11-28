@@ -6,7 +6,7 @@ use Telelab\DB\Driver\Statement;
 /**
  * Description of PDOStatement
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class PDOStatement extends Statement
 {

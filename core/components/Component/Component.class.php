@@ -4,7 +4,7 @@ namespace Telelab\Component;
 /**
  * Class base
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 abstract class Component extends AbstractComponent
 {

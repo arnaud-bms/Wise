@@ -9,7 +9,7 @@ use mageekguy\atoum;
 /**
  * Test  \Telelab\Autoloader
  * 
- * @author Guillaume Dievart <dievartg@gmail.com>
+ * @author Guillaume Dievart <g.dievart@telemaque.fr>
  */
 class Cache extends atoum\test
 {

@@ -7,7 +7,7 @@ use Telelab\Conf\ConfException;
 /**
  * Configuration Class from files
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Conf extends ComponentStatic
 {

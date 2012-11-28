@@ -6,7 +6,7 @@ use \Telelab\Exception\Exception;
 /**
  * Description of ComponentException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class ComponentException extends Exception
 {

@@ -7,7 +7,7 @@ use Telelab\Router\CurlException;
  /**
   * Class ManageCurl
   *
-  * @author gdievart <dievartg@gmail.com>
+  * @author gdievart <g.dievart@telemaque.fr>
   */
 class ManageCurl extends Component
 {

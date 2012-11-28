@@ -2,7 +2,7 @@
 /**
  * Bootstrap of Example application
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 
 use Telelab\Autoloader\Autoloader;

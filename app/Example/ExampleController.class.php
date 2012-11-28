@@ -6,7 +6,7 @@ use Telelab\Controller\Controller;
 /**
  * Description of Main
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 abstract class ExampleController extends Controller 
 {

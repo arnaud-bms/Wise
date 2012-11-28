@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * SqlBuilderException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class SqlBuilderException extends ComponentException
 {

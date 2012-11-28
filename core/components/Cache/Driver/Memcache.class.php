@@ -6,7 +6,7 @@ use Telelab\Cache\Driver\Driver;
 /**
  * Driver Cache with memcached
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Memcache extends Driver
 {

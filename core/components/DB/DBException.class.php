@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * DBException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class DBException extends ComponentException
 {

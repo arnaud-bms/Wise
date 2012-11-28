@@ -5,7 +5,7 @@ namespace Telelab\DB\Driver;
 /**
  * Abstract class driver
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 interface Driver
 {

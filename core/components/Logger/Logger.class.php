@@ -6,7 +6,7 @@ use Telelab\Component\ComponentStatic;
 /**
  * Format data from array to csv, json, xml, serialize ...
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Logger extends ComponentStatic
 {

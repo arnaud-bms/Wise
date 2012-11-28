@@ -6,7 +6,7 @@ use \Telelab\Component\Component;
 /**
  * Generate file
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Generate extends Component
 {

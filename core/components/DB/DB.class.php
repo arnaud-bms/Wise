@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Connector to database
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class DB extends Component
 {

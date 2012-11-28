@@ -4,7 +4,7 @@ namespace Telelab\Autoloader;
 /**
  * Autoloader: Include class file
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Autoloader
 {

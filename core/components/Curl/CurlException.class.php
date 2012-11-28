@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * CurlException
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class CurlException extends ComponentException
 {

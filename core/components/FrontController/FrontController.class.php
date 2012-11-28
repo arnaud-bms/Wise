@@ -7,7 +7,7 @@ use Telelab\Router\Router;
 /**
  * Load route application, execute plugin and controller
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class FrontController extends ComponentStatic
 {

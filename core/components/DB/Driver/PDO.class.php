@@ -7,7 +7,7 @@ use Telelab\DB\Driver\PDOStatement;
 /**
  * Connector to database
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class PDO implements Driver
 {

@@ -7,7 +7,7 @@ use Telelab\FrontController\FrontController;
 /**
  * Description of Main
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Main extends ExampleController
 {

@@ -8,7 +8,7 @@ use Telelab\Logger\Logger;
 /**
  * Catch all error and log
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class ErrorHandler extends Component
 {

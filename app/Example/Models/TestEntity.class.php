@@ -6,7 +6,7 @@ use Telelab\Entity\Entity;
 /**
  * Description of Test
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class TestEntity extends Entity
 {

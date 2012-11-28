@@ -6,7 +6,7 @@ use Telelab\Component\Component;
  /**
   * Class Mail
   *
-  * @author gdievart <dievartg@gmail.com>
+  * @author gdievart <g.dievart@telemaque.fr>
   */
 class Mail extends Component
 {

@@ -9,7 +9,7 @@ use mageekguy\atoum;
 /**
  * Test  \Telelab\Str
  * 
- * @author Guillaume Dievart <dievartg@gmail.com>
+ * @author Guillaume Dievart <g.dievart@telemaque.fr>
  */
 class Str extends atoum\test
 {

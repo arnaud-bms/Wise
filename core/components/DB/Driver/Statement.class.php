@@ -4,7 +4,7 @@ namespace Telelab\DB\Driver;
 /**
  * Statement query
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 abstract class Statement
 {

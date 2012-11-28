@@ -7,7 +7,7 @@ use Telelab\SqlBuilder\SqlBuilder;
 /**
  * Default method to request database
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 abstract class Repository extends Component
 {

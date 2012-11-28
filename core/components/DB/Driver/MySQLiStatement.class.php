@@ -6,7 +6,7 @@ use Telelab\DB\Driver\Statement;
 /**
  * MySQLiStatement
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class MySQLiStatement extends Statement
 {

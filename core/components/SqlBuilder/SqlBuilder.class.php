@@ -7,7 +7,7 @@ use Telelab\DB\DB;
 /**
  * Build sql request
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class SqlBuilder extends Component
 {

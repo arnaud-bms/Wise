@@ -6,7 +6,7 @@ use Telelab\Conf\Conf;
 /**
  * Class base component
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 abstract class AbstractComponent
 {

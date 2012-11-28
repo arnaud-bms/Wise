@@ -6,7 +6,7 @@ use Telelab\Cache\Driver\Driver;
 /**
  * Driver Cache with file system
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class File extends Driver
 {

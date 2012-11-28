@@ -7,7 +7,7 @@ use Telelab\Component\Component;
 /**
  * Abstract Controller
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 abstract class Controller extends Component
 {

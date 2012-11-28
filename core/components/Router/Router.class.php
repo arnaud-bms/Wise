@@ -8,7 +8,7 @@ use Telelab\Conf\Conf;
 /**
  * Router extract informations from route
  *
- * @author gdievart <dievartg@gmail.com>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
 class Router extends Component
 {
