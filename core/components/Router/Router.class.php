@@ -92,9 +92,10 @@ class Router extends Component
         foreach ($routing as $routeName => $routeTest) {
             $this->_checkFieldsRoute($routeTest);
             $pattern = '#'.$routeTest['pattern'].'#';
-			$httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+            $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
             if (preg_match($pattern, $route, $argv)
-				&& (empty($routeTest['http_method']) || strtolower($routeTest['http_method']) === strtolower($httpMethod))
+                && (empty($routeTest['http_method'])
+                    || strtolower($routeTest['http_method']) === strtolower($httpMethod))
             ) {
                 $routeInfos = $routeTest;
                 array_shift($argv);
@@ -188,7 +189,7 @@ class Router extends Component
      */
     private function _loadApp($routeApp)
     {
-        if(isset($routeApp['path'])) {
+        if (isset($routeApp['path'])) {
             $bootstrapFile = $routeApp['path'].'/bootstrap.php';
         } else {
             $bootstrapFile = ROOT_DIR.'app/'.$routeApp['app'].'/bootstrap.php';

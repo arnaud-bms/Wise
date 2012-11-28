@@ -17,7 +17,7 @@ abstract class Entity extends Component
     private $_tableName;
 
     /**
-     * @var SqlBuilder 
+     * @var SqlBuilder
      */
     private $_sqlBuilder;
 
@@ -53,7 +53,7 @@ abstract class Entity extends Component
      */
     private function _initTableName()
     {
-        if(!empty($this->_table)) {
+        if (!empty($this->_table)) {
             $this->_tableName = $this->_table;
         } else {
             preg_match('#([a-zA-Z]+)Entity$#', get_called_class(), $matches);

@@ -59,7 +59,7 @@ abstract class Repository extends Component
      */
     private function _initTableName()
     {
-        if(!empty($this->_table)) {
+        if (!empty($this->_table)) {
             $this->_tableName = $this->_table;
         } else {
             preg_match('#([a-zA-Z]+)Repository$#', get_called_class(), $matches);
@@ -138,7 +138,7 @@ abstract class Repository extends Component
      */
     public function __call($method, $argv)
     {
-        switch($method) {
+        switch ($method) {
             case (strpos($method, 'findBy')):
                 $field  = strtolower(substr($method, 6));
                 $method = 'findBy';
@@ -174,7 +174,7 @@ abstract class Repository extends Component
      */
     protected function _getEntity($row)
     {
-        if($this->_hasEntity) {
+        if ($this->_hasEntity) {
             $row = new $this->_entityName($row);
         }
 
