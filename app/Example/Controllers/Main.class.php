@@ -21,12 +21,14 @@ class Main extends ExampleController
      */
     public function index()
     {
-        $response['rows'] = array('name' => 'value');
-
         $response['page'] = 'TOTO';
 
+        $testRepository = $this->getRepository('\Example\Models\TestRepository');
+        $test = $testRepository->findByName('Guillaume');
+        $response['rows'] = array($test);
+
         // Set property format for plugin Format
-        FrontController::setProperty('format', 'html');
+        FrontController::setProperty('format', 'json');
 
         return $response;
     }
@@ -46,7 +48,7 @@ class Main extends ExampleController
 
 
     /**
-     *
+     * Example of generating list
      */
     public function generateList()
     {

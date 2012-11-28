@@ -1,14 +1,14 @@
 <?php
 namespace Example\Models;
 
-use Telelab\Repository\Repository;
+use Telelab\Entity\Entity;
 
 /**
  * Description of Test
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class TestRepository extends Repository
+class TestEntity extends Entity
 {
     /**
      * @var string
