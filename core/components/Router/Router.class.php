@@ -92,7 +92,10 @@ class Router extends Component
         foreach ($routing as $routeName => $routeTest) {
             $this->_checkFieldsRoute($routeTest);
             $pattern = '#'.$routeTest['pattern'].'#';
-            if (preg_match($pattern, $route, $argv)) {
+			$httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+            if (preg_match($pattern, $route, $argv)
+				&& (empty($routeTest['http_method']) || strtolower($routeTest['http_method']) === strtolower($httpMethod))
+            ) {
                 $routeInfos = $routeTest;
                 array_shift($argv);
                 $routeInfos['argv'] = $argv;
@@ -138,11 +141,11 @@ class Router extends Component
         if ($routeConfig = Conf::getConfig('route_apps')) {
             foreach ($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
-                
-                $prefix   = substr($route, 0, strlen($routeApp['prefix']));
-                $hostname = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                if ((empty($routeApp['type']) || strtolower($routeApp['type']) === $this->_sapiName)
-                    && (empty($routeApp['host']) || strtolower($routeApp['host']) === $hostname)
+
+                $prefix     = substr($route, 0, strlen($routeApp['prefix']));
+                $hostname   = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+                if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
+                    && (empty($routeApp['host']) || $routeApp['host'] === $hostname)
                     && $routeApp['prefix'] === $prefix
                 ) {
                     $this->_loadApp($routeApp);
