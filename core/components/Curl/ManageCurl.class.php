@@ -2,7 +2,7 @@
 namespace Telelab\Curl;
 
 use Telelab\Component\Component;
-use Telelab\Router\CurlException;
+use Telelab\Curl\CurlException;
 
  /**
   * Class ManageCurl
