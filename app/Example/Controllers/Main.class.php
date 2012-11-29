@@ -2,7 +2,7 @@
 namespace Example\Controllers;
 
 use Example\ExampleController;
-use Telelab\FrontController\FrontController;
+use Telelab\Globals\Globals;
 
 /**
  * Description of Main
@@ -28,7 +28,7 @@ class Main extends ExampleController
         $response['rows'] = array($test);
 
         // Set property format for plugin Format
-        FrontController::setProperty('format', 'json');
+        Globals::set('format', 'json');
 
         return $response;
     }
@@ -41,8 +41,8 @@ class Main extends ExampleController
      */
     public function generateIndex($var, $var2)
     {
-        FrontController::setProperty('format', 'xml');
-        FrontController::setProperty('generate', 'home');
+        Globals::set('format', 'json');
+        Globals::set('generate', 'home');
         return $this->index($var, $var2);
     }
 
@@ -57,8 +57,8 @@ class Main extends ExampleController
         $stmt = $testRepository->select('*');
         $response['rows'] = $stmt->fetchAll();
 
-        FrontController::setProperty('format', 'xml');
-        FrontController::setProperty('generate', 'list');
+        Globals::set('format', 'json');
+        Globals::set('generate', 'list');
 
         return $response;
     }

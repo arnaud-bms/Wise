@@ -23,7 +23,7 @@ class Globals extends ComponentStatic
      * @param string $name
      * @param mixed $value
      */
-    public static function __set($name, $value)
+    public static function set($name, $value)
     {
         self::$_params[$name] = $value;
     }
@@ -35,7 +35,7 @@ class Globals extends ComponentStatic
      * @param string $name
      * @return mixed
      */
-    public static function __get($name)
+    public static function get($name)
     {
         if(array_key_exists($name, self::$_params)) {
             return self::$_params[$name];

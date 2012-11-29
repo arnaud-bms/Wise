@@ -1,6 +1,7 @@
 <?php
 namespace Plugin;
 
+use Telelab\Globals\Globals;
 use Telelab\FrontController\FrontController;
 use Telelab\Plugin\Plugin;
 use Telelab\Conf\Conf;
@@ -28,7 +29,7 @@ class View extends Plugin
     public function postcall()
     {
         if (is_array(FrontController::getResponse())) {
-            if ($responseFormat = FrontController::getProperty('format')) {
+            if ($responseFormat = Globals::get('format')) {
                 if ($responseFormat !== 'html') {
                     $format = new \Telelab\Format\Format();
                     FrontController::setResponse(

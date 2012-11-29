@@ -2,6 +2,7 @@
 namespace Plugin;
 
 use Telelab\FrontController\FrontController;
+use Telelab\Globals\Globals;
 use Telelab\Plugin\Plugin;
 
 /**
@@ -17,7 +18,7 @@ class Generate extends Plugin
      */
     public function precall()
     {
-        
+
     }
 
 
@@ -26,7 +27,7 @@ class Generate extends Plugin
      */
     public function postcall()
     {
-        if ($alias = FrontController::getProperty('generate')) {
+        if ($alias = Globals::get('generate')) {
             $generate = new \Telelab\Generate\Generate();
             $generate->generateFile($alias, FrontController::getResponse());
         }
