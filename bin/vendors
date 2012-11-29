@@ -13,5 +13,10 @@ create_dir $VENDOR_PATH;
 cd $VENDOR_PATH;
 
 # Install smarty 3
-show_action "INSTALL SMARTY 3";
+show_action "INSTALL OR UPDATE SMARTY";
 svn checkout http://smarty-php.googlecode.com/svn/trunk/distribution smarty
+
+
+# Install PHPMAiler
+show_action "INSTALL OR UPDATE PHPMailer";
+svn checkout http://svn.codespot.com/a/apache-extras.org/phpmailer/trunk/ phpmailer
