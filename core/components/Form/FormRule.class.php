@@ -97,6 +97,8 @@ class FormRule
                 if (!FormCheck::$rule($value, $params) && empty($ruleName)) {
                     $this->_countErrors++;
                     $this->_errors[] = $errorMsg;
+                } else {
+                    break;
                 }
             }
         }
