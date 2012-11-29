@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\Logger;
+namespace Telelab\Globals;
 
 use Telelab\Component\ComponentStatic;
 
