@@ -8,7 +8,6 @@
 use Telelab\Autoloader\Autoloader;
 use Telelab\Conf\Conf;
 use Telelab\FrontController\FrontController;
-use Telelab\Globals\Globals;
 
 define('ROOT_DIR', __DIR__.'/../');
 
