@@ -68,11 +68,6 @@ class FrontController extends ComponentStatic
     protected static $_response;
 
     /**
-     * @var static $_properties
-     */
-    protected static $_properties = array();
-
-    /**
      * Run application
      */
     public static function run($route = null)
@@ -210,35 +205,5 @@ class FrontController extends ComponentStatic
     public static function setResponse($response)
     {
         self::$_response = $response;
-    }
-
-
-    /**
-     * Retrieve property
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public static function getProperty($name)
-    {
-        if (array_key_exists($name, self::$_properties)) {
-            $property = self::$_properties[$name];
-        } else {
-            $property = false;
-        }
-
-        return $property;
-    }
-
-
-    /**
-     * Set response
-     *
-     * @param string $name
-     * @param mixed $value
-     */
-    public static function setProperty($name, $value)
-    {
-        self::$_properties[$name] = $value;
     }
 }
