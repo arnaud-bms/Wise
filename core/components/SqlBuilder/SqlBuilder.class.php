@@ -153,7 +153,7 @@ class SqlBuilder extends Component
     {
         $query = '';
         foreach ($values as $field => $value) {
-            if ($value[0] === '!') {
+            if (!empty($value) && $value[0] === '!') {
                 $value = substr($value, 1);
                 $operator = '!=';
             } else {
