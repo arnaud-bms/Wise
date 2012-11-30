@@ -180,7 +180,7 @@ abstract class Repository extends Component
      */
     protected function _getEntity($row)
     {
-        if ($this->_hasEntity) {
+        if ($row && $this->_hasEntity) {
             $row = new $this->_entityName($row);
         }
 
