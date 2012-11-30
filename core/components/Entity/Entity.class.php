@@ -27,6 +27,21 @@ abstract class Entity extends Component
     private $_field = array();
 
     /**
+     * @var array $fieldChanged
+     */
+    private $_fieldChanged = array();
+
+    /**
+     * @var boolean Check if is new
+     */
+    private $_isNew = true;
+
+    /**
+     * @var mixed string or array for multiple keys
+     */
+    private $_primaryKey = 'id';
+
+    /**
      * Init members of DAO
      *
      * @param array $row
@@ -70,12 +85,47 @@ abstract class Entity extends Component
 
 
     /**
+     * Set value
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function __set($key, $value)
+    {
+        if(array_key_exists($key, $this->_field) && $value !== $this->_field[$key]) {
+            $this->_fieldChanged[$key] = $value;
+        }
+    }
+
+
+    /**
      * Save insert or update entity
      *
      * @return boolean
      */
     public function save()
     {
-        return $this->_sqlBuilder->insert($this->_field);
+        if($this->_isNew) {
+            return $this->_sqlBuilder->insert($this->_field);
+        } else {
+            $criteria = array();
+            $primaryKey = (array)$this->_primaryKey;
+            foreach($primaryKey as $key) {
+                $criteria[$key] = $this->_field[$key];
+            }
+
+            return $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
+        }
+    }
+
+
+    /**
+     * Set flag new
+     *
+     * @param boolean $isNew
+     */
+    public function setIsNew($isNew)
+    {
+        $this->_isNew = (boolean)$isNew;
     }
 }
