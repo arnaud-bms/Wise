@@ -43,7 +43,11 @@ class FormRule
     {
         $from = $from === null ? $_POST : $from;
 
-        if (!empty($from) && array_key_exists($element, $from)) {
+        if (!empty($from)) {
+            if (!array_key_exists($element, $from)) {
+                $from[$element] = '';
+            }
+
             if (is_array($from[$element])) {
                 $this->_elementValue = $from[$element];
             } elseif (is_string($element)) {
@@ -98,7 +102,7 @@ class FormRule
                     $this->_countErrors++;
                     $this->_errors[] = $errorMsg;
                 } else {
-                    break;
+                    $ruleName = array();
                 }
             }
         }
