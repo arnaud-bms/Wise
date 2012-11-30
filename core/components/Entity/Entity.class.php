@@ -22,6 +22,11 @@ abstract class Entity extends Component
     private $_sqlBuilder;
 
     /**
+     * @var array $field
+     */
+    private $_field = array();
+
+    /**
      * Init members of DAO
      *
      * @param array $row
@@ -42,8 +47,10 @@ abstract class Entity extends Component
      */
     private function _hydrate($row)
     {
-        foreach ($row as $key => $value) {
-            $this->$key = $value;
+        if (is_array($row)) {
+            foreach ($row as $key => $value) {
+                $this->_field[$key] = $value;
+            }
         }
     }
 
@@ -59,5 +66,16 @@ abstract class Entity extends Component
             preg_match('#([a-zA-Z]+)Entity$#', get_called_class(), $matches);
             $this->_tableName = strtolower($matches[1]);
         }
+    }
+
+
+    /**
+     * Save insert or update entity
+     *
+     * @return boolean
+     */
+    public function save()
+    {
+        return $this->_sqlBuilder->insert($this->_field);
     }
 }
