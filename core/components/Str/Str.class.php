@@ -85,4 +85,22 @@ class Str extends ComponentStatic
         $string = htmlentities($string, ENT_NOQUOTES, 'UTF-8');
         return preg_replace('#&([a-zA-Z])[a-zA-Z]+;#', '$1', $string);
     }
+
+
+    /**
+     * Hash string
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function hash($string)
+    {
+        if(!empty($string)) {
+            $nbHash = ceil(substr($string, 0, 1)/10)*2;
+            for ($i = 0; $i < $nbHash; $i++) {
+                $string = md5($string);
+            }
+        }
+        return $string;
+    }
 }
