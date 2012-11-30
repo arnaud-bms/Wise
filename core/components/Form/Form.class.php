@@ -11,18 +11,24 @@ use Telelab\Component\Component;
 class Form extends Component
 {
     /**
-     * Contain all the rules
-     *
-     * @var Array
+     * @var Array Contain all the rules
      */
     protected $_rules = array ();
 
     /**
-     * Contain the first error occured
-     *
-     * @var String
+     * @var String Contain the first error occured
      */
     protected $_errors = array();
+
+    /**
+     * @var mixed Callback
+     */
+    protected $_callback;
+
+    /**
+     * @var string Error return when callback failed
+     */
+    protected $_errorCallback;
 
     /**
      * Add one or more rule (instances of formRule)
@@ -38,6 +44,20 @@ class Form extends Component
         return $this->_rules[$name];
     }
 
+
+    /**
+     * Call functino or method after validate all rules
+     *
+     * @param mixed $callback Array or string
+     * @param string $error
+     */
+    public function setCallback($callback, $error)
+    {
+        $this->_callback = $callback;
+        $this->_errorCallback = $error;
+    }
+
+
     /**
      * Check if the rules are valid
      *
@@ -48,6 +68,16 @@ class Form extends Component
         foreach ($this->_rules as $ruleName => $rule) {
             if (!$rule->isValid()) {
                 $this->_errors[$ruleName] = $rule->getError();
+            }
+        }
+
+        if($this->_callback !== null) {
+            if (is_callable($this->_callback)) {
+                if(!call_user_func($this->_callback, $this->_rules)) {
+                    $this->_errors['form'] = $this->_errorCallback;
+                }
+            } else {
+                throw new FormException("Function $this->_callback apparently not exists");
             }
         }
 
