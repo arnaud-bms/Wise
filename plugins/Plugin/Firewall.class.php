@@ -19,7 +19,7 @@ class Firewall extends Plugin
      */
     public function _init($config)
     {
-        var_dump($config);
+        
     }
 
     /**
