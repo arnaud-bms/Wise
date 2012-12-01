@@ -1,5 +1,5 @@
 {
-    "global":{
+    "globals":{
         "env":"dev"
     },
     "exception_handler":{
