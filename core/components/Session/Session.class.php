@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\Logger;
+namespace Telelab\Session;
 
 use Telelab\Component\Component;
 
@@ -14,7 +14,7 @@ class Session extends Component
     /**
      * Start session
      */
-    protected function _init()
+    protected function _init($config)
     {
         session_start();
     }
