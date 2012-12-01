@@ -8,6 +8,7 @@
 use Telelab\Autoloader\Autoloader;
 use Telelab\Conf\Conf;
 use Telelab\FrontController\FrontController;
+use Telelab\Globals\Globals;
 
 define('ROOT_DIR', __DIR__.'/../');
 
@@ -40,5 +41,6 @@ if ($errorConfig = Conf::getConfig('error_handler')) {
     set_error_handler(array($errorConfig['class'], $errorConfig['method']));
 }
 
+Globals::init();
 FrontController::init();
 FrontController::run();

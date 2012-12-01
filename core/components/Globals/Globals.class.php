@@ -18,6 +18,19 @@ class Globals extends ComponentStatic
 
 
     /**
+     * Init Globals component
+     *
+     * @param array $config
+     */
+    protected static function _init($config)
+    {
+        foreach ($config as $name => $value) {
+            self::set($name, $value);
+        }
+    }
+
+
+    /**
      * Set arg to _params
      *
      * @param string $name
