@@ -77,7 +77,7 @@ abstract class Repository extends Component
     public function find($id)
     {
         $where = array('id' => (int)$id);
-        if($stmt = $this->_sqlBuilder->select('*', $where, 1)) {
+        if ($stmt = $this->_sqlBuilder->select('*', $where, 1)) {
             return $this->_getEntity($stmt->fetch());
         }
         return false;
@@ -106,7 +106,7 @@ abstract class Repository extends Component
      */
     public function findBy($criteria, $order = null, $limit = null, $offset = null)
     {
-        if($stmt = $this->_sqlBuilder->select('*', $criteria, $order, $limit, $offset)) {
+        if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, $limit, $offset)) {
             $entities = array();
             while ($row = $stmt->fetch()) {
                 $entities[] = $this->_getEntity($row);
@@ -128,7 +128,7 @@ abstract class Repository extends Component
      */
     public function findOneBy($criteria, $order = null)
     {
-        if($stmt = $this->_sqlBuilder->select('*', $criteria, $order, 1)) {
+        if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, 1)) {
             return $this->_getEntity($stmt->fetch());
         }
         return false;

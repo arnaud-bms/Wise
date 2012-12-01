@@ -71,9 +71,9 @@ class Form extends Component
             }
         }
 
-        if($this->_callback !== null) {
+        if ($this->_callback !== null) {
             if (is_callable($this->_callback)) {
-                if(!call_user_func($this->_callback, $this->_rules)) {
+                if (!call_user_func($this->_callback, $this->_rules)) {
                     $this->_errors['form'] = $this->_errorCallback;
                 }
             } else {

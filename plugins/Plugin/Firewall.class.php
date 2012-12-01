@@ -19,7 +19,7 @@ class Firewall extends Plugin
      */
     public function _init($config)
     {
-        
+
     }
 
     /**
@@ -30,9 +30,9 @@ class Firewall extends Plugin
         list($module, $route) = explode(':', FrontController::getRouteName());
         $routes = Conf::getConfig('firewall.route');
 
-        if(in_array($route, $routes)) {
-            if(!Globals::get('is_connected')) {
-                if(Conf::getConfig('firewall.redirect_type') == 'bg') {
+        if (in_array($route, $routes)) {
+            if (!Globals::get('is_connected')) {
+                if (Conf::getConfig('firewall.redirect_type') == 'bg') {
                     FrontController::run(Conf::getConfig('firewall.redirect'));
                     FrontController::interruptRequest();
                 } else {

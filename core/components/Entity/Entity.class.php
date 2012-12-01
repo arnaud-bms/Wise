@@ -92,7 +92,7 @@ abstract class Entity extends Component
      */
     public function __set($key, $value)
     {
-        if(array_key_exists($key, $this->_field) && $value !== $this->_field[$key]) {
+        if (array_key_exists($key, $this->_field) && $value !== $this->_field[$key]) {
             $this->_fieldChanged[$key] = $value;
         }
     }
@@ -105,12 +105,12 @@ abstract class Entity extends Component
      */
     public function save()
     {
-        if($this->_isNew) {
+        if ($this->_isNew) {
             return $this->_sqlBuilder->insert($this->_field);
         } else {
             $criteria = array();
             $primaryKey = (array)$this->_primaryKey;
-            foreach($primaryKey as $key) {
+            foreach ($primaryKey as $key) {
                 $criteria[$key] = $this->_field[$key];
             }
 

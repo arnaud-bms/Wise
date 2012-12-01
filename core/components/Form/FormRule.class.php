@@ -35,7 +35,7 @@ class FormRule
     /**
      * Prepare an element for the specifics rules
      *
-     * @param String or Array $element : Name of the element, if it's an array, can be separated by $delimiter (default : '.');
+     * @param String or Array $element : if it's an array, separated by $delimiter
      * @param Array $from : Array where the Element is
      * @param String $delimiter (default : '.') : Delimiter for array Elements
      */

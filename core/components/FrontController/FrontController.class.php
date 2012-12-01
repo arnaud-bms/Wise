@@ -93,7 +93,7 @@ class FrontController extends ComponentStatic
         self::$_method     = $routeInfos['method'];
         self::$_argv       = $routeInfos['argv'];
 
-        if(isset($routeInfos['precall'])) {
+        if (isset($routeInfos['precall'])) {
             self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $routeInfos['precall']);
         } elseif ($precall = Conf::getConfig('plugin.default_precall')) {
             self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $precall);
@@ -101,7 +101,7 @@ class FrontController extends ComponentStatic
             self::$_plugins[self::PLUGIN_PRECALL] = array();
         }
 
-        if(isset($routeInfos['postcall'])) {
+        if (isset($routeInfos['postcall'])) {
             self::$_plugins[self::PLUGIN_POSTCALL] = explode(';', $routeInfos['postcall']);
         } elseif ($precall = Conf::getConfig('plugin.default_postcall')) {
             self::$_plugins[self::PLUGIN_POSTCALL] = explode(';', $precall);

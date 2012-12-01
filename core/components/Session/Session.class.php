@@ -44,7 +44,8 @@ class Session extends Component
     {
         $_SESSION = array();
         $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 10,
+        setcookie(
+            session_name(), '', time() - 10,
             $params["path"], $params["domain"],
             $params["secure"], $params["httponly"]
         );
@@ -72,7 +73,7 @@ class Session extends Component
      */
     public function __get($name)
     {
-        if(array_key_exists($name, $_SESSION)) {
+        if (array_key_exists($name, $_SESSION)) {
             return $_SESSION[$name];
         }
     }

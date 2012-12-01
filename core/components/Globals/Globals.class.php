@@ -37,7 +37,7 @@ class Globals extends ComponentStatic
      */
     public static function get($name)
     {
-        if(array_key_exists($name, self::$_params)) {
+        if (array_key_exists($name, self::$_params)) {
             return self::$_params[$name];
         }
     }
