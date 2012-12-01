@@ -67,6 +67,9 @@ class File extends Driver
     public function setCache($uniqId, $content)
     {
         $file = $this->_path.'/'.$uniqId.'.cache';
+        if (!is_dir(dirname($file))) {
+            mkdir(dirname($file), 0775, true);
+        }
         file_put_contents($file, $content);
     }
 }
