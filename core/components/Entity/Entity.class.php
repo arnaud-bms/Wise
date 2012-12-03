@@ -85,6 +85,21 @@ abstract class Entity extends Component
 
 
     /**
+     * Get value
+     *
+     * @param string $key
+     */
+    public function __get($key)
+    {
+        if (array_key_exists($key, $this->_field)) {
+            return $this->_field[$key];
+        }
+
+        return null;
+    }
+
+
+    /**
      * Set value
      *
      * @param string $key
