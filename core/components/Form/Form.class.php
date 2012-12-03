@@ -23,12 +23,7 @@ class Form extends Component
     /**
      * @var mixed Callback
      */
-    protected $_callback;
-
-    /**
-     * @var string Error return when callback failed
-     */
-    protected $_errorCallback;
+    protected $_callback = array();
 
     /**
      * Add one or more rule (instances of formRule)
@@ -51,10 +46,11 @@ class Form extends Component
      * @param mixed $callback Array or string
      * @param string $error
      */
-    public function setCallback($callback, $error)
+    public function addCallback($callback, $error)
     {
-        $this->_callback = $callback;
-        $this->_errorCallback = $error;
+        $callback['method'] = $callback;
+        $callback['error']  = $error;
+        $this->_callback[] = $callback;
     }
 
 
@@ -71,13 +67,16 @@ class Form extends Component
             }
         }
 
-        if ($this->_callback !== null) {
-            if (is_callable($this->_callback)) {
-                if (!call_user_func($this->_callback, $this->_rules)) {
-                    $this->_errors['form'] = $this->_errorCallback;
+        if (empty($this->_errors) && !empty($this->_callback)) {
+            foreach ($this->_callback as $callback) {
+                if (is_callable($callback['method'])) {
+                    if (!call_user_func($callback['method'], $this->_rules)) {
+                        $this->_errors['form'] = $callback['error'];
+                        break;
+                    }
+                } else {
+                    throw new FormException("Function {$callback['method']} apparently not exists");
                 }
-            } else {
-                throw new FormException("Function $this->_callback apparently not exists");
             }
         }
 
