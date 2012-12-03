@@ -39,7 +39,7 @@ abstract class Entity extends Component
     /**
      * @var mixed string or array for multiple keys
      */
-    private $_primaryKey = 'id';
+    protected $_primaryKey = 'id';
 
     /**
      * Init members of DAO
@@ -127,12 +127,16 @@ abstract class Entity extends Component
     /**
      * Save insert or update entity
      *
+     * @param boolean $setPrimaryKey Set primary_key after insert
      * @return boolean
      */
-    public function save()
+    public function save($setPrimaryKey = false)
     {
         if ($this->_isNew) {
-            return $this->_sqlBuilder->insert($this->_field);
+            $rowAffected = $this->_sqlBuilder->insert($this->_field);
+            if ($rowAffected > 0 && $setPrimaryKey) {
+                $this->_field[$this->_primaryKey] = $this->_sqlBuilder->getLastIdInsert();
+            }
         } else {
             $criteria = array();
             $primaryKey = (array)$this->_primaryKey;
@@ -140,8 +144,10 @@ abstract class Entity extends Component
                 $criteria[$key] = $this->_field[$key];
             }
 
-            return $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
+            $rowAffected = $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
         }
+
+        return $rowAffected;
     }
 
 
