@@ -76,5 +76,7 @@ class Session extends Component
         if (array_key_exists($name, $_SESSION)) {
             return $_SESSION[$name];
         }
+
+        return null;
     }
 }
