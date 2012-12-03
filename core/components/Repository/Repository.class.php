@@ -136,6 +136,24 @@ abstract class Repository extends Component
 
 
     /**
+     * Return count(*)
+     *
+     * @param array $criteria
+     * @return int
+     */
+    public function count($criteria)
+    {
+        if ($stmt = $this->_sqlBuilder->select(array('nb' => 'count(*)'), $criteria)) {
+            if($result = $stmt->fetch()) {
+                return (int)$result['nb'];
+            }
+
+        }
+        return false;
+    }
+
+
+    /**
      * Create find dynamic request
      *
      * @param string $method
