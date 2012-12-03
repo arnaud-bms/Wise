@@ -95,15 +95,12 @@ class FormRule
             $params = null;
         }
 
-        $elementValue = (array)$this->_elementValue;
-        foreach ($elementValue as $value) {
-            while ($rule = array_shift($ruleName)) {
-                if (!FormCheck::$rule($value, $params) && empty($ruleName)) {
-                    $this->_countErrors++;
-                    $this->_errors[] = $errorMsg;
-                } else {
-                    $ruleName = array();
-                }
+        while ($rule = array_shift($ruleName)) {
+            if (!FormCheck::$rule($this->_elementValue, $params) && empty($ruleName)) {
+                $this->_countErrors++;
+                $this->_errors[] = $errorMsg;
+            } else {
+                $ruleName = array();
             }
         }
     }
