@@ -114,6 +114,17 @@ abstract class Entity extends Component
 
 
     /**
+     * Retrieve all properties of the entity in array
+     *
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->_field;
+    }
+
+
+    /**
      * Save insert or update entity
      *
      * @return boolean
