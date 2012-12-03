@@ -26,7 +26,7 @@ class MySQL implements Driver
     public function __construct($host, $dbname, $user, $password)
     {
         $this->_link = mysql_connect($host, $user, $password);
-        mysql_select_db($dbname);
+        mysql_select_db($dbname, $this->_link);
     }
 
 
@@ -54,7 +54,7 @@ class MySQL implements Driver
      */
     public function exec($query)
     {
-        return mysql_query($query) ? mysql_affected_rows() : 0;
+        return mysql_query($query, $this->_link) ? mysql_affected_rows() : 0;
     }
 
 
@@ -67,6 +67,17 @@ class MySQL implements Driver
     public function escape($string)
     {
         return mysql_real_escape_string($string);
+    }
+
+
+    /**
+     * Get last id insert
+     *
+     * @return int
+     */
+    public function getLastIdInsert()
+    {
+        return mysql_insert_id($this->_link);
     }
 
 

@@ -73,6 +73,17 @@ class PDO implements Driver
 
 
     /**
+     * Get last id insert
+     *
+     * @return int
+     */
+    public function getLastIdInsert()
+    {
+        return $this->_pdo->lastInsertId();
+    }
+
+
+    /**
      * Close connection with database
      */
     public function close()

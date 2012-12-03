@@ -70,6 +70,17 @@ class MySQLi implements Driver
 
 
     /**
+     * Get last id insert
+     *
+     * @return int
+     */
+    public function getLastIdInsert()
+    {
+        return $this->_mysqli->insert_id;
+    }
+
+
+    /**
      * Close connection with database
      */
     public function close()
