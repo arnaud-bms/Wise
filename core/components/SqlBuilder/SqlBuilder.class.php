@@ -35,6 +35,19 @@ class SqlBuilder extends Component
 
 
     /**
+     * Call method on DB
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        return call_user_func_array(array($this->_db, $method), $args);
+    }
+
+
+    /**
      * Insert row into table
      *
      * @param array $rows
