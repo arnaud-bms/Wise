@@ -24,8 +24,10 @@ class Globals extends ComponentStatic
      */
     protected static function _init($config)
     {
-        foreach ($config as $name => $value) {
-            self::set($name, $value);
+        if (is_array($config)) {
+            foreach ($config as $name => $value) {
+                self::set($name, $value);
+            }
         }
     }
 
