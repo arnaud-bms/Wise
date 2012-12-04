@@ -96,11 +96,11 @@ class FormRule
         }
 
         while ($rule = array_shift($ruleName)) {
-            if (!FormCheck::$rule($this->_elementValue, $params) && empty($ruleName)) {
+            if(FormCheck::$rule($this->_elementValue, $params)) {
+                break;
+            } elseif (empty($ruleName)) {
                 $this->_countErrors++;
                 $this->_errors[] = $errorMsg;
-            } else {
-                $ruleName = array();
             }
         }
     }
