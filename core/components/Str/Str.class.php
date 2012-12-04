@@ -114,6 +114,13 @@ class Str extends ComponentStatic
      */
     public static function normalizePhoneNumber($number)
     {
+        $number = preg_replace('/\+?([^0-9]+)/', '', $number);
+
+        if (substr($number, 0, 1) == 0 && strlen($number) === 10) {
+            $number = '33'.(int)$number;
+        }
+
+
         return $number;
     }
 }
