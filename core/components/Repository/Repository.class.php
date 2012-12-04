@@ -154,6 +154,17 @@ abstract class Repository extends Component
 
 
     /**
+     * Insert multiple rows
+     *
+     * @param array $rows
+     */
+    public function insertMultiple($rows)
+    {
+        return $this->_sqlBuilder->insertMultiple($rows);
+    }
+
+
+    /**
      * Create find dynamic request
      *
      * @param string $method

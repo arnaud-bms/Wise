@@ -74,6 +74,42 @@ class SqlBuilder extends Component
 
 
     /**
+     * Insert rows into table
+     *
+     * @param array $rows
+     * @param bool  $ignore
+     */
+    public function insertMultiple($rows, $ignore = false)
+    {
+        if (empty($rows)) {
+            return 0;
+        }
+
+        $query  = "INSERT %s INTO %s (%s) VALUES%s";
+        $ignore = $ignore ? 'IGNORE' : '';
+        $fields = array_keys($rows[0]);
+
+        $queryValues = '';
+        foreach ($rows as $row) {
+            $values = $this->escapeValues($row);
+            $queryValues.= '('.implode(',', $values).'), ';
+        }
+
+        $query = sprintf(
+            $query,
+            $ignore,
+            $this->_table,
+            implode(',', $fields),
+            rtrim($queryValues, ', ')
+        );
+
+        echo $query;
+
+        return $this->_db->exec($query);
+    }
+
+
+    /**
     * Update rows table
     *
     * @param array $rows
@@ -166,15 +202,20 @@ class SqlBuilder extends Component
     {
         $query = '';
         foreach ($values as $field => $value) {
-            if (!empty($value) && $value[0] === '!') {
-                $value = substr($value, 1);
-                $operator = '!=';
+            if (is_array($value)) {
+                $value = array_map(array($this, 'escape'), $value);
+                $query.= $field.' IN('.implode(',', $value).')'.' '.$separator.' ';
             } else {
-                $operator = '=';
-            }
+                if (!empty($value) && $value[0] === '!') {
+                    $value = substr($value, 1);
+                    $operator = '!=';
+                } else {
+                    $operator = '=';
+                }
 
-            $query.= $field.' '.$operator.' '
-                   . $this->escape($value).' '.$separator.' ';
+                $query.= $field.' '.$operator.' '
+                       . $this->escape($value).' '.$separator.' ';
+            }
         }
 
         return rtrim($query, $separator.' ');
