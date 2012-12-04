@@ -103,4 +103,17 @@ class Str extends ComponentStatic
         }
         return $string;
     }
+
+
+    /**
+     * Normalize phone number
+     *
+     * @todo
+     * @param string $number
+     * @return $number
+     */
+    public static function normalizePhoneNumber($number)
+    {
+        return $number;
+    }
 }
