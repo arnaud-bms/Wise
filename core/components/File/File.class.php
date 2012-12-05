@@ -42,7 +42,7 @@ class File extends Component
         $this->_uploadedFileExt  = explode(',', $config['uploaded_file']['ext']);
     }
 
-    
+
     /**
      * Check uploaded file and return new file path
      *
@@ -110,7 +110,7 @@ class File extends Component
     {
         $filenameUploaded = $this->_uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid();
         if (!is_dir($this->_uploadedFilePath)) {
-            mkdir($this->_uploadedFilePath, 0755, true);
+            mkdir($this->_uploadedFilePath, 0775, true);
         }
 
         if(!move_uploaded_file($file['tmp_name'], $filenameUploaded)) {
