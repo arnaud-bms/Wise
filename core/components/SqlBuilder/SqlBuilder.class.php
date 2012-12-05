@@ -103,8 +103,6 @@ class SqlBuilder extends Component
             rtrim($queryValues, ', ')
         );
 
-        echo $query;
-
         return $this->_db->exec($query);
     }
 
