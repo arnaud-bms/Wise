@@ -167,6 +167,18 @@ abstract class Repository extends Component
 
 
     /**
+     * Delete rows
+     *
+     * @param array $criteria
+     * @return int rows affected
+     */
+    public function delete($criteria)
+    {
+        return $this->_sqlBuilder->delete($criteria);
+    }
+
+
+    /**
      * Create find dynamic request
      *
      * @param string $method
