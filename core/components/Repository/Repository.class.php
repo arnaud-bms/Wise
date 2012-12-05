@@ -157,10 +157,12 @@ abstract class Repository extends Component
      * Insert multiple rows
      *
      * @param array $rows
+     * @param boolean $ignore
+     * @return int rows affected
      */
-    public function insertMultiple($rows)
+    public function insertMultiple($rows, $ignore = false)
     {
-        return $this->_sqlBuilder->insertMultiple($rows);
+        return $this->_sqlBuilder->insertMultiple($rows, $ignore);
     }
 
 
