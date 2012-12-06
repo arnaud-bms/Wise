@@ -118,6 +118,6 @@ class Str extends ComponentStatic
             $number = '33'.(int)$number;
         }
 
-        return (int)$number;
+        return $number;
     }
 }
