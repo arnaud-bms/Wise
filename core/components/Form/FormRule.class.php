@@ -2,7 +2,7 @@
 namespace Telelab\Form;
 
 use Telelab\Form\FormRuleException;
-use Telelab\Form\FormCheck;
+use Telelab\Filter\Filter;
 
 /**
  * Form: Apply rule to form element
@@ -71,7 +71,7 @@ class FormRule
 
 
     /**
-     * Magic function to call functions from formCheck class if it's exists !
+     * Magic function to call functions from Filter class if it's exists !
      *
      * @param String $name : Name of the function
      * @param Array $args : Array of parameters
@@ -96,7 +96,7 @@ class FormRule
         }
 
         while ($rule = array_shift($ruleName)) {
-            if(FormCheck::$rule($this->_elementValue, $params)) {
+            if(Filter::$rule($this->_elementValue, $params)) {
                 break;
             } elseif (empty($ruleName)) {
                 $this->_countErrors++;

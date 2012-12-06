@@ -1,12 +1,14 @@
 <?php
-namespace Telelab\Form;
+namespace Telelab\Filter;
+
+use Telelab\Component\Component;
 
 /**
- * Form: Check form
+ * Filter: Check value from data
  *
- * @author Codefalse <codefalse@altern.org>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
-class FormCheck
+class Filter extends Component
 {
 
     /**
