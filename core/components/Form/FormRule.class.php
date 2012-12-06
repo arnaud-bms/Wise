@@ -96,7 +96,7 @@ class FormRule
         }
 
         while ($rule = array_shift($ruleName)) {
-            if(Filter::$rule($this->_elementValue, $params)) {
+            if (Filter::$rule($this->_elementValue, $params)) {
                 break;
             } elseif (empty($ruleName)) {
                 $this->_countErrors++;
@@ -113,9 +113,7 @@ class FormRule
      */
     public function __toString()
     {
-        return (is_array($this->_elementValue)
-            ? reset($this->_elementValue)
-            : (string)$this->_elementValue);
+        return (is_array($this->_elementValue) ? reset($this->_elementValue) : (string)$this->_elementValue);
     }
 
 

@@ -155,7 +155,7 @@ abstract class Repository extends Component
     public function count($criteria)
     {
         if ($stmt = $this->_sqlBuilder->select(array('nb' => 'count(*)'), $criteria)) {
-            if($result = $stmt->fetch()) {
+            if ($result = $stmt->fetch()) {
                 return (int)$result['nb'];
             }
 

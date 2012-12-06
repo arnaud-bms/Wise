@@ -67,17 +67,17 @@ class File extends Component
         if (!is_uploaded_file($file['tmp_name'])) {
             switch($file['error']){
                 case 0:
-                  throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", $file['error']);
+                    throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", $file['error']);
                 case 1:
-                  throw new FileUploadedException("Le fichier est trop volumineux pour être traité", $file['error']);
+                    throw new FileUploadedException("Le fichier est trop volumineux pour être traité", $file['error']);
                 case 2:
-                  throw new FileUploadedException("Le fichier est trop volumineux pour être traité", $file['error']);
+                    throw new FileUploadedException("Le fichier est trop volumineux pour être traité", $file['error']);
                 case 3:
-                  throw new FileUploadedException("Le fichier a été partiellement envoyé", $file['error']);
+                    throw new FileUploadedException("Le fichier a été partiellement envoyé", $file['error']);
                 case 4:
-                  throw new FileUploadedException("Pas de fichier envoyé", $file['error']);
+                    throw new FileUploadedException("Pas de fichier envoyé", $file['error']);
                 default:
-                  throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", 5);
+                    throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", 5);
             }
         }
     }
@@ -93,7 +93,7 @@ class File extends Component
     {
         $fileInfos = pathinfo($file['name']);
 
-        if(empty($fileInfos['extension']) || !in_array($fileInfos['extension'], $this->_uploadedFileExt)) {
+        if (empty($fileInfos['extension']) || !in_array($fileInfos['extension'], $this->_uploadedFileExt)) {
             throw new FileUploadedException("Fichier non autorisé", 6);
         }
     }
@@ -113,7 +113,7 @@ class File extends Component
             mkdir($this->_uploadedFilePath, 0775, true);
         }
 
-        if(!move_uploaded_file($file['tmp_name'], $filenameUploaded)) {
+        if (!move_uploaded_file($file['tmp_name'], $filenameUploaded)) {
             throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", 7);
         }
 

@@ -53,8 +53,8 @@ class Firewall extends Plugin
         $isProtected = false;
 
         foreach ($routes as $routeProtected) {
-            if($patternPos = strpos($routeProtected, '*')) {
-                if(substr($route, 0, $patternPos) === substr($routeProtected, 0, $patternPos)) {
+            if ($patternPos = strpos($routeProtected, '*')) {
+                if (substr($route, 0, $patternPos) === substr($routeProtected, 0, $patternPos)) {
                     $isProtected = true;
                     break;
                 }

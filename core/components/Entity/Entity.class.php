@@ -138,7 +138,7 @@ abstract class Entity extends Component
                 $this->_field[$this->_primaryKey] = $this->_sqlBuilder->getLastIdInsert();
             }
         } else {
-            if(empty($criteria)) {
+            if (empty($criteria)) {
                 $primaryKey = (array)$this->_primaryKey;
                 foreach ($primaryKey as $key) {
                     $criteria[$key] = $this->_field[$key];
