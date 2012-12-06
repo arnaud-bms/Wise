@@ -22,6 +22,18 @@ class FormCheck
 
 
     /**
+     * The input value is empty
+     *
+     * @param string $value The value to test
+     * @return boolean
+     */
+    public static function isEmpty($value)
+    {
+        return empty($value);
+    }
+
+
+    /**
      * The input value must correspond to the general form of an email address
      *
      * @param string $value The value to test
@@ -300,7 +312,19 @@ class FormCheck
      */
     public static function isDate($value)
     {
-        return (preg_match('/^([0-9][0-2]|[0-9])\/([0-2][0-9]|3[01]|[0-9])\/[0-9]{4}|([0-9][0-2]|[0-9])-([0-2][0-9]|3[01]|[0-9])-[0-9]{4}$/', $value));
+        return (strtotime($value) !== false);
+    }
+
+
+    /**
+     * Check hour format
+     *
+     * @param string $value
+     * @return boolean
+     */
+    public static function isHour($value)
+    {
+        return (strlen($value) === 4 && substr($value, 0, 2) <= 24 && substr($value, 2, 2) <= 59);
     }
 
 
