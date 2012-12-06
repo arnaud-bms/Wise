@@ -181,8 +181,15 @@ class SqlBuilder extends Component
         $query = sprintf($query, $selectQuery, $this->_table, $whereQuery);
 
         /**
-         * @todo order by
+         * @todo Optimize order by
          */
+        if (!empty($order)) {
+            $query.= ' ORDER BY ';
+            foreach ($order as $field => $way) {
+                $query.= $field.' '.$way.', ';
+            }
+            $query = rtrim($query, ', ');
+        }
 
         $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
 
