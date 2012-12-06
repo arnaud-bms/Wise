@@ -27,6 +27,17 @@ abstract class Repository extends Component
      */
     private $_entityName;
 
+    /**
+     * @staticvar string Type data to return
+     */
+    const RETURN_ENTITY = 'entity';
+    const RETURN_ARRAY  = 'array';
+
+    /**
+     * @var string Type result to return
+     */
+    private $_resultType = self::RETURN_ENTITY;
+
 
     /**
      * Init repository
@@ -78,7 +89,7 @@ abstract class Repository extends Component
     {
         $where = array('id' => (int)$id);
         if ($stmt = $this->_sqlBuilder->select('*', $where, 1)) {
-            return $this->_getEntity($stmt->fetch());
+            return $this->_getResult($stmt->fetch());
         }
         return false;
     }
@@ -109,7 +120,7 @@ abstract class Repository extends Component
         if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, $limit, $offset)) {
             $entities = array();
             while ($row = $stmt->fetch()) {
-                $entities[] = $this->_getEntity($row);
+                $entities[] = $this->_getResult($row);
             }
 
             return $entities;
@@ -129,7 +140,7 @@ abstract class Repository extends Component
     public function findOneBy($criteria, $order = null)
     {
         if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, 1)) {
-            return $this->_getEntity($stmt->fetch());
+            return $this->_getResult($stmt->fetch());
         }
         return false;
     }
@@ -216,14 +227,29 @@ abstract class Repository extends Component
 
 
     /**
+     * Set type result to return
+     *
+     * @param string $type
+     */
+    public function setResultType($type)
+    {
+        if ($type === self::RETURN_ENTITY) {
+            $this->_resultType = self::RETURN_ENTITY;
+        } else {
+            $this->_resultType = self::RETURN_ARRAY;
+        }
+    }
+
+
+    /**
      * Create entity DAO if exists
      *
      * @param array $row
      * @return mixed
      */
-    protected function _getEntity($row)
+    protected function _getResult($row)
     {
-        if ($row && $this->_hasEntity) {
+        if ($row && $this->_resultType === self::RETURN_ENTITY && $this->_hasEntity) {
             $row = new $this->_entityName($row);
         }
 
