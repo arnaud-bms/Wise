@@ -98,26 +98,28 @@ abstract class Repository extends Component
     /**
      * Find all entities
      *
+     * @param array $select
      * @return array List rows
      */
-    public function findAll()
+    public function findAll($select)
     {
-        return $this->findBy(array());
+        return $this->findBy($select, array());
     }
 
 
     /**
      * Find by dynamic
      *
+     * @param array $select
      * @param array $criteria
      * @param array $order
      * @param int $limit
      * @param int $offset
      * @return array List rows
      */
-    public function findBy($criteria, $order = null, $limit = null, $offset = null)
+    public function findBy($select, $criteria, $order = null, $limit = null, $offset = null)
     {
-        if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, $limit, $offset)) {
+        if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, $limit, $offset)) {
             $entities = array();
             while ($row = $stmt->fetch()) {
                 $entities[] = $this->_getResult($row);
@@ -133,13 +135,14 @@ abstract class Repository extends Component
     /**
      * Find by dynamic
      *
+     * @param array $select
      * @param array $criteria
      * @param array $order
      * return array List rows
      */
-    public function findOneBy($criteria, $order = null)
+    public function findOneBy($select, $criteria, $order = null)
     {
-        if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, 1)) {
+        if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, 1)) {
             return $this->_getResult($stmt->fetch());
         }
         return false;
