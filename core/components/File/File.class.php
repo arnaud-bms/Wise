@@ -119,4 +119,20 @@ class File extends Component
 
         return $filenameUploaded;
     }
+
+
+    /**
+     * Write file
+     *
+     * @param string $file
+     * @param string $content
+     */
+    public static function putContents($file, $content)
+    {
+        if (!is_dir(dirname($file))) {
+            mkdir(dirname($file), 0775, true);
+        }
+
+        file_put_contents($file, $content);
+    }
 }
