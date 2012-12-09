@@ -3,6 +3,7 @@ namespace Telelab\Repository;
 
 use Telelab\Component\Component;
 use Telelab\SqlBuilder\SqlBuilder;
+use Telelab\Autoloader\AutoloaderException;
 
 /**
  * Default method to request database
@@ -59,8 +60,13 @@ abstract class Repository extends Component
     {
         if ($this->_hasEntity === null) {
             $entityName        = str_replace('Repository', 'Entity', get_called_class());
-            $this->_hasEntity  = class_exists($entityName);
             $this->_entityName = $entityName;
+
+            try {
+                $this->_hasEntity  = class_exists($entityName);
+            } catch (AutoloaderException $e) {
+                $this->_hasEntity = false;
+            }
         }
     }
 
