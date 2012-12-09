@@ -88,6 +88,7 @@ abstract class Entity extends Component
      * Get value
      *
      * @param string $key
+     * @return mixed
      */
     public function __get($key)
     {

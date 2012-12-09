@@ -4,7 +4,7 @@ namespace Telelab\DB;
 use Telelab\Component\Component;
 
 /**
- * Connector to database
+ * DB: Connector to database
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -36,6 +36,7 @@ class DB extends Component
      * Init DB
      *
      * @param array $config
+     * @throws DBException
      */
     protected function _init($config)
     {

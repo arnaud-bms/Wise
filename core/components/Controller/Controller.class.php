@@ -5,7 +5,7 @@ use Telelab\FrontController\FrontController;
 use Telelab\Component\Component;
 
 /**
- * Abstract Controller
+ * Controller: Base class for controller
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -20,7 +20,7 @@ abstract class Controller extends Component
     /**
      * Redirect
      *
-     * @param type $route
+     * @param string $route
      */
     protected function _redirect($route)
     {

@@ -32,8 +32,8 @@ class MySQLi implements Driver
     /**
      * Execute query and return result
      *
-     * @param type $query
-     * @return stmt
+     * @param string $query
+     * @return MySQLiStatement
      */
     public function query($query)
     {
@@ -44,7 +44,7 @@ class MySQLi implements Driver
     /**
      * Execute query and return rows affected
      *
-     * @param type $query
+     * @param string $query
      * @return int Rows affected
      */
     public function exec($query)

@@ -2,7 +2,7 @@
 namespace Telelab\Component;
 
 /**
- * Class base
+ * Component: Base of the dynamic component
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -12,13 +12,11 @@ abstract class Component extends AbstractComponent
     /**
      * Construct Component
      *
-     * @param type $config
+     * @param mixed $config
      */
     final public function __construct($config = null)
     {
-        $class = get_called_class();
-        $config = self::_getComponentConfig($class, $config);
-
+        $config = self::_getComponentConfig(get_called_class(), $config);
         if ($config !== null && is_array($config) && isset($this->_requiredFields)) {
             self::_checkRequiredFields($this->_requiredFields, $config);
         }
@@ -30,7 +28,7 @@ abstract class Component extends AbstractComponent
     /**
      * Init component
      *
-     * @param type $config
+     * @param mixed $config
      */
     protected function _init($config)
     {

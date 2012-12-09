@@ -4,7 +4,8 @@ namespace Telelab\Component;
 use Telelab\Conf\Conf;
 
 /**
- * Class base component
+ * AbstractComponent: Base class of components
+ * This class load configuration component
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -15,8 +16,8 @@ abstract class AbstractComponent
      * Extract Component configuration
      *
      * @param string $class Class called
-     * @param array $config
-     * @return array
+     * @param array $config Configuration passed to construct of the component
+     * @return mixed Component configuration
      */
     protected static function _getComponentConfig($class, $config)
     {
@@ -38,6 +39,7 @@ abstract class AbstractComponent
      * Check is required fields is present
      *
      * @param array $config
+     * @throws ComponentException If the field does'nt exists
      */
     protected static function _checkRequiredFields($requiredFields, $config)
     {

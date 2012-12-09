@@ -59,7 +59,7 @@ class File extends Component
     /**
      * Check if the file is uploaded
      *
-     * @throw FileUploadedException
+     * @throws FileUploadedException If an error on upload file
      * @param array $file
      */
     private function _checkFileUploaded($file)
@@ -67,17 +67,17 @@ class File extends Component
         if (!is_uploaded_file($file['tmp_name'])) {
             switch($file['error']){
                 case 0:
-                    throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", $file['error']);
+                    throw new FileUploadedException("An error occurred while sending the file", $file['error']);
                 case 1:
-                    throw new FileUploadedException("Le fichier est trop volumineux pour être traité", $file['error']);
+                    throw new FileUploadedException("The file is too large to be processed", $file['error']);
                 case 2:
-                    throw new FileUploadedException("Le fichier est trop volumineux pour être traité", $file['error']);
+                    throw new FileUploadedException("The file is too large to be processed", $file['error']);
                 case 3:
-                    throw new FileUploadedException("Le fichier a été partiellement envoyé", $file['error']);
+                    throw new FileUploadedException("The file was partially uploaded", $file['error']);
                 case 4:
-                    throw new FileUploadedException("Pas de fichier envoyé", $file['error']);
+                    throw new FileUploadedException("Not file receive", $file['error']);
                 default:
-                    throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", 5);
+                    throw new FileUploadedException("Unknow error", 5);
             }
         }
     }
@@ -86,7 +86,7 @@ class File extends Component
     /**
      * Check if the file is uploaded
      *
-     * @throw FileUploadedException
+     * @throws FileUploadedException If extension is not available
      * @param array $file
      */
     private function _checkExtension($file)
@@ -94,7 +94,7 @@ class File extends Component
         $fileInfos = pathinfo($file['name']);
 
         if (empty($fileInfos['extension']) || !in_array($fileInfos['extension'], $this->_uploadedFileExt)) {
-            throw new FileUploadedException("Fichier non autorisé", 6);
+            throw new FileUploadedException("Extension not allowed", 6);
         }
     }
 
@@ -102,7 +102,7 @@ class File extends Component
     /**
      * Move uploaded file
      *
-     * @throw FileUploadedException
+     * @throws FileUploadedException If an error on move file
      * @param array $file
      * @return filename
      */
@@ -114,7 +114,7 @@ class File extends Component
         }
 
         if (!move_uploaded_file($file['tmp_name'], $filenameUploaded)) {
-            throw new FileUploadedException("Une erreur s'est produite lors de l'envoi du fichier", 7);
+            throw new FileUploadedException("Error on upload file", 7);
         }
 
         return $filenameUploaded;

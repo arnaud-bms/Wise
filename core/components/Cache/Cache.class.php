@@ -4,7 +4,7 @@ namespace Telelab\Cache;
 use Telelab\Component\Component;
 
 /**
- * Cache component
+ * Cache: Set and get cache
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -12,7 +12,7 @@ class Cache extends Component
 {
 
     /**
-     * @var CacheDriver
+     * @var CacheDriver Driver used by cache system
      */
     protected $_driver;
 
@@ -34,6 +34,7 @@ class Cache extends Component
      * Init Cache
      *
      * @param array $config
+     * @throws CacheException If driver does'nt exists
      */
     protected function _init($config)
     {
@@ -58,8 +59,8 @@ class Cache extends Component
     /**
      * Retrieve cache
      *
-     * @param string $uniqId
-     * @return string $content
+     * @param string $uniqId Request id
+     * @return string Content's request
      */
     public function getCache($uniqId)
     {

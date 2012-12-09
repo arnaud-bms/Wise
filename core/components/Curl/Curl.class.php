@@ -4,7 +4,7 @@ namespace Telelab\Curl;
 use Telelab\Component\Component;
 
  /**
-  * Class Curl
+  * Curl
   *
   * @author gdievart <g.dievart@telemaque.fr>
   */
@@ -44,6 +44,7 @@ class Curl extends Component
     /**
      * Execute query
      *
+     * @throws CurlException Return curl_error
      * @return mixed
      */
     public function exec()

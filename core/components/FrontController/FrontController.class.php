@@ -6,7 +6,7 @@ use Telelab\Router\Router;
 use Telelab\Conf\Conf;
 
 /**
- * Load route application, execute plugin and controller
+ * FrontController: Load route application, execute plugin and controller
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -113,8 +113,6 @@ class FrontController extends ComponentStatic
 
     /**
      * Execute route
-     *
-     * @param array $routeInfos
      */
     protected static function _executeRoute()
     {
