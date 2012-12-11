@@ -156,6 +156,39 @@ abstract class Repository extends Component
 
 
     /**
+     * Execute query
+     *
+     * @param string $query
+     * @return array List rows
+     */
+    public function query($query)
+    {
+        if ($stmt = $this->_sqlBuilder->query($query)) {
+            $entities = array();
+            while ($row = $stmt->fetch()) {
+                $entities[] = $this->_getResult($row);
+            }
+
+            return $entities;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Execute query
+     *
+     * @param string $query
+     * @return int Rows affected
+     */
+    public function exec($query)
+    {
+        return $this->_sqlBuilder->exec($query);
+    }
+
+
+    /**
      * Return count(*)
      *
      * @param array $criteria
