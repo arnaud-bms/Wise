@@ -91,7 +91,7 @@ class Router extends Component
         $routing = $this->_getRoutingApp($route);
         foreach ($routing as $routeName => $routeTest) {
             $this->_checkFieldsRoute($routeTest);
-            $pattern = '#'.$routeTest['pattern'].'#';
+            $pattern = '#^'.$routeTest['pattern'].'$#';
             $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
             if (preg_match($pattern, $route, $argv)
                 && (empty($routeTest['http_method'])
