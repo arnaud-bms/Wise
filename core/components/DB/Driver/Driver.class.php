@@ -50,4 +50,9 @@ interface Driver
      * @return int
      */
     public function getLastIdInsert();
+
+    /**
+     * Create a new connection
+     */
+    public function reset();
 }

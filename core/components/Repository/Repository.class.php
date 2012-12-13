@@ -189,6 +189,15 @@ abstract class Repository extends Component
 
 
     /**
+     * Reset db, this method is call when use fork
+     */
+    public function resetDb()
+    {
+        $this->_sqlBuilder->reset();
+    }
+
+
+    /**
      * Return count(*)
      *
      * @param array $criteria

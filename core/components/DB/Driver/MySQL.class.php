@@ -25,8 +25,24 @@ class MySQL implements Driver
      */
     public function __construct($host, $dbname, $user, $password)
     {
-        $this->_link = mysql_connect($host, $user, $password);
-        mysql_select_db($dbname, $this->_link);
+        $this->_host     = $host;
+        $this->_dbname   = $dbname;
+        $this->_user     = $user;
+        $this->_password = $password;
+
+        $this->_initLink();
+    }
+
+
+    /**
+     * Init link
+     *
+     * @param boolean $new New link
+     */
+    public function _initLink($new = false)
+    {
+        $this->_link = mysql_connect($this->_host, $this->_user, $this->_password, $new);
+        mysql_select_db($this->_dbname, $this->_link);
     }
 
 
@@ -86,6 +102,16 @@ class MySQL implements Driver
      */
     public function close()
     {
+        echo "HERE\n";
         mysql_close($this->_link);
+    }
+
+
+    /**
+     * Set connection with database
+     */
+    public function reset()
+    {
+        $this->_initLink(true);
     }
 }
