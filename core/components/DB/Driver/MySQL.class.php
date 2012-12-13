@@ -102,7 +102,6 @@ class MySQL implements Driver
      */
     public function close()
     {
-        echo "HERE\n";
         mysql_close($this->_link);
     }
 

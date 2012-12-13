@@ -18,7 +18,7 @@ class DB extends Component
     /**
      * @var Connection to DB
      */
-    private $_driver = null;
+    private static $_driver = null;
 
     /**
      * @var array Required fields
@@ -56,7 +56,7 @@ class DB extends Component
                 );
         }
 
-        $this->_driver = new $driver(
+        self::$_driver = new $driver(
             $config['host'],
             $config['dbname'],
             $config['user'],
@@ -90,7 +90,16 @@ class DB extends Component
      */
     public function __call($method, $argv)
     {
-        return call_user_func_array(array($this->_driver, $method), $argv);
+        return call_user_func_array(array(self::$_driver, $method), $argv);
+    }
+
+
+    /**
+     * Reset connection with database
+     */
+    public static function reset()
+    {
+       self::$_driver->reset();
     }
 
 
@@ -102,6 +111,6 @@ class DB extends Component
     public function close()
     {
         self::$_instance = null;
-        $this->_driver->close();
+        self::$_driver->close();
     }
 }
