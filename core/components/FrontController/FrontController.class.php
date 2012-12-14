@@ -4,6 +4,7 @@ namespace Telelab\FrontController;
 use Telelab\Component\ComponentStatic;
 use Telelab\Router\Router;
 use Telelab\Conf\Conf;
+use Telelab\Logger\Logger;
 
 /**
  * FrontController: Load route application, execute plugin and controller
@@ -129,6 +130,7 @@ class FrontController extends ComponentStatic
      */
     protected static function _executePlugins($method)
     {
+        Logger::log('['.__CLASS__.'] excute '.$method.' plugins', Logger::LOG_DEBUG);
         if (!self::$_interrupRequest) {
             foreach (self::$_plugins[$method] as $plugin) {
                 if (!isset(self::$_pluginsLoaded[$plugin])) {
@@ -141,7 +143,10 @@ class FrontController extends ComponentStatic
                     self::$_pluginsLoaded[$plugin]->postCall();
                 }
 
+                Logger::log('['.__CLASS__.'] excute plugin -> '.$plugin, Logger::LOG_DEBUG);
+
                 if (self::$_interrupRequest) {
+                    Logger::log('['.__CLASS__.'] interrup request', Logger::LOG_DEBUG);
                     break;
                 }
             }
@@ -155,6 +160,12 @@ class FrontController extends ComponentStatic
     protected static function _executeAction()
     {
         if (!self::$_interrupRequest) {
+            Logger::log(
+                '['.__CLASS__.'] excute action -> '
+                .self::$_controller.'::'.self::$_method.'('.implode(',', self::$_argv).')',
+                Logger::LOG_DEBUG
+            );
+
             $controller = new self::$_controller();
             self::$_response = call_user_func_array(
                 array($controller, self::$_method),

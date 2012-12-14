@@ -2,6 +2,7 @@
 namespace Telelab\DB;
 
 use Telelab\Component\Component;
+use Telelab\Logger\Logger;
 
 /**
  * DB: Connector to database
@@ -74,6 +75,7 @@ class DB extends Component
     public static function getInstance($config = null)
     {
         if (!self::$_instance instanceOf DB) {
+            Logger::log('['.__CLASS__.'] new instance', Logger::LOG_DEBUG);
             self::$_instance = new DB($config);
         }
 

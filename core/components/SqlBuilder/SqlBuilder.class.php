@@ -3,6 +3,7 @@ namespace Telelab\SqlBuilder;
 
 use Telelab\Component\Component;
 use Telelab\DB\DB;
+use Telelab\Logger\Logger;
 
 /**
  * Build sql request
@@ -69,6 +70,8 @@ class SqlBuilder extends Component
             implode(',', $values)
         );
 
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
+
         return $this->_db->exec($query);
     }
 
@@ -103,6 +106,8 @@ class SqlBuilder extends Component
             rtrim($queryValues, ', ')
         );
 
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
+
         return $this->_db->exec($query);
     }
 
@@ -126,6 +131,8 @@ class SqlBuilder extends Component
             $query, $ignore, $this->_table, $setQuery, $whereQuery
         );
 
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
+
         return $this->_db->exec($query);
     }
 
@@ -145,6 +152,8 @@ class SqlBuilder extends Component
             $this->_table,
             $whereQuery
         );
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
 
         return $this->_db->exec($query);
     }
@@ -192,6 +201,8 @@ class SqlBuilder extends Component
         }
 
         $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
 
         return $this->_db->query($query);
     }

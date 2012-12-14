@@ -33,7 +33,7 @@ class Logger extends ComponentStatic
      */
     protected static $_requiredFields = array(
         'driver',
-        'enable'
+        'enable',
     );
 
     /**
@@ -67,6 +67,11 @@ class Logger extends ComponentStatic
     protected static $_output = false;
 
     /**
+     * @var boolean Write message if the level more than
+     */
+    protected static $_logLevel = self::LOG_INFO;
+
+    /**
      * Init logger
      *
      * @param array $config
@@ -77,6 +82,10 @@ class Logger extends ComponentStatic
 
         if (isset($config['output'])) {
             self::$_output = (boolean)$config['output'];
+        }
+
+        if (isset($config['log_level'])) {
+            self::$_logLevel = array_search($config['log_level'], self::$_listLevel);
         }
 
         self::$_driverLoaded = false;
@@ -95,7 +104,7 @@ class Logger extends ComponentStatic
      */
     public static function log($message, $level = self::LOG_INFO)
     {
-        if (self::$_enable) {
+        if (self::$_enable && $level >= self::$_logLevel) {
             self::_loadDriver();
 
             $message = date('Y-m-d H:i:s')
