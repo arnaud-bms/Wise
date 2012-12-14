@@ -189,6 +189,18 @@ abstract class Repository extends Component
 
 
     /**
+     * Escape string
+     *
+     * @param string $string
+     * @return string $string
+     */
+    public function escape($string)
+    {
+        return $this->_sqlBuilder->escape($string);
+    }
+
+
+    /**
      * Return count(*)
      *
      * @param array $criteria
