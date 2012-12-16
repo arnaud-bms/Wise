@@ -1,7 +1,12 @@
-<h1>Main template</h1>
-
-{$page}
-
-{foreach from=$rows item=row}
-    {$row.name}
-{/foreach}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Telelab framework</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    {include file="main/header.tpl"}
+    {include file="{$page}"}
+    {include file="main/footer.tpl"}
+</body>
+</html>

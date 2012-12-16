@@ -5,21 +5,29 @@ use Example\ExampleController;
 use Telelab\Globals\Globals;
 
 /**
- * Description of Main
+ * Basic controller
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
-class Main extends ExampleController
+class Basic extends ExampleController
 {
 
     /**
-     * Method test
+     * Simple route
      *
-     * @param string $var
-     * @param string $var
      * @return array $response
      */
     public function index()
+    {
+        Globals::set('format', 'html');
+
+        $response['page'] = 'basic/simple_route.tpl';
+
+        return $response;
+    }
+
+
+    public function repository()
     {
         $response['page'] = 'TOTO';
 
