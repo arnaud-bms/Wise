@@ -30,21 +30,21 @@ class View extends Plugin
     {
         if (is_array(FrontController::getResponse())) {
             $responseFormat = Globals::get('format');
-			if ($responseFormat !== null && $responseFormat !== 'html') {
-				$format = new \Telelab\Format\Format();
-				FrontController::setResponse(
-					$format->formatData(
-						$responseFormat,
-						FrontController::getResponse()
-					)
-				);
-			} else {
-				$view = new \Telelab\View\View();
-				$view->setDataList(FrontController::getResponse());
-				FrontController::setResponse(
-					$view->fetch(Conf::getConfig('view.default_template'))
-				);
-			}
+            if ($responseFormat !== null && $responseFormat !== 'html') {
+                $format = new \Telelab\Format\Format();
+                FrontController::setResponse(
+                    $format->formatData(
+                        $responseFormat,
+                        FrontController::getResponse()
+                    )
+                );
+            } else {
+                $view = new \Telelab\View\View();
+                $view->setDataList(FrontController::getResponse());
+                FrontController::setResponse(
+                    $view->fetch(Conf::getConfig('view.default_template'))
+                );
+            }
         }
     }
 }

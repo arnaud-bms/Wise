@@ -4,165 +4,170 @@ namespace Telelab\Paginator;
 use Telelab\Component\ComponentStatic;
 
  /**
-  * Class MPaginator
+  * Paginator: Pagination
   *
   * @author gdievart
   */
-class Paginator extends ComponentStatic{
+class Paginator extends ComponentStatic
+{
 
-	/**
-	 * Current page
-	 * @var int
-	 */
-	protected static $_iCurrentPage;
+    /**
+     * @var int Current page
+     */
+    protected static $_currentPage;
 
-	/**
-	 * Total page
-	 * @var int
-	 */
-	protected static $_iTotalPages;
+    /**
+     * @var int Total page
+     */
+    protected static $_totalPages;
 
-	/**
-	 * Total items
-	 * @var int
-	 */
-	protected static $_iTotalItems;
+    /**
+     * @var int Total items
+     */
+    protected static $_totalItems;
 
-	/**
-	 * Item per page
-	 * @var int
-	 */
-	protected static $_iStepItems;
+    /**
+     * @var int Item per page
+     */
+    protected static $_stepItems;
 
-	/**
-	 * Number links around current page
-	 * @var int
-	 */
-	protected static $_iAround = 4;
+    /**
+     * @var int Number links around current page
+     */
+    protected static $_around = 4;
 
 
-	/**
-	 * Get pagination
-	 *
-	 * @param int $iCurrent
-	 * @param int $iTotalItems
-	 * @param int $iStepItem
-	 * @return array first previous current links next end
-	 */
-	public static function getPagination($iCurrent, $iTotalItems, $iStepItem = 10) {
-		self::_initMembers($iCurrent, $iTotalItems, $iStepItem);
+    /**
+     * Get pagination
+     *
+     * @param int $current
+     * @param int $totalItems
+     * @param int $stepItem
+     * @return array first previous current links next end
+     */
+    public static function getPagination($current, $totalItems, $stepItem = 10)
+    {
+        self::_initMembers($current, $totalItems, $stepItem);
 
-		$aPagination = array();
-		$aPagination['first'] = self::_getFirst();
-		$aPagination['prev']  = self::_getPrevious();
-		$aPagination['current'] = self::_getCurrent();
-		$aPagination['links'] = self::_getLinksAround();
-		$aPagination['next']  = self::_getNext();
-		$aPagination['last']  = self::_getLast();
+        $pagination = array();
+        $pagination['first'] = self::_getFirst();
+        $pagination['prev']  = self::_getPrevious();
+        $pagination['current'] = self::_getCurrent();
+        $pagination['links'] = self::_getLinksAround();
+        $pagination['next']  = self::_getNext();
+        $pagination['last']  = self::_getLast();
 
-		return $aPagination;
-	}
-
-
-	/**
-	 * Init paginator
-	 *
-	 * @param type $iCurrent
-	 * @param type $iTotalItems
-	 * @param type $iStepItem
-	 */
-	private static function _initMembers($iCurrent, $iTotalItems, $iStepItem = 10) {
-		self::$_iCurrentPage = $iCurrent;
-		self::$_iTotalItems  = $iTotalItems;
-		self::$_iStepItems   = $iStepItem;
-		self::$_iTotalPages  = ceil( $iTotalItems / $iStepItem);
-	}
-
-	/**
-	 * Get first link
-	 *
-	 * @return int
-	 */
- 	private static function _getFirst() {
-		return 1;
-	}
+        return $pagination;
+    }
 
 
-	/**
-	 * Get previous link
-	 *
-	 * @return int
-	 */
- 	private static function _getPrevious() {
-		return self::$_iCurrentPage > 1 ? self::$_iCurrentPage - 1 : null;
-	}
+    /**
+     * Init paginator
+     *
+     * @param type $current
+     * @param type $totalItems
+     * @param type $stepItem
+     */
+    private static function _initMembers($current, $totalItems, $stepItem = 10)
+    {
+        self::$_currentPage = $current;
+        self::$_totalItems  = $totalItems;
+        self::$_stepItems   = $stepItem;
+        self::$_totalPages  = ceil($totalItems / $stepItem);
+    }
+
+    /**
+     * Get first link
+     *
+     * @return int
+     */
+    private static function _getFirst()
+    {
+        return 1;
+    }
 
 
-	/**
-	 * Get linkAround
-	 *
-	 * @return array
-	 */
- 	private static function _getLinksAround() {
-        if (self::$_iCurrentPage > self::$_iTotalPages) {
-            return self::$_iCurrentPage = self::$_iTotalPages;
+    /**
+     * Get previous link
+     *
+     * @return int
+     */
+    private static function _getPrevious()
+    {
+        return self::$_currentPage > 1 ? self::$_currentPage - 1 : null;
+    }
+
+
+    /**
+     * Get linkAround
+     *
+     * @return array
+     */
+    private static function _getLinksAround()
+    {
+        if (self::$_currentPage > self::$_totalPages) {
+            return self::$_currentPage = self::$_totalPages;
         }
-		if(self::$_iCurrentPage <= self::$_iAround) {
+        if (self::$_currentPage <= self::$_around) {
             $i      = 1;
-            $iLimit = self::$_iTotalPages > (self::$_iAround + self::$_iCurrentPage) ? self::$_iAround + self::$_iCurrentPage : self::$_iTotalPages;
+            $limit = self::$_totalPages > (self::$_around + self::$_currentPage) ? self::$_around + self::$_currentPage : self::$_totalPages;
+        } else {
+            $i      = self::$_currentPage - self::$_around;
+            $limit = self::$_totalPages > (self::$_currentPage + self::$_around) ? self::$_currentPage + self::$_around : self::$_totalPages ;
         }
-		else {
-			$i      = self::$_iCurrentPage - self::$_iAround;
-            $iLimit = self::$_iTotalPages > (self::$_iCurrentPage + self::$_iAround) ? self::$_iCurrentPage + self::$_iAround : self::$_iTotalPages ;
-		}
 
-		if($iLimit <= (self::$_iAround * 2 + 1) && (self::$_iAround * 2 + 1) < self::$_iTotalPages)
-			$iLimit = self::$_iAround * 2 + 1;
+        if ($limit <= (self::$_around * 2 + 1) && (self::$_around * 2 + 1) < self::$_totalPages) {
+            $limit = self::$_around * 2 + 1;
+        }
 
-		$aLinksAround = range($i, $iLimit);
+        $linksAround = range($i, $limit);
 
-		return $aLinksAround;
-	}
+        return $linksAround;
+    }
 
 
-	/**
-	 * Get current page
-	 *
-	 * @return int
-	 */
- 	private static function _getCurrent() {
-		return self::$_iCurrentPage;
-	}
+    /**
+     * Get current page
+     *
+     * @return int
+     */
+    private static function _getCurrent()
+    {
+        return self::$_currentPage;
+    }
 
 
-	/**
-	 * Get next link
-	 *
-	 * @return int
-	 */
- 	private static function _getNext() {
-		$iNext = (self::$_iCurrentPage + 1) <= self::$_iTotalPages ? self::$_iCurrentPage + 1 : null;
+    /**
+     * Get next link
+     *
+     * @return int
+     */
+    private static function _getNext()
+    {
+        $next = (self::$_currentPage + 1) <= self::$_totalPages ? self::$_currentPage + 1 : null;
 
-		return $iNext;
-	}
-
-
-	/**
-	 * Get last link
-	 *
-	 * @param int
-	 */
- 	private static function _getLast() {
-		return self::$_iTotalPages;
-	}
+        return $next;
+    }
 
 
-	/**
-	 * Set link around current
-	 *
-	 * @param int $iAround
-	 */
- 	public static function setAround($iAround) {
-		self::$_iAround = $iAround;
-	}
+    /**
+     * Get last link
+     *
+     * @param int
+     */
+    private static function _getLast()
+    {
+        return self::$_totalPages;
+    }
+
+
+    /**
+     * Set link around current
+     *
+     * @param int $around
+     */
+    public static function setAround($around)
+    {
+        self::$_around = $around;
+    }
 }
