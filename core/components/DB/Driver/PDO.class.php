@@ -90,4 +90,15 @@ class PDO implements Driver
     {
         unset($this->_pdo);
     }
+
+
+    /**
+     * Close connection with database
+     *
+     * @todo
+     */
+    public function reset()
+    {
+
+    }
 }

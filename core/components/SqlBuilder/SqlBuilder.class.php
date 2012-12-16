@@ -200,7 +200,9 @@ class SqlBuilder extends Component
             $query = rtrim($query, ', ');
         }
 
-        $query.= $limit !== null ? ' LIMIT '.(int)$limit : null;
+        if ($limit !== null) {
+            $query.= $offset !== null ? ' LIMIT '.(int)$offset.', '.(int)$limit : ' LIMIT '.(int)$limit;
+        }
 
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
 
@@ -265,7 +267,7 @@ class SqlBuilder extends Component
         if (is_int($value) || is_float($value)) {
             return $value;
         }
-        return "'".$this->_db->escape($value)."'";
+        return $this->_db->escape($value);
     }
 
 

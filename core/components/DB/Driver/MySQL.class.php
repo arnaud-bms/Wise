@@ -82,7 +82,7 @@ class MySQL implements Driver
      */
     public function escape($string)
     {
-        return mysql_real_escape_string($string);
+        return "'".mysql_real_escape_string($string)."'";
     }
 
 
