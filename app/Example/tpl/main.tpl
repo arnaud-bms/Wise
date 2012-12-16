@@ -2,10 +2,8 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title>{$meta.title|htmlspecialchars} - EDF</title>
+    <title>{$meta.title} - Telelab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{$meta.description|htmlspecialchars}">
-    <meta name="author" content="gdievart">
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
@@ -24,10 +22,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="span3 bs-docs-sidebar">
-                {include file="column_right.tpl"}
-            </div>
-            <div class="span9">
+            <div class="span12">
                 {include file="{$page}"}
             </div>
         </div>
