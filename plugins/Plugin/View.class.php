@@ -29,23 +29,22 @@ class View extends Plugin
     public function postcall()
     {
         if (is_array(FrontController::getResponse())) {
-            if ($responseFormat = Globals::get('format')) {
-                if ($responseFormat !== 'html') {
-                    $format = new \Telelab\Format\Format();
-                    FrontController::setResponse(
-                        $format->formatData(
-                            $responseFormat,
-                            FrontController::getResponse()
-                        )
-                    );
-                } else {
-                    $view = new \Telelab\View\View();
-                    $view->setDataList(FrontController::getResponse());
-                    FrontController::setResponse(
-                        $view->fetch(Conf::getConfig('view.default_template'))
-                    );
-                }
-            }
+            $responseFormat = Globals::get('format');
+			if ($responseFormat !== null && $responseFormat !== 'html') {
+				$format = new \Telelab\Format\Format();
+				FrontController::setResponse(
+					$format->formatData(
+						$responseFormat,
+						FrontController::getResponse()
+					)
+				);
+			} else {
+				$view = new \Telelab\View\View();
+				$view->setDataList(FrontController::getResponse());
+				FrontController::setResponse(
+					$view->fetch(Conf::getConfig('view.default_template'))
+				);
+			}
         }
     }
 }
