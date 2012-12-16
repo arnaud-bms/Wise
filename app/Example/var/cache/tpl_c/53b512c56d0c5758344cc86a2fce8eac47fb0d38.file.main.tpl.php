@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2012-12-16 22:15:55
+<?php /* Smarty version Smarty-3.1-DEV, created on 2012-12-16 22:33:47
          compiled from "/data/Projects/www/Telelab/app/Example/tpl/main.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:44566008850ce38b67bca04-87680398%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '53b512c56d0c5758344cc86a2fce8eac47fb0d38' => 
     array (
       0 => '/data/Projects/www/Telelab/app/Example/tpl/main.tpl',
-      1 => 1355692528,
+      1 => 1355693625,
       2 => 'file',
     ),
   ),
@@ -28,12 +28,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['meta']->value['title']);?>
- - EDF</title>
+    <title><?php echo $_smarty_tpl->tpl_vars['meta']->value['title'];?>
+ - Telelab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['meta']->value['description']);?>
-">
-    <meta name="author" content="gdievart">
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
@@ -54,11 +51,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <div class="container">
         <div class="row">
-            <div class="span3 bs-docs-sidebar">
-                <?php echo $_smarty_tpl->getSubTemplate ("column_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
-
-            </div>
-            <div class="span9">
+            <div class="span12">
                 <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['page']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
             </div>
