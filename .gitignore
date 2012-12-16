@@ -7,3 +7,5 @@
 
 /var/
 /vendor/
+/app/Example/var
+/nbproject/private/
