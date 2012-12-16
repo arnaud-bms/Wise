@@ -39,8 +39,8 @@ class PDO implements Driver
     /**
      * Execute query and return result
      *
-     * @param type $query
-     * @return stmt
+     * @param string $query
+     * @return PDOStatement
      */
     public function query($query)
     {
@@ -51,7 +51,7 @@ class PDO implements Driver
     /**
      * Execute query and return rows affected
      *
-     * @param type $query
+     * @param string $query
      * @return int
      */
     public function exec($query)
@@ -89,5 +89,16 @@ class PDO implements Driver
     public function close()
     {
         unset($this->_pdo);
+    }
+
+
+    /**
+     * Close connection with database
+     *
+     * @todo
+     */
+    public function reset()
+    {
+
     }
 }

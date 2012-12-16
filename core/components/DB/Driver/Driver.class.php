@@ -12,10 +12,10 @@ interface Driver
     /**
      * Init driver
      *
-     * @param type $host
-     * @param type $dbname
-     * @param type $user
-     * @param type $password
+     * @param string $host
+     * @param string $dbname
+     * @param stirng $user
+     * @param string $password
      * @throws DBException
      */
     public function __construct($host, $dbname, $user, $password);
@@ -23,7 +23,7 @@ interface Driver
     /**
      * Execute query and return resultl
      *
-     * @param string  $query
+     * @param string $query
      * @return
      */
     public function query($query);
@@ -31,7 +31,7 @@ interface Driver
     /**
      * Execute query and return row affected
      *
-     * @param string  $query
+     * @param string $query
      * @return int
      */
     public function exec($query);
@@ -50,4 +50,9 @@ interface Driver
      * @return int
      */
     public function getLastIdInsert();
+
+    /**
+     * Create a new connection
+     */
+    public function reset();
 }

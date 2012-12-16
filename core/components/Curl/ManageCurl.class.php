@@ -68,6 +68,7 @@ class ManageCurl extends Component
      * Add Curl to execute on multi
      *
      * @param Curl $curl
+     * @return string Request id
      */
     public function addCurl(Curl $curl)
     {
@@ -257,6 +258,7 @@ class ManageCurl extends Component
      * Return ref on Curl
      *
      * @param string $uniqId
+     * @throws CurlException If uniq id does'nt exists
      * @return Curl
      */
     private function _getCurl($uniqId)

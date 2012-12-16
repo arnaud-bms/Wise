@@ -4,7 +4,7 @@ namespace Telelab\Cache\Driver;
 use Telelab\Component\Component;
 
 /**
- * Driver
+ * Driver: Abstract cache driver
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */

@@ -3,6 +3,7 @@ namespace Telelab\Repository;
 
 use Telelab\Component\Component;
 use Telelab\SqlBuilder\SqlBuilder;
+use Telelab\Autoloader\AutoloaderException;
 
 /**
  * Default method to request database
@@ -27,6 +28,17 @@ abstract class Repository extends Component
      */
     private $_entityName;
 
+    /**
+     * @staticvar string Type data to return
+     */
+    const RETURN_ENTITY = 'entity';
+    const RETURN_ARRAY  = 'array';
+
+    /**
+     * @var string Type result to return
+     */
+    private $_resultType = self::RETURN_ENTITY;
+
 
     /**
      * Init repository
@@ -48,8 +60,13 @@ abstract class Repository extends Component
     {
         if ($this->_hasEntity === null) {
             $entityName        = str_replace('Repository', 'Entity', get_called_class());
-            $this->_hasEntity  = class_exists($entityName);
             $this->_entityName = $entityName;
+
+            try {
+                $this->_hasEntity  = class_exists($entityName);
+            } catch (AutoloaderException $e) {
+                $this->_hasEntity = false;
+            }
         }
     }
 
@@ -78,7 +95,7 @@ abstract class Repository extends Component
     {
         $where = array('id' => (int)$id);
         if ($stmt = $this->_sqlBuilder->select('*', $where, 1)) {
-            return $this->_getEntity($stmt->fetch());
+            return $this->_getResult($stmt->fetch());
         }
         return false;
     }
@@ -87,29 +104,31 @@ abstract class Repository extends Component
     /**
      * Find all entities
      *
+     * @param array $select
      * @return array List rows
      */
-    public function findAll()
+    public function findAll($select)
     {
-        return $this->findBy(array());
+        return $this->findBy($select, array());
     }
 
 
     /**
      * Find by dynamic
      *
+     * @param array $select
      * @param array $criteria
      * @param array $order
      * @param int $limit
      * @param int $offset
      * @return array List rows
      */
-    public function findBy($criteria, $order = null, $limit = null, $offset = null)
+    public function findBy($select, $criteria, $order = null, $limit = null, $offset = null)
     {
-        if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, $limit, $offset)) {
+        if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, $limit, $offset)) {
             $entities = array();
             while ($row = $stmt->fetch()) {
-                $entities[] = $this->_getEntity($row);
+                $entities[] = $this->_getResult($row);
             }
 
             return $entities;
@@ -122,16 +141,62 @@ abstract class Repository extends Component
     /**
      * Find by dynamic
      *
+     * @param array $select
      * @param array $criteria
      * @param array $order
      * return array List rows
      */
-    public function findOneBy($criteria, $order = null)
+    public function findOneBy($select, $criteria, $order = null)
     {
-        if ($stmt = $this->_sqlBuilder->select('*', $criteria, $order, 1)) {
-            return $this->_getEntity($stmt->fetch());
+        if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, 1)) {
+            return $this->_getResult($stmt->fetch());
         }
         return false;
+    }
+
+
+    /**
+     * Execute query
+     *
+     * @param string $query
+     * @return array List rows
+     */
+    public function query($query)
+    {
+        if ($stmt = $this->_sqlBuilder->query($query)) {
+            $entities = array();
+            while ($row = $stmt->fetch()) {
+                $entities[] = $this->_getResult($row);
+            }
+
+            return $entities;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Execute query
+     *
+     * @param string $query
+     * @return int Rows affected
+     */
+    public function exec($query)
+    {
+        return $this->_sqlBuilder->exec($query);
+    }
+
+
+    /**
+     * Escape string
+     *
+     * @param string $string
+     * @return string $string
+     */
+    public function escape($string)
+    {
+        return $this->_sqlBuilder->escape($string);
     }
 
 
@@ -144,7 +209,7 @@ abstract class Repository extends Component
     public function count($criteria)
     {
         if ($stmt = $this->_sqlBuilder->select(array('nb' => 'count(*)'), $criteria)) {
-            if($result = $stmt->fetch()) {
+            if ($result = $stmt->fetch()) {
                 return (int)$result['nb'];
             }
 
@@ -157,10 +222,24 @@ abstract class Repository extends Component
      * Insert multiple rows
      *
      * @param array $rows
+     * @param boolean $ignore
+     * @return int rows affected
      */
-    public function insertMultiple($rows)
+    public function insertMultiple($rows, $ignore = false)
     {
-        return $this->_sqlBuilder->insertMultiple($rows);
+        return $this->_sqlBuilder->insertMultiple($rows, $ignore);
+    }
+
+
+    /**
+     * Delete rows
+     *
+     * @param array $criteria
+     * @return int rows affected
+     */
+    public function delete($criteria)
+    {
+        return $this->_sqlBuilder->delete($criteria);
     }
 
 
@@ -202,14 +281,29 @@ abstract class Repository extends Component
 
 
     /**
+     * Set type result to return
+     *
+     * @param string $type
+     */
+    public function setResultType($type)
+    {
+        if ($type === self::RETURN_ENTITY) {
+            $this->_resultType = self::RETURN_ENTITY;
+        } else {
+            $this->_resultType = self::RETURN_ARRAY;
+        }
+    }
+
+
+    /**
      * Create entity DAO if exists
      *
      * @param array $row
      * @return mixed
      */
-    protected function _getEntity($row)
+    protected function _getResult($row)
     {
-        if ($row && $this->_hasEntity) {
+        if ($row && $this->_resultType === self::RETURN_ENTITY && $this->_hasEntity) {
             $row = new $this->_entityName($row);
         }
 

@@ -31,6 +31,7 @@ class PDOStatement extends Statement
      * Return current row
      *
      * @param string $type
+     * @return mixed Result of the current request
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
@@ -42,6 +43,7 @@ class PDOStatement extends Statement
      * Return all rows
      *
      * @param string $type
+     * @return array List result
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
@@ -53,7 +55,7 @@ class PDOStatement extends Statement
      * Return PDO::FETCH_*
      *
      * @param string $type
-     * @return string
+     * @return mixed
      */
     protected function _getTypeStatement($type)
     {

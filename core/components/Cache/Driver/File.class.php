@@ -4,7 +4,7 @@ namespace Telelab\Cache\Driver;
 use Telelab\Cache\Driver\Driver;
 
 /**
- * Driver Cache with file system
+ * File: File driver of the cache system
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -44,6 +44,7 @@ class File extends Driver
      * Retrieve valid cache
      *
      * @param type $uniqId
+     * @return string Content, if the request's cache exists
      */
     public function getCache($uniqId)
     {

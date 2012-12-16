@@ -30,7 +30,9 @@ class Cache extends Plugin
      */
     public function precall()
     {
-        if ($content = $this->_cache->getCache(FrontController::getRouteId())) {
+        $cacheId = FrontController::getRouteId()
+                 . '.' . Str::url(FrontController::getRouteName(), '.');
+        if ($content = $this->_cache->getCache($cacheId)) {
             FrontController::interruptRequest();
             echo $content;
         }

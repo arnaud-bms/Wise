@@ -25,15 +25,15 @@ class MySQLi implements Driver
      */
     public function __construct($host, $dbname, $user, $password)
     {
-        $this->_mysqli = new mysqli($host, $user, $password, $dbname);
+        $this->_mysqli = new \mysqli($host, $user, $password, $dbname);
     }
 
 
     /**
      * Execute query and return result
      *
-     * @param type $query
-     * @return stmt
+     * @param string $query
+     * @return MySQLiStatement
      */
     public function query($query)
     {
@@ -44,7 +44,7 @@ class MySQLi implements Driver
     /**
      * Execute query and return rows affected
      *
-     * @param type $query
+     * @param string $query
      * @return int Rows affected
      */
     public function exec($query)
@@ -65,7 +65,7 @@ class MySQLi implements Driver
      */
     public function escape($string)
     {
-        return $this->_mysqli->real_escape_string($string);
+        return "'".$this->_mysqli->real_escape_string($string)."'";
     }
 
 
@@ -86,5 +86,14 @@ class MySQLi implements Driver
     public function close()
     {
         $this->_mysqli->close();
+    }
+
+    /**
+     * Set connection with database
+     * @todo
+     */
+    public function reset()
+    {
+
     }
 }

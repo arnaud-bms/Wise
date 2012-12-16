@@ -25,16 +25,32 @@ class MySQL implements Driver
      */
     public function __construct($host, $dbname, $user, $password)
     {
-        $this->_link = mysql_connect($host, $user, $password);
-        mysql_select_db($dbname, $this->_link);
+        $this->_host     = $host;
+        $this->_dbname   = $dbname;
+        $this->_user     = $user;
+        $this->_password = $password;
+
+        $this->_initLink();
+    }
+
+
+    /**
+     * Init link
+     *
+     * @param boolean $new New link
+     */
+    public function _initLink($new = false)
+    {
+        $this->_link = mysql_connect($this->_host, $this->_user, $this->_password, $new);
+        mysql_select_db($this->_dbname, $this->_link);
     }
 
 
     /**
      * Execute query and return result
      *
-     * @param type $query
-     * @return stmt
+     * @param string $query
+     * @return MySQLStatement
      */
     public function query($query)
     {
@@ -49,7 +65,7 @@ class MySQL implements Driver
     /**
      * Execute query and return rows affected
      *
-     * @param type $query
+     * @param string $query
      * @return int Rows affected
      */
     public function exec($query)
@@ -66,7 +82,7 @@ class MySQL implements Driver
      */
     public function escape($string)
     {
-        return mysql_real_escape_string($string);
+        return "'".mysql_real_escape_string($string)."'";
     }
 
 
@@ -87,5 +103,14 @@ class MySQL implements Driver
     public function close()
     {
         mysql_close($this->_link);
+    }
+
+
+    /**
+     * Set connection with database
+     */
+    public function reset()
+    {
+        $this->_initLink(true);
     }
 }

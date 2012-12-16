@@ -1,12 +1,14 @@
 <?php
-namespace Telelab\Form;
+namespace Telelab\Filter;
+
+use Telelab\Component\Component;
 
 /**
- * Form: Check form
+ * Filter: Check value from data
  *
- * @author Codefalse <codefalse@altern.org>
+ * @author gdievart <g.dievart@telemaque.fr>
  */
-class FormCheck
+class Filter extends Component
 {
 
     /**
@@ -18,6 +20,18 @@ class FormCheck
     public static function isRequired($value)
     {
         return !empty($value);
+    }
+
+
+    /**
+     * The input value is empty
+     *
+     * @param string $value The value to test
+     * @return boolean
+     */
+    public static function isEmpty($value)
+    {
+        return empty($value);
     }
 
 
@@ -300,7 +314,19 @@ class FormCheck
      */
     public static function isDate($value)
     {
-        return (preg_match('/^([0-9][0-2]|[0-9])\/([0-2][0-9]|3[01]|[0-9])\/[0-9]{4}|([0-9][0-2]|[0-9])-([0-2][0-9]|3[01]|[0-9])-[0-9]{4}$/', $value));
+        return (strtotime($value) !== false);
+    }
+
+
+    /**
+     * Check hour format
+     *
+     * @param string $value
+     * @return boolean
+     */
+    public static function isHour($value)
+    {
+        return (strlen($value) === 4 && substr($value, 0, 2) <= 24 && substr($value, 2, 2) <= 59);
     }
 
 
@@ -336,7 +362,7 @@ class FormCheck
      */
     public static function isPhone($value)
     {
-        return (preg_match('/^((\([0-9]{3}\) ?)|([0-9]{3}-))?[0-9]{3}-[0-9]{4}$/', $value));
+        return (preg_match('/^(0|\+?33)[0-9]([\s\-]?[0-9]{2}){4}$/', $value));
     }
 
 
@@ -348,7 +374,7 @@ class FormCheck
      */
     public static function isMobile($value)
     {
-        return (preg_match('/^0[67]([\s]?[0-9]{2}){4}$/', $value));
+        return (preg_match('/^(0|\+?33)[67]([\s]?[0-9]{2}){4}$/', $value));
     }
 
 

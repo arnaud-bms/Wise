@@ -88,6 +88,7 @@ abstract class Entity extends Component
      * Get value
      *
      * @param string $key
+     * @return mixed
      */
     public function __get($key)
     {
@@ -107,7 +108,7 @@ abstract class Entity extends Component
      */
     public function __set($key, $value)
     {
-        if (array_key_exists($key, $this->_field) && $value !== $this->_field[$key]) {
+        if (!array_key_exists($key, $this->_field) || $value !== $this->_field[$key]) {
             $this->_fieldChanged[$key] = $value;
         }
     }
@@ -130,7 +131,7 @@ abstract class Entity extends Component
      * @param boolean $setPrimaryKey Set primary_key after insert
      * @return boolean
      */
-    public function save($setPrimaryKey = false)
+    public function save($setPrimaryKey = false, $criteria = array())
     {
         if ($this->_isNew) {
             $rowAffected = $this->_sqlBuilder->insert($this->_field);
@@ -138,10 +139,11 @@ abstract class Entity extends Component
                 $this->_field[$this->_primaryKey] = $this->_sqlBuilder->getLastIdInsert();
             }
         } else {
-            $criteria = array();
-            $primaryKey = (array)$this->_primaryKey;
-            foreach ($primaryKey as $key) {
-                $criteria[$key] = $this->_field[$key];
+            if (empty($criteria)) {
+                $primaryKey = (array)$this->_primaryKey;
+                foreach ($primaryKey as $key) {
+                    $criteria[$key] = $this->_field[$key];
+                }
             }
 
             $rowAffected = $this->_sqlBuilder->update($this->_fieldChanged, $criteria);

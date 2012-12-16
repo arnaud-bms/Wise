@@ -4,7 +4,7 @@ namespace Telelab\Format;
 use \Telelab\Component\Component;
 
 /**
- * Format data from array to csv, json, xml, serialize ...
+ * Format: data from array to csv, json, xml, serialize ...
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -22,6 +22,8 @@ class Format extends Component
      *
      * @param string $format
      * @param array $data
+     * @throws FormatException If format does'nt exists
+     * @return string
      */
     public function formatData($format, $data)
     {

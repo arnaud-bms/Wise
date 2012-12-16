@@ -31,8 +31,9 @@ class Memcache extends Driver
     );
 
     /**
+     * Init memcached driver
      *
-     * @param type $config
+     * @param array $config
      */
     protected function _init($config)
     {
@@ -41,10 +42,12 @@ class Memcache extends Driver
         $this->_ttl = $config['ttl'];
     }
 
+
     /**
      * Retrieve valid cache
      *
      * @param type $uniqId
+     * @return string Content, if the request's cache exists
      */
     public function getCache($uniqId)
     {
@@ -55,8 +58,8 @@ class Memcache extends Driver
     /**
      * Set cache
      *
-     * @param type $uniqId
-     * @param type $content
+     * @param string $uniqId
+     * @param string $content
      */
     public function setCache($uniqId, $content)
     {

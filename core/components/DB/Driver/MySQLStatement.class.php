@@ -41,8 +41,8 @@ class MySQLStatement extends Statement
     /**
      * Return all rows
      *
-     * @todo
      * @param string $type
+     * @return array List result
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {

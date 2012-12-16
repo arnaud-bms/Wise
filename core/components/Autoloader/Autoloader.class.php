@@ -1,6 +1,8 @@
 <?php
 namespace Telelab\Autoloader;
 
+use Telelab\Autoloader\AutoloaderException;
+
 /**
  * Autoloader: Include class file
  *
@@ -16,6 +18,7 @@ class Autoloader
     /**
      * Register autoload
      *
+     * @throws AutoloaderException If file class does'nt exists
      * @return type
      */
     public static function loadClass($class)
@@ -24,7 +27,12 @@ class Autoloader
         foreach (self::$_alias as $prefix => $path) {
             if ($alias === $prefix) {
                 $class = substr($class, strlen($prefix)+1);
-                require $path.'/'.strtr($class, '\\', '/').'.class.php';
+                $file  = $path.'/'.strtr($class, '\\', '/').'.class.php';
+                if (file_exists($file)) {
+                    require $file;
+                } else {
+                    throw new AutoloaderException("File '$file' does'nt exists");
+                }
                 break;
             }
         }

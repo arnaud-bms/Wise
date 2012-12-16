@@ -5,7 +5,7 @@ use Telelab\Component\ComponentStatic;
 use Telelab\Conf\ConfException;
 
 /**
- * Configuration Class from files
+ * Conf: Configuration Class from files
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
@@ -46,6 +46,7 @@ class Conf extends ComponentStatic
      * Retrieve conf from file
      *
      * @param string $fileConf
+     * @throws ConfException If is invalid configuration file
      * @return array
      */
     private static function _getConfFromFile($fileConf)
@@ -92,7 +93,7 @@ class Conf extends ComponentStatic
      * Retrieve config
      *
      * @param string $section
-     * @param mixed  $newConfig
+     * @param mixed $newConfig
      */
     public static function setConfig($section, $newConfig)
     {

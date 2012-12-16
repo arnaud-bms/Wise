@@ -4,11 +4,11 @@ namespace Telelab\Component;
 use \Telelab\Exception\Exception;
 
 /**
- * Description of ComponentException
+ * ComponentException
  *
  * @author gdievart <g.dievart@telemaque.fr>
  */
 class ComponentException extends Exception
 {
-    
+
 }

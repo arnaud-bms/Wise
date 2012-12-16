@@ -30,6 +30,7 @@ class CodeGen extends ComponentStatic
      *
      * @param int $length
      * @param string $chars
+     * @return string Code generated
      */
     public static function generate($length, $chars = 'a-zA-Z0-9')
     {
@@ -43,6 +44,12 @@ class CodeGen extends ComponentStatic
     }
 
 
+    /**
+     * Extract list chars used for generated code
+     *
+     * @param string $chars
+     * @return array List chars used
+     */
     private static function _getCharsToUsed($chars)
     {
         $charsUsedToGenerate = array();

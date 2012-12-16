@@ -17,7 +17,7 @@ class MySQLiStatement extends Statement
     protected $_mySQLiStatement = null;
 
     /**
-     * Init PDO
+     * Init MySQLiStatement
      *
      * @param handle $resource
      */
@@ -41,8 +41,8 @@ class MySQLiStatement extends Statement
     /**
      * Return all rows
      *
-     * @todo
      * @param string $type
+     * @return array List result
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
