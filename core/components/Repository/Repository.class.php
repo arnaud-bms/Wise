@@ -244,6 +244,19 @@ abstract class Repository extends Component
 
 
     /**
+    * Update rows table
+    *
+    * @param array $rows
+    * @param array $where
+    * @param bool  $ignore
+    */
+    public function update($rows, $where = array(), $ignore = false)
+    {
+        return $this->_sqlBuilder->update($rows, $where, $ignore);
+    }
+
+
+    /**
      * Create find dynamic request
      *
      * @param string $method
