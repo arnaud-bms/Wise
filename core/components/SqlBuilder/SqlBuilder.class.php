@@ -90,7 +90,7 @@ class SqlBuilder extends Component
 
         $query  = "INSERT %s INTO %s (%s) VALUES%s";
         $ignore = $ignore ? 'IGNORE' : '';
-        $fields = array_keys($rows[0]);
+        $fields = array_keys(current($rows));
 
         $queryValues = '';
         foreach ($rows as $row) {
