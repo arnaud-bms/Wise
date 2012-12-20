@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Telelab\SqlBuilder\SqlBuilder</title>
+
+	<script type="text/javascript" src="resources/combined.js?4073514947"></script>
+	<script type="text/javascript" src="elementlist.js?52018286"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-ACL.html">ACL</a>
+						</li>
+				<li><a href="namespace-Example.html">Example<span></span></a>
+						<ul>
+				<li><a href="namespace-Example.Controllers.html">Controllers</a>
+						</li>
+				<li><a href="namespace-Example.Models.html">Models</a>
+						</li>
+				<li><a href="namespace-Example.Plugins.html">Plugins</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li><a href="namespace-Plugin.html">Plugin</a>
+						</li>
+				<li class="active"><a href="namespace-Telelab.html">Telelab<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Autoloader.html">Autoloader<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Autoloader.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Autoloader.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.Cache.html">Cache<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Cache.Driver.html">Driver</a>
+						</li>
+				<li><a href="namespace-Telelab.Cache.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Cache.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.CodeGen.html">CodeGen</a>
+						</li>
+				<li><a href="namespace-Telelab.Component.html">Component</a>
+						</li>
+				<li><a href="namespace-Telelab.Conf.html">Conf</a>
+						</li>
+				<li><a href="namespace-Telelab.Controller.html">Controller</a>
+						</li>
+				<li><a href="namespace-Telelab.Curl.html">Curl</a>
+						</li>
+				<li><a href="namespace-Telelab.DB.html">DB<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.DB.Driver.html">Driver</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Telelab.Entity.html">Entity</a>
+						</li>
+				<li><a href="namespace-Telelab.ErrorHandler.html">ErrorHandler</a>
+						</li>
+				<li><a href="namespace-Telelab.Exception.html">Exception</a>
+						</li>
+				<li><a href="namespace-Telelab.ExceptionHandler.html">ExceptionHandler</a>
+						</li>
+				<li><a href="namespace-Telelab.File.html">File</a>
+						</li>
+				<li><a href="namespace-Telelab.Filter.html">Filter</a>
+						</li>
+				<li><a href="namespace-Telelab.Form.html">Form</a>
+						</li>
+				<li><a href="namespace-Telelab.Format.html">Format<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Format.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Format.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.FrontController.html">FrontController<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.FrontController.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.FrontController.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.Generate.html">Generate</a>
+						</li>
+				<li><a href="namespace-Telelab.Globals.html">Globals</a>
+						</li>
+				<li><a href="namespace-Telelab.Logger.html">Logger<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Logger.Driver.html">Driver</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Telelab.Mailer.html">Mailer</a>
+						</li>
+				<li><a href="namespace-Telelab.Paginator.html">Paginator</a>
+						</li>
+				<li><a href="namespace-Telelab.Plugin.html">Plugin</a>
+						</li>
+				<li><a href="namespace-Telelab.Redis.html">Redis</a>
+						</li>
+				<li><a href="namespace-Telelab.Repository.html">Repository</a>
+						</li>
+				<li><a href="namespace-Telelab.Router.html">Router</a>
+						</li>
+				<li><a href="namespace-Telelab.Session.html">Session</a>
+						</li>
+				<li class="active"><a href="namespace-Telelab.SqlBuilder.html">SqlBuilder</a>
+						</li>
+				<li><a href="namespace-Telelab.Str.html">Str<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Str.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Str.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.View.html">View<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.View.Driver.html">Driver</a>
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Telelab.SqlBuilder.SqlBuilder.html">SqlBuilder</a></li>
+			</ul>
+
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Telelab.SqlBuilder.SqlBuilderException.html">SqlBuilderException</a></li>
+			</ul>
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Telelab.SqlBuilder.html" title="Summary of Telelab\SqlBuilder"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class SqlBuilder</h1>
+
+
+	<div class="description">
+	
+<p>Build sql request</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Telelab.Component.AbstractComponent.html"><span>Telelab\Component\AbstractComponent</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-Telelab.Component.Component.html"><span>Telelab\Component\Component</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Telelab\SqlBuilder\SqlBuilder</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Telelab.html">Telelab</a>\<a href="namespace-Telelab.SqlBuilder.html">SqlBuilder</a><br />
+		
+
+				<b>Author:</b>
+				gdievart &lt;<a
+href="mailto:g.dievart&#64;telemaque.fr">g.dievart&#64;<!---->telemaque.fr</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#8-281" title="Go to source code">core/components/SqlBuilder/SqlBuilder.class.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="_init" id="__init">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__init">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#26-35" title="Go to source code">_init</a>( <span>type <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Init repository</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Init repository</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>type</code><br>$config</dd>
+				</dl></div>
+
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Telelab.Component.Component.html#__init">Telelab\Component\Component::_init()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#38-48" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Call method on DB</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Call method on DB</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br>$method</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>array</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insert" id="_insert">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insert">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#51-76" title="Go to source code">insert</a>( <span>array <var>$rows</var></span>, <span>boolean <var>$ignore</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Insert row into table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Insert row into table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rows</var></dt>
+					<dd><code>array</code><br>$rows</dd>
+					<dt><var>$ignore</var></dt>
+					<dd><code>boolean</code><br>$ignore</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insertMultiple" id="_insertMultiple">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insertMultiple">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#79-112" title="Go to source code">insertMultiple</a>( <span>array <var>$rows</var></span>, <span>boolean <var>$ignore</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Insert rows into table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Insert rows into table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rows</var></dt>
+					<dd><code>array</code><br>$rows</dd>
+					<dt><var>$ignore</var></dt>
+					<dd><code>boolean</code><br>$ignore</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#115-137" title="Go to source code">update</a>( <span>array <var>$rows</var></span>, <span>array <var>$where</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$ignore</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Update rows table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Update rows table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rows</var></dt>
+					<dd><code>array</code><br>$rows</dd>
+					<dt><var>$where</var></dt>
+					<dd><code>array</code><br>$where</dd>
+					<dt><var>$ignore</var></dt>
+					<dd><code>boolean</code><br>$ignore</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#140-159" title="Go to source code">delete</a>( <span>array <var>$where</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Delete from table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Delete from table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$where</var></dt>
+					<dd><code>array</code><br>$where</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="select" id="_select">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_select">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#162-210" title="Go to source code">select</a>( <span>array <var>$select</var></span>, <span>array <var>$where</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$order</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$limit</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$offset</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Simple select on table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Simple select on table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$select</var></dt>
+					<dd><code>array</code><br>$select</dd>
+					<dt><var>$where</var></dt>
+					<dd><code>array</code><br>$where</dd>
+					<dt><var>$order</var></dt>
+					<dd><code>array</code><br>$order</dd>
+					<dt><var>$limit</var></dt>
+					<dd></dd>
+					<dt><var>$offset</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_queryAssign" id="__queryAssign">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__queryAssign">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#213-240" title="Go to source code">_queryAssign</a>( <span>array <var>$values</var></span>, <span>string <var>$separator</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Construct field = value $sep</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Construct field = value $sep</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$values</var></dt>
+					<dd><code>array</code><br>$value</dd>
+					<dt><var>$separator</var></dt>
+					<dd><code>string</code><br>$separator</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="escapeValues" id="_escapeValues">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_escapeValues">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#243-256" title="Go to source code">escapeValues</a>( <span>array <var>$valueList</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Escape list values</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Escape list values</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$valueList</var></dt>
+					<dd><code>array</code><br>$valueList</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="escape" id="_escape">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_escape">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#259-271" title="Go to source code">escape</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Escape value if is string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Escape value if is string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="closeConnection" id="_closeConnection">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_closeConnection">#</a>
+		<code><a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#274-280" title="Go to source code">closeConnection</a>( )</code>
+
+		<div class="description short">
+			
+<p>Reset connection with database</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reset connection with database</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Telelab.Component.Component.html#methods">Telelab\Component\Component</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Telelab.Component.Component.html#___construct">__construct()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Telelab.Component.AbstractComponent.html#methods">Telelab\Component\AbstractComponent</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Telelab.Component.AbstractComponent.html#__checkRequiredFields">_checkRequiredFields()</a>, 
+			<a href="class-Telelab.Component.AbstractComponent.html#__getComponentConfig">_getComponentConfig()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="_db" id="$_db">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Telelab.DB.DB.html">Telelab\DB\DB</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#15-18" title="Go to source code"><var>$_db</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_db" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_table" id="$_table">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Telelab.SqlBuilder.SqlBuilder.html#20-23" title="Go to source code"><var>$_table</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_table" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>table name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>table name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

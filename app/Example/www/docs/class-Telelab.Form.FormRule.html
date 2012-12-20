@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Telelab\Form\FormRule</title>
+
+	<script type="text/javascript" src="resources/combined.js?4073514947"></script>
+	<script type="text/javascript" src="elementlist.js?52018286"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-ACL.html">ACL</a>
+						</li>
+				<li><a href="namespace-Example.html">Example<span></span></a>
+						<ul>
+				<li><a href="namespace-Example.Controllers.html">Controllers</a>
+						</li>
+				<li><a href="namespace-Example.Models.html">Models</a>
+						</li>
+				<li><a href="namespace-Example.Plugins.html">Plugins</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li><a href="namespace-Plugin.html">Plugin</a>
+						</li>
+				<li class="active"><a href="namespace-Telelab.html">Telelab<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Autoloader.html">Autoloader<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Autoloader.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Autoloader.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.Cache.html">Cache<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Cache.Driver.html">Driver</a>
+						</li>
+				<li><a href="namespace-Telelab.Cache.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Cache.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.CodeGen.html">CodeGen</a>
+						</li>
+				<li><a href="namespace-Telelab.Component.html">Component</a>
+						</li>
+				<li><a href="namespace-Telelab.Conf.html">Conf</a>
+						</li>
+				<li><a href="namespace-Telelab.Controller.html">Controller</a>
+						</li>
+				<li><a href="namespace-Telelab.Curl.html">Curl</a>
+						</li>
+				<li><a href="namespace-Telelab.DB.html">DB<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.DB.Driver.html">Driver</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Telelab.Entity.html">Entity</a>
+						</li>
+				<li><a href="namespace-Telelab.ErrorHandler.html">ErrorHandler</a>
+						</li>
+				<li><a href="namespace-Telelab.Exception.html">Exception</a>
+						</li>
+				<li><a href="namespace-Telelab.ExceptionHandler.html">ExceptionHandler</a>
+						</li>
+				<li><a href="namespace-Telelab.File.html">File</a>
+						</li>
+				<li><a href="namespace-Telelab.Filter.html">Filter</a>
+						</li>
+				<li class="active"><a href="namespace-Telelab.Form.html">Form</a>
+						</li>
+				<li><a href="namespace-Telelab.Format.html">Format<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Format.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Format.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.FrontController.html">FrontController<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.FrontController.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.FrontController.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.Generate.html">Generate</a>
+						</li>
+				<li><a href="namespace-Telelab.Globals.html">Globals</a>
+						</li>
+				<li><a href="namespace-Telelab.Logger.html">Logger<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Logger.Driver.html">Driver</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Telelab.Mailer.html">Mailer</a>
+						</li>
+				<li><a href="namespace-Telelab.Paginator.html">Paginator</a>
+						</li>
+				<li><a href="namespace-Telelab.Plugin.html">Plugin</a>
+						</li>
+				<li><a href="namespace-Telelab.Redis.html">Redis</a>
+						</li>
+				<li><a href="namespace-Telelab.Repository.html">Repository</a>
+						</li>
+				<li><a href="namespace-Telelab.Router.html">Router</a>
+						</li>
+				<li><a href="namespace-Telelab.Session.html">Session</a>
+						</li>
+				<li><a href="namespace-Telelab.SqlBuilder.html">SqlBuilder</a>
+						</li>
+				<li><a href="namespace-Telelab.Str.html">Str<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Str.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.Str.tests.units.html">units</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-Telelab.View.html">View<span></span></a>
+						<ul>
+				<li><a href="namespace-Telelab.View.Driver.html">Driver</a>
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Telelab.Form.Form.html">Form</a></li>
+				<li class="active"><a href="class-Telelab.Form.FormRule.html">FormRule</a></li>
+			</ul>
+
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Telelab.Form.FormException.html">FormException</a></li>
+				<li><a href="class-Telelab.Form.FormRuleException.html">FormRuleException</a></li>
+			</ul>
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Telelab.Form.html" title="Summary of Telelab\Form"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class FormRule</h1>
+
+
+	<div class="description">
+	
+<p>Form: Apply rule to form element</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Telelab.html">Telelab</a>\<a href="namespace-Telelab.Form.html">Form</a><br />
+		
+
+				<b>Author:</b>
+				Codefalse &lt;<a
+href="mailto:codefalse&#64;altern.org">codefalse&#64;<!---->altern.org</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Telelab.Form.FormRule.html#7-215" title="Go to source code">core/components/Form/FormRule.class.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#35-70" title="Go to source code">__construct</a>( <span>String <var>$element</var></span>, <span>Array <var>$from</var> = <span class="php-keyword1">null</span></span>, <span>String <var>$delimiter</var> = <span class="php-quote">'.'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Prepare an element for the specifics rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepare an element for the specifics rules</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>String</code><br>or Array $element : if it's an array, separated by $delimiter</dd>
+					<dt><var>$from</var></dt>
+					<dd><code>Array</code><br>$from : Array where the Element is</dd>
+					<dt><var>$delimiter</var></dt>
+					<dd><code>String</code><br>$delimiter (default : '.') : Delimiter for array Elements</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#73-106" title="Go to source code">__call</a>( <span>String <var>$name</var></span>, <span>Array <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Magic function to call functions from Filter class if it's exists !</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Magic function to call functions from Filter class if it's exists !</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>String</code><br>$name : Name of the function</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>Array</code><br>$args : Array of parameters</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#109-117" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Magic function of php to return the first value when the object is
+written</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Magic function of php to return the first value when the object is
+written</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValue" id="_getValue">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getValue">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#120-148" title="Go to source code">getValue</a>( <span>String <var>$keyValue</var> = <span class="php-keyword1">null</span></span>, <span>Boolean <var>$byValue</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Return the values if first parameter is set, or, a an array containing all
+values if it's an array, or a string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the values if first parameter is set, or, a an array containing all
+values if it's an array, or a string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keyValue</var></dt>
+					<dd><code>String</code><br>or Int $keyValue : The Value or Key in the Element</dd>
+					<dt><var>$byValue</var></dt>
+					<dd><code>Boolean</code><br>$byValue : Search by Value (true) or by key (default, false)</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValid" id="_isValid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValid">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#151-159" title="Go to source code">isValid</a>( )</code>
+
+		<div class="description short">
+			
+<p>Indicate if the element has no errors from the rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Indicate if the element has no errors from the rules</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getError" id="_getError">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getError">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#162-179" title="Go to source code">getError</a>( <span>integer <var>$errno</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Return the error given by $errno or the first</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the error given by $errno or the first</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$errno</var></dt>
+					<dd><code>integer</code><br>$errno : The number of the error</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br>: The error or null<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllErrors" id="_getAllErrors">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAllErrors">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#182-190" title="Go to source code">getAllErrors</a>( )</code>
+
+		<div class="description short">
+			
+<p>Return an array containing all the Errors</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return an array containing all the Errors</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="callFunction" id="_callFunction">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_callFunction">#</a>
+		<code><a href="source-class-Telelab.Form.FormRule.html#193-214" title="Go to source code">callFunction</a>( <span>Mixed <var>$method</var></span>, <span>Mixed <var>$index</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Transform value to the return of the called function</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Transform value to the return of the called function</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd><code>Mixed</code><br>$method : The called function in (String) or Array ("class", "function");</dd>
+					<dt><var>$index</var></dt>
+					<dd><code>Mixed</code><br>$index : Index in the array of values (default 0) Could be Int or String</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="_elementValue" id="$_elementValue">
+		<td class="attributes"><code>
+			protected  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Telelab.Form.FormRule.html#15-18" title="Go to source code"><var>$_elementValue</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_elementValue" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The value of the Element analysed</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The value of the Element analysed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_countErrors" id="$_countErrors">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Telelab.Form.FormRule.html#20-23" title="Go to source code"><var>$_countErrors</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#$_countErrors" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The number of errors occured</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The number of errors occured</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_errors" id="$_errors">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Telelab.Form.FormRule.html#25-28" title="Go to source code"><var>$_errors</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$_errors" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Contains all the Errors</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Contains all the Errors</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_rules" id="$_rules">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Telelab.Form.FormRule.html#30-33" title="Go to source code"><var>$_rules</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$_rules" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Contains all the rules</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Contains all the rules</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
