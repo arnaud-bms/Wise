@@ -6,7 +6,8 @@ use Telelab\Globals\Globals;
 use Telelab\Plugin\Plugin;
 
 /**
- * Plugin generate, use to generate files
+ * Plugin generate
+ * This plugins is used for generated content's request
  *
  * @author gdievart
  */
@@ -23,7 +24,7 @@ class Generate extends Plugin
 
 
     /**
-     * Method call on postcall
+     * Write result of the request in file
      */
     public function postcall()
     {

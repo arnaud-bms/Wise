@@ -7,6 +7,7 @@ use Telelab\Str\Str;
 
 /**
  * Plugin Cache, use Telelab\Cache
+ * This plugins must be call before and after the action of the controller
  *
  * @author gdievart
  */
@@ -26,7 +27,7 @@ class Cache extends Plugin
     }
 
     /**
-     * Method call on precall
+     * Write content's request if exists to stdout
      */
     public function precall()
     {
@@ -40,7 +41,7 @@ class Cache extends Plugin
 
 
     /**
-     * Method call on postcall
+     * Write the content's request to the cache system
      */
     public function postcall()
     {

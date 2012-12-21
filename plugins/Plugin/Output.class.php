@@ -5,7 +5,7 @@ use Telelab\FrontController\FrontController;
 use Telelab\Plugin\Plugin;
 
 /**
- * Plugin output, use to write on stdout
+ * Plugin output, the plugin is used to write on stdout
  *
  * @author gdievart
  */
@@ -17,7 +17,7 @@ class Output extends Plugin
      */
     public function precall()
     {
-        
+
     }
 
 

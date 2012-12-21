@@ -7,7 +7,8 @@ use Telelab\FrontController\FrontController;
 use Telelab\Globals\Globals;
 
 /**
- * Plugin Cache, use Telelab\Cache
+ * Plugin Firewall: This method is called for check if the user is authorized
+ * to show current page
  *
  * @author gdievart
  */
@@ -23,7 +24,7 @@ class Firewall extends Plugin
     }
 
     /**
-     * Method call on precall
+     * Check if the current user is connected and if the current route is protected
      */
     public function precall()
     {
@@ -69,7 +70,7 @@ class Firewall extends Plugin
 
 
     /**
-     * Method call on precall
+     * Nothing !
      */
     public function postcall()
     {

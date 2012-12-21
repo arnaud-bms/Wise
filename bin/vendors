@@ -28,3 +28,10 @@ create_dir atoum
 cd atoum
 wget http://downloads.atoum.org/nightly/mageekguy.atoum.phar
 cd -
+
+# Install ApiGen
+create_dir apigen
+cd apigen
+git init
+git pull https://github.com/apigen/apigen.git
+cd -
