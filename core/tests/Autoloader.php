@@ -13,12 +13,15 @@ use mageekguy\atoum;
 class Autoloader extends atoum\test
 {
 
+    /**
+     * 2 Tests on the method LoadClass
+     */
     public function testLoadClass()
     {
-        $this->assert->when(function(){
-                                new \Telelab\Unknow();
-                            })
-                     ->error()
-                     ->exists();
+        $this->assert->exception(function(){ new \Telelab\Unknow(); })
+                     ->isInstanceOf('\Telelab\Autoloader\AutoloaderException');
+
+        $this->assert->object(new \Telelab\CodeGen\CodeGen())
+                     ->isInstanceOf('\Telelab\CodeGen\CodeGen');
     }
 }
