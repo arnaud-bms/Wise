@@ -70,7 +70,16 @@ class Form extends Component
         if (empty($this->_errors) && !empty($this->_callback)) {
             foreach ($this->_callback as $callback) {
                 if (is_callable($callback['method'])) {
-                    if (!call_user_func($callback['method'], $this->_rules)) {
+                    if (is_array($callback['method'])) {
+                        $object = $callback['method'][0];
+                        $method = $callback['method'][1];
+                        $return = $object->$method($this->_rules, $callback['error']);
+                    } else {
+                        $function = $callback['method'];
+                        $return = $function($this->_rules, $callback['error']);
+                    }
+
+                    if (!$return) {
                         $this->_errors['form'] = $callback['error'];
                         break;
                     }
