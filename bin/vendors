@@ -8,6 +8,7 @@ VENDOR_PATH=$TELELAB_PATH"vendor";
 
 # Need subversion
 install_package subversion
+install_package git
 
 create_dir $VENDOR_PATH;
 cd $VENDOR_PATH;
@@ -20,3 +21,10 @@ svn checkout http://smarty-php.googlecode.com/svn/trunk/distribution smarty
 # Install PHPMAiler
 show_action "INSTALL OR UPDATE PHPMailer";
 svn checkout http://svn.codespot.com/a/apache-extras.org/phpmailer/trunk/ phpmailer
+
+# Install Atoum
+show_action "INSTALL OR UPDATE Atoum";
+create_dir atoum
+cd atoum
+wget http://downloads.atoum.org/nightly/mageekguy.atoum.phar
+cd -

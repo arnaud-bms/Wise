@@ -1,7 +1,9 @@
 <?php
 /**
- * Default configuration for UnitTests 
+ * Default configuration for UnitTests
  */
+
+require_once __DIR__.'/../../vendor/atoum/mageekguy.atoum.phar';
 
 use Telelab\Autoloader\Autoloader;
 use Telelab\Conf\Conf;
@@ -15,5 +17,5 @@ Autoloader::setAlias(array(
     'Plugin'      => ROOT_DIR.'plugins/Plugin'
 ));
 
-Conf::loadConfig(ROOT_DIR.'etc/telelab.ini');
-Conf::mergeConfig(ROOT_DIR.'etc/routing.ini');
+Conf::loadConfig(ROOT_DIR.'app/etc/app.ini');
+Conf::mergeConfig(ROOT_DIR.'app/etc/routing.ini');
