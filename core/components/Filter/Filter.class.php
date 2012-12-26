@@ -172,12 +172,14 @@ class Filter extends Component
      * @param Mixed $callback : Function to call
      * @return boolean
      */
-    public static function callback($value, $callback)
+    public static function callback($value, $callback, &$error)
     {
         if (is_array($callback)) {
-            return call_user_func($callback, $value);
+            $object = $callback[0];
+            $method = $callback[1];
+            return $object->$method($value, $error);
         } else {
-            return $callback($value);
+            return $callback($value, $error);
         }
     }
 

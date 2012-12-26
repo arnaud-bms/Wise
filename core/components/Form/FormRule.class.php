@@ -96,7 +96,7 @@ class FormRule
         }
 
         while ($rule = array_shift($ruleName)) {
-            if (Filter::$rule($this->_elementValue, $params)) {
+            if (Filter::$rule($this->_elementValue, $params, $errorMsg)) {
                 break;
             } elseif (empty($ruleName)) {
                 $this->_countErrors++;
