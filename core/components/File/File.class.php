@@ -17,11 +17,15 @@ class File extends Component
      */
     private $_uploadedFilePath;
 
-
     /**
      * @var array Extension available for upload
      */
     private $_uploadedFileExt = array();
+
+    /**
+     * @var string Current ext uploaded
+     */
+    private $_currentExt;
 
 
     /**
@@ -96,6 +100,8 @@ class File extends Component
         if (empty($fileInfos['extension']) || !in_array($fileInfos['extension'], $this->_uploadedFileExt)) {
             throw new FileUploadedException("Extension not allowed", 6);
         }
+
+        $this->_currentExt = $fileInfos['extension'];
     }
 
 
@@ -108,7 +114,8 @@ class File extends Component
      */
     private function _moveUploadedFile($file)
     {
-        $filenameUploaded = $this->_uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid();
+        $filenameUploaded = $this->_uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid().'.'. $this->_currentExt;
+        echo $filenameUploaded."\n";
         if (!is_dir($this->_uploadedFilePath)) {
             mkdir($this->_uploadedFilePath, 0775, true);
         }
