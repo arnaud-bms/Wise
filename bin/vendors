@@ -6,9 +6,7 @@ source $CURRENT_DIR/functions
 TELELAB_PATH=$(dirname CURRENT_DIR)/;
 VENDOR_PATH=$TELELAB_PATH"vendor";
 
-# Need subversion
-install_package subversion
-install_package git
+# todo Check if the command git and subversion exists
 
 create_dir $VENDOR_PATH;
 cd $VENDOR_PATH;
