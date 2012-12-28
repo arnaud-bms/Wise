@@ -115,7 +115,6 @@ class File extends Component
     private function _moveUploadedFile($file)
     {
         $filenameUploaded = $this->_uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid().'.'. $this->_currentExt;
-        echo $filenameUploaded."\n";
         if (!is_dir($this->_uploadedFilePath)) {
             mkdir($this->_uploadedFilePath, 0775, true);
         }
