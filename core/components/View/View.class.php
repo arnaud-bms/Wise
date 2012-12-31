@@ -35,6 +35,9 @@ class View extends Component
             case 'smarty':
                 $driver = 'Telelab\View\Driver\Smarty';
                 break;
+            case 'php':
+                $driver = 'Telelab\View\Driver\Php';
+                break;
             default:
                 throw new ViewException(
                     "Driver '{$config['driver']}' does'nt exists", 400
