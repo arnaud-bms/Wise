@@ -23,6 +23,11 @@ class File extends Component
     private $_uploadedFileExt = array();
 
     /**
+     * @var int|array Max size
+     */
+    private $_maxSize;
+
+    /**
      * @var string Current ext uploaded
      */
     private $_currentExt;
@@ -32,7 +37,8 @@ class File extends Component
      * @var array Required fields
      */
     protected $_requiredFields = array(
-        'uploaded_file'
+        'path',
+        'ext',
     );
 
     /**
@@ -42,8 +48,11 @@ class File extends Component
      */
     protected function _init($config)
     {
-        $this->_uploadedFilePath = $config['uploaded_file']['path'];
-        $this->_uploadedFileExt  = explode(',', $config['uploaded_file']['ext']);
+        $this->_uploadedFilePath = $config['path'];
+        $this->_uploadedFileExt  = explode(',', $config['ext']);
+        if (isset($config['max_size'])) {
+            $this->_maxSize = $config['max_size'];
+        }
     }
 
 
@@ -56,6 +65,7 @@ class File extends Component
     {
         $this->_checkFileUploaded($file);
         $this->_checkExtension($file);
+        $this->_checkMaxSize($file);
         return $this->_moveUploadedFile($file);
     }
 
@@ -102,6 +112,30 @@ class File extends Component
         }
 
         $this->_currentExt = $fileInfos['extension'];
+    }
+
+
+    /**
+     * Check if the size file
+     *
+     * @throws FileUploadedException If size is too large
+     * @param array $file
+     */
+    private function _checkMaxSize($file)
+    {
+        if ($this->_maxSize === null) {
+            return true;
+        }
+
+        if (is_array($this->_maxSize) && isset($this->_maxSize[$this->_currentExt])) {
+            $maxSize = $this->_maxSize[$this->_currentExt];
+        } else {
+            $maxSize = $this->_maxSize;
+        }
+
+        if ($file['size'] > $maxSize) {
+            throw new FileUploadedException("File size is too large", 8);
+        }
     }
 
 
