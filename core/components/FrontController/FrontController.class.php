@@ -74,9 +74,28 @@ class FrontController extends ComponentStatic
      */
     public static function run($route = null)
     {
-        $router = new Router();
-        self::_setRouteInfos($router->getRouteInfos($route));
+        self::_setRouteInfos(self::_getRouteInfos($route));
         self::_executeRoute();
+    }
+
+
+    /**
+     * Get routes informations from Router
+     *
+     * @param string $route
+     * @return array
+     */
+    private static function _getRouteInfos($route)
+    {
+        try {
+            $router = new Router();
+            $routeInfos = $router->getRouteInfos($route);
+        } catch (\Telelab\Router\RouterException $e) {
+            header("HTTP/1.1 404 Not found");
+            exit(0);
+        }
+
+        return $routeInfos;
     }
 
 
