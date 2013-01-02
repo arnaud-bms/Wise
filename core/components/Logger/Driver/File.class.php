@@ -47,7 +47,9 @@ class File extends Driver
     public function log($message, $level)
     {
         $this->_initHandle();
-        fwrite($this->_handle, $message);
+        if ($this->_handle) {
+            fwrite($this->_handle, $message);
+        }
     }
 
 
