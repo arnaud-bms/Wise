@@ -19,7 +19,7 @@ class PHPExcel extends ComponentStatic
      */
     protected static function _init($config)
     {
-        require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel/IOFactory.php';
+
     }
 
 
@@ -32,6 +32,20 @@ class PHPExcel extends ComponentStatic
      */
     public static function load($file)
     {
+        require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel/IOFactory.php';
         return \PHPExcel_IOFactory::load($file);
+    }
+
+
+    /**
+     * Return ref to PHPExcel
+     *
+     * @return \PHPExcel
+     */
+    public static function getPhpExcel()
+    {
+        require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel.php';
+        require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel/IOFactory.php';
+        return new \PHPExcel();
     }
 }
