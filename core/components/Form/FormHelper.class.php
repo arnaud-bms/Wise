@@ -1,7 +1,6 @@
 <?php
 namespace Telelab\Form;
 
-use Telelab\Component\Component;
 use Telelab\Globals\Globals;
 
 /**
@@ -72,11 +71,8 @@ class FormHelper
      *
      * @param array $options Array
      */
-    public static function isValidCaptcha($code = null, $error = null)
+    public static function isValidCaptcha($code = null)
     {
-        error_log('here');
-        //error_log(Globals::get('session')->captcha);
-        //error_log($code);
         if (Globals::get('session')->captcha) {
             if ($code == Globals::get('session')->captcha && $code != '') {
                 return true;
