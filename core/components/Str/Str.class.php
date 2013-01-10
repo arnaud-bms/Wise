@@ -96,7 +96,7 @@ class Str extends ComponentStatic
     public static function hash($string)
     {
         if (!empty($string)) {
-            $nbHash = ceil(substr($string, 0, 1)/10)*2;
+            $nbHash = ceil(substr($string, 0, 1)/10)*2+2;
             for ($i = 0; $i < $nbHash; $i++) {
                 $string = md5($string);
             }

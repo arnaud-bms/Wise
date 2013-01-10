@@ -13,6 +13,16 @@ class CodeGen extends ComponentStatic
 
     private static $_chars = array();
 
+    private static $_words = array(
+        "bleu","blanc","rouge","jaune","vert","violet","affichera",
+        "chaine","genre","retourne","fonction","commentaire","lapin","renard","image",
+        "mathematique","aleatoire","hasard","source","chat","souris","chapeau","langue",
+        "arbre","generer","livre","supposon","tout","vecteur","construction","violon",
+        "flute","fuite","zebre","zoro","xylophone","deux","trois","quatre","cinq","sept",
+        "huit","neuf","douze","treize"
+    );
+
+    private static $_pronounceability = 1;
 
     /**
      * Init CodeGen
@@ -60,5 +70,50 @@ class CodeGen extends ComponentStatic
         }
 
         return $charsUsedToGenerate;
+    }
+
+
+
+    /**
+     * Generate simple word
+     *
+     * @author mercier133 http://www.servicesgratis.net
+     */
+    public static function generateWord()
+    {
+        $m1 = self::$_words[rand(0,count(self::$_words)-1)];
+        $result = substr($m1,0,rand(2,strlen($m1)-1));
+
+        $countWords = count(self::$_words);
+        for ($i = 0; $i < rand(3,4); $i++) {
+
+            $pasOk=true;
+            $x =0;
+            while ($pasOk && $x<100){
+
+                $m = self::$_words[rand(0, $countWords-1)];
+                while ($m==$m1){
+                    $m = self::$_words[rand(0, $countWords-1)];
+                }
+
+                if (preg_match('#'.substr($result,-self::$_pronounceability).'#',$m)) {
+                    $pasOk = false;
+                    $m2 = explode(substr($result,-1), $m);
+                    $result .= substr($m2[1],0,rand(2,strlen($m2[1])-1));
+                }
+                $x++;
+            }
+
+            if($x==100){
+                return generatePass();
+            }
+
+        }
+
+        if(strlen($result) < 4) {
+            return generatePass();
+        }
+
+        return $result;
     }
 }
