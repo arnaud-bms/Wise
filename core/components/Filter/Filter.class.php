@@ -175,12 +175,11 @@ class Filter extends Component
     public static function callback($value, $callback, &$error)
     {
         if (is_array($callback)) {
-            $object = $callback[0];
-            $method = $callback[1];
-            return $object->$method($value, $error);
+            return call_user_func($callback, $value, $error);
         } else {
             return $callback($value, $error);
         }
+        
     }
 
 
