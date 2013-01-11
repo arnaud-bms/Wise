@@ -37,10 +37,8 @@ class FormHelper
         $element = array($elements[$elements_shuffle[$rand]].($elements[$elements_shuffle[$rand]] == "l'" ? '' : ' '), $elements_shuffle[$rand]);
 
         $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $params['message']).'</label>';
-        $captcha .= '<div id="'.$params['content_id'].'">';
 
-
-        $captcha .= '<input type="hidden" name="captcha" data-type="captcha" data-required="true" />';
+        $captcha .= '<input type="hidden" id="captcha" name="captcha" data-type="captcha" data-required="true" />';
 
 
         $elements_codes = array();
@@ -53,9 +51,6 @@ class FormHelper
 
             $captcha .= '<div class="captcha_item" style="background: url('.$elements_picture.') -'.($key * $size).'px top no-repeat; width: '.$size.'px; height: '.$size.'px; cursor: pointer;" data-value="'.$elements_codes[$i].'"></div>';
         }
-
-        $captcha .= '<div style="clear: both; float: none;"></div>';
-        $captcha .= '</div>';
 
         Globals::get('session')->captcha = $elements_codes[$rand];
 
