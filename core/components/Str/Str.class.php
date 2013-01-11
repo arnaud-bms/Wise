@@ -120,4 +120,49 @@ class Str extends ComponentStatic
 
         return (int)$number;
     }
+
+
+    /**
+     * Convert string to literalize string (on|off|yes|no|1|'')
+     *
+     * @param mixed $value
+     */
+    public static function literalize($value) {
+        // lowercase our value for comparison
+        $value  = trim($value);
+        $lvalue = strtolower($value);
+
+        if (in_array($lvalue, array('null', '~', ''))) {
+            $value = null;
+        }   else if (in_array($lvalue, array('true', 'on', '+', 'yes'))) {
+            $value = true;
+        }   else if (in_array($lvalue, array('false', 'off', '-', 'no')))   {
+            $value = false;
+        }   else if (ctype_digit($value))   {
+            $value = (int) $value;
+        }   else if (is_numeric($value)) {
+            $value = (float) $value;
+        }
+
+        return $value;
+    }
+
+    /**
+     * escape string with special chars
+     *
+     * @param string $string
+     */
+    public static function escapeOnce($string) {
+        return self::fixDoubleEscape(htmlspecialchars($string, ENT_COMPAT, 'UTF-8'));
+    }
+
+
+    /**
+     * fix string double escape
+     *
+     * @param string $string
+     */
+    public static function fixDoubleEscape($string) {
+        return preg_replace('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $string);
+    }
 }

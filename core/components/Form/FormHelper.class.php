@@ -2,6 +2,7 @@
 namespace Telelab\Form;
 
 use Telelab\Globals\Globals;
+use Telelab\View\ViewHelper;
 
 /**
  * FormHelper: Helper that generate form components (html) and handle it
@@ -17,26 +18,33 @@ class FormHelper
      */
     public static function generateCaptcha($options = array())
     {
-        $message = 'Par mesure de sécurité,<br />Merci de cliquer sur #DET#<strong class="selected">#OBJ#</strong> dans la liste : *';
+        $default = array(
+            'message' => 'Par mesure de sécurité,<br />Merci de cliquer sur #DET#<strong class="selected">#OBJ#</strong> dans la liste : *', 
+            'return' => false,
+            'style' => 'form/captcha.css',
+            'script' => 'form/jquery.captcha.js'
+        );
 
-        $default = array('message' => $message, 'content_id' => 'captcha', 'return' => false);
-        $params = array_merge($default, $options);
+        $options = array_merge($default, $options);
         $captcha = '';
 
-        $elements_picture = empty($params['picture']) ? '/img/icons/captcha/fruits.jpg' : $params['picture'];
+        ViewHelper::includeStyle($options['style']);
+        ViewHelper::includeScript($options['script']);
 
-        $elements         = empty($params['items']) ? array('cerise' => 'la', 'poire' => 'la', 'fraises' => 'les', 'pomme' => 'la', 'prunes' => 'les') : $params['items'];
+        $elements_picture = empty($options['picture']) ? '/img/icons/captcha/fruits.jpg' : $options['picture'];
+
+        $elements         = empty($options['items']) ? array('cerise' => 'la', 'poire' => 'la', 'fraises' => 'les', 'pomme' => 'la', 'prunes' => 'les') : $options['items'];
         $elements_values  = array_keys($elements);
         $elements_shuffle = $elements_values;
         shuffle($elements_shuffle);
 
-        $size = empty($params['size']) ? 57 : $params['size'];
+        $size = empty($options['size']) ? 57 : $options['size'];
 
         $rand = mt_rand(0, (sizeof($elements) - 1));
 
         $element = array($elements[$elements_shuffle[$rand]].($elements[$elements_shuffle[$rand]] == "l'" ? '' : ' '), $elements_shuffle[$rand]);
 
-        $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $params['message']).'</label>';
+        $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $options['message']).'</label>';
 
         $captcha .= '<input type="hidden" id="captcha" name="captcha" data-type="captcha" data-required="true" />';
 
@@ -54,7 +62,7 @@ class FormHelper
 
         Globals::get('session')->captcha = $elements_codes[$rand];
 
-        if ($params['return'] === true) {
+        if ($options['return'] === true) {
             return $captcha;
         } else {
             echo $captcha;
