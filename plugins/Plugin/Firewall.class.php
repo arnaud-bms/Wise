@@ -47,10 +47,10 @@ class Firewall extends Plugin
      *
      * @return boolean
      */
-    protected function _isProtectedRoute()
+    protected function _isProtectedRoute($config = 'firewall')
     {
         list($module, $route) = explode(':', FrontController::getRouteName());
-        $routes = Conf::getConfig('firewall.route');
+        $routes = Conf::getConfig($config.'.route');
         $isProtected = false;
 
         foreach ($routes as $routeProtected) {
