@@ -147,6 +147,9 @@ abstract class Entity extends Component
             }
 
             $rowAffected = $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
+            foreach ($this->_fieldChanged as $newField => $value) {
+                $this->_field[$newField] = $value;
+            }
         }
 
         return $rowAffected;
