@@ -152,11 +152,13 @@ class Router extends Component
             foreach ($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
 
-                $prefix     = substr($route, 0, strlen($routeApp['prefix']));
-                $hostname   = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+                $prefix        = substr($route, 0, strlen($routeApp['prefix']));
+                $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+                $matchHostname = $routeApp['host'] === $hostname || preg_match('/^'.$routeApp['host'].'$/', $hostname);
+
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
-                    && (empty($routeApp['host']) || $routeApp['host'] === $hostname)
+                    && (empty($routeApp['host']) || $matchHostname)
                     && $routeApp['prefix'] === $prefix
                 ) {
                     Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
