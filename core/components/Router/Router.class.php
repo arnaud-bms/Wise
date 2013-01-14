@@ -154,7 +154,7 @@ class Router extends Component
 
                 $prefix        = substr($route, 0, strlen($routeApp['prefix']));
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = $routeApp['host'] === $hostname || preg_match('/^'.$routeApp['host'].'$/', $hostname);
+                $matchHostname = !empty($routeApp['host']) && ($routeApp['host'] === $hostname || preg_match('/^'.$routeApp['host'].'$/', $hostname));
 
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
