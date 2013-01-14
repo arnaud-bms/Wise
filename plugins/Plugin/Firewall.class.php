@@ -28,15 +28,26 @@ class Firewall extends Plugin
      */
     public function precall()
     {
-        if ($this->_isProtectedRoute()) {
-            if (!Globals::get('is_connected')) {
-                if (Conf::getConfig('firewall.redirect_type') == 'bg') {
-                    FrontController::run(Conf::getConfig('firewall.redirect'));
-                    FrontController::interruptRequest();
-                } else {
-                    header('Location: '.Conf::getConfig('firewall.redirect'));
-                    exit(0);
-                }
+        if (!Globals::get('is_connected')) {
+            $this->_checkRoute();
+        }
+    }
+
+
+    /**
+     * Redirect if the route is protected
+     *
+     * @param string $config
+     */
+    protected function _checkRoute($config = 'firewall')
+    {
+        if ($this->_isProtectedRoute($config)) {
+            if (Conf::getConfig($config.'.redirect_type') == 'bg') {
+                FrontController::run(Conf::getConfig($config.'.redirect'));
+                FrontController::interruptRequest();
+            } else {
+                header('Location: '.Conf::getConfig($config.'.redirect'));
+                exit(0);
             }
         }
     }
@@ -47,10 +58,10 @@ class Firewall extends Plugin
      *
      * @return boolean
      */
-    protected function _isProtectedRoute()
+    private function _isProtectedRoute($config)
     {
         list($module, $route) = explode(':', FrontController::getRouteName());
-        $routes = Conf::getConfig('firewall.route');
+        $routes = Conf::getConfig($config.'.route');
         $isProtected = false;
 
         foreach ($routes as $routeProtected) {
