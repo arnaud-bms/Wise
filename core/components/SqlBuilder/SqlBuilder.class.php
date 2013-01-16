@@ -62,6 +62,10 @@ class SqlBuilder extends Component
         $fields = array_keys($rows);
         $values = $this->escapeValues($rows);
 
+        foreach ($fields as &$field) {
+            $field = '`'.$field.'`';
+        }
+
         $query = sprintf(
             $query,
             $ignore,
@@ -96,6 +100,10 @@ class SqlBuilder extends Component
         foreach ($rows as $row) {
             $values = $this->escapeValues($row);
             $queryValues.= '('.implode(',', $values).'), ';
+        }
+
+        foreach ($fields as &$field) {
+            $field = '`'.$field.'`';
         }
 
         $query = sprintf(
@@ -222,7 +230,7 @@ class SqlBuilder extends Component
         foreach ($values as $field => $value) {
             if (is_array($value)) {
                 $value = array_map(array($this, 'escape'), $value);
-                $query.= $field.' IN('.implode(',', $value).')'.' '.$separator.' ';
+                $query.= '`'.$field.'` IN('.implode(',', $value).')'.' '.$separator.' ';
             } else {
                 if (!empty($value) && $value[0] === '!') {
                     $value = substr($value, 1);
@@ -231,7 +239,7 @@ class SqlBuilder extends Component
                     $operator = '=';
                 }
 
-                $query.= $field.' '.$operator.' '
+                $query.= '`'.$field.'` '.$operator.' '
                        . $this->escape($value).' '.$separator.' ';
             }
         }
