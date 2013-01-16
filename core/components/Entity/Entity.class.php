@@ -152,7 +152,20 @@ abstract class Entity extends Component
             }
         }
 
+        $this->_fieldChanged = array();
+
         return $rowAffected;
+    }
+
+
+    /**
+     * Check if the entity has changed
+     *
+     * @return boolean
+     */
+    public function hasChanged()
+    {
+        return !empty($this->_fieldChanged);
     }
 
 
