@@ -27,7 +27,7 @@ class Router extends Component
     /**
      * @var string Name of route app loaded
      */
-    private $_routeAppLoaded = null;
+    protected static $_routeAppLoaded = null;
 
     /**
      * @var array Required fields to route app
@@ -55,8 +55,28 @@ class Router extends Component
     protected function _init($config)
     {
         $this->_sapiName       = php_sapi_name();
-        $this->_routeAppLoaded = null;
+        $this->setRouteAppLoaded(null);
         Logger::log('['.__CLASS__.'] call by sapi -> '.$this->_sapiName, Logger::LOG_DEBUG);
+    }
+
+
+    /**
+     * Get route app name
+     */
+    public static function getRouteAppLoaded()
+    {
+        return self::$_routeAppLoaded;
+    }
+
+
+    /**
+     * Set route app loaded
+     *
+     * @param string $routeName
+     */
+    public static function setRouteAppLoaded($routeName)
+    {
+        self::$_routeAppLoaded = $routeName;
     }
 
 
@@ -106,8 +126,8 @@ class Router extends Component
                 $routeInfos = $routeTest;
                 array_shift($argv);
                 $routeInfos['argv'] = $argv;
-                $routeInfos['name'] = $this->_routeAppLoaded.':'.$routeName;
-                Logger::log('['.__CLASS__.'] route loaded -> '.$this->_routeAppLoaded.':'.$routeName, Logger::LOG_DEBUG);
+                $routeInfos['name'] = $this->getRouteAppLoaded().':'.$routeName;
+                Logger::log('['.__CLASS__.'] route loaded -> '.$this->getRouteAppLoaded().':'.$routeName, Logger::LOG_DEBUG);
                 break;
             } else {
                 Logger::log('['.__CLASS__.'] route no matches -> '.$routeName, Logger::LOG_DEBUG);
@@ -154,7 +174,7 @@ class Router extends Component
 
                 $prefix        = substr($route, 0, strlen($routeApp['prefix']));
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = !empty($routeApp['host']) && ($routeApp['host'] === $hostname || preg_match('/^'.$routeApp['host'].'$/', $hostname));
+                $matchHostname = (!empty($routeApp['host']) && ($routeApp['host'] === $hostname) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname)));
 
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
@@ -164,7 +184,7 @@ class Router extends Component
                     Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
                     $this->_loadApp($routeApp);
                     $routing = Conf::getConfig('routing');
-                    $this->_routeAppLoaded = $routeName;
+                    $this->setRouteAppLoaded($routeName);
                     break;
                 } else {
                     Logger::log('['.__CLASS__.'] route no matches -> '.$routeName, Logger::LOG_DEBUG);

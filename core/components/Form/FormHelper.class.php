@@ -1,15 +1,18 @@
 <?php
 namespace Telelab\Form;
 
+use Telelab\Component\Component;
 use Telelab\Globals\Globals;
 use Telelab\View\ViewHelper;
+use Telelab\Html\Html;
+use Telelab\Type\ArrayType;
 
 /**
  * FormHelper: Helper that generate form components (html) and handle it
  *
  * @author fmanas <f.manas@telemaque.fr>
  */
-class FormHelper
+class FormHelper extends Component
 {
     /**
      * Generate html tag
@@ -17,59 +20,54 @@ class FormHelper
      * @param array $options
      * @return string html
      */   
-    public function createTag($options = array()) {
-        $default = array('type' => 'input', 'label' => '', 'attributes' => array('name' => 'ipt'), 'value' => '', 'p' => false, 'p_class' => false);
-        $options = array_merge($default, $options);
+    public static function createTag($options = array())
+    {
+        $default = array(
+            'type' => 'input',
+            'label' => null,
+            'value' => '', 
+            'parent' => array('input' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'inputs')), 'group' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'control-group'))),
+            'attributes' => array('name' => 'ipt')
+        );
 
-        $field = '';
-        if($p_class != false) {
-            $pclass = ' class="'.$p_class.'"';
-        } else {
-            $pclass="";
+        $options = ArrayType::mergeRecursive($default, $options);
+
+        $tag = '';
+
+        // Parent group tag
+        if ($options['parent']['group']['active'] == true) {
+            $tag .= '<'.$options['parent']['group']['tag'].Html::tagOptions($options['parent']['group']['attributes']).'>';
         }
 
-        if ($p == true) {
-            $field.='<p'.$pclass.'>';
+        $for = isset($options['attributes']['id']) ? $options['attributes']['id'] : $options['attributes']['name'];
+
+        if ($options['label'])  {
+            $tag .= '<label id="label_'.$for.'" for="'.$for.'">'.$options['label'].'</label>';
         }
 
-        $for = isset($options['attributes']["id"]) ? $options['attributes']['id'] : $options['attributes']['name'];
-
-        if ($options['label'] != '')  {
-            $field .= '<label id="label_'.$for.'" for="'.$for.'">'.$options['label'].'</label>';
+        // Parent input tag
+        if ($options['parent']['input']['active'] == true) {
+            $tag .= '<'.$options['parent']['input']['tag'].Html::tagOptions($options['parent']['input']['attributes']).'>';
         }
 
         switch ($options['type']) {
             case 'input':
-                $field .= '<input ';
-                foreach($options['attributes'] as $attr => $val){
-                    $field .= $attr.'="'.$val.'" ';
-                }
-
-                $field .= 'value="'.$value.'" />';
+                $tag .= '<input'.Html::tagOptions($options['attributes']).' value="'.$options['value'].'" />';
             break;
             case 'textarea':
-                /*
-                - cols :    nombre de caractères affichés par ligne
-                - rows :    détermine le nombre de lignes visibles dans la zone de texte
-                - wrap :    Ses valeurs possibles sont : hard / off / soft
-                                    détermine si les retours à la ligne se font automatiquement (hard / soft)
-                                    ou si une scrollbar horizontale apparait en cas de dépassement (off)
-                - disabled :    rend la zone de texte grisée et non modifiable
-                - readonly :    rend la zone de texte non modifiable mais ne change pas son apparence
-                */
-                $field .= '<textarea ';
-                foreach($options['attributes'] as $attr => $val) {
-                    $field .= $attr.'="'.$val.'" ';
-                }
-                $field.=">".$value."</textarea>";
+                $tag .= '<textarea '.Html::tagOptions($options['attributes']).'>'.$options['value'].'</textarea>';
             break;
         }
 
-        if ($p == true) {
-            $field.="</p>";
+        if ($options['parent']['input']['active'] == true) {
+            $tag .= '</'.$options['parent']['input']['tag'].'>';
         }
 
-        return $field;
+        if ($options['parent']['group']['active'] == true) {
+            $tag .= '</'.$options['parent']['group']['tag'].'>';
+        }
+ 
+        return $tag;
     }
 
 
@@ -79,27 +77,38 @@ class FormHelper
      * @param array $options
      * @return string html
      */   
-    public function createSelectTag($options) {
-        $default = array('label' => '', 'attributes' => array(), 'values' => array(), 'p' => true, 'p_class' => false, 'selectedindex' => 0, 'disabled' => array());
-        $options = array_merge($default,$options);
+    public static function createSelectTag($options)
+    {
+        $default = array(
+            'label' => null,
+            'attributes' => array(),
+            'values' => array(),
+            'selectedindex' => 0,
+            'disabled' => array(),
+            'parent' => array('input' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'inputs')), 'group' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'control-group')))
+        );
 
-        $select_field = '';
+        $options = ArrayType::mergeRecursive($default, $options);
 
-        if($p_class != false) {
-            $pclass = ' class="'.$p_class.'"';
-        } else {
-            $pclass = '';
+        $select_tag = '';
+
+        // Parent group tag
+        if ($options['parent']['group']['active'] == true) {
+            $select_tag .= '<'.$options['parent']['group']['tag'].Html::tagOptions($options['parent']['group']['attributes']).'>';
         }
 
-        if ($p == true) {
-            $select_field .= '<p'.$pclass.'>';
+        $for = isset($options['attributes']["id"]) ? $options['attributes']['id'] : $options['attributes']['name'];
+
+        if ($options['label'] != '')  {
+            $select_tag .= '<label id="label_'.$for.'" for="'.$for.'">'.$options['label'].'</label>';
         }
 
-        if ($options['label'] != '') {
-            $select_field .= '<label for="'.$options['attributes']['name'].'">'.$options['label'].'</label>';
+        // Parent input tag
+        if ($options['parent']['input']['active'] == true) {
+            $tag .= '<'.$options['parent']['input']['tag'].Html::tagOptions($options['parent']['input']['attributes']).'>';
         }
 
-        $select_field .= '<select'.Html::tagOptions($options['attributes']).'>';
+        $select_tag .= '<select'.Html::tagOptions($options['attributes']).'>';
 
         $tag_options = array();
         foreach($values as $value => $text) {
@@ -112,16 +121,20 @@ class FormHelper
                 $tag_options['disabled'] = 'disabled';
             }
 
-            $select_field .= '<option'.Html::tagOptions($tag_options).'>'.$text.'</option>';
+            $select_tag .= '<option'.Html::tagOptions($tag_options).'>'.$text.'</option>';
         }
 
-        $select_field .= '</select>';
+        $select_tag .= '</select>';
 
-        if ($p == true) {
-            $select_field .= '</p>';
+        if ($options['parent']['input']['active'] == true) {
+            $select_tag .= '</'.$options['parent']['input']['tag'].'>';
         }
 
-        return $select_field;
+        if ($options['parent']['group']['active'] == true) {
+            $select_tag .= '</'.$options['parent']['group']['tag'].'>';
+        }
+
+        return $select_tag;
     }
     
 

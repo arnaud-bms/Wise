@@ -47,7 +47,7 @@ class Server extends Component
 
 
     /**
-     * Init View
+     * retrieve parameter
      *
      * @param string $key
      */
@@ -58,5 +58,14 @@ class Server extends Component
         }
 
         return null;
+    }
+
+
+    /**
+     * retrieve parameters
+     */
+    public function getParameters()
+    {
+        return $this->_parameters;
     }
 }

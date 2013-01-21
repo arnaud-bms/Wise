@@ -108,4 +108,33 @@ class Conf extends ComponentStatic
         }
         $config = $newConfig;
     }
+
+
+    /**
+     * Browse array to rewrite config into multi depth array (recursive method)
+     *
+     * @param array $config
+     * @return array $newConfig
+     */
+    public static function rewriteConfig($config)
+    {
+        foreach ($config as $options => $value) {
+            $optionsDepth = explode('.', $options);
+
+            // 3 cases
+            // array contains . => 
+            if (count($optionsDepth) === 1) {
+                if (is_array($value)) {
+                    $configToMerge[$options] = self::rewriteConfig($value);
+                } else {
+                    $configToMerge[$options] = $value;
+                }
+            } else {
+                $firstDepth = array_shift($optionsDepth);
+                $configToMerge[$firstDepth] = self::rewriteConfig(array(implode('.', $optionsDepth) => $value));
+            }
+        }
+
+        return $configToMerge;
+    }
 }

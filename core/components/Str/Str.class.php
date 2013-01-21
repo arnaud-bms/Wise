@@ -127,20 +127,21 @@ class Str extends ComponentStatic
      *
      * @param mixed $value
      */
-    public static function literalize($value) {
+    public static function literalize($value)
+    {
         // lowercase our value for comparison
         $value  = trim($value);
         $lvalue = strtolower($value);
 
         if (in_array($lvalue, array('null', '~', ''))) {
             $value = null;
-        }   else if (in_array($lvalue, array('true', 'on', '+', 'yes'))) {
+        } else if (in_array($lvalue, array('true', 'on', '+', 'yes'))) {
             $value = true;
-        }   else if (in_array($lvalue, array('false', 'off', '-', 'no')))   {
+        } else if (in_array($lvalue, array('false', 'off', '-', 'no')))   {
             $value = false;
-        }   else if (ctype_digit($value))   {
+        } else if (ctype_digit($value))   {
             $value = (int) $value;
-        }   else if (is_numeric($value)) {
+        } else if (is_numeric($value)) {
             $value = (float) $value;
         }
 
@@ -151,6 +152,7 @@ class Str extends ComponentStatic
      * escape string with special chars
      *
      * @param string $string
+     * @return string
      */
     public static function escapeOnce($string) {
         return self::fixDoubleEscape(htmlspecialchars($string, ENT_COMPAT, 'UTF-8'));
@@ -161,8 +163,22 @@ class Str extends ComponentStatic
      * fix string double escape
      *
      * @param string $string
+     * @return string
      */
-    public static function fixDoubleEscape($string) {
+    public static function fixDoubleEscape($string)
+    {
         return preg_replace('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $string);
+    }
+
+
+    /**
+     * convert string to camelcase format (e.g. "this_method_name" -> "ThisMethodName")
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function camelcase($string)
+    {
+        return preg_replace('/(?:^|_)(.?)/e',"strtoupper('$1')", $string); 
     }
 }
