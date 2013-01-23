@@ -17,13 +17,13 @@ class Html extends Component
      * @param array $options
      */
     public static function tagOptions($options = array()) {
-      $options = self::_parseAttributes($options);
-        
-      $html = '';
-      foreach ($options as $key => $value) {
-        $html .= ' '.$key.'="'.Str::escapeOnce($value).'"';
-      } 
-      return $html;
+        $options = self::_parseAttributes($options);
+
+        $html = '';
+        foreach ($options as $key => $value) {
+          $html .= ' '.$key.'="'.Str::escapeOnce($value).'"';
+        }
+        return $html;
     }
 
     /**
@@ -32,7 +32,7 @@ class Html extends Component
      * @param string $options
      */
     protected static function _parseAttributes($string) {
-      return is_array($string) ? $string : self::stringToArray($string);
+        return is_array($string) ? $string : self::stringToArray($string);
     }
 
 
@@ -40,6 +40,7 @@ class Html extends Component
      * Convert string tag with attributes to an array
      *
      * @param string $string
+     * @return array
      */
     public static function stringToArray($string = '') {
         preg_match_all('/
@@ -51,7 +52,8 @@ class Html extends Component
             \s*(?:
                 (?=\w+\s*=) | \s*$  # followed by another key= or the end of the string
             )
-        /x', $string, $matches, PREG_SET_ORDER);
+            /x', $string, $matches, PREG_SET_ORDER
+        );
 
         $attributes = array();
         foreach ($matches as $val) {

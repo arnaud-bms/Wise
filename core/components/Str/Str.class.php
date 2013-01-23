@@ -135,13 +135,13 @@ class Str extends ComponentStatic
 
         if (in_array($lvalue, array('null', '~', ''))) {
             $value = null;
-        } else if (in_array($lvalue, array('true', 'on', '+', 'yes'))) {
+        } elseif (in_array($lvalue, array('true', 'on', '+', 'yes'))) {
             $value = true;
-        } else if (in_array($lvalue, array('false', 'off', '-', 'no')))   {
+        } elseif (in_array($lvalue, array('false', 'off', '-', 'no'))) {
             $value = false;
-        } else if (ctype_digit($value))   {
+        } elseif (ctype_digit($value)) {
             $value = (int) $value;
-        } else if (is_numeric($value)) {
+        } elseif (is_numeric($value)) {
             $value = (float) $value;
         }
 
@@ -179,6 +179,6 @@ class Str extends ComponentStatic
      */
     public static function camelcase($string)
     {
-        return preg_replace('/(?:^|_)(.?)/e',"strtoupper('$1')", $string); 
+        return preg_replace('/(?:^|_)(.?)/e', "strtoupper('$1')", $string);
     }
 }
