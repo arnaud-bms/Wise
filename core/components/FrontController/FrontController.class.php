@@ -92,6 +92,10 @@ class FrontController extends ComponentStatic
             $routeInfos = $router->getRouteInfos($route);
         } catch (\Telelab\Router\RouterException $e) {
             header("HTTP/1.1 404 Not found");
+            if ($error = Conf::getConfig('route_error.404')) {
+                self::run($error);
+            }
+            var_dump($error);
             exit(0);
         }
 
