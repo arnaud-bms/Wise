@@ -136,10 +136,12 @@ abstract class Entity extends Component
     public function save($setPrimaryKey = false, $criteria = array())
     {
         if ($this->_isNew) {
-            $rowAffected = $this->_sqlBuilder->insert($this->_field);
+            $rowAffected = $this->_sqlBuilder->insert($this->_fieldChanged);
             if ($rowAffected > 0 && $setPrimaryKey) {
-                $this->_field[$this->_primaryKey] = $this->_sqlBuilder->getLastIdInsert();
+                $this->_fieldChanged[$this->_primaryKey] = $this->_sqlBuilder->getLastIdInsert();
             }
+            $this->_isNew = false;
+            $this->_field = $this->_fieldChanged;
         } else {
             if (empty($criteria)) {
                 $primaryKey = (array)$this->_primaryKey;
