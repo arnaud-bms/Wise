@@ -111,13 +111,14 @@ class FormHelper extends Component
         $selectTag .= '<select'.Html::tagOptions($options['attributes']).'>';
 
         $tagOptions = array();
-        foreach ($values as $value => $text) {
+        foreach ($options['values'] as $value => $text) {
             $tagOptions['value'] = $value;
-            if ($val == $selectedindex) {
+            if ($value == $options['selectedindex']) {
                 $tagOptions['selected'] = 'selected';
             }
 
-            if (is_array($disabled) && in_array($val, $disabled)) {
+            $disabled = (array)$options['disabled'];
+            if (in_array($value, $disabled)) {
                 $tagOptions['disabled'] = 'disabled';
             }
 

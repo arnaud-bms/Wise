@@ -120,9 +120,6 @@ class Conf extends ComponentStatic
     {
         foreach ($config as $options => $value) {
             $optionsDepth = explode('.', $options);
-
-            // 3 cases
-            // array contains . => 
             if (count($optionsDepth) === 1) {
                 if (is_array($value)) {
                     $configToMerge[$options] = self::rewriteConfig($value);
