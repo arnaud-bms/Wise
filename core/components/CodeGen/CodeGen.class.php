@@ -81,36 +81,35 @@ class CodeGen extends ComponentStatic
      */
     public static function generateWord()
     {
-        $m1 = self::$_words[rand(0,count(self::$_words)-1)];
-        $result = substr($m1,0,rand(2,strlen($m1)-1));
+        $m1 = self::$_words[rand(0, count(self::$_words) - 1)];
+        $result = substr($m1, 0, rand(2, strlen($m1) - 1));
 
         $countWords = count(self::$_words);
-        for ($i = 0; $i < rand(3,4); $i++) {
+        for ($i = 0; $i < rand(3, 4); $i++) {
 
             $pasOk=true;
             $x =0;
-            while ($pasOk && $x<100){
+            while ($pasOk && $x<100) {
 
-                $m = self::$_words[rand(0, $countWords-1)];
-                while ($m==$m1){
-                    $m = self::$_words[rand(0, $countWords-1)];
+                $m = self::$_words[rand(0, $countWords - 1)];
+                while ($m == $m1){
+                    $m = self::$_words[rand(0, $countWords - 1)];
                 }
 
-                if (preg_match('#'.substr($result,-self::$_pronounceability).'#',$m)) {
+                if (preg_match('#'.substr($result, -self::$_pronounceability).'#', $m)) {
                     $pasOk = false;
-                    $m2 = explode(substr($result,-1), $m);
-                    $result .= substr($m2[1],0,rand(2,strlen($m2[1])-1));
+                    $m2 = explode(substr($result, -1), $m);
+                    $result .= substr($m2[1], 0, rand(2, strlen($m2[1]) - 1));
                 }
                 $x++;
             }
 
-            if($x==100){
+            if ($x==100) {
                 return generatePass();
             }
-
         }
 
-        if(strlen($result) < 4) {
+        if (strlen($result) < 4) {
             return generatePass();
         }
 

@@ -44,11 +44,15 @@ abstract class Entity extends Component
     /**
      * Init members of DAO
      *
-     * @param array $row
+     * @param array $row Null if is a new row
      */
-    protected function _init($row)
+    protected function _init($row = null)
     {
-        $this->_hydrate($row);
+        if ($row !== null && is_array($row)) {
+            $this->_isNew = false;
+            $this->_hydrate($row);
+        }
+
         $this->_initTableName();
         $this->_sqlBuilder = new SqlBuilder($this->_tableName);
 
@@ -62,10 +66,8 @@ abstract class Entity extends Component
      */
     private function _hydrate($row)
     {
-        if (is_array($row)) {
-            foreach ($row as $key => $value) {
-                $this->_field[$key] = $value;
-            }
+        foreach ($row as $key => $value) {
+            $this->_field[$key] = $value;
         }
     }
 

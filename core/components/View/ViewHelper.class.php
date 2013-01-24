@@ -22,8 +22,9 @@ class ViewHelper extends Component
             $options = array_merge($options, $style);
             $options['href'] = (preg_match('/^(\/|http)/', $options['href']) ? '' : '/css/').$options['href'];
             echo '<link'.Html::tagOptions($options).' />'."\n";
-        }   else
+        } else {
             echo '<link rel="stylesheet" type="text/css" href="'.(preg_match('/^(\/|http)/', $style) ? '' : '/css/').$style.'" media="all" />'."\n";
+        }
     }
 
     /**
@@ -37,7 +38,8 @@ class ViewHelper extends Component
             $options = array_merge($options, $script);
             $options['href'] = (preg_match('/^(\/|http)/', $options['src']) ? '' : '/js/').$options['src'];
             echo '<script'.Html::tagOptions($options).' />'."\n";
-        }   else
+        } else {
             echo '<script type="text/javascript" src="'.(preg_match('/^(\/|http)/', $script) ? '' : '/js/').$script.'"></script>'."\n";
+        }
     }
 }
