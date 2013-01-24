@@ -95,7 +95,6 @@ class FrontController extends ComponentStatic
             if ($error = Conf::getConfig('route_error.404')) {
                 self::run($error);
             }
-            var_dump($error);
             exit(0);
         }
 
@@ -113,9 +112,16 @@ class FrontController extends ComponentStatic
         self::$_routeId    = md5(serialize($routeInfos));
         self::$_routeName  = $routeInfos['name'];
         self::$_pattern    = $routeInfos['pattern'];
-        self::$_controller = $routeInfos['controller'];
-        self::$_method     = $routeInfos['method'];
         self::$_argv       = $routeInfos['argv'];
+
+        if (isset($routeInfos['controller'])) {
+            if (strpos($routeInfos['controller'], '::') !== false) {
+                list(self::$_controller, self::$_method) = explode('::', $routeInfos['controller']);
+            } else {
+                self::$_controller = $routeInfos['controller'];
+                self::$_method     = $routeInfos['method'];
+            }
+        }
 
         if (isset($routeInfos['precall'])) {
             self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $routeInfos['precall']);
@@ -182,7 +188,7 @@ class FrontController extends ComponentStatic
      */
     protected static function _executeAction()
     {
-        if (!self::$_interrupRequest) {
+        if (!self::$_interrupRequest && self::$_controller !== null) {
             Logger::log(
                 '['.__CLASS__.'] excute action -> '
                 .self::$_controller.'::'.self::$_method.'('.implode(',', self::$_argv).')',
@@ -194,6 +200,8 @@ class FrontController extends ComponentStatic
                 array($controller, self::$_method),
                 self::$_argv
             );
+        } else {
+            self::$_response = array();
         }
     }
 

@@ -41,9 +41,7 @@ class Router extends Component
      * @var array Required fields to route
      */
     private $_requiredFieldsRoute = array(
-        'pattern',
-        'controller',
-        'method'
+        'pattern'
     );
 
 
