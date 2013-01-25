@@ -179,6 +179,6 @@ class Str extends ComponentStatic
      */
     public static function camelcase($string)
     {
-        return preg_replace('/(?:^|_)(.?)/e', "strtoupper('$1')", $string);
+        return preg_replace('/(?:^|_)(.?)/e', "self::upper('$1')", self::lower($string));
     }
 }
