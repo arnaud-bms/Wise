@@ -358,7 +358,7 @@ class Filter extends Component
      */
     public static function isPhone($value)
     {
-        return (preg_match('/^(0|\+?33)[0-9]([\s\-]?[0-9]{2}){4}$/', $value));
+        return (preg_match('/^(0033|0|\+?33)[0-9]([\s\-]?[0-9]{2}){4}$/', $value));
     }
 
 
@@ -370,7 +370,7 @@ class Filter extends Component
      */
     public static function isMobile($value)
     {
-        return (preg_match('/^(0|\+?33)[67]([\s]?[0-9]{2}){4}$/', $value));
+        return (preg_match('/^(0033|0|\+?33)[67]([\s]?[0-9]{2}){4}$/', $value));
     }
 
 
