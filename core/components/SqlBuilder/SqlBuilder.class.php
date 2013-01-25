@@ -231,6 +231,8 @@ class SqlBuilder extends Component
             if (is_array($value)) {
                 $value = array_map(array($this, 'escape'), $value);
                 $query.= '`'.$field.'` IN('.implode(',', $value).')'.' '.$separator.' ';
+            } elseif($value === null) {
+                $query.= '`'.$field.'` = NULL '.$separator.' ';
             } else {
                 if (!empty($value) && $value[0] === '!') {
                     $value = substr($value, 1);
