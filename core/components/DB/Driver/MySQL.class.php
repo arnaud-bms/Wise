@@ -2,6 +2,7 @@
 namespace Telelab\DB\Driver;
 
 use Telelab\DB\Driver\MySQLStatement;
+use Telelab\Logger\Logger;
 
 /**
  * Connector to database
@@ -54,6 +55,7 @@ class MySQL implements Driver
      */
     public function query($query)
     {
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         if ($resource = mysql_query($query, $this->_link)) {
             return new MySQLStatement($resource);
         }
@@ -70,6 +72,7 @@ class MySQL implements Driver
      */
     public function exec($query)
     {
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         return mysql_query($query, $this->_link) ? mysql_affected_rows() : 0;
     }
 

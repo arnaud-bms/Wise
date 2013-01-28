@@ -3,6 +3,7 @@ namespace Telelab\DB\Driver;
 
 use Telelab\DB\DBException;
 use Telelab\DB\Driver\PDOStatement;
+use Telelab\Logger\Logger;
 
 /**
  * Connector to database
@@ -44,6 +45,7 @@ class PDO implements Driver
      */
     public function query($query)
     {
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         return new PDOStatement($this->_pdo->query($query));
     }
 
@@ -56,6 +58,7 @@ class PDO implements Driver
      */
     public function exec($query)
     {
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         return $this->_pdo->exec($query);
     }
 

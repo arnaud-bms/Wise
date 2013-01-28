@@ -37,39 +37,21 @@ class Logger extends ComponentStatic
     );
 
     /**
-     * @var driver Driver to load
+     * @var array Logger configuration
      */
-    protected static $_driverToLoad;
-
-    /**
-     * @var driver Driver loaded
-     */
-    protected static $_driverLoaded;
-
-    /**
-     * @var driver Driver load
-     */
-    protected static $_driverConfig;
-
-    /**
-     * @var driver Ref to driver
-     */
-    protected static $_driver;
-
-    /**
-     * @var boolean Enable log
-     */
-    protected static $_enable = false;
-
-    /**
-     * @var boolean Write message to stdout
-     */
-    protected static $_output = false;
-
-    /**
-     * @var boolean Write message if the level more than
-     */
-    protected static $_logLevel = self::LOG_INFO;
+    protected static $_loggerConf = array(
+        'logger' => array(
+            'to_load'    => null,
+            'loaded'    => null,
+            'config'    => null,
+            'driver'    => null,
+            'enable'    => false,
+            'output'    => false,
+            'prefix'    => null,
+            'prefix'    => null,
+            'log_level' => self::LOG_INFO,
+        )
+    );
 
     /**
      * Init logger
@@ -78,19 +60,20 @@ class Logger extends ComponentStatic
      */
     protected static function _init($config)
     {
-        self::$_enable = (boolean)$config['enable'];
+        $loggerName = isset($config['name']) ? $config['name'] : 'logger';
+        self::$_loggerConf[$loggerName]['enable'] = (boolean)$config['enable'];
 
         if (isset($config['output'])) {
-            self::$_output = (boolean)$config['output'];
+            self::$_loggerConf[$loggerName]['output'] = (boolean)$config['output'];
         }
 
         if (isset($config['log_level'])) {
-            self::$_logLevel = array_search($config['log_level'], self::$_listLevel);
+            self::$_loggerConf[$loggerName]['logLevel'] = array_search($config['log_level'], self::$_listLevel);
         }
 
-        self::$_driverLoaded = false;
-        self::$_driverToLoad = $config['driver'];
-        self::$_driverConfig = isset($config[$config['driver']])
+        self::$_loggerConf[$loggerName]['driverLoaded'] = false;
+        self::$_loggerConf[$loggerName]['driverToLoad'] = $config['driver'];
+        self::$_loggerConf[$loggerName]['driverConfig'] = isset($config[$config['driver']])
                 ? $config[$config['driver']]
                 : null;
     }
@@ -102,16 +85,16 @@ class Logger extends ComponentStatic
      * @param string $message
      * @param int $level
      */
-    public static function log($message, $level = self::LOG_INFO)
+    public static function log($message, $level = self::LOG_INFO, $loggerName = 'logger')
     {
-        if (self::$_enable && $level >= self::$_logLevel) {
-            self::_loadDriver();
+        if (self::$_loggerConf[$loggerName]['enable'] && $level >= self::$_loggerConf[$loggerName]['logLevel']) {
+            self::_loadDriver($loggerName);
 
             $message = date('Y-m-d H:i:s')
                      . ' ['.self::$_listLevel[$level].'] '.$message.PHP_EOL;
-            self::$_driver->log($message, $level);
+            self::$_loggerConf[$loggerName]['driver']->log($message, $level);
 
-            if (self::$_output) {
+            if (self::$_loggerConf[$loggerName]['output']) {
                 echo $message;
             }
         }
@@ -121,12 +104,12 @@ class Logger extends ComponentStatic
     /**
      * Load driver Logger
      */
-    protected static function _loadDriver()
+    protected static function _loadDriver($loggerName)
     {
-        if (self::$_driver === null || self::$_driverToLoad === false) {
-            $class = 'Telelab\Logger\Driver\\'.ucfirst(self::$_driverToLoad);
-            self::$_driver = new $class(self::$_driverConfig);
-            self::$_driverLoaded = true;
+        if (self::$_loggerConf[$loggerName]['driver'] === null || self::$_loggerConf[$loggerName]['driverToLoad'] === false) {
+            $class = 'Telelab\Logger\Driver\\'.ucfirst(self::$_loggerConf[$loggerName]['driverToLoad']);
+            self::$_loggerConf[$loggerName]['driver'] = new $class(self::$_loggerConf[$loggerName]['driverConfig']);
+            self::$_loggerConf[$loggerName]['driverLoaded'] = true;
         }
     }
 }

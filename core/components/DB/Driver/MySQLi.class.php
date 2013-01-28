@@ -2,6 +2,7 @@
 namespace Telelab\DB\Driver;
 
 use Telelab\DB\Driver\MySQLiStatement;
+use Telelab\Logger\Logger;
 
 /**
  * Connector to database
@@ -37,6 +38,7 @@ class MySQLi implements Driver
      */
     public function query($query)
     {
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         return new MySQLiStatement($this->_mysqli->query($query));
     }
 
@@ -49,6 +51,7 @@ class MySQLi implements Driver
      */
     public function exec($query)
     {
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         if ($this->_mysqli->query($query)) {
             return $this->_mysqli->affected_rows;
         }
