@@ -23,10 +23,10 @@ class FormHelper extends Component
     public static function createTag($options = array())
     {
         $default = array(
-            'type' => 'input',
-            'label' => null,
-            'value' => '',
-            'parent' => array('input' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'inputs')), 'group' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'control-group'))),
+            'type'       => 'input',
+            'label'      => null,
+            'value'      => '',
+            'parent'     => array('input' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'inputs')), 'group' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'control-group'))),
             'attributes' => array('name' => 'ipt')
         );
 
@@ -80,12 +80,12 @@ class FormHelper extends Component
     public static function createSelectTag($options)
     {
         $default = array(
-            'label' => null,
-            'attributes' => array(),
-            'values' => array(),
+            'label'         => null,
+            'attributes'    => array(),
+            'values'        => array(),
             'selectedindex' => 0,
-            'disabled' => array(),
-            'parent' => array('input' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'inputs')), 'group' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'control-group')))
+            'disabled'      => array(),
+            'parent'        => array('input' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'inputs')), 'group' => array('active' => false, 'tag' => 'div', 'attributes' => array('class' => 'control-group')))
         );
 
         $options = ArrayType::mergeRecursive($default, $options);
@@ -148,9 +148,9 @@ class FormHelper extends Component
     {
         $default = array(
             'message' => 'Par mesure de sécurité,<br />Merci de cliquer sur #DET#<strong class="selected">#OBJ#</strong> dans la liste : *',
-            'return' => false,
-            'style' => 'form/captcha.css',
-            'script' => 'form/jquery.captcha.js'
+            'return'  => false,
+            'style'   => 'form/captcha.css',
+            'script'  => 'form/jquery.captcha.js'
         );
 
         $options = array_merge($default, $options);

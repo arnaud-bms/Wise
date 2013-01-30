@@ -11,8 +11,14 @@ use Telelab\Component\ComponentStatic;
 class CodeGen extends ComponentStatic
 {
 
+    /**
+     * @var array list chars used for generate code
+     */
     private static $_chars = array();
 
+    /**
+     * @var array Words used for generate simple code
+     */
     private static $_words = array(
         "bleu","blanc","rouge","jaune","vert","violet","affichera",
         "chaine","genre","retourne","fonction","commentaire","lapin","renard","image",
@@ -22,6 +28,9 @@ class CodeGen extends ComponentStatic
         "huit","neuf","douze","treize"
     );
 
+    /**
+     * @var int  pronounceability
+     */
     private static $_pronounceability = 1;
 
     /**
@@ -73,11 +82,11 @@ class CodeGen extends ComponentStatic
     }
 
 
-
     /**
      * Generate simple word
      *
      * @author mercier133 http://www.servicesgratis.net
+     * @return string
      */
     public static function generateWord()
     {

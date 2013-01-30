@@ -146,7 +146,6 @@ class Translator extends Component
      * @param array  $parameters
      * @param string $domain
      * @param string $locale
-     *
      * @return string
      */
     public static function translate($id, array $parameters = array(), $catalogue = 'messages', $locale = null)

@@ -16,7 +16,8 @@ class Html extends Component
      *
      * @param array $options
      */
-    public static function tagOptions($options = array()) {
+    public static function tagOptions($options = array())
+    {
         $options = self::_parseAttributes($options);
 
         $html = '';
@@ -26,12 +27,15 @@ class Html extends Component
         return $html;
     }
 
+
     /**
      * Convert attributes to array attributes
      *
      * @param string $options
+     * @return mixed
      */
-    protected static function _parseAttributes($string) {
+    protected static function _parseAttributes($string)
+    {
         return is_array($string) ? $string : self::stringToArray($string);
     }
 
@@ -42,7 +46,8 @@ class Html extends Component
      * @param string $string
      * @return array
      */
-    public static function stringToArray($string = '') {
+    public static function stringToArray($string = '')
+    {
         preg_match_all('/
             \s*(\w+)              # key                               \\1
             \s*=\s*               # =
@@ -62,5 +67,4 @@ class Html extends Component
 
         return $attributes;
     }
-
 }
