@@ -32,7 +32,7 @@ class TranslatorHelper extends Component
     {
         $html = '<script type="text/javascript" src="/js/telelab/telelab.lang.js"></script>'
               . '<script type="text/javascript">'
-              . 'lang.load('.$lang.')'
+              . 'lang.load('.$lang.');'
               . '</script>';
 
         return $html;
