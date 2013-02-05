@@ -16,7 +16,8 @@ class ViewHelper extends Component
      *
      * @param string|array $style
      */
-    public static function includeStyle($style = null) {
+    public static function includeStyle($style = null)
+    {
         if (is_array($style)) {
             $options = array('rel' => 'stylesheet', 'type' => 'text/css', 'media' => 'all', 'title' => null, 'href' => null);
             $options = array_merge($options, $style);
@@ -32,7 +33,8 @@ class ViewHelper extends Component
      *
      * @param string|array $script
      */
-    public static function includeScript($script = null) {
+    public static function includeScript($script = null)
+    {
         if (is_array($script)) {
             $options = array('type' => 'text/javascript', 'title' => null, 'src' => null);
             $options = array_merge($options, $script);

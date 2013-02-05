@@ -148,13 +148,15 @@ class Str extends ComponentStatic
         return $value;
     }
 
+    
     /**
      * escape string with special chars
      *
      * @param string $string
      * @return string
      */
-    public static function escapeOnce($string) {
+    public static function escapeOnce($string)
+    {
         return self::fixDoubleEscape(htmlspecialchars($string, ENT_COMPAT, 'UTF-8'));
     }
 

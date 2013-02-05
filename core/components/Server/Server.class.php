@@ -39,7 +39,7 @@ class Server extends Component
      */
     protected function _init($config)
     {
-        $this->_requestMethod = $request_method = $_SERVER['REQUEST_METHOD'];
+        $this->_requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $this->_parameters = $_REQUEST;
     }

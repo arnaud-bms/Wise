@@ -101,7 +101,7 @@ class CodeGen extends ComponentStatic
             while ($pasOk && $x<100) {
 
                 $m = self::$_words[rand(0, $countWords - 1)];
-                while ($m == $m1){
+                while ($m == $m1) {
                     $m = self::$_words[rand(0, $countWords - 1)];
                 }
 
