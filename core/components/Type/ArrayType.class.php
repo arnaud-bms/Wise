@@ -8,7 +8,6 @@ use Telelab\Component\Component;
  *
  * @author fmanas <f.manas@telemaque.fr>
  */
-
 class ArrayType extends Component
 {
 
@@ -18,14 +17,16 @@ class ArrayType extends Component
      * @param array $firstArray
      * @param array $secondArray
      * @return array
-     */  
+     */
     public static function mergeRecursive($firstArray, $secondArray)
     {
-        if (!is_array($firstArray) or !is_array($secondArray)) { return $secondArray; }
-        foreach ($secondArray AS $sKey2 => $sValue2)
-        {
+        if (!is_array($firstArray) || !is_array($secondArray)) {
+            return $secondArray;
+        }
+
+        foreach ($secondArray as $sKey2 => $sValue2) {
             $firstArray[$sKey2] = self::mergeRecursive(@$firstArray[$sKey2], $sValue2);
         }
         return $firstArray;
-    } 
+    }
 }
