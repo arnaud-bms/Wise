@@ -108,7 +108,7 @@ class Logger extends ComponentStatic
             }
 
             if (!empty(self::$_loggerConf[$loggerName]['callback'][$level])) {
-                call_user_func(self::$_loggerConf[$loggerName]['callback'][$level], (array)$message);
+                call_user_func(self::$_loggerConf[$loggerName]['callback'][$level], $message);
             }
         }
     }
