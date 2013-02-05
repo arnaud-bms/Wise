@@ -71,6 +71,15 @@ class Logger extends ComponentStatic
             self::$_loggerConf[$loggerName]['logLevel'] = array_search($config['log_level'], self::$_listLevel);
         }
 
+        if (isset($config['callback'])) {
+            foreach ($config['callback'] as $level => $callback) {
+                if ($key = array_search($level, self::$_listLevel)) {
+                    self::$_loggerConf[$loggerName]['callback'][$key] = $callback;
+                }
+            }
+        }
+
+
         self::$_loggerConf[$loggerName]['driverLoaded'] = false;
         self::$_loggerConf[$loggerName]['driverToLoad'] = $config['driver'];
         self::$_loggerConf[$loggerName]['driverConfig'] = isset($config[$config['driver']])
@@ -97,6 +106,10 @@ class Logger extends ComponentStatic
             if (self::$_loggerConf[$loggerName]['output']) {
                 echo $message;
             }
+
+            if (!empty(self::$_loggerConf[$loggerName]['callback'][$level])) {
+                call_user_func(self::$_loggerConf[$loggerName]['callback'][$level], (array)$message);
+            }
         }
     }
 
@@ -106,7 +119,7 @@ class Logger extends ComponentStatic
      */
     protected static function _loadDriver($loggerName)
     {
-        if (self::$_loggerConf[$loggerName]['driver'] === null || self::$_loggerConf[$loggerName]['driverToLoad'] === false) {
+        if (empty(self::$_loggerConf[$loggerName]['driver']) || self::$_loggerConf[$loggerName]['driverToLoad'] === false) {
             $class = 'Telelab\Logger\Driver\\'.ucfirst(self::$_loggerConf[$loggerName]['driverToLoad']);
             self::$_loggerConf[$loggerName]['driver'] = new $class(self::$_loggerConf[$loggerName]['driverConfig']);
             self::$_loggerConf[$loggerName]['driverLoaded'] = true;
