@@ -115,7 +115,7 @@ class Str extends ComponentStatic
     {
         $number = preg_replace('/([^0-9]+)/', '', $number);
         if (substr($number, 0, 1) == '0' && substr($number, 0, 2) !== '00') {
-            $number = '33'.(int)$number;
+            $number = '33'.substr($number, 1);
         }
 
         return (int)$number;
@@ -148,7 +148,7 @@ class Str extends ComponentStatic
         return $value;
     }
 
-    
+
     /**
      * escape string with special chars
      *
