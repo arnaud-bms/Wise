@@ -61,8 +61,9 @@ class Memcache extends Driver
      * @param string $uniqId
      * @param string $content
      */
-    public function setCache($uniqId, $content)
+    public function setCache($uniqId, $content, $ttl = null)
     {
-        $this->_memcache->add($uniqId, $content, false, $this->_ttl);
+        $ttl = $ttl === null ? $this->_ttl : $ttl;
+        $this->_memcache->set($uniqId, $content, false, $ttl);
     }
 }

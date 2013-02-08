@@ -65,7 +65,7 @@ class File extends Driver
      * @param type $uniqId
      * @param type $content
      */
-    public function setCache($uniqId, $content)
+    public function setCache($uniqId, $content, $ttl = null)
     {
         $file = $this->_path.'/'.$uniqId.'.cache';
         if (!is_dir(dirname($file))) {

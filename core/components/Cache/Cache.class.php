@@ -77,11 +77,12 @@ class Cache extends Component
      *
      * @param string $uniqId
      * @param string $content
+     * @param int $ttl
      */
-    public function setCache($uniqId, $content)
+    public function setCache($uniqId, $content, $ttl = null)
     {
         if ($this->_enable) {
-            $this->_driver->setCache($uniqId, $content);
+            $this->_driver->setCache($uniqId, $content, $ttl);
         }
     }
 }

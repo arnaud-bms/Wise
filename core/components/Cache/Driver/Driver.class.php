@@ -12,5 +12,5 @@ abstract class Driver extends Component
 {
     abstract public function getCache($uniqId);
 
-    abstract public function setCache($uniqId, $content);
+    abstract public function setCache($uniqId, $content, $ttl = null);
 }
