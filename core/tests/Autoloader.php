@@ -1,7 +1,7 @@
 <?php
 namespace Telelab\Autoloader\tests\units;
 
-require_once __DIR__.'/config.php';
+require_once __DIR__.'/bootstrap.php';
 
 use mageekguy\atoum;
 
