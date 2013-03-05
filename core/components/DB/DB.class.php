@@ -63,6 +63,10 @@ class DB extends Component
             $config['user'],
             $config['password']
         );
+
+        if (isset($config['charset']) && $config['charset'] !== null) {
+            self::$_driver->query('SET NAMES "'.$config['charset'].'"');
+        }
     }
 
 
