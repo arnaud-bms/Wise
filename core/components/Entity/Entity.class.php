@@ -96,8 +96,9 @@ abstract class Entity extends Component
     {
         if (array_key_exists($key, $this->_field)) {
             return $this->_field[$key];
+        } elseif (array_key_exists($key, $this->_fieldChanged)) {
+            return $this->_fieldChanged[$key];
         }
-
         return null;
     }
 
