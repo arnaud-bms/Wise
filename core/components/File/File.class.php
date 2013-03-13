@@ -107,7 +107,7 @@ class File extends Component
     {
         $fileInfos = pathinfo($file['name']);
 
-        if (empty($fileInfos['extension']) || !in_array($fileInfos['extension'], $this->_uploadedFileExt)) {
+        if (empty($fileInfos['extension']) || !in_array(strtolower($fileInfos['extension']), $this->_uploadedFileExt)) {
             throw new FileUploadedException("Extension not allowed", 6);
         }
 
