@@ -41,6 +41,19 @@ class File extends Component
         'ext',
     );
 
+
+    /**
+     * @var array mime types
+     */
+    private $_mimeTypes = array(
+        '3gp'   => 'audio/mpeg',
+        'gif'   => 'image/gif',
+        'jpeg'  => 'image/jpeg',
+        'jpg'   => 'image/jpeg',
+        'png'   => 'image/png',
+        'mp3'   => 'audio/mpeg',
+    );
+
     /**
      * Init File component
      *
@@ -108,6 +121,11 @@ class File extends Component
         $fileInfos = pathinfo($file['name']);
 
         if (empty($fileInfos['extension']) || !in_array(strtolower($fileInfos['extension']), $this->_uploadedFileExt)) {
+            throw new FileUploadedException("Extension not allowed", 6);
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        if (isset($this->_mimeTypes[$fileInfos['extension']]) && $this->_mimeTypes[$fileInfos['extension']] !== finfo_file($finfo, $file['tmp_name'])) {
             throw new FileUploadedException("Extension not allowed", 6);
         }
 
