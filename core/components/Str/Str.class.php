@@ -71,6 +71,18 @@ class Str extends ComponentStatic
 
 
     /**
+     * Check if the string is utf8
+     *
+     * @param string $string
+     * @return bool
+     */
+    public static function isUtf8($string)
+    {
+        return substr($string, 0, 3) == chr(0xEF) . chr(0xBB) . chr(0xBF);
+    }
+
+
+    /**
      * Accent
      *
      * @param string $string
