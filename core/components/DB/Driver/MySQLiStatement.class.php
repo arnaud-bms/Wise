@@ -34,7 +34,7 @@ class MySQLiStatement extends Statement
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
-        return $this->_mySQLiStatement->fetch($this->_getTypeStatement($type));
+        return $this->_getTypeStatement($type);
     }
 
 

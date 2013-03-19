@@ -35,7 +35,7 @@ class PDOStatement extends Statement
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
-        return $this->_pdoStatement->fetch($this->_getTypeStatement($type));
+        return $this->_getTypeStatement($type);
     }
 
 
@@ -47,7 +47,12 @@ class PDOStatement extends Statement
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
-        return $this->_pdoStatement->fetchAll($this->_getTypeStatement($type));
+        $rows = array();
+        while ($row = $this->fetch($type)) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
 
