@@ -39,7 +39,13 @@ class MySQLi implements Driver
     public function query($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        return new MySQLiStatement($this->_mysqli->query($query));
+        if ($resource = $this->_mysqli->query($query)) {
+            return new MySQLiStatement($resource);
+        }
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
+
+        return false;
     }
 
 
@@ -55,6 +61,8 @@ class MySQLi implements Driver
         if ($this->_mysqli->query($query)) {
             return $this->_mysqli->affected_rows;
         }
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
 
         return 0;
     }
