@@ -46,10 +46,12 @@ class File extends Driver
      */
     public function log($message, $level)
     {
-        $this->_initHandle();
+        file_put_contents($this->_file, $message, FILE_APPEND);
+        // Temporary comment because the logrotate lose handle
+        /*$this->_initHandle();
         if ($this->_handle) {
             fwrite($this->_handle, $message);
-        }
+        }*/
     }
 
 
