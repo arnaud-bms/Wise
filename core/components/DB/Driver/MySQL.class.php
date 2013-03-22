@@ -59,6 +59,8 @@ class MySQL implements Driver
         if ($resource = mysql_query($query, $this->_link)) {
             return new MySQLStatement($resource);
         }
+        
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
 
         return false;
     }
@@ -73,7 +75,14 @@ class MySQL implements Driver
     public function exec($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        return mysql_query($query, $this->_link) ? mysql_affected_rows() : 0;
+
+        if (mysql_query($query, $this->_link)) {
+            return mysql_affected_rows();
+        }
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
+  
+        return 0;
     }
 
 

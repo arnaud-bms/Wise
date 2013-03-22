@@ -46,7 +46,13 @@ class PDO implements Driver
     public function query($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        return new PDOStatement($this->_pdo->query($query));
+        if ($resource = $this->_pdo->query($query)) {
+            return new PDOStatement($resource);
+        }
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
+
+        return false;
     }
 
 
@@ -59,7 +65,13 @@ class PDO implements Driver
     public function exec($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        return $this->_pdo->exec($query);
+        if ($resource = $this->_pdo->exec($query)) {
+            return $resource;
+        }
+
+        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
+
+        return false;
     }
 
 
