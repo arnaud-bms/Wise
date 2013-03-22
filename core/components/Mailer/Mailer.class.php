@@ -41,7 +41,7 @@ class Mailer extends ComponentStatic
      */
     public static function _init($config)
     {
-        require ROOT_DIR.'/vendor/phpmailer/class.phpmailer.php';
+        require_once ROOT_DIR.'/vendor/phpmailer/class.phpmailer.php';
         self::$_phpMailer       = new \PHPMailer();
         self::$_hostDefault     = $config['host_default'];
         self::$_hostAttachments = $config['host_attachments'];
