@@ -172,7 +172,7 @@ class Router extends Component
 
                 $matchPrefix   = preg_match('/^'.$routeApp['prefix'].'/', $route);
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
+                $matchHostname = $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname)) || (empty($routeApp['host_pattern']) && empty($routeApp['host']));
 
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
