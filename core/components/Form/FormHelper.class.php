@@ -172,10 +172,10 @@ class FormHelper extends Component
 
         $element = array($elements[$elementsShuffle[$rand]].($elements[$elementsShuffle[$rand]] == "l'" ? '' : ' '), $elementsShuffle[$rand]);
 
-        $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $options['message']).'</label>';
-
         $captcha .= '<input type="hidden" id="captcha" name="captcha" data-type="captcha" data-required="true" />';
 
+
+        $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $options['message']).'<div class="clearfix"></div><div class="captcha_items">';
 
         $elementsCodes = array();
         for ($i = 0 ; $i < sizeof($elementsShuffle); $i++) {
@@ -186,6 +186,8 @@ class FormHelper extends Component
 
             $captcha .= '<div class="captcha_item" style="background: url('.$elementsPicture.') -'.($key * $size).'px top no-repeat; width: '.$size.'px; height: '.$size.'px; cursor: pointer;" data-value="'.$elementsCodes[$i].'"></div>';
         }
+
+        $captcha .= '<div class="clearfix"></div></div></label>';
 
         Globals::get('session')->captcha = $elementsCodes[$rand];
 
