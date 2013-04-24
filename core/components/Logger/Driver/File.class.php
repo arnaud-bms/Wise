@@ -46,6 +46,10 @@ class File extends Driver
      */
     public function log($message, $level)
     {
+        if (!is_dir(dirname($this->_file))) {
+            mkdir(dirname($this->_file), 0755, true);
+        }
+
         file_put_contents($this->_file, $message, FILE_APPEND);
         // Temporary comment because the logrotate lose handle
         /*$this->_initHandle();
