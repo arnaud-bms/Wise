@@ -162,6 +162,10 @@ class FrontController extends ComponentStatic
         Logger::log('['.__CLASS__.'] excute '.$method.' plugins', Logger::LOG_DEBUG);
         if (!self::$_interrupRequest) {
             foreach (self::$_plugins[$method] as $plugin) {
+                if (empty($plugin)) {
+                    continue;
+                }
+                
                 if (!isset(self::$_pluginsLoaded[$plugin])) {
                     self::$_pluginsLoaded[$plugin] = new $plugin();
                 }
