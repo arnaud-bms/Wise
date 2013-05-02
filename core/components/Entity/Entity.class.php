@@ -3,6 +3,8 @@ namespace Telelab\Entity;
 
 use Telelab\Component\Component;
 use Telelab\SqlBuilder\SqlBuilder;
+use Telelab\Str\Str;
+use Telelab\Criteria\Criteria;
 
 /**
  * Entity
@@ -14,32 +16,33 @@ abstract class Entity extends Component
     /**
      * @var string Table name of the entity
      */
-    private $_tableName;
+    protected $_tableName;
 
     /**
      * @var SqlBuilder
      */
-    private $_sqlBuilder;
+    protected $_sqlBuilder;
 
     /**
      * @var array $field
      */
-    private $_field = array();
+    protected $_field = array();
 
     /**
      * @var array $fieldChanged
      */
-    private $_fieldChanged = array();
+    protected $_fieldChanged = array();
 
     /**
      * @var boolean Check if is new
      */
-    private $_isNew = true;
+    protected $_isNew = true;
 
     /**
      * @var mixed string or array for multiple keys
      */
     protected $_primaryKey = 'id';
+
 
     /**
      * Init members of DAO
@@ -48,14 +51,13 @@ abstract class Entity extends Component
      */
     protected function _init($row = null)
     {
+        $this->_initTableName();
         if ($row !== null && is_array($row)) {
             $this->_isNew = false;
             $this->_hydrate($row);
         }
 
-        $this->_initTableName();
         $this->_sqlBuilder = new SqlBuilder($this->_tableName);
-
     }
 
 
@@ -64,7 +66,7 @@ abstract class Entity extends Component
      *
      * @param array $row
      */
-    private function _hydrate($row)
+    protected function _hydrate($row)
     {
         foreach ($row as $key => $value) {
             $this->_field[$key] = $value;
@@ -99,6 +101,7 @@ abstract class Entity extends Component
         } elseif (array_key_exists($key, $this->_fieldChanged)) {
             return $this->_fieldChanged[$key];
         }
+
         return null;
     }
 
@@ -111,8 +114,33 @@ abstract class Entity extends Component
      */
     public function __set($key, $value)
     {
-        if (!array_key_exists($key, $this->_field) || $value !== $this->_field[$key]) {
-            $this->_fieldChanged[$key] = $value;
+        if (!array_key_exists($key, $this->_field) || ((string)$value !== $this->_field[$key]) && $value !== $this->_field[$key]) {
+            $this->_fieldChanged[$key] = is_object($value) ? (string)$value : $value;
+        }
+    }
+
+
+    /**
+     * Handle getter and setter method calls
+     *
+     * @param string $method
+     * @param array $argv
+     */
+    public function __call($method, $argv)
+    {
+        $prefix = substr($method, 0, 3);
+        $key = Str::camelcaseToUnderscores(substr($method, 3));
+
+        if ($prefix === 'get') {
+            if (array_key_exists($key, $this->_field)) {
+                return $this->_field[$key];
+            } else {
+                return null;
+            }
+        } elseif ($prefix === 'set') {
+            $this->_fieldChanged[$key] = $argv[0];
+        } else {
+            throw new \Exception("Undefined method '$method'");
         }
     }
 
@@ -139,13 +167,13 @@ abstract class Entity extends Component
         if ($this->_isNew) {
             $rowAffected = $this->_sqlBuilder->insert($this->_fieldChanged);
             if ($rowAffected > 0 && $setPrimaryKey) {
-                $this->_fieldChanged[$this->_primaryKey] = $this->_sqlBuilder->getLastIdInsert();
+                $this->_fieldChanged[$this->getPrimaryKey()] = $this->_sqlBuilder->getLastIdInsert();
             }
             $this->_isNew = false;
             $this->_field = $this->_fieldChanged;
         } else {
             if (empty($criteria)) {
-                $primaryKey = (array)$this->_primaryKey;
+                $primaryKey = (array)$this->getPrimaryKey();
                 foreach ($primaryKey as $key) {
                     $criteria[$key] = $this->_field[$key];
                 }
@@ -160,6 +188,23 @@ abstract class Entity extends Component
         $this->_fieldChanged = array();
 
         return $rowAffected;
+    }
+
+
+    /**
+     * Delete entity
+     *
+     * @return int Number of rows affected
+     */
+    public function delete()
+    {
+        $criteria = new Criteria();
+        $primaryKey = (array)$this->getPrimaryKey();
+        foreach ($primaryKey as $key) {
+            $criteria->add($key, $this->_field[$key], Criteria::EQUAL);
+        }
+
+        return $this->_sqlBuilder->delete($criteria);
     }
 
 
@@ -182,5 +227,27 @@ abstract class Entity extends Component
     public function setIsNew($isNew)
     {
         $this->_isNew = (boolean)$isNew;
+    }
+
+
+    /**
+     * Get repository class name
+     *
+     * @return string
+     */
+    public function getRepositoryClass()
+    {
+        return str_replace('Entity', 'Repository', get_called_class());
+    }
+
+
+    /**
+     * Get table primary key
+     *
+     * @return string
+     */
+    public function getPrimaryKey()
+    {
+        return $this->_primaryKey;
     }
 }

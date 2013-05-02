@@ -204,4 +204,31 @@ class Str extends ComponentStatic
     {
         return preg_replace('/(?:^|_)(.?)/e', "self::upper('$1')", self::lower($string));
     }
+
+
+    /**
+     * Convert camel case string to underscore format
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function camelcaseToUnderscores($string)
+    {
+        return self::lower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $string));
+    }
+
+
+    /**
+     * Add slashes to string if doesn't exists
+     *
+     * @param string $string
+     */
+    public static function checkAddslashes($string)
+    {
+        if (strpos(str_replace("\'", "", " $string"), "'") != false) {
+            $string = addslashes($string);
+        }
+
+        return $string;
+    }
 }
