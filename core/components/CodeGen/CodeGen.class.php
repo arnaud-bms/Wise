@@ -114,12 +114,12 @@ class CodeGen extends ComponentStatic
             }
 
             if ($x==100) {
-                return generatePass();
+                return self::generateWord();
             }
         }
 
         if (strlen($result) < 4) {
-            return generatePass();
+            return self::generateWord();
         }
 
         return $result;
