@@ -26,9 +26,24 @@ class MySQLi implements Driver
      */
     public function __construct($host, $dbname, $user, $password)
     {
-        $this->_mysqli = new \mysqli($host, $user, $password, $dbname);
+        $this->_host     = $host;
+        $this->_dbname   = $dbname;
+        $this->_user     = $user;
+        $this->_password = $password;
+        
+        $this->_initLink();
     }
 
+    
+    /**
+     * Init link
+     *
+     * @param boolean $new New link
+     */
+    private function _initLink()
+    {
+        $this->_mysqli = new \mysqli($this->_host, $this->_user, $this->_password, $this->_dbname);
+    }
 
     /**
      * Execute query and return result
@@ -99,12 +114,12 @@ class MySQLi implements Driver
         $this->_mysqli->close();
     }
 
+    
     /**
      * Set connection with database
-     * @todo
      */
     public function reset()
     {
-
+        $this->_initLink();
     }
 }
