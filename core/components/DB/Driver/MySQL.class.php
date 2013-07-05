@@ -84,6 +84,17 @@ class MySQL implements Driver
   
         return 0;
     }
+    
+    
+    /**
+     * Set charset
+     * 
+     * @param string $charset
+     */
+    public function setCharset($charset)
+    {
+        mysql_query('SET NAMES "'.$charset.'"');
+    }
 
 
     /**

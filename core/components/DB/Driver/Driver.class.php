@@ -35,6 +35,13 @@ interface Driver
      * @return int
      */
     public function exec($query);
+    
+    /**
+     * Set charset
+     * 
+     * @param string $charset
+     */
+    public function setCharset($charset);
 
     /**
      * Escape string
