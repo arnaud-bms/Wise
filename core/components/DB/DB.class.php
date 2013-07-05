@@ -65,7 +65,7 @@ class DB extends Component
         );
 
         if (isset($config['charset']) && $config['charset'] !== null) {
-            self::$_driver->query('SET NAMES "'.$config['charset'].'"');
+            self::$_driver->setCharset($config['charset']);
         }
     }
 

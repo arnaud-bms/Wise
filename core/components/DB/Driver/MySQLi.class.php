@@ -81,6 +81,17 @@ class MySQLi implements Driver
 
         return 0;
     }
+    
+    
+    /**
+     * Set charset
+     * 
+     * @param string $charset
+     */
+    public function setCharset($charset)
+    {
+        $this->_mysqli->set_charset($charset);
+    }
 
 
     /**
