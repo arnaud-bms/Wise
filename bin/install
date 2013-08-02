@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Include functions
+CURRENT_DIR=$(dirname $BASH_SOURCE)/;
+source $CURRENT_DIR/functions;
+
+# Init vars
+TELELAB_PATH=$(dirname CURRENT_DIR)/;
+APP_PATH=$TELELAB_PATH"app/";
+
+# Create files configuration
+show_action "Création des fichiers de configuration";
+cp -v $APP_PATH"etc/"{_,}app.ini;
+cp -v $APP_PATH"etc/"{_,}routing.ini;
+
+# Create log directory
+create_dir $TELELAB_PATH"var/log";
+chmod 777 $TELELAB_PATH"var/log";
+
+show_action "Installation des librairies externe";
+$CURRENT_DIR"vendors";
+
+show_action "Création d'une application";
+echo -n "Nom de l'application: ";
+read app;
+
+if test "$app" = ""
+then
+    app="Default";
+fi
+
+$CURRENT_DIR"create_app" $app;
+
+show_action "Configuration du routage applicatif";
+echo $APP_PATH$app"/etc/routing.ini";
+sed -i s/{{app_name}}/$app/g $APP_PATH"/etc/routing.ini";
+
+show_action "Configuration du serveur http";
+echo "* Voir le fichier $APP_PATH"etc/"apache_configuration";
+echo "* Remplacer HOSTNAME par votre nom de domaine";
+echo "* Remplacer APP_NAME par le nom de votre application";
+echo "* Remplacer DOCUMENT_ROOT par la racine du framework";

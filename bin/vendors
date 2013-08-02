@@ -1,12 +1,15 @@
 #!/bin/bash
 
-CURRENT_DIR=$(pwd)/$(dirname $0)/;
+CURRENT_DIR=$(dirname $BASH_SOURCE)/;
 source $CURRENT_DIR/functions
 
 TELELAB_PATH=$(dirname CURRENT_DIR)/;
 VENDOR_PATH=$TELELAB_PATH"vendor";
 
 # todo Check if the command git and subversion exists
+show_action "INSTALL GIT/SVN";
+sudo apt-get install subversion;
+sudo apt-get install git;
 
 create_dir $VENDOR_PATH;
 cd $VENDOR_PATH;
