@@ -13,3 +13,4 @@ Autoloader::addAlias(array(
 ));
 
 Conf::mergeConfig(__DIR__.'/etc/config.ini');
+Conf::mergeConfig(__DIR__.'/etc/routing.ini');
