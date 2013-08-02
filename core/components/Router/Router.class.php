@@ -198,14 +198,13 @@ class Router extends Component
             foreach ($routeConfig as $routeName => $routeApp) {
                 $this->_checkFieldsRouteApp($routeApp);
 
-                $matchPrefix   = preg_match('/^'.$routeApp['prefix'].'/', $route);
+                $matchPrefix   = preg_match('/^'.preg_quote($routeApp['prefix'], '/').'/', $route);
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
-
+                $matchHostname = (empty($routeApp['host_pattern']) && empty($routeApp['host'])) || $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
+                $matchType     = empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName;
+                
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
-                if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
-                    && $matchHostname && $matchPrefix
-                ) {
+                if ($matchType && $matchHostname && $matchPrefix) {
                     Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
                     $this->_loadApp($routeApp);
                     $routing = Conf::getConfig('routing');
