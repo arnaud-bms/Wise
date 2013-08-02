@@ -7,7 +7,7 @@ TELELAB_PATH=$(dirname CURRENT_DIR)/;
 VENDOR_PATH=$TELELAB_PATH"vendor";
 
 # todo Check if the command git and subversion exists
-show_action "INSTALL GIT/SVN";
+show_action "Installation de GIT/SVN";
 sudo apt-get install subversion;
 sudo apt-get install git;
 
@@ -15,16 +15,16 @@ create_dir $VENDOR_PATH;
 cd $VENDOR_PATH;
 
 # Install smarty 3
-show_action "INSTALL OR UPDATE SMARTY";
+show_action "Installation ou mise à jour de SMARTY";
 svn checkout http://smarty-php.googlecode.com/svn/trunk/distribution smarty
 
 
 # Install PHPMAiler
-show_action "INSTALL OR UPDATE PHPMailer";
+show_action "Installation ou mise à jour de PHPMailer";
 svn checkout http://svn.codespot.com/a/apache-extras.org/phpmailer/trunk/ phpmailer
 
 # Install Atoum
-show_action "INSTALL OR UPDATE Atoum";
+show_action "Installation ou mise à jour de Atoum";
 create_dir atoum
 cd atoum
 wget http://downloads.atoum.org/nightly/mageekguy.atoum.phar

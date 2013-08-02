@@ -18,7 +18,7 @@ APP_NAME=$1;
 
 if test -d "$APP_PATH$APP_NAME"
 then
-    echo $APP_NAME" exists already";
+    echo $APP_NAME" existe déjà";
     exit 1;
 fi
 
@@ -34,6 +34,7 @@ cp $CURRENT_DIR"/tpl_app/Main.class.php" $APP_PATH$APP_NAME"/Controllers/Main.cl
 cp $CURRENT_DIR"/tpl_app/bootstrap.php" $APP_PATH$APP_NAME"/bootstrap.php";
 cp $CURRENT_DIR"/tpl_app/config.ini" $APP_PATH$APP_NAME"/etc/config.ini";
 cp $CURRENT_DIR"/tpl_app/routing.ini" $APP_PATH$APP_NAME"/etc/routing.ini";
+cp $CURRENT_DIR"/tpl_app/view.ini" $APP_PATH$APP_NAME"/etc/view.ini";
 cp $CURRENT_DIR"/tpl_app/main.php" $APP_PATH$APP_NAME"/tpl/main.php";
 
 sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";

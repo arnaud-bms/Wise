@@ -1,3 +1,3 @@
-<h1>Page d'accueil</h1>
+<h1><?php echo $view->title; ?></h1>
 
-Ceci est la page d'accueil de votre application !!
+<?php echo $view->content; ?>

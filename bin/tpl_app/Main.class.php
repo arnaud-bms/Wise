@@ -18,7 +18,7 @@ class Main extends {{app_name}}Controller
      */
     public function index()
     {
-        $response['title'] = "Titre de la page";
+        $response['content'] = "Ce contenu provient de ".__FILE__;
         
         return $response;
     }
