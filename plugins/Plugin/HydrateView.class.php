@@ -3,7 +3,6 @@ namespace Plugin;
 
 use Telelab\Plugin\Plugin;
 use Telelab\FrontController\FrontController;
-use Telelab\Globals\Globals;
 use Telelab\Conf\Conf;
 
 /**
