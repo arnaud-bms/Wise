@@ -29,7 +29,7 @@ class Autoloader
                 $class = substr($class, strlen($prefix)+1);
                 $file  = $path.'/'.strtr($class, '\\', '/').'.class.php';
                 if (file_exists($file)) {
-                    require $file;
+                    include $file;
                 } else {
                     throw new AutoloaderException("File '$file' does'nt exists");
                 }
