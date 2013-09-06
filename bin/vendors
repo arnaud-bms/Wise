@@ -8,8 +8,14 @@ VENDOR_PATH=$TELELAB_PATH"vendor";
 
 # todo Check if the command git and subversion exists
 show_action "Installation de GIT/SVN";
-sudo apt-get install subversion;
-sudo apt-get install git;
+if test -f "/etc/debian_version"
+then
+    sudo apt-get install subversion;
+    sudo apt-get install git;
+else
+    sudo yum install subversion;
+    sudo yum install git;
+fi
 
 create_dir $VENDOR_PATH;
 cd $VENDOR_PATH;

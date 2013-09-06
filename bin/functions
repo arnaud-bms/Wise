@@ -11,15 +11,6 @@ show_error() {
     echo -e "\nError: "${1};
 }
 
-# Install package if isn't install
-install_package() {
-    if test "`dpkg -l | grep ${1} | wc -l`" = "0"
-    then
-        show_action "- Install ${1}";
-        apt-get install ${1}
-    fi
-}
-
 # Create directory if does'nt exists
 create_dir() {
     if ! test -d ${1}
