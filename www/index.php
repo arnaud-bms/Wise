@@ -32,8 +32,7 @@ Conf::mergeConfig(ROOT_DIR.'app/etc/routing.ini');
 // Set exception handler if exists
 if ($handlerConfig = Conf::getConfig('exception_handler')) {
     set_exception_handler(
-        array($handlerConfig['class'],
-        $handlerConfig['method'])
+        array($handlerConfig['class'], $handlerConfig['method'])
     );
 }
 

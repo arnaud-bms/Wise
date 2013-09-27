@@ -57,6 +57,10 @@ class Format extends Component
     protected function _arrayToXML($data, $sxe = null, $rootNode = 'xml')
     {
         if ($sxe === null) {
+            if (count($data) === 1) {
+                $rootNode = key($data);
+                $data = $data[$rootNode];
+            }
             $sxe = simplexml_load_string(
                 '<?xml version="1.0" encoding="utf-8"?><'.$rootNode.' />'
             );

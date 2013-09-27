@@ -14,13 +14,11 @@ class Main extends {{app_name}}Controller
     /**
      * Method index
      * 
-     * @param string $var 
-     * @param string $var 
      * @return array $response
      */
-    public function index($var, $var2)
+    public function index()
     {
-        $response['title'] = "Titre de la page";
+        $response['content'] = "Ce contenu provient de ".__FILE__;
         
         return $response;
     }

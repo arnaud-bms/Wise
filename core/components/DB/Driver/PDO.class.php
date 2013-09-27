@@ -73,6 +73,17 @@ class PDO implements Driver
 
         return false;
     }
+    
+    
+    /**
+     * Set charset
+     * 
+     * @param string $charset
+     */
+    public function setCharset($charset)
+    {
+        $this->_pdo->exec('SET NAMES "'.$charset.'"');
+    }
 
 
     /**

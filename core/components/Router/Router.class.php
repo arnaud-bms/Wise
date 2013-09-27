@@ -44,6 +44,11 @@ class Router extends Component
         'pattern'
     );
 
+    /**
+     * @var Cache
+     */
+    private $_cache;
+
 
     /**
      * Init Router
@@ -52,9 +57,21 @@ class Router extends Component
      */
     protected function _init($config)
     {
-        $this->_sapiName       = php_sapi_name();
+        $this->_sapiName = php_sapi_name();
         $this->setRouteAppLoaded(null);
+        $this->_initCache();
         Logger::log('['.__CLASS__.'] call by sapi -> '.$this->_sapiName, Logger::LOG_DEBUG);
+    }
+
+
+    /**
+     * Init cache system if the section router_cache exist
+     */
+    private function _initCache()
+    {
+        if ($this->_cache === null && $routerConf = Conf::getConfig('router_cache')) {
+            $this->_cache = new \Telelab\Cache\Cache($routerConf);
+        }
     }
 
 
@@ -111,29 +128,40 @@ class Router extends Component
     {
         $routeInfos = false;
         $routing = $this->_getRoutingApp($route);
-        foreach ($routing as $routeName => $routeTest) {
-            $this->_checkFieldsRoute($routeTest);
-            $pattern = '#^'.$routeTest['pattern'].'$#';
-            $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
-            Logger::log('['.__CLASS__.'] test route -> '.$routeName, Logger::LOG_DEBUG);
-            if (preg_match($pattern, $route, $argv)
-                && (empty($routeTest['http_method'])
-                    || strtolower($routeTest['http_method']) === strtolower($httpMethod))
-            ) {
-                Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
-                $routeInfos = $routeTest;
-                array_shift($argv);
-                $routeInfos['argv'] = $argv;
-                $routeInfos['name'] = $this->getRouteAppLoaded().':'.$routeName;
-                Logger::log('['.__CLASS__.'] route loaded -> '.$this->getRouteAppLoaded().':'.$routeName, Logger::LOG_DEBUG);
-                break;
-            } else {
-                Logger::log('['.__CLASS__.'] route no matches -> '.$routeName, Logger::LOG_DEBUG);
+        $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+
+        $cacheId = 'telelab:router:'.md5($route.$httpMethod);
+        if ($this->_cache === null || $routeInfos = $this->_cache->getCache($cacheId)) {
+            Logger::log('['.__CLASS__.'] route from cache -> '.$route, Logger::LOG_DEBUG);
+            return $routeInfos;
+        } else {
+            foreach ($routing as $routeName => $routeTest) {
+                $this->_checkFieldsRoute($routeTest);
+                $pattern = '#^'.$routeTest['pattern'].'$#';
+                Logger::log('['.__CLASS__.'] test route -> '.$routeName, Logger::LOG_DEBUG);
+                if (preg_match($pattern, $route, $argv)
+                    && (empty($routeTest['http_method'])
+                        || strtolower($routeTest['http_method']) === strtolower($httpMethod))
+                ) {
+                    Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
+                    $routeInfos = $routeTest;
+                    array_shift($argv);
+                    $routeInfos['argv'] = $argv;
+                    $routeInfos['name'] = $this->getRouteAppLoaded().':'.$routeName;
+                    Logger::log('['.__CLASS__.'] route loaded -> '.$this->getRouteAppLoaded().':'.$routeName, Logger::LOG_DEBUG);
+                    break;
+                } else {
+                    Logger::log('['.__CLASS__.'] route no matches -> '.$routeName, Logger::LOG_DEBUG);
+                }
             }
         }
 
         if ($routeInfos === false) {
             throw new RouterException("Route '$route' not matches", 404);
+        }
+
+        if ($this->_cache !== null) {
+            $this->_cache->setCache($cacheId, $routeInfos);
         }
 
         return $routeInfos;
@@ -172,12 +200,11 @@ class Router extends Component
 
                 $matchPrefix   = preg_match('/^'.$routeApp['prefix'].'/', $route);
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname)) || (empty($routeApp['host_pattern']) && empty($routeApp['host']));
-
+                $matchHostname = (empty($routeApp['host_pattern']) && empty($routeApp['host'])) || $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
+                $matchType     = empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName;
+                
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
-                if ((empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName)
-                    && $matchHostname && $matchPrefix
-                ) {
+                if ($matchType && $matchHostname && $matchPrefix) {
                     Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
                     $this->_loadApp($routeApp);
                     $routing = Conf::getConfig('routing');

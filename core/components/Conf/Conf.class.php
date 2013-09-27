@@ -3,6 +3,7 @@ namespace Telelab\Conf;
 
 use Telelab\Component\ComponentStatic;
 use Telelab\Conf\ConfException;
+use Telelab\Logger\Logger;
 
 /**
  * Conf: Configuration Class from files
@@ -18,12 +19,18 @@ class Conf extends ComponentStatic
     protected static $_config = array();
 
     /**
+     * @var Cache
+     */
+    protected static $_cache;
+
+    /**
      * Set config
      *
      * @param string $fileConf
      */
     public static function loadConfig($fileConf)
     {
+        self::_initCache();
         self::$_config = self::_getConfFromFile($fileConf);
     }
 
@@ -35,10 +42,22 @@ class Conf extends ComponentStatic
      */
     public static function mergeConfig($fileConf)
     {
+        self::_initCache();
         self::$_config = array_merge(
             self::$_config,
             self::_getConfFromFile($fileConf)
         );
+    }
+
+
+    /**
+     * Init cache system if the section conf_cache exist
+     */
+    private static function _initCache()
+    {
+        if (self::$_cache === null && $cacheConf = self::getConfig('conf_cache')) {
+            self::$_cache = new \Telelab\Cache\Cache($cacheConf);
+        }
     }
 
 
@@ -51,6 +70,12 @@ class Conf extends ComponentStatic
      */
     private static function _getConfFromFile($fileConf)
     {
+        $cacheId = 'telelab:conf:'.md5($fileConf);
+        if (self::$_cache !== null && $config = self::$_cache->getCache($cacheId)) {
+            Logger::log('['.__CLASS__.'] conf file from cache -> '.$fileConf, Logger::LOG_DEBUG);
+            return $config;
+        }
+
         $typeFile = substr($fileConf, strrpos($fileConf, '.')+1);
         switch($typeFile) {
             case 'json':
@@ -66,6 +91,11 @@ class Conf extends ComponentStatic
             default:
                 throw new ConfException("File '$fileConf' it's not valid", 400);
         }
+
+        if (self::$_cache !== null) {
+            self::$_cache->setCache($cacheId, $config);
+        }
+
         return $config;
     }
 

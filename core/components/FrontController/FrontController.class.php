@@ -124,7 +124,7 @@ class FrontController extends ComponentStatic
         }
 
         if (isset($routeInfos['precall'])) {
-            self::$_plugins[self::PLUGIN_PRECALL] = $routeInfos['precall'] != '' ? explode(';', $routeInfos['precall']) : array();
+            self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $routeInfos['precall']);
         } elseif ($precall = Conf::getConfig('plugin.default_precall')) {
             self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $precall);
         } else {
@@ -132,7 +132,7 @@ class FrontController extends ComponentStatic
         }
 
         if (isset($routeInfos['postcall'])) {
-            self::$_plugins[self::PLUGIN_POSTCALL] = $routeInfos['postcall'] != '' ? explode(';', $routeInfos['postcall']) : array();
+            self::$_plugins[self::PLUGIN_POSTCALL] = explode(';', $routeInfos['postcall']);
         } elseif ($precall = Conf::getConfig('plugin.default_postcall')) {
             self::$_plugins[self::PLUGIN_POSTCALL] = explode(';', $precall);
         } else {
@@ -162,6 +162,10 @@ class FrontController extends ComponentStatic
         Logger::log('['.__CLASS__.'] excute '.$method.' plugins', Logger::LOG_DEBUG);
         if (!self::$_interrupRequest) {
             foreach (self::$_plugins[$method] as $plugin) {
+                if (empty($plugin)) {
+                    continue;
+                }
+                
                 if (!isset(self::$_pluginsLoaded[$plugin])) {
                     self::$_pluginsLoaded[$plugin] = new $plugin();
                 }
