@@ -19,9 +19,7 @@ chmod 777 $TELELAB_PATH"var/log";
 
 show_action "Installation des librairies externe";
 curl -sS https://getcomposer.org/installer | php -- --install-dir=bin
-cd ..
-./bin/composer.phar
-cd -
+$TELELAB_PATH/bin/composer.phar install
 
 show_action "Création d'une application";
 echo -n "Nom de l'application: ";

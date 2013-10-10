@@ -5,12 +5,10 @@
  * @author {{user}}
  */
 
-use Telelab\Autoloader\Autoloader;
 use Telelab\Conf\Conf;
 
-Autoloader::addAlias(array(
-    '{{app_name}}'  => ROOT_DIR.'app/{{app_name}}'
-));
+$loader = require ROOT_DIR.'/vendor/autoload.php';
+$loader->add('{{app_name}}', __DIR__);
 
 Conf::mergeConfig(__DIR__.'/etc/config.ini');
 Conf::mergeConfig(__DIR__.'/etc/routing.ini');

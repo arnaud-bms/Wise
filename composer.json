@@ -1,5 +1,8 @@
 {
     "autoload": {
+        "psr-0": {
+            "Telelab\\": "core"
+        }
     },
     "require": {
         "monolog/monolog": "1.2.*",
