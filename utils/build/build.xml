@@ -21,6 +21,8 @@
         <mkdir dir="${project.basedir}/build/coverage" />
         <mkdir dir="${project.basedir}/build/logs" />
         <mkdir dir="${project.basedir}/build/pdepend" />
+        
+        <exec logoutput="true" dir="${project.basedir}" command="composer install" escape="false" />
     </target>
 
     <target name="qa" description="Lance les outils d'analyse">
