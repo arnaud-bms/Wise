@@ -94,6 +94,10 @@ class Str extends atoum\test
 
         $this->assert->variable(\Telelab\Str\Str::literalize(''))
                      ->isNull();
+        
+        $this->assert->integer(\Telelab\Str\Str::literalize('20'));
+        
+        $this->assert->float(\Telelab\Str\Str::literalize('20.5'));
     }
 
     public function testCamelcase()
