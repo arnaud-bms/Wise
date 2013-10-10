@@ -231,4 +231,19 @@ class Str extends ComponentStatic
 
         return $string;
     }
+    
+    
+    /**
+     * Unserialize for multibytes
+     * 
+     * @param string $string
+     * @return array
+     */
+    public static function mbUnserialize($string)
+    {
+        $string = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $string);
+
+        return unserialize($string);
+    }
+
 }
