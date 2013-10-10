@@ -56,7 +56,7 @@
     </target>
     
     <target name="phpcs">
-        <phpcodesniffer standard="PSR-0">
+        <phpcodesniffer standard="PSR2">
             <fileset dir="${project.basedir}/${source}/core">
                 <include name="**/*.php"/>
             </fileset>
