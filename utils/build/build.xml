@@ -29,6 +29,7 @@
         <phingcall target="phpcpd" />
         <phingcall target="phploc" />
         <phingcall target="phpcs" />
+        <phingcall target="phpcb" />
     </target>
     
     <target name="pdepend">
