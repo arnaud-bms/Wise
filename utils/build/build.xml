@@ -30,7 +30,7 @@
     </target>
     
     <target name="pdepend">
-        <phpdepend file="${project.basedir}/${source}">
+        <phpdepend file="${project.basedir}/${source}/core">
             <logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
             <logger type="jdepend-chart" outfile="${project.basedir}/build/pdepend/dependencies.svg" />
             <logger type="overview-pyramid" outfile="${project.basedir}/build/pdepend/overview-pyramid.svg" />
@@ -38,13 +38,13 @@
     </target>
 
     <target name="phpmd">
-        <phpmd file="${project.basedir}/${source}">
+        <phpmd file="${project.basedir}/${source}/core">
             <formatter type="xml" outfile="${project.basedir}/build/phpmd.xml" />
         </phpmd>
     </target>
     
     <target name="phpcpd">
-        <phpcpd file="${project.basedir}/${source}">
+        <phpcpd file="${project.basedir}/${source}/core">
             <formatter type="pmd" outfile="${project.basedir}/build/logs/pmd-cpd.xml"/>
         </phpcpd>
     </target>
