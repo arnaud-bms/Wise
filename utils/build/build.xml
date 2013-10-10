@@ -63,4 +63,8 @@
             <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
         </phpcodesniffer>
     </target>
+    
+    <target name="atoum">
+        <exec logoutput="true" dir="${project.basedir}/${source}/tests" command="atoum" escape="false" />
+    </target>
 </project>
