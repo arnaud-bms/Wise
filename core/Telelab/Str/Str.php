@@ -87,7 +87,7 @@ class Str extends ComponentStatic
         |\xF0[\x90-\xBF][\x80-\xBF]{2}    # planes 1-3
         |[\xF1-\xF3][\x80-\xBF]{3}                  # planes 4-15
         |\xF4[\x80-\x8F][\x80-\xBF]{2}    # plane 16
-        )+%xs', $string);
+        )+%xs', $string) === 1;
     }
 
 
@@ -99,10 +99,10 @@ class Str extends ComponentStatic
      */
     public static function removeAccent($string)
     {
-        if (mb_detect_encoding($string) !== 'UTF-8') {
+        if (!self::isUtf8($string)) {
             $string = utf8_encode($string);
         }
-
+        
         $string = htmlentities($string, ENT_NOQUOTES, 'UTF-8');
         return preg_replace('#&([a-zA-Z])[a-zA-Z]+;#', '$1', $string);
     }
