@@ -18,7 +18,10 @@ create_dir $TELELAB_PATH"var/log";
 chmod 777 $TELELAB_PATH"var/log";
 
 show_action "Installation des librairies externe";
-$CURRENT_DIR"vendors";
+curl -sS https://getcomposer.org/installer | php -- --install-dir=bin
+cd ..
+./bin/composer.phar
+cd -
 
 show_action "Création d'une application";
 echo -n "Nom de l'application: ";
