@@ -33,7 +33,7 @@
     </target>
     
     <target name="pdepend">
-        <phpdepend file="${project.basedir}/${source}/core">
+        <phpdepend file="${project.basedir}/core">
             <logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
             <logger type="jdepend-chart" outfile="${project.basedir}/build/pdepend/dependencies.svg" />
             <logger type="overview-pyramid" outfile="${project.basedir}/build/pdepend/overview-pyramid.svg" />
@@ -41,24 +41,24 @@
     </target>
 
     <target name="phpmd">
-        <phpmd file="${project.basedir}/${source}/core">
+        <phpmd file="${project.basedir}/core">
             <formatter type="xml" outfile="${project.basedir}/build/phpmd.xml" />
         </phpmd>
     </target>
     
     <target name="phpcpd">
-        <phpcpd file="${project.basedir}/${source}/core">
+        <phpcpd file="${project.basedir}/core">
             <formatter type="pmd" outfile="${project.basedir}/build/logs/pmd-cpd.xml"/>
         </phpcpd>
     </target>
     
     <target name="phploc">
-        <exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/build/logs/phploc.csv' '${project.basedir}/${source}/core'" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/build/logs/phploc.csv' '${project.basedir}/core'" escape="false" />
     </target>
     
     <target name="phpcs">
         <phpcodesniffer standard="PSR2">
-            <fileset dir="${project.basedir}/${source}/core">
+            <fileset dir="${project.basedir}/core">
                 <include name="**/*.php"/>
             </fileset>
             <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
@@ -66,10 +66,10 @@
     </target>
     
     <target name="atoum">
-        <exec logoutput="true" dir="${project.basedir}/${source}/tests" command="atoum" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/tests" command="atoum" escape="false" />
     </target>
     
     <target name="phpcb">
-        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/${source}/www' --output '${project.basedir}/build/code-browser'" escape="false" />
+        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/www' --output '${project.basedir}/build/code-browser'" escape="false" />
     </target>
 </project>
