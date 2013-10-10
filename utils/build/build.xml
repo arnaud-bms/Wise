@@ -27,6 +27,8 @@
         <phingcall target="pdepend" />
         <phingcall target="phpmd" />
         <phingcall target="phpcpd" />
+        <phingcall target="phploc" />
+        <phingcall target="phpcs" />
     </target>
     
     <target name="pdepend">
@@ -47,5 +49,18 @@
         <phpcpd file="${project.basedir}/${source}/core">
             <formatter type="pmd" outfile="${project.basedir}/build/logs/pmd-cpd.xml"/>
         </phpcpd>
+    </target>
+    
+    <target name="phploc">
+        <exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/build/logs/phploc.csv' '${project.basedir}/${source}/core'" escape="false" />
+    </target>
+    
+    <target name="phpcs">
+        <phpcodesniffer standard="PSR-0">
+            <fileset dir="${project.basedir}/${source}/core">
+                <include name="**/*.php"/>
+            </fileset>
+            <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
+        </phpcodesniffer>
     </target>
 </project>
