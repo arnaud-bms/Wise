@@ -20,6 +20,11 @@ class DB extends Component
      * @var Connection to DB
      */
     private static $_driver = null;
+    
+    /**
+     * @var String Charset to use
+     */
+    private static $_charset = null;
 
     /**
      * @var array Required fields
@@ -65,6 +70,7 @@ class DB extends Component
         );
 
         if (isset($config['charset']) && $config['charset'] !== null) {
+            self::$_charset = $config['charset'];
             self::$_driver->setCharset($config['charset']);
         }
     }
@@ -106,6 +112,10 @@ class DB extends Component
     public static function reset()
     {
        self::$_driver->reset();
+       
+       if (self::$_charset !== null) {
+            self::$_driver->setCharset(self::$_charset);
+        }
     }
 
 

@@ -178,10 +178,14 @@ abstract class Entity extends Component
                     $criteria[$key] = $this->_field[$key];
                 }
             }
-
-            $rowAffected = $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
-            foreach ($this->_fieldChanged as $newField => $value) {
-                $this->_field[$newField] = $value;
+            
+            if (!empty($this->_fieldChanged)) {
+                $rowAffected = $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
+                foreach ($this->_fieldChanged as $newField => $value) {
+                    $this->_field[$newField] = $value;
+                }
+            } else {
+                $rowAffected = 0;
             }
         }
 
