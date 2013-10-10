@@ -5,23 +5,14 @@
  * @author gdievart <g.dievart@telemaque.fr>
  */
 
-use Telelab\Autoloader\Autoloader;
 use Telelab\Conf\Conf;
 use Telelab\FrontController\FrontController;
 use Telelab\Globals\Globals;
 use Telelab\Logger\Logger;
 
-define('ROOT_DIR', __DIR__.'/../');
-
-require_once ROOT_DIR.'/core/components/Autoloader/Autoloader.class.php';
-spl_autoload_register(array('Telelab\Autoloader\Autoloader', 'loadClass'));
-
-Autoloader::setAlias(
-    array(
-        'Telelab'         => ROOT_DIR.'core/components',
-        'Plugin'        => ROOT_DIR.'plugins/Plugin'
-    )
-);
+define('ROOT_DIR', realpath(__DIR__.'/..').'/');
+$loader = require ROOT_DIR.'vendor/autoload.php';
+$loader->add('Plugin', ROOT_DIR.'plugins');
 
 // Load the default configuration
 Conf::loadConfig(ROOT_DIR.'app/etc/app.ini');

@@ -28,23 +28,23 @@ mkdir $APP_PATH$APP_NAME/{Controllers,etc,Models,Plugins,tpl,var,var/log,www};
 chmod 777 $APP_PATH$APP_NAME/var/log;
 
 echo "Copie des fichiers de base de l'application "$APP_NAME;
-cp $CURRENT_DIR"/tpl_app/AppController.class.php" $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";
-cp $CURRENT_DIR"/tpl_app/AppRepository.class.php" $APP_PATH$APP_NAME"/Models/AppRepository.class.php";
-cp $CURRENT_DIR"/tpl_app/Main.class.php" $APP_PATH$APP_NAME"/Controllers/Main.class.php";
+cp $CURRENT_DIR"/tpl_app/AppController.php" $APP_PATH$APP_NAME"/"$APP_NAME"Controller.php";
+cp $CURRENT_DIR"/tpl_app/AppRepository.php" $APP_PATH$APP_NAME"/Models/AppRepository.php";
+cp $CURRENT_DIR"/tpl_app/Main.php" $APP_PATH$APP_NAME"/Controllers/Main.php";
 cp $CURRENT_DIR"/tpl_app/bootstrap.php" $APP_PATH$APP_NAME"/bootstrap.php";
 cp $CURRENT_DIR"/tpl_app/config.ini" $APP_PATH$APP_NAME"/etc/config.ini";
 cp $CURRENT_DIR"/tpl_app/routing.ini" $APP_PATH$APP_NAME"/etc/routing.ini";
 cp $CURRENT_DIR"/tpl_app/view.ini" $APP_PATH$APP_NAME"/etc/view.ini";
 cp $CURRENT_DIR"/tpl_app/main.php" $APP_PATH$APP_NAME"/tpl/main.php";
 
-sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";
-sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.class.php";
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.php";
 
-sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/Models/AppRepository.class.php";
-sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Models/AppRepository.class.php";
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/Models/AppRepository.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Models/AppRepository.php";
 
-sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/Controllers/Main.class.php";
-sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Controllers/Main.class.php";
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/Controllers/Main.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Controllers/Main.php";
 
 sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/bootstrap.php";
 sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/bootstrap.php";
