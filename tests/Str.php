@@ -1,16 +1,14 @@
 <?php
 namespace Telelab\Str\tests\units;
 
-require_once __DIR__.'/bootstrap.php';
-
-use mageekguy\atoum;
+use atoum;
 
 /**
  * Test  \Telelab\Str
  *
  * @author Guillaume Dievart <g.dievart@telemaque.fr>
  */
-class Str extends atoum\test
+class Str extends atoum
 {
     public function testLower()
     {
@@ -39,6 +37,9 @@ class Str extends atoum\test
     public function testRemoveAccent()
     {
         $this->assert->string(\Telelab\Str\Str::removeAccent('Unit testsé'))
+                     ->isEqualTo('Unit testse');
+        
+        $this->assert->string(\Telelab\Str\Str::removeAccent(utf8_decode('Unit testsé')))
                      ->isEqualTo('Unit testse');
     }
 
@@ -104,5 +105,45 @@ class Str extends atoum\test
     {
         $this->assert->string(\Telelab\Str\Str::camelCase('bonjour_test'))
                      ->isEqualTo('BonjourTest');
+    }
+    
+    public function testIsUtf8()
+    {
+        $this->assert->boolean(\Telelab\Str\Str::isUtf8('bonjour é'))
+                     ->isTrue();
+        
+        $this->assert->boolean(\Telelab\Str\Str::isUtf8(utf8_decode('bonjour é')))
+                     ->isFalse();
+    }
+    
+    
+    public function testEscapeOnce()
+    {
+        $this->assert->string(\Telelab\Str\Str::escapeOnce('&'))
+                     ->isEqualTo('&amp;');
+        
+        $this->assert->string(\Telelab\Str\Str::escapeOnce('"'))
+                     ->isEqualTo('&quot;');
+    }
+    
+    
+    public function testFixDoubleEscape()
+    {
+        $this->assert->string(\Telelab\Str\Str::fixDoubleEscape('&amp;eacute;'))
+                     ->isEqualTo('&eacute;');
+    }
+    
+    
+    public function testCamelcaseToUnderscores()
+    {
+        $this->assert->string(\Telelab\Str\Str::camelcaseToUnderscores('CeciEstUnTest'))
+                     ->isEqualTo('ceci_est_un_test');
+    }
+    
+    
+    public function testCheckAddslashes()
+    {
+        $this->assert->string(\Telelab\Str\Str::checkAddslashes('C\'est un test'))
+                     ->isEqualTo('C\\\'est un test');
     }
 }

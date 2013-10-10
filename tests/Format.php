@@ -1,16 +1,14 @@
 <?php
 namespace Telelab\Format\tests\units;
 
-require_once __DIR__.'/bootstrap.php';
-
-use mageekguy\atoum;
+use atoum;
 
 /**
  * Test  \Telelab\Format
  *
  * @author Guillaume Dievart <g.dievart@telemaque.fr>
  */
-class Format extends atoum\test
+class Format extends atoum
 {
 
     private $_format;

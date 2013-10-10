@@ -1,16 +1,14 @@
 <?php
 namespace Telelab\Cache\tests\units;
 
-require_once __DIR__.'/bootstrap.php';
-
-use mageekguy\atoum;
+use atoum;
 
 /**
  * Test  \Telelab\Autoloader
  *
  * @author Guillaume Dievart <g.dievart@telemaque.fr>
  */
-class Cache extends atoum\test
+class Cache extends atoum
 {
     public function testSetCache()
     {
