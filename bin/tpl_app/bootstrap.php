@@ -8,7 +8,7 @@
 use Telelab\Conf\Conf;
 
 $loader = require ROOT_DIR.'/vendor/autoload.php';
-$loader->add('{{app_name}}', __DIR__);
+$loader->add('{{app_name}}', ROOT_DIR.'/app');
 
 Conf::mergeConfig(__DIR__.'/etc/config.ini');
 Conf::mergeConfig(__DIR__.'/etc/routing.ini');
