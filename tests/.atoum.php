@@ -12,6 +12,6 @@ $script->addDefaultReport();
 $xunit = new atoum\reports\asynchronous\xunit();
 $runner->addReport($xunit);
  
-$writer = new atoum\writers\file('/tmp/atoum.xunit.xml');
+$writer = new atoum\writers\file(__DIR__.'/../build/logs/atoum.xunit.xml');
 $xunit->addWriter($writer);
 

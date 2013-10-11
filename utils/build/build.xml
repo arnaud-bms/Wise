@@ -32,6 +32,7 @@
         <phingcall target="phploc" />
         <phingcall target="phpcs" />
         <phingcall target="phpcb" />
+        <phingcall target="atoum" />
     </target>
     
     <target name="pdepend">
@@ -68,7 +69,7 @@
     </target>
     
     <target name="atoum">
-        <exec logoutput="true" dir="${project.basedir}/tests" command="atoum" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/tests" command="atoum -f * -bf bootstrap.php" escape="false" />
     </target>
     
     <target name="phpcb">
