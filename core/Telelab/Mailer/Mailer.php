@@ -62,8 +62,17 @@ class Mailer extends ComponentStatic
      * @param string $replyTo
      * @return boolean
      */
-    public static function sendMail($from = '', $fromName = '', $to = '', $subject = '',
-            $msgHtml = '', $msgTxt = '', $attachments = null, $utf8 = false, $replyTo = null)
+    public static function sendMail(
+            $from = '', 
+            $fromName = '', 
+            $to = '', 
+            $subject = '',
+            $msgHtml = '', 
+            $msgTxt = '', 
+            $attachments = null, 
+            $utf8 = false, 
+            $replyTo = null
+            )
     {
         self::$phpMailer->IsSMTP();
 
