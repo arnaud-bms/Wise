@@ -16,12 +16,12 @@ abstract class Component extends AbstractComponent
      */
     final public function __construct($config = null)
     {
-        $config = self::_getComponentConfig(get_called_class(), $config);
+        $config = self::getComponentConfig(get_called_class(), $config);
         if ($config !== null && is_array($config) && isset($this->_requiredFields)) {
-            self::_checkRequiredFields($this->_requiredFields, $config);
+            self::checkRequiredFields($this->_requiredFields, $config);
         }
 
-        $this->_init($config);
+        $this->init($config);
     }
 
 
@@ -30,7 +30,7 @@ abstract class Component extends AbstractComponent
      *
      * @param mixed $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
 
     }

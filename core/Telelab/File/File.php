@@ -59,7 +59,7 @@ class File extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->uploadedFilePath = $config['path'];
         $this->uploadedFileExt  = explode(',', $config['ext']);
@@ -76,10 +76,10 @@ class File extends Component
      */
     public function getUploadedFile($file)
     {
-        $this->_checkFileUploaded($file);
-        $this->_checkExtension($file);
-        $this->_checkMaxSize($file);
-        return $this->_moveUploadedFile($file);
+        $this->checkFileUploaded($file);
+        $this->checkExtension($file);
+        $this->checkMaxSize($file);
+        return $this->moveUploadedFile($file);
     }
 
 
@@ -89,7 +89,7 @@ class File extends Component
      * @throws FileUploadedException If an error on upload file
      * @param array $file
      */
-    private function _checkFileUploaded($file)
+    private function checkFileUploaded($file)
     {
         if (!is_uploaded_file($file['tmp_name'])) {
             switch($file['error']){
@@ -116,7 +116,7 @@ class File extends Component
      * @throws FileUploadedException If extension is not available
      * @param array $file
      */
-    private function _checkExtension($file)
+    private function checkExtension($file)
     {
         $fileInfos = pathinfo($file['name']);
 
@@ -139,7 +139,7 @@ class File extends Component
      * @throws FileUploadedException If size is too large
      * @param array $file
      */
-    private function _checkMaxSize($file)
+    private function checkMaxSize($file)
     {
         if ($this->maxSize === null) {
             return true;
@@ -164,7 +164,7 @@ class File extends Component
      * @param array $file
      * @return filename
      */
-    private function _moveUploadedFile($file)
+    private function moveUploadedFile($file)
     {
         $filenameUploaded = $this->uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid().'.'. $this->currentExt;
         if (!is_dir($this->uploadedFilePath)) {

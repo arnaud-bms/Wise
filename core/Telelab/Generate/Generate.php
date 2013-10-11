@@ -33,7 +33,7 @@ class Generate extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->dir = $config['dir'];
         if (isset($config['alias'])) {

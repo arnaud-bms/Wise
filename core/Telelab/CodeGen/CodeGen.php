@@ -19,7 +19,7 @@ class CodeGen extends ComponentStatic
     /**
      * @var array Words used for generate simple code
      */
-    private static $_words = array(
+    private static $words = array(
         "bleu","blanc","rouge","jaune","vert","violet","affichera",
         "chaine","genre","retourne","fonction","commentaire","lapin","renard","image",
         "mathematique","aleatoire","hasard","source","chat","souris","chapeau","langue",
@@ -31,16 +31,18 @@ class CodeGen extends ComponentStatic
     /**
      * @var int  pronounceability
      */
-    private static $_pronounceability = 1;
+    private static $pronounceability = 1;
 
     /**
      * Init CodeGen
      */
-    protected static function _init($config)
+    protected static function init($config)
     {
         self::$chars['0-9'] = array_map('chr', range(48, 57));
         self::$chars['A-Z'] = array_map('chr', range(65, 90));
         self::$chars['a-z'] = array_map('chr', range(97, 122));
+        
+        parent::init($config);
     }
 
 
@@ -54,7 +56,7 @@ class CodeGen extends ComponentStatic
     public static function generate($length, $chars = 'a-zA-Z0-9')
     {
         $codeGenerated = '';
-        $charsToUsed = self::_getCharsToUsed($chars);
+        $charsToUsed = self::getCharsToUsed($chars);
         for ($i = 0; $i < $length; $i++) {
             $codeGenerated.= $charsToUsed[mt_rand(0, (count($charsToUsed)-1))];
         }
@@ -69,7 +71,7 @@ class CodeGen extends ComponentStatic
      * @param string $chars
      * @return array List chars used
      */
-    private static function _getCharsToUsed($chars)
+    private static function getCharsToUsed($chars)
     {
         $charsUsedToGenerate = array();
         foreach (self::$chars as $key => $listChars) {
@@ -90,22 +92,22 @@ class CodeGen extends ComponentStatic
      */
     public static function generateWord()
     {
-        $m1 = self::$_words[rand(0, count(self::$_words) - 1)];
+        $m1 = self::$words[rand(0, count(self::$words) - 1)];
         $result = substr($m1, 0, rand(2, strlen($m1) - 1));
 
-        $countWords = count(self::$_words);
+        $countWords = count(self::$words);
         for ($i = 0; $i < rand(3, 4); $i++) {
 
             $pasOk=true;
             $x =0;
             while ($pasOk && $x<100) {
 
-                $m = self::$_words[rand(0, $countWords - 1)];
+                $m = self::$words[rand(0, $countWords - 1)];
                 while ($m == $m1) {
-                    $m = self::$_words[rand(0, $countWords - 1)];
+                    $m = self::$words[rand(0, $countWords - 1)];
                 }
 
-                if (preg_match('#'.substr($result, -self::$_pronounceability).'#', $m)) {
+                if (preg_match('#'.substr($result, -self::$pronounceability).'#', $m)) {
                     $pasOk = false;
                     $m2 = explode(substr($result, -1), $m);
                     $result .= substr($m2[1], 0, rand(2, strlen($m2[1]) - 1));

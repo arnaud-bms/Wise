@@ -44,7 +44,7 @@ class DB extends Component
      * @param array $config
      * @throws DBException
      */
-    protected function _init($config)
+    protected function init($config)
     {
         switch($config['driver']) {
             case 'pdo':

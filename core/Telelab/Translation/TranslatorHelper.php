@@ -16,9 +16,9 @@ class TranslatorHelper extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
-
+        parent::init($config);
     }
 
 

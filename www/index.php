@@ -32,7 +32,7 @@ if ($errorConfig = Conf::getConfig('error_handler')) {
     set_error_handler(array($errorConfig['class'], $errorConfig['method']));
 }
 
-Globals::init();
-Logger::init();
-FrontController::init();
+Globals::initStatic();
+Logger::initStatic();
+FrontController::initStatic();
 FrontController::run();

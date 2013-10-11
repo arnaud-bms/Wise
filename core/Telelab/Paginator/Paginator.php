@@ -47,15 +47,15 @@ class Paginator extends ComponentStatic
      */
     public static function getPagination($current, $totalItems, $stepItem = 10)
     {
-        self::_initMembers($current, $totalItems, $stepItem);
+        self::initMembers($current, $totalItems, $stepItem);
 
         $pagination = array();
-        $pagination['first'] = self::_getFirst();
-        $pagination['prev']  = self::_getPrevious();
-        $pagination['current'] = self::_getCurrent();
-        $pagination['links'] = self::_getLinksAround();
-        $pagination['next']  = self::_getNext();
-        $pagination['last']  = self::_getLast();
+        $pagination['first'] = self::getFirst();
+        $pagination['prev']  = self::getPrevious();
+        $pagination['current'] = self::getCurrent();
+        $pagination['links'] = self::getLinksAround();
+        $pagination['next']  = self::getNext();
+        $pagination['last']  = self::getLast();
 
         return $pagination;
     }
@@ -68,7 +68,7 @@ class Paginator extends ComponentStatic
      * @param type $totalItems
      * @param type $stepItem
      */
-    private static function _initMembers($current, $totalItems, $stepItem = 10)
+    private static function initMembers($current, $totalItems, $stepItem = 10)
     {
         self::$currentPage = $current;
         self::$totalItems  = $totalItems;
@@ -81,7 +81,7 @@ class Paginator extends ComponentStatic
      *
      * @return int
      */
-    private static function _getFirst()
+    private static function getFirst()
     {
         return 1;
     }
@@ -92,7 +92,7 @@ class Paginator extends ComponentStatic
      *
      * @return int
      */
-    private static function _getPrevious()
+    private static function getPrevious()
     {
         return self::$currentPage > 1 ? self::$currentPage - 1 : null;
     }
@@ -103,7 +103,7 @@ class Paginator extends ComponentStatic
      *
      * @return array
      */
-    private static function _getLinksAround()
+    private static function getLinksAround()
     {
         if (self::$currentPage > self::$totalPages) {
             return self::$currentPage = self::$totalPages;
@@ -131,7 +131,7 @@ class Paginator extends ComponentStatic
      *
      * @return int
      */
-    private static function _getCurrent()
+    private static function getCurrent()
     {
         return self::$currentPage;
     }
@@ -142,7 +142,7 @@ class Paginator extends ComponentStatic
      *
      * @return int
      */
-    private static function _getNext()
+    private static function getNext()
     {
         $next = (self::$currentPage + 1) <= self::$totalPages ? self::$currentPage + 1 : null;
 
@@ -155,7 +155,7 @@ class Paginator extends ComponentStatic
      *
      * @param int
      */
-    private static function _getLast()
+    private static function getLast()
     {
         return self::$totalPages;
     }

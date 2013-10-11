@@ -14,7 +14,7 @@ class Session extends Component
     /**
      * Start session
      */
-    protected function _init($config)
+    protected function init($config)
     {
         session_start();
     }

@@ -21,7 +21,7 @@ class Smarty extends Driver
     /**
      * @var Smarty Ref to Smarty
      */
-    private $_smarty;
+    private $smarty;
 
 
     /**
@@ -29,12 +29,12 @@ class Smarty extends Driver
      *
      * @param array $config
      */
-    public function _init($config)
+    public function init($config)
     {
         require_once ROOT_DIR.'/vendor/smarty/libs/Smarty.class.php';
-        $this->_smarty = new \Smarty();
-        $this->_smarty->template_dir = $config['template_dir'];
-        $this->_smarty->compile_dir  = $config['compile_dir'];
+        $this->smarty = new \Smarty();
+        $this->smarty->template_dir = $config['template_dir'];
+        $this->smarty->compile_dir  = $config['compile_dir'];
     }
 
 
@@ -46,7 +46,7 @@ class Smarty extends Driver
      */
     public function setData($field, $content)
     {
-        $this->_smarty->assign($field, $content);
+        $this->smarty->assign($field, $content);
     }
 
 
@@ -57,7 +57,7 @@ class Smarty extends Driver
      */
     public function getData($field)
     {
-        return $this->_smarty->getTemplateVars($field);
+        return $this->smarty->getTemplateVars($field);
     }
 
 
@@ -80,6 +80,6 @@ class Smarty extends Driver
      */
     public function fetch($template)
     {
-        return $this->_smarty->fetch($template);
+        return $this->smarty->fetch($template);
     }
 }

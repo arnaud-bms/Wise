@@ -32,7 +32,7 @@ class Curl extends Component
      *
      * @param string $url
      */
-    protected function _init($url)
+    protected function init($url)
     {
         $this->curl = curl_init();
         $this->setUrl($url);

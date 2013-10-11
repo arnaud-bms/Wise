@@ -18,7 +18,7 @@ class Html extends Component
      */
     public static function tagOptions($options = array())
     {
-        $options = self::_parseAttributes($options);
+        $options = self::parseAttributes($options);
 
         $html = '';
         foreach ($options as $key => $value) {
@@ -34,7 +34,7 @@ class Html extends Component
      * @param string $options
      * @return mixed
      */
-    protected static function _parseAttributes($string)
+    protected static function parseAttributes($string)
     {
         return is_array($string) ? $string : self::stringToArray($string);
     }

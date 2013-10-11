@@ -13,12 +13,12 @@ class Php extends Driver
     /**
      * @var StdObject viewData
      */
-    private $_viewData;
+    private $viewData;
 
     /**
      * @var string Path to template
      */
-    private $_tplDir;
+    private $tplDir;
 
     /**
      * @var array Required fields
@@ -33,10 +33,10 @@ class Php extends Driver
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
-        $this->_viewData = new \stdClass();
-        $this->_tplDir   = $config['template_dir'];
+        $this->viewData = new \stdClass();
+        $this->tplDir   = $config['template_dir'];
     }
 
 
@@ -48,7 +48,7 @@ class Php extends Driver
      */
     public function setData($field, $content)
     {
-        $this->_viewData->$field = $content;
+        $this->viewData->$field = $content;
     }
 
 
@@ -59,7 +59,7 @@ class Php extends Driver
      */
     public function getData($field)
     {
-        return $this->_viewData->$field;
+        return $this->viewData->$field;
     }
 
 
@@ -83,7 +83,7 @@ class Php extends Driver
     public function fetch($template)
     {
         global $view;
-        $view = $this->_viewData;
-        include $this->_tplDir."/".$template;
+        $view = $this->viewData;
+        include $this->tplDir."/".$template;
     }
 }

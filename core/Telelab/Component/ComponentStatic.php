@@ -14,15 +14,15 @@ abstract class ComponentStatic extends AbstractComponent
      *
      * @param mixed $config
      */
-    public static function init($config = null)
+    public static function initStatic($config = null)
     {
         $class = get_called_class();
-        $config = self::_getComponentConfig($class, $config);
+        $config = self::getComponentConfig($class, $config);
         if ($config !== null && is_array($config) && isset($class::$_requiredFields)) {
-            self::_checkRequiredFields($class::$_requiredFields, $config);
+            self::checkRequiredFields($class::$_requiredFields, $config);
         }
-
-        $class::_init($config);
+        
+        self::init($config);
     }
 
 
@@ -31,7 +31,7 @@ abstract class ComponentStatic extends AbstractComponent
      *
      * @param mixed $config
      */
-    protected static function _init($config)
+    protected static function init($config)
     {
 
     }

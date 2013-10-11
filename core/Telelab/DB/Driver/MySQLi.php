@@ -31,7 +31,7 @@ class MySQLi implements Driver
         $this->_user     = $user;
         $this->_password = $password;
         
-        $this->_initLink();
+        $this->initLink();
     }
 
     
@@ -40,7 +40,7 @@ class MySQLi implements Driver
      *
      * @param boolean $new New link
      */
-    private function _initLink()
+    private function initLink()
     {
         $this->_mysqli = new \mysqli($this->_host, $this->_user, $this->_password, $this->_dbname);
     }
@@ -131,6 +131,6 @@ class MySQLi implements Driver
      */
     public function reset()
     {
-        $this->_initLink();
+        $this->initLink();
     }
 }

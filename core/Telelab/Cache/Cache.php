@@ -36,7 +36,7 @@ class Cache extends Component
      * @param array $config
      * @throws CacheException If driver does'nt exists
      */
-    protected function _init($config)
+    protected function init($config)
     {
         switch($config['driver']) {
             case 'file':

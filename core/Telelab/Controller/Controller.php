@@ -29,9 +29,11 @@ abstract class Controller extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function initAuto($config)
     {
         self::$server = new Server();
+        
+        parent::initAuto($config);
     }
 
     /**
@@ -39,7 +41,7 @@ abstract class Controller extends Component
      *
      * @param string $route
      */
-    protected function _redirect($route)
+    protected function redirect($route)
     {
         FrontController::run($route);
         FrontController::interruptRequest();

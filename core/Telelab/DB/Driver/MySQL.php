@@ -31,7 +31,7 @@ class MySQL implements Driver
         $this->_user     = $user;
         $this->_password = $password;
 
-        $this->_initLink();
+        $this->initLink();
     }
 
 
@@ -40,7 +40,7 @@ class MySQL implements Driver
      *
      * @param boolean $new New link
      */
-    public function _initLink($new = false)
+    public function initLink($new = false)
     {
         $this->_link = mysql_connect($this->_host, $this->_user, $this->_password, $new);
         mysql_select_db($this->_dbname, $this->_link);
@@ -134,6 +134,6 @@ class MySQL implements Driver
      */
     public function reset()
     {
-        $this->_initLink(true);
+        $this->initLink(true);
     }
 }

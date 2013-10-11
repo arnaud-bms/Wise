@@ -29,16 +29,16 @@ class Format extends Component
     {
         switch($format) {
             case 'json':
-                $return = $this->_arrayToJson($data);
+                $return = $this->arrayToJson($data);
                 break;
             case 'xml':
-                $return = $this->_arrayToXml($data);
+                $return = $this->arrayToXml($data);
                 break;
             case 'csv':
-                $return = $this->_arrayToCsv($data);
+                $return = $this->arrayToCsv($data);
                 break;
             case 'serialize':
-                $return = $this->_arrayToSerialize($data);
+                $return = $this->arrayToSerialize($data);
                 break;
             default:
                 throw new FormatException("Format '$format' is not valid", 400);
@@ -54,7 +54,7 @@ class Format extends Component
      * @param type $data
      * @return string XML
      */
-    protected function _arrayToXML($data, $sxe = null, $rootNode = 'xml')
+    protected function arrayToXml($data, $sxe = null, $rootNode = 'xml')
     {
         if ($sxe === null) {
             if (count($data) === 1) {
@@ -71,7 +71,7 @@ class Format extends Component
                 ? 'node'
                 : preg_replace('/[^a-z:_-]/i', '', $key);
             if (is_array($value)) {
-                $this->_arrayToXml($value, $sxe->addChild($key));
+                $this->arrayToXml($value, $sxe->addChild($key));
             } else {
                 $sxe->addChild($key, $value);
             }
@@ -87,7 +87,7 @@ class Format extends Component
      * @param array $data
      * @return string json
      */
-    protected function _arrayToJson($data)
+    protected function arrayToJson($data)
     {
         return json_encode($data);
     }
@@ -98,7 +98,7 @@ class Format extends Component
      *
      * @param type $data
      */
-    protected function _arrayToSerialize($data)
+    protected function arrayToSerialize($data)
     {
         return serialize($data);
     }

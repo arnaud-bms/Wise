@@ -29,7 +29,7 @@ class View extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         switch($config['driver']) {
             case 'smarty':

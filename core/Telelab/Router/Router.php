@@ -55,11 +55,11 @@ class Router extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->sapiName = php_sapi_name();
         $this->setRouteAppLoaded(null);
-        $this->_initCache();
+        $this->initCache();
         Logger::log('['.__CLASS__.'] call by sapi -> '.$this->sapiName, Logger::LOG_DEBUG);
     }
 
@@ -67,7 +67,7 @@ class Router extends Component
     /**
      * Init cache system if the section routercache exist
      */
-    private function _initCache()
+    private function initCache()
     {
         if ($this->cache === null && $routerConf = Conf::getConfig('routercache')) {
             $this->cache = new \Telelab\Cache\Cache($routerConf);
@@ -127,16 +127,16 @@ class Router extends Component
     private function _getRouteInfos($route)
     {
         $routeInfos = false;
-        $routing = $this->_getRoutingApp($route);
+        $routing = $this->getRoutingApp($route);
         $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
 
         $cacheId = 'telelab:router:'.md5($route.$httpMethod);
-        if ($this->cache === null || $routeInfos = $this->cache->getCache($cacheId)) {
+        if ($this->cache !== null && $routeInfos = $this->cache->getCache($cacheId)) {
             Logger::log('['.__CLASS__.'] route from cache -> '.$route, Logger::LOG_DEBUG);
             return $routeInfos;
         } else {
             foreach ($routing as $routeName => $routeTest) {
-                $this->_checkFieldsRoute($routeTest);
+                $this->checkFieldsRoute($routeTest);
                 $pattern = '#^'.$routeTest['pattern'].'$#';
                 Logger::log('['.__CLASS__.'] test route -> '.$routeName, Logger::LOG_DEBUG);
                 if (preg_match($pattern, $route, $argv)
@@ -173,7 +173,7 @@ class Router extends Component
      *
      * @param array $routeApp
      */
-    private function _checkFieldsRoute($route)
+    private function checkFieldsRoute($route)
     {
         foreach ($this->requiredFieldsRoute as $field) {
             if (!array_key_exists($field, $route)) {
@@ -191,12 +191,12 @@ class Router extends Component
      * @param string $route
      * @return array
      */
-    private function _getRoutingApp($route)
+    private function getRoutingApp($route)
     {
         $routing = false;
         if ($routeConfig = Conf::getConfig('route_apps')) {
             foreach ($routeConfig as $routeName => $routeApp) {
-                $this->_checkFieldsRouteApp($routeApp);
+                $this->checkFieldsRouteApp($routeApp);
 
                 $matchPrefix   = preg_match('/^'.$routeApp['prefix'].'/', $route);
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
@@ -206,7 +206,7 @@ class Router extends Component
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ($matchType && $matchHostname && $matchPrefix) {
                     Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
-                    $this->_loadApp($routeApp);
+                    $this->loadApp($routeApp);
                     $routing = Conf::getConfig('routing');
                     $this->setRouteAppLoaded($routeName);
                     break;
@@ -231,7 +231,7 @@ class Router extends Component
      *
      * @param array $routeApp
      */
-    private function _checkFieldsRouteApp($routeApp)
+    private function checkFieldsRouteApp($routeApp)
     {
         foreach ($this->requiredFieldsRouteApp as $field) {
             if (!array_key_exists($field, $routeApp)) {
@@ -248,7 +248,7 @@ class Router extends Component
      *
      * @param array $routeApp
      */
-    private function _loadApp($routeApp)
+    private function loadApp($routeApp)
     {
         Logger::log('['.__CLASS__.'] load app -> '.$routeApp['app'], Logger::LOG_DEBUG);
 

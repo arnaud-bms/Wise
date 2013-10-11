@@ -21,9 +21,10 @@ class Cache extends Plugin
     /**
      * Init Plugin Cache
      */
-    public function _init($config)
+    public function init($config)
     {
         $this->cache = new \Telelab\Cache\Cache();
+        parent::init($config);
     }
 
     /**

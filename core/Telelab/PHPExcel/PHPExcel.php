@@ -17,7 +17,7 @@ class PHPExcel extends ComponentStatic
      *
      * @param array $config
      */
-    protected static function _init($config)
+    protected static function init($config)
     {
 
     }

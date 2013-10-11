@@ -45,10 +45,10 @@ abstract class Repository extends Component
      *
      * @param type $config
      */
-    public function _init($config)
+    public function init($config)
     {
-        $this->_initEntity();
-        $this->_initTableName();
+        $this->initEntity();
+        $this->initTableName();
         $this->_sqlBuilder = new SqlBuilder($this->tableName);
     }
 
@@ -56,7 +56,7 @@ abstract class Repository extends Component
     /**
      * Check if entity DAO exists and set members
      */
-    protected function _initEntity()
+    protected function initEntity()
     {
         if ($this->hasEntity === null) {
             $entityName        = str_replace('Repository', 'Entity', get_called_class());
@@ -74,7 +74,7 @@ abstract class Repository extends Component
     /**
      * Init table name from entity
      */
-    private function _initTableName()
+    private function initTableName()
     {
         if (!empty($this->_table)) {
             $this->tableName = $this->_table;
@@ -95,7 +95,7 @@ abstract class Repository extends Component
     {
         $where = array('id' => (int)$id);
         if ($stmt = $this->_sqlBuilder->select('*', $where, 1)) {
-            return $this->_getResult($stmt->fetch());
+            return $this->getResult($stmt->fetch());
         }
         return false;
     }
@@ -128,7 +128,7 @@ abstract class Repository extends Component
         if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, $limit, $offset)) {
             $entities = array();
             while ($row = $stmt->fetch()) {
-                $entities[] = $this->_getResult($row);
+                $entities[] = $this->getResult($row);
             }
 
             return $entities;
@@ -149,7 +149,7 @@ abstract class Repository extends Component
     public function findOneBy($select, $criteria, $order = null)
     {
         if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, 1)) {
-            return $this->_getResult($stmt->fetch());
+            return $this->getResult($stmt->fetch());
         }
         return false;
     }
@@ -166,7 +166,7 @@ abstract class Repository extends Component
         if ($stmt = $this->_sqlBuilder->query($query)) {
             $entities = array();
             while ($row = $stmt->fetch()) {
-                $entities[] = $this->_getResult($row);
+                $entities[] = $this->getResult($row);
             }
 
             return $entities;
@@ -314,7 +314,7 @@ abstract class Repository extends Component
      * @param array $row
      * @return mixed
      */
-    protected function _getResult($row)
+    protected function getResult($row)
     {
         if ($row && $this->resultType === self::RETURN_ENTITY && $this->hasEntity) {
             $row = new $this->entityName($row);

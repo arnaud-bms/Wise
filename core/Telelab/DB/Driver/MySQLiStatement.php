@@ -34,7 +34,7 @@ class MySQLiStatement extends Statement
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
-        return $this->_getTypeStatement($type);
+        return $this->getTypeStatement($type);
     }
 
 
@@ -61,7 +61,7 @@ class MySQLiStatement extends Statement
      * @param string $type
      * @return mixed
      */
-    protected function _getTypeStatement($type)
+    protected function getTypeStatement($type)
     {
         switch($type) {
             case Statement::FETCH_OBJECT:

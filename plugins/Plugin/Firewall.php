@@ -18,9 +18,9 @@ class Firewall extends Plugin
     /**
      * Init Plugin Cache
      */
-    public function _init($config)
+    public function init($config)
     {
-
+        parent::init($config);
     }
 
     /**
@@ -29,7 +29,7 @@ class Firewall extends Plugin
     public function precall()
     {
         if (!Globals::get('is_connected')) {
-            $this->_checkRoute();
+            $this->checkRoute();
         }
     }
 
@@ -39,9 +39,9 @@ class Firewall extends Plugin
      *
      * @param string $config
      */
-    protected function _checkRoute($config = 'firewall')
+    protected function checkRoute($config = 'firewall')
     {
-        if ($this->_isProtectedRoute($config)) {
+        if ($this->isProtectedRoute($config)) {
             if (Conf::getConfig($config.'.redirect_type') == 'bg') {
                 FrontController::run(Conf::getConfig($config.'.redirect'));
                 FrontController::interruptRequest();
@@ -58,7 +58,7 @@ class Firewall extends Plugin
      *
      * @return boolean
      */
-    private function _isProtectedRoute($config)
+    private function isProtectedRoute($config)
     {
         list($module, $route) = explode(':', FrontController::getRouteName());
         $routes = Conf::getConfig($config.'.route');

@@ -74,8 +74,8 @@ class FrontController extends ComponentStatic
      */
     public static function run($route = null)
     {
-        self::_setRouteInfos(self::_getRouteInfos($route));
-        self::_executeRoute();
+        self::setRouteInfos(self::getRouteInfos($route));
+        self::executeRoute();
     }
 
 
@@ -85,7 +85,7 @@ class FrontController extends ComponentStatic
      * @param string $route
      * @return array
      */
-    private static function _getRouteInfos($route)
+    private static function getRouteInfos($route)
     {
         try {
             $router = new Router();
@@ -107,7 +107,7 @@ class FrontController extends ComponentStatic
      *
      * @param array $routeInfos
      */
-    protected static function _setRouteInfos($routeInfos)
+    protected static function setRouteInfos($routeInfos)
     {
         self::$routeId    = md5(serialize($routeInfos));
         self::$routeName  = $routeInfos['name'];
@@ -144,11 +144,11 @@ class FrontController extends ComponentStatic
     /**
      * Execute route
      */
-    protected static function _executeRoute()
+    protected static function executeRoute()
     {
-        self::_executePlugins(self::PLUGIN_PRECALL);
-        self::_executeAction();
-        self::_executePlugins(self::PLUGIN_POSTCALL);
+        self::executePlugins(self::PLUGIN_PRECALL);
+        self::executeAction();
+        self::executePlugins(self::PLUGIN_POSTCALL);
     }
 
 
@@ -157,7 +157,7 @@ class FrontController extends ComponentStatic
      *
      * @param string $type
      */
-    protected static function _executePlugins($method)
+    protected static function executePlugins($method)
     {
         Logger::log('['.__CLASS__.'] excute '.$method.' plugins', Logger::LOG_DEBUG);
         if (!self::$interrupRequest) {
@@ -190,7 +190,7 @@ class FrontController extends ComponentStatic
     /**
      * Execute controller
      */
-    protected static function _executeAction()
+    protected static function executeAction()
     {
         if (!self::$interrupRequest && self::$controller !== null) {
             Logger::log(

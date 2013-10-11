@@ -14,22 +14,22 @@ class EntityManager extends Component
     /**
      * @var array Ref to entity
      */
-    private $_entities = array();
+    private $entities = array();
 
     /**
      * @var SqlBuilder
      */
-    private $_sqlBuilder;
+    private $sqlBuilder;
 
     /**
      * Init members of DAO
      *
      * @param array $row
      */
-    protected function _init($row)
+    protected function init($row)
     {
-        $this->_hydrate($row);
-        $this->_sqlBuilder = new SqlBuilder($this->_tableName);
+        $this->hydrate($row);
+        $this->sqlBuilder = new SqlBuilder($this->_tableName);
     }
 
 
@@ -42,7 +42,7 @@ class EntityManager extends Component
     public function createEntity($entityName)
     {
         $entity = new $entityName;
-        $this->_entities[$entityName][] = $entity;
+        $this->entities[$entityName][] = $entity;
 
         return $entity;
     }

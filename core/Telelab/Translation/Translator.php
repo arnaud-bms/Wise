@@ -60,7 +60,7 @@ class Translator extends Component
      *
      * @param string $locale   The locale
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->locale = $config['locale'];
         $this->languagePath = $config['language_path'];
@@ -157,7 +157,7 @@ class Translator extends Component
         }
 
         if (!isset($instance->catalogues[$catalogue])) {
-            $catalogue = $instance->_loadCatalogue($catalogue);
+            $catalogue = $instance->loadCatalogue($catalogue);
         }
 
         return strtr($instance->_translate($id, $locale, $catalogue), $parameters);
@@ -180,7 +180,7 @@ class Translator extends Component
         }
 
         if (!isset($instance->catalogues[$catalogue])) {
-            $catalogue = $instance->_loadCatalogue($catalogue);
+            $catalogue = $instance->loadCatalogue($catalogue);
         }
 
         $fullCatalogue = array();
@@ -229,7 +229,7 @@ class Translator extends Component
      * @throws TranslationException: empty catalogue
      * @return string translation
      */
-    protected function _loadCatalogue($catalogue)
+    protected function loadCatalogue($catalogue)
     {
         $file = rtrim($this->languagePath, '/').'/'.$catalogue.'.xml';
 
@@ -237,7 +237,7 @@ class Translator extends Component
             $this->catalogues[$catalogue] = simplexml_load_file($file);
         } else if ($this->fallbackCatalogue !== $catalogue) {
             if (!isset($this->catalogues[$this->fallbackCatalogue])) {
-                $this->_loadCatalogue($this->fallbackCatalogue);
+                $this->loadCatalogue($this->fallbackCatalogue);
             }
 
             return $this->fallbackCatalogue;

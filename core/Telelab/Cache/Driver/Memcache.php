@@ -35,7 +35,7 @@ class Memcache extends Driver
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->memcache = new \Memcache();
         $this->memcache->connect($config['host'], $config['port']);

@@ -37,7 +37,7 @@ class Server extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->requestMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 

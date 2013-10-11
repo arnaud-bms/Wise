@@ -19,7 +19,7 @@ abstract class AbstractComponent
      * @param array $config Configuration passed to construct of the component
      * @return mixed Component configuration
      */
-    protected static function _getComponentConfig($class, $config)
+    protected static function getComponentConfig($class, $config)
     {
         if ($config === null) {
             $configName = substr($class, strlen('Telelab\\'));
@@ -41,7 +41,7 @@ abstract class AbstractComponent
      * @param array $config
      * @throws ComponentException If the field does'nt exists
      */
-    protected static function _checkRequiredFields($requiredFields, $config)
+    protected static function checkRequiredFields($requiredFields, $config)
     {
         foreach ($requiredFields as $field) {
             if (!array_key_exists($field, $config)) {

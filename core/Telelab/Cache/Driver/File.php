@@ -33,7 +33,7 @@ class File extends Driver
      *
      * @param array $config
      */
-    public function _init($config)
+    public function init($config)
     {
         $this->path = $config['path'];
         $this->ttl  = $config['ttl'];

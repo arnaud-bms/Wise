@@ -49,12 +49,12 @@ abstract class Entity extends Component
      *
      * @param array $row Null if is a new row
      */
-    protected function _init($row = null)
+    protected function init($row = null)
     {
-        $this->_initTableName();
+        $this->initTableName();
         if ($row !== null && is_array($row)) {
             $this->isNew = false;
-            $this->_hydrate($row);
+            $this->hydrate($row);
         }
 
         $this->sqlBuilder = new SqlBuilder($this->tableName);
@@ -66,7 +66,7 @@ abstract class Entity extends Component
      *
      * @param array $row
      */
-    protected function _hydrate($row)
+    protected function hydrate($row)
     {
         foreach ($row as $key => $value) {
             $this->field[$key] = $value;
@@ -77,7 +77,7 @@ abstract class Entity extends Component
     /**
      * Init table name from entity
      */
-    private function _initTableName()
+    private function initTableName()
     {
         if (!empty($this->_table)) {
             $this->tableName = $this->_table;

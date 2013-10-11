@@ -15,9 +15,11 @@ class Session extends Plugin
     /**
      * Init Plugin Cache
      */
-    public function _init($config)
+    public function init($config)
     {
         Globals::set('session', new \Telelab\Session\Session());
+        
+        parent::init($config);
     }
 
     /**

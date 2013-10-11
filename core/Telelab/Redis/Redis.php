@@ -28,7 +28,7 @@ class Redis extends Component
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->redis = new \Redis();
 

@@ -58,7 +58,7 @@ class Logger extends ComponentStatic
      *
      * @param array $config
      */
-    protected static function _init($config)
+    protected static function init($config)
     {
         $loggerName = isset($config['name']) ? $config['name'] : 'logger';
         self::$loggerConf[$loggerName]['enable'] = (boolean)$config['enable'];
@@ -97,7 +97,7 @@ class Logger extends ComponentStatic
     public static function log($message, $level = self::LOG_INFO, $loggerName = 'logger')
     {
         if (self::$loggerConf[$loggerName]['enable'] && $level >= self::$loggerConf[$loggerName]['logLevel']) {
-            self::_loadDriver($loggerName);
+            self::loadDriver($loggerName);
 
             $message = date('Y-m-d H:i:s')
                      . ' ['.self::$listLevel[$level].'] '.$message.PHP_EOL;
@@ -117,7 +117,7 @@ class Logger extends ComponentStatic
     /**
      * Load driver Logger
      */
-    protected static function _loadDriver($loggerName)
+    protected static function loadDriver($loggerName)
     {
         if (empty(self::$loggerConf[$loggerName]['driver']) || self::$loggerConf[$loggerName]['driverToLoad'] === false) {
             $class = 'Telelab\Logger\Driver\\'.ucfirst(self::$loggerConf[$loggerName]['driverToLoad']);

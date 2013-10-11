@@ -30,8 +30,8 @@ class Conf extends ComponentStatic
      */
     public static function loadConfig($fileConf)
     {
-        self::_initCache();
-        self::$config = self::_getConfFromFile($fileConf);
+        self::initCache();
+        self::$config = self::getConfFromFile($fileConf);
     }
 
 
@@ -42,10 +42,10 @@ class Conf extends ComponentStatic
      */
     public static function mergeConfig($fileConf)
     {
-        self::_initCache();
+        self::initCache();
         self::$config = array_merge(
             self::$config,
-            self::_getConfFromFile($fileConf)
+            self::getConfFromFile($fileConf)
         );
     }
 
@@ -53,7 +53,7 @@ class Conf extends ComponentStatic
     /**
      * Init cache system if the section confcache exist
      */
-    private static function _initCache()
+    private static function initCache()
     {
         if (self::$cache === null && $cacheConf = self::getConfig('confcache')) {
             self::$cache = new \Telelab\Cache\Cache($cacheConf);
@@ -68,7 +68,7 @@ class Conf extends ComponentStatic
      * @throws ConfException If is invalid configuration file
      * @return array
      */
-    private static function _getConfFromFile($fileConf)
+    private static function getConfFromFile($fileConf)
     {
         $cacheId = 'telelab:conf:'.md5($fileConf);
         if (self::$cache !== null && $config = self::$cache->getCache($cacheId)) {

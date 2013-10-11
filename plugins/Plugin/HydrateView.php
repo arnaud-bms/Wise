@@ -28,7 +28,7 @@ class HydrateView extends Plugin
     {
         list($routeApp, $route) = explode(':', FrontController::getRouteName());
 
-        $configToMerge = $this->_getConfigView($route);
+        $configToMerge = $this->getConfigView($route);
         
         $response = array_merge($configToMerge, FrontController::getResponse());
         
@@ -42,7 +42,7 @@ class HydrateView extends Plugin
      *
      * @return array
      */
-    private function _getConfigView($route)
+    private function getConfigView($route)
     {
         $configToMerge = array();
         if ($configRoute = Conf::getConfig('hydrate_view.'.$route)) {

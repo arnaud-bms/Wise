@@ -32,9 +32,11 @@ class File extends Driver
      *
      * @param array $config
      */
-    protected function _init($config)
+    protected function init($config)
     {
         $this->_file = $config['file'];
+        
+        parent::init($config);
     }
 
 
@@ -52,7 +54,7 @@ class File extends Driver
 
         file_put_contents($this->_file, $message, FILE_APPEND);
         // Temporary comment because the logrotate lose handle
-        /*$this->_initHandle();
+        /*$this->initHandle();
         if ($this->_handle) {
             fwrite($this->_handle, $message);
         }*/
@@ -62,7 +64,7 @@ class File extends Driver
     /**
      * Init handle
      */
-    private function _initHandle()
+    private function initHandle()
     {
         if (!$this->_handle) {
             if (!is_dir(dirname($this->_file))) {

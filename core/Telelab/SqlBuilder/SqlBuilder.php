@@ -27,7 +27,7 @@ class SqlBuilder extends Component
      *
      * @param type $config
      */
-    public function _init($table)
+    public function init($table)
     {
         $this->table = $table;
         $this->db = DB::getInstance();
@@ -127,8 +127,8 @@ class SqlBuilder extends Component
         $query  = "UPDATE %s %s SET %s WHERE %s";
         $ignore = $ignore ? 'IGNORE' : '';
 
-        $setQuery   = $this->_queryAssign($rows, ',');
-        $whereQuery = $this->_queryAssign($where, 'AND');
+        $setQuery   = $this->queryAssign($rows, ',');
+        $whereQuery = $this->queryAssign($where, 'AND');
 
         $query = sprintf(
             $query, $ignore, $this->table, $setQuery, $whereQuery
@@ -147,7 +147,7 @@ class SqlBuilder extends Component
     {
         $query = "DELETE FROM %s WHERE %s";
 
-        $whereQuery = $this->_queryAssign($where, 'AND');
+        $whereQuery = $this->queryAssign($where, 'AND');
         $query = sprintf(
             $query,
             $this->table,
@@ -181,7 +181,7 @@ class SqlBuilder extends Component
         $selectQuery = rtrim($selectQuery, ',');
 
         if (count($where) > 0) {
-            $whereQuery = $this->_queryAssign($where, 'AND');
+            $whereQuery = $this->queryAssign($where, 'AND');
         } else {
             $whereQuery = '1';
         }
@@ -213,7 +213,7 @@ class SqlBuilder extends Component
     * @param array $value
     * @param string $separator
     */
-    protected function _queryAssign($values, $separator)
+    protected function queryAssign($values, $separator)
     {
         $query = '';
         foreach ($values as $field => $value) {
