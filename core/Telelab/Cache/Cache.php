@@ -14,12 +14,12 @@ class Cache extends Component
     /**
      * @var CacheDriver Driver used by cache system
      */
-    protected $_driver;
+    protected $driver;
 
     /**
      * @var boolean Enable Cache
      */
-    protected $_enable;
+    protected $enable;
 
     /**
      * @var array Required fields
@@ -50,9 +50,9 @@ class Cache extends Component
         }
 
         $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
-        $this->_driver = new $driver($driverConfig);
+        $this->driver = new $driver($driverConfig);
 
-        $this->_enable = (boolean)$config['enable'];
+        $this->enable = (boolean)$config['enable'];
     }
 
 
@@ -64,8 +64,8 @@ class Cache extends Component
      */
     public function getCache($uniqId)
     {
-        if ($this->_enable) {
-            return $this->_driver->getCache($uniqId);
+        if ($this->enable) {
+            return $this->driver->getCache($uniqId);
         }
 
         return false;
@@ -81,8 +81,8 @@ class Cache extends Component
      */
     public function setCache($uniqId, $content, $ttl = null)
     {
-        if ($this->_enable) {
-            $this->_driver->setCache($uniqId, $content, $ttl);
+        if ($this->enable) {
+            $this->driver->setCache($uniqId, $content, $ttl);
         }
     }
 }

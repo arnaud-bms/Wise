@@ -14,12 +14,12 @@ class Memcache extends Driver
     /**
      * @var MemCache
      */
-    protected $_memcache;
+    protected $memcache;
 
     /**
      * @var int ttl
      */
-    protected $_ttl;
+    protected $ttl;
 
     /**
      * @var array Required fields
@@ -37,9 +37,9 @@ class Memcache extends Driver
      */
     protected function _init($config)
     {
-        $this->_memcache = new \Memcache();
-        $this->_memcache->connect($config['host'], $config['port']);
-        $this->_ttl = $config['ttl'];
+        $this->memcache = new \Memcache();
+        $this->memcache->connect($config['host'], $config['port']);
+        $this->ttl = $config['ttl'];
     }
 
 
@@ -51,7 +51,7 @@ class Memcache extends Driver
      */
     public function getCache($uniqId)
     {
-        return $this->_memcache->get($uniqId);
+        return $this->memcache->get($uniqId);
     }
 
 
@@ -63,7 +63,7 @@ class Memcache extends Driver
      */
     public function setCache($uniqId, $content, $ttl = null)
     {
-        $ttl = $ttl === null ? $this->_ttl : $ttl;
-        $this->_memcache->set($uniqId, $content, false, $ttl);
+        $ttl = $ttl === null ? $this->ttl : $ttl;
+        $this->memcache->set($uniqId, $content, false, $ttl);
     }
 }

@@ -14,17 +14,17 @@ class Curl extends Component
     /**
      * @var resource Handle on cUrl
      */
-     private $_curl;
+     private $curl;
 
     /**
      * @var string Last error generated
      */
-    private $_error = null;
+    private $error = null;
 
     /**
      * @var int Timeout
      */
-    private $_timeout = 3;
+    private $timeout = 3;
 
 
     /**
@@ -34,9 +34,9 @@ class Curl extends Component
      */
     protected function _init($url)
     {
-        $this->_curl = curl_init();
+        $this->curl = curl_init();
         $this->setUrl($url);
-        $this->setOpt(CURLOPT_TIMEOUT, $this->_timeout);
+        $this->setOpt(CURLOPT_TIMEOUT, $this->timeout);
         $this->setOpt(CURLOPT_RETURNTRANSFER, 1);
     }
 
@@ -44,13 +44,13 @@ class Curl extends Component
     /**
      * Execute query
      *
-     * @throws CurlException Return curl_error
+     * @throws CurlException Return curlerror
      * @return mixed
      */
     public function exec()
     {
-        if (($return = curl_exec($this->_curl)) === false) {
-            throw new CurlException(curl_error($this->_curl));
+        if (($return = curl_exec($this->curl)) === false) {
+            throw new CurlException(curlerror($this->curl));
         }
         return $return;
     }
@@ -63,7 +63,7 @@ class Curl extends Component
      */
     public function getHandle()
     {
-        return $this->_curl;
+        return $this->curl;
     }
 
 
@@ -74,7 +74,7 @@ class Curl extends Component
      */
     public function getInfo()
     {
-        return curl_getinfo($this->_curl);
+        return curl_getinfo($this->curl);
     }
 
 
@@ -85,7 +85,7 @@ class Curl extends Component
      */
     public function getError()
     {
-        return $this->_error;
+        return $this->error;
     }
 
 
@@ -110,7 +110,7 @@ class Curl extends Component
      */
     public function setOpt($option, $value)
     {
-        curl_setopt($this->_curl, $option, $value);
+        curl_setopt($this->curl, $option, $value);
     }
 
 
@@ -121,7 +121,7 @@ class Curl extends Component
      */
     public function setOptArray(array $listOptions)
     {
-        curl_setopt_array($this->_curl, $listOptions);
+        curl_setopt_array($this->curl, $listOptions);
     }
 
 
@@ -130,6 +130,6 @@ class Curl extends Component
      */
     public function __destruct()
     {
-        curl_close($this->_curl);
+        curl_close($this->curl);
     }
 }

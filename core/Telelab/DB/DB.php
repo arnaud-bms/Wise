@@ -14,17 +14,17 @@ class DB extends Component
     /**
      * @var DB
      */
-    private static $_instance = null;
+    private static $instance = null;
 
     /**
      * @var Connection to DB
      */
-    private static $_driver = null;
+    private static $driver = null;
     
     /**
      * @var String Charset to use
      */
-    private static $_charset = null;
+    private static $charset = null;
 
     /**
      * @var array Required fields
@@ -62,7 +62,7 @@ class DB extends Component
                 );
         }
 
-        self::$_driver = new $driver(
+        self::$driver = new $driver(
             $config['host'],
             $config['dbname'],
             $config['user'],
@@ -70,8 +70,8 @@ class DB extends Component
         );
 
         if (isset($config['charset']) && $config['charset'] !== null) {
-            self::$_charset = $config['charset'];
-            self::$_driver->setCharset($config['charset']);
+            self::$charset = $config['charset'];
+            self::$driver->setCharset($config['charset']);
         }
     }
 
@@ -84,12 +84,12 @@ class DB extends Component
      */
     public static function getInstance($config = null)
     {
-        if (!self::$_instance instanceOf DB) {
+        if (!self::$instance instanceOf DB) {
             Logger::log('['.__CLASS__.'] new instance', Logger::LOG_DEBUG);
-            self::$_instance = new DB($config);
+            self::$instance = new DB($config);
         }
 
-        return self::$_instance;
+        return self::$instance;
     }
 
 
@@ -102,7 +102,7 @@ class DB extends Component
      */
     public function __call($method, $argv)
     {
-        return call_user_func_array(array(self::$_driver, $method), $argv);
+        return call_user_func_array(array(self::$driver, $method), $argv);
     }
 
 
@@ -111,10 +111,10 @@ class DB extends Component
      */
     public static function reset()
     {
-       self::$_driver->reset();
+       self::$driver->reset();
        
-       if (self::$_charset !== null) {
-            self::$_driver->setCharset(self::$_charset);
+       if (self::$charset !== null) {
+            self::$driver->setCharset(self::$charset);
         }
     }
 
@@ -126,7 +126,7 @@ class DB extends Component
      */
     public function close()
     {
-        self::$_instance = null;
-        self::$_driver->close();
+        self::$instance = null;
+        self::$driver->close();
     }
 }

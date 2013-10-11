@@ -16,12 +16,12 @@ abstract class Controller extends Component
     /**
      * @var array Repository loaded
      */
-    protected $_repositoryLoaded = array();
+    protected $repositoryLoaded = array();
 
     /**
      * @var Server instance
      */
-    private static $_server = null;
+    private static $server = null;
 
 
     /**
@@ -31,7 +31,7 @@ abstract class Controller extends Component
      */
     protected function _init($config)
     {
-        self::$_server = new Server();
+        self::$server = new Server();
     }
 
     /**
@@ -54,11 +54,11 @@ abstract class Controller extends Component
      */
     public function getRepository($repository)
     {
-        if (!isset($this->_repositoryLoaded[$repository])) {
-            $this->_repositoryLoaded[$repository] = new $repository();
+        if (!isset($this->repositoryLoaded[$repository])) {
+            $this->repositoryLoaded[$repository] = new $repository();
         }
 
-        return $this->_repositoryLoaded[$repository];
+        return $this->repositoryLoaded[$repository];
     }
 
 
@@ -71,8 +71,8 @@ abstract class Controller extends Component
      */
     public function __call($method, $argv)
     {
-        if (method_exists(self::$_server, $method)) {
-            return call_user_func_array(array(self::$_server, $method), $argv);
+        if (method_exists(self::$server, $method)) {
+            return call_user_func_array(array(self::$server, $method), $argv);
         }
 
         return null;

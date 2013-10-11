@@ -14,7 +14,7 @@ class CodeGen extends ComponentStatic
     /**
      * @var array list chars used for generate code
      */
-    private static $_chars = array();
+    private static $chars = array();
 
     /**
      * @var array Words used for generate simple code
@@ -38,9 +38,9 @@ class CodeGen extends ComponentStatic
      */
     protected static function _init($config)
     {
-        self::$_chars['0-9'] = array_map('chr', range(48, 57));
-        self::$_chars['A-Z'] = array_map('chr', range(65, 90));
-        self::$_chars['a-z'] = array_map('chr', range(97, 122));
+        self::$chars['0-9'] = array_map('chr', range(48, 57));
+        self::$chars['A-Z'] = array_map('chr', range(65, 90));
+        self::$chars['a-z'] = array_map('chr', range(97, 122));
     }
 
 
@@ -72,9 +72,9 @@ class CodeGen extends ComponentStatic
     private static function _getCharsToUsed($chars)
     {
         $charsUsedToGenerate = array();
-        foreach (self::$_chars as $key => $listChars) {
+        foreach (self::$chars as $key => $listChars) {
             if (strpos($chars, $key) !== false) {
-                $charsUsedToGenerate = array_merge($charsUsedToGenerate, self::$_chars[$key]);
+                $charsUsedToGenerate = array_merge($charsUsedToGenerate, self::$chars[$key]);
             }
         }
 

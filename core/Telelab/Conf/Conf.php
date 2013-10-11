@@ -16,12 +16,12 @@ class Conf extends ComponentStatic
     /**
      * @var array List config setted
      */
-    protected static $_config = array();
+    protected static $config = array();
 
     /**
      * @var Cache
      */
-    protected static $_cache;
+    protected static $cache;
 
     /**
      * Set config
@@ -31,7 +31,7 @@ class Conf extends ComponentStatic
     public static function loadConfig($fileConf)
     {
         self::_initCache();
-        self::$_config = self::_getConfFromFile($fileConf);
+        self::$config = self::_getConfFromFile($fileConf);
     }
 
 
@@ -43,20 +43,20 @@ class Conf extends ComponentStatic
     public static function mergeConfig($fileConf)
     {
         self::_initCache();
-        self::$_config = array_merge(
-            self::$_config,
+        self::$config = array_merge(
+            self::$config,
             self::_getConfFromFile($fileConf)
         );
     }
 
 
     /**
-     * Init cache system if the section conf_cache exist
+     * Init cache system if the section confcache exist
      */
     private static function _initCache()
     {
-        if (self::$_cache === null && $cacheConf = self::getConfig('conf_cache')) {
-            self::$_cache = new \Telelab\Cache\Cache($cacheConf);
+        if (self::$cache === null && $cacheConf = self::getConfig('confcache')) {
+            self::$cache = new \Telelab\Cache\Cache($cacheConf);
         }
     }
 
@@ -71,7 +71,7 @@ class Conf extends ComponentStatic
     private static function _getConfFromFile($fileConf)
     {
         $cacheId = 'telelab:conf:'.md5($fileConf);
-        if (self::$_cache !== null && $config = self::$_cache->getCache($cacheId)) {
+        if (self::$cache !== null && $config = self::$cache->getCache($cacheId)) {
             Logger::log('['.__CLASS__.'] conf file from cache -> '.$fileConf, Logger::LOG_DEBUG);
             return $config;
         }
@@ -92,8 +92,8 @@ class Conf extends ComponentStatic
                 throw new ConfException("File '$fileConf' it's not valid", 400);
         }
 
-        if (self::$_cache !== null) {
-            self::$_cache->setCache($cacheId, $config);
+        if (self::$cache !== null) {
+            self::$cache->setCache($cacheId, $config);
         }
 
         return $config;
@@ -108,7 +108,7 @@ class Conf extends ComponentStatic
      */
     public static function getConfig($section = null)
     {
-        $config = self::$_config;
+        $config = self::$config;
         if ($section !== null) {
             $section = explode('.', $section);
             foreach ($section as $field) {
@@ -127,7 +127,7 @@ class Conf extends ComponentStatic
      */
     public static function setConfig($section, $newConfig)
     {
-        $config =& self::$_config;
+        $config =& self::$config;
         $section = explode('.', $section);
         foreach ($section as $field) {
             if (isset($config[$field])) {

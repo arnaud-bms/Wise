@@ -21,12 +21,12 @@ class File extends Driver
     /**
      * @var string Path to cache folder
      */
-    protected $_path;
+    protected $path;
 
     /**
      * @var int ttl
      */
-    protected $_ttl;
+    protected $ttl;
 
     /**
      * Init File driver
@@ -35,8 +35,8 @@ class File extends Driver
      */
     public function _init($config)
     {
-        $this->_path = $config['path'];
-        $this->_ttl  = $config['ttl'];
+        $this->path = $config['path'];
+        $this->ttl  = $config['ttl'];
     }
 
 
@@ -48,9 +48,9 @@ class File extends Driver
      */
     public function getCache($uniqId)
     {
-        $file = $this->_path.'/'.$uniqId.'.cache';
+        $file = $this->path.'/'.$uniqId.'.cache';
         if (file_exists($file)) {
-            if (filemtime($file) > (time() - $this->_ttl)) {
+            if (filemtime($file) > (time() - $this->ttl)) {
                 return file_get_contents($file);
             } else {
                 unlink($file);
@@ -67,7 +67,7 @@ class File extends Driver
      */
     public function setCache($uniqId, $content, $ttl = null)
     {
-        $file = $this->_path.'/'.$uniqId.'.cache';
+        $file = $this->path.'/'.$uniqId.'.cache';
         if (!is_dir(dirname($file))) {
             mkdir(dirname($file), 0775, true);
         }
