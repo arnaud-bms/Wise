@@ -31,7 +31,7 @@ class Logger extends ComponentStatic
     /**
      * @var array Required fields
      */
-    protected static $_requiredFields = array(
+    protected static $requiredFields = array(
         'driver',
         'enable',
     );

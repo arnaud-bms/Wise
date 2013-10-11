@@ -13,7 +13,7 @@ class File extends Driver
     /**
      * @var array Required fields
      */
-    protected $_requiredFields = array(
+    protected $requiredFields = array(
         'file'
     );
 

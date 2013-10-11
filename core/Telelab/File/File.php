@@ -36,7 +36,7 @@ class File extends Component
     /**
      * @var array Required fields
      */
-    protected $_requiredFields = array(
+    protected $requiredFields = array(
         'path',
         'ext',
     );

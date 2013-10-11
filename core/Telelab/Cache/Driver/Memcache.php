@@ -24,7 +24,7 @@ class Memcache extends Driver
     /**
      * @var array Required fields
      */
-    protected $_requiredFields = array(
+    protected $requiredFields = array(
         'host',
         'port',
         'ttl'

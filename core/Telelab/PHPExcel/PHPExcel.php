@@ -11,18 +11,6 @@ use Telelab\Component\ComponentStatic;
 class PHPExcel extends ComponentStatic
 {
 
-
-    /**
-     * Init phpExcel
-     *
-     * @param array $config
-     */
-    protected static function init($config)
-    {
-
-    }
-
-
     /**
      * Load file
      *

@@ -13,7 +13,7 @@ class Mailer extends ComponentStatic
     /**
      * @var array Required fields
      */
-    protected static $_requiredFields = array(
+    protected static $requiredFields = array(
         'host_default',
         'host_attachments'
     );
@@ -51,7 +51,7 @@ class Mailer extends ComponentStatic
     /**
      * Sendmail
      *
-     * @param string $from
+     * @param string $from Expiditor
      * @param string $fromName
      * @param string $to
      * @param string $subject
@@ -63,16 +63,16 @@ class Mailer extends ComponentStatic
      * @return boolean
      */
     public static function sendMail(
-            $from = '', 
-            $fromName = '', 
-            $to = '', 
-            $subject = '',
-            $msgHtml = '', 
-            $msgTxt = '', 
-            $attachments = null, 
-            $utf8 = false, 
-            $replyTo = null
-            )
+        $from = '',
+        $fromName = '',
+        $to = '',
+        $subject = '',
+        $msgHtml = '',
+        $msgTxt = '',
+        $attachments = null,
+        $utf8 = false,
+        $replyTo = null
+    )
     {
         self::$phpMailer->IsSMTP();
 
@@ -95,11 +95,13 @@ class Mailer extends ComponentStatic
             self::$phpMailer->CharSet = "UTF-8";
         }
 
-        if (!$utf8 && mb_detect_encoding($msgHtml) === 'UTF-8')
+        if (!$utf8 && mb_detect_encoding($msgHtml) === 'UTF-8') {
             $msgHtml = utf8_decode($msgHtml);
+        }
 
-        if (!$utf8 && mb_detect_encoding($subject) === 'UTF-8')
+        if (!$utf8 && mb_detect_encoding($subject) === 'UTF-8') {
             $subject = utf8_decode($subject);
+        }
 
         self::$phpMailer->Subject = $subject;
 
