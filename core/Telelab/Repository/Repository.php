@@ -16,17 +16,17 @@ abstract class Repository extends Component
     /**
      * @var string Table name of the entity
      */
-    private $_tableName;
+    private $tableName;
 
     /**
      * @var boolean check if repository has entity
      */
-    private $_hasEntity;
+    private $hasEntity;
 
     /**
      * @var string entity class name
      */
-    private $_entityName;
+    private $entityName;
 
     /**
      * @staticvar string Type data to return
@@ -37,7 +37,7 @@ abstract class Repository extends Component
     /**
      * @var string Type result to return
      */
-    private $_resultType = self::RETURN_ENTITY;
+    private $resultType = self::RETURN_ENTITY;
 
 
     /**
@@ -49,7 +49,7 @@ abstract class Repository extends Component
     {
         $this->_initEntity();
         $this->_initTableName();
-        $this->_sqlBuilder = new SqlBuilder($this->_tableName);
+        $this->_sqlBuilder = new SqlBuilder($this->tableName);
     }
 
 
@@ -58,14 +58,14 @@ abstract class Repository extends Component
      */
     protected function _initEntity()
     {
-        if ($this->_hasEntity === null) {
+        if ($this->hasEntity === null) {
             $entityName        = str_replace('Repository', 'Entity', get_called_class());
-            $this->_entityName = $entityName;
+            $this->entityName = $entityName;
 
             try {
-                $this->_hasEntity  = class_exists($entityName);
+                $this->hasEntity  = class_exists($entityName);
             } catch (AutoloaderException $e) {
-                $this->_hasEntity = false;
+                $this->hasEntity = false;
             }
         }
     }
@@ -77,10 +77,10 @@ abstract class Repository extends Component
     private function _initTableName()
     {
         if (!empty($this->_table)) {
-            $this->_tableName = $this->_table;
+            $this->tableName = $this->_table;
         } else {
             preg_match('#([a-zA-Z]+)Repository$#', get_called_class(), $matches);
-            $this->_tableName = strtolower($matches[1]);
+            $this->tableName = strtolower($matches[1]);
         }
     }
 
@@ -301,9 +301,9 @@ abstract class Repository extends Component
     public function setResultType($type)
     {
         if ($type === self::RETURN_ENTITY) {
-            $this->_resultType = self::RETURN_ENTITY;
+            $this->resultType = self::RETURN_ENTITY;
         } else {
-            $this->_resultType = self::RETURN_ARRAY;
+            $this->resultType = self::RETURN_ARRAY;
         }
     }
 
@@ -316,8 +316,8 @@ abstract class Repository extends Component
      */
     protected function _getResult($row)
     {
-        if ($row && $this->_resultType === self::RETURN_ENTITY && $this->_hasEntity) {
-            $row = new $this->_entityName($row);
+        if ($row && $this->resultType === self::RETURN_ENTITY && $this->hasEntity) {
+            $row = new $this->entityName($row);
         }
 
         return $row;

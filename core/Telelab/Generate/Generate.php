@@ -20,12 +20,12 @@ class Generate extends Component
     /**
      * @var array Directory to generate files
      */
-    protected $_dir;
+    protected $dir;
 
     /**
      * @var array alias to list files
      */
-    protected $_aliasFile = array();
+    protected $aliasFile = array();
 
 
     /**
@@ -35,7 +35,7 @@ class Generate extends Component
      */
     protected function _init($config)
     {
-        $this->_dir = $config['dir'];
+        $this->dir = $config['dir'];
         if (isset($config['alias'])) {
             $this->setAliasFiles($config['alias']);
         }
@@ -49,7 +49,7 @@ class Generate extends Component
      */
     public function setAliasFiles($alias)
     {
-        $this->_aliasFile = $alias;
+        $this->aliasFile = $alias;
     }
 
 
@@ -61,14 +61,14 @@ class Generate extends Component
      */
     public function generateFile($alias, $content)
     {
-        foreach ($this->_aliasFile as $pattern => $filename) {
+        foreach ($this->aliasFile as $pattern => $filename) {
             $pattern = '#'.$pattern.'#';
             if (preg_match($pattern, $alias, $argv)) {
                 array_shift($argv);
                 foreach ($argv as $key => $value) {
                     $filename = str_replace('$'.($key+1), $value, $filename);
                 }
-                file_put_contents($this->_dir.$filename, $content);
+                file_put_contents($this->dir.$filename, $content);
             }
         }
     }

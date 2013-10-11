@@ -14,7 +14,7 @@ class View extends Component
     /**
      * @var CacheDriver
      */
-    protected $_driver;
+    protected $driver;
 
     /**
      * @var array Required fields
@@ -46,7 +46,7 @@ class View extends Component
 
         $driverConfig = isset($config[$config['driver']])
                       ? $config[$config['driver']] : null;
-        $this->_driver = new $driver($driverConfig);
+        $this->driver = new $driver($driverConfig);
     }
 
 
@@ -57,7 +57,7 @@ class View extends Component
      */
     public function setDataList($dataList)
     {
-        $this->_driver->setDataList($dataList);
+        $this->driver->setDataList($dataList);
     }
 
 
@@ -69,7 +69,7 @@ class View extends Component
      */
     public function setData($field, $value)
     {
-        $this->_driver->setData($field, $value);
+        $this->driver->setData($field, $value);
     }
 
 
@@ -81,7 +81,7 @@ class View extends Component
      */
     public function getData($field)
     {
-        return $this->_driver->getData($field);
+        return $this->driver->getData($field);
     }
 
 
@@ -92,7 +92,7 @@ class View extends Component
      */
     public function display($template)
     {
-        $this->_driver->display($template);
+        $this->driver->display($template);
     }
 
 
@@ -104,6 +104,6 @@ class View extends Component
      */
     public function fetch($template)
     {
-        return $this->_driver->fetch($template);
+        return $this->driver->fetch($template);
     }
 }

@@ -22,17 +22,17 @@ class Router extends Component
     /**
      * @var string current sapi_name
      */
-    private $_sapiName = null;
+    private $sapiName = null;
 
     /**
      * @var string Name of route app loaded
      */
-    protected static $_routeAppLoaded = null;
+    protected static $routeAppLoaded = null;
 
     /**
      * @var array Required fields to route app
      */
-    private $_requiredFieldsRouteApp = array(
+    private $requiredFieldsRouteApp = array(
         'prefix',
         'app'
     );
@@ -40,14 +40,14 @@ class Router extends Component
     /**
      * @var array Required fields to route
      */
-    private $_requiredFieldsRoute = array(
+    private $requiredFieldsRoute = array(
         'pattern'
     );
 
     /**
      * @var Cache
      */
-    private $_cache;
+    private $cache;
 
 
     /**
@@ -57,20 +57,20 @@ class Router extends Component
      */
     protected function _init($config)
     {
-        $this->_sapiName = php_sapi_name();
+        $this->sapiName = php_sapi_name();
         $this->setRouteAppLoaded(null);
         $this->_initCache();
-        Logger::log('['.__CLASS__.'] call by sapi -> '.$this->_sapiName, Logger::LOG_DEBUG);
+        Logger::log('['.__CLASS__.'] call by sapi -> '.$this->sapiName, Logger::LOG_DEBUG);
     }
 
 
     /**
-     * Init cache system if the section router_cache exist
+     * Init cache system if the section routercache exist
      */
     private function _initCache()
     {
-        if ($this->_cache === null && $routerConf = Conf::getConfig('router_cache')) {
-            $this->_cache = new \Telelab\Cache\Cache($routerConf);
+        if ($this->cache === null && $routerConf = Conf::getConfig('routercache')) {
+            $this->cache = new \Telelab\Cache\Cache($routerConf);
         }
     }
 
@@ -80,7 +80,7 @@ class Router extends Component
      */
     public static function getRouteAppLoaded()
     {
-        return self::$_routeAppLoaded;
+        return self::$routeAppLoaded;
     }
 
 
@@ -91,7 +91,7 @@ class Router extends Component
      */
     public static function setRouteAppLoaded($routeName)
     {
-        self::$_routeAppLoaded = $routeName;
+        self::$routeAppLoaded = $routeName;
     }
 
 
@@ -104,7 +104,7 @@ class Router extends Component
     public function getRouteInfos($route = null)
     {
         if ($route === null) {
-            if ($this->_sapiName === self::SAPI_CLI) {
+            if ($this->sapiName === self::SAPI_CLI) {
                 array_shift($_SERVER['argv']);
                 $route = implode($_SERVER['argv'], ' ');
             } else {
@@ -131,7 +131,7 @@ class Router extends Component
         $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
 
         $cacheId = 'telelab:router:'.md5($route.$httpMethod);
-        if ($this->_cache === null || $routeInfos = $this->_cache->getCache($cacheId)) {
+        if ($this->cache === null || $routeInfos = $this->cache->getCache($cacheId)) {
             Logger::log('['.__CLASS__.'] route from cache -> '.$route, Logger::LOG_DEBUG);
             return $routeInfos;
         } else {
@@ -160,8 +160,8 @@ class Router extends Component
             throw new RouterException("Route '$route' not matches", 404);
         }
 
-        if ($this->_cache !== null) {
-            $this->_cache->setCache($cacheId, $routeInfos);
+        if ($this->cache !== null) {
+            $this->cache->setCache($cacheId, $routeInfos);
         }
 
         return $routeInfos;
@@ -175,7 +175,7 @@ class Router extends Component
      */
     private function _checkFieldsRoute($route)
     {
-        foreach ($this->_requiredFieldsRoute as $field) {
+        foreach ($this->requiredFieldsRoute as $field) {
             if (!array_key_exists($field, $route)) {
                 throw new RouterException(
                     "The field '$field' is required in route", 407
@@ -200,8 +200,8 @@ class Router extends Component
 
                 $matchPrefix   = preg_match('/^'.$routeApp['prefix'].'/', $route);
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = (empty($routeApp['host_pattern']) && empty($routeApp['host'])) || $this->_sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
-                $matchType     = empty($routeApp['type']) || $routeApp['type'] === $this->_sapiName;
+                $matchHostname = (empty($routeApp['host_pattern']) && empty($routeApp['host'])) || $this->sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
+                $matchType     = empty($routeApp['type']) || $routeApp['type'] === $this->sapiName;
                 
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ($matchType && $matchHostname && $matchPrefix) {
@@ -233,7 +233,7 @@ class Router extends Component
      */
     private function _checkFieldsRouteApp($routeApp)
     {
-        foreach ($this->_requiredFieldsRouteApp as $field) {
+        foreach ($this->requiredFieldsRouteApp as $field) {
             if (!array_key_exists($field, $routeApp)) {
                 throw new RouterException(
                     "The field '$field' is required in routeApp", 406

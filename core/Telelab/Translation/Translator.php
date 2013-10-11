@@ -15,37 +15,37 @@ class Translator extends Component
     /**
      * @var Translator
      */
-    private static $_instance = null;
+    private static $instance = null;
 
     /**
      * @var string locale
      */
-    protected $_locale;
+    protected $locale;
 
     /**
      * @var array catalogues files
      */
-    protected $_catalogues = array();
+    protected $catalogues = array();
 
     /**
      * @var string
      */
-    private $_fallbackLocale  = 'fr';
+    private $fallbackLocale  = 'fr';
 
     /**
      * @var string
      */
-    private $_fallbackCatalogue = 'messages';
+    private $fallbackCatalogue = 'messages';
 
     /**
      * @var array availables languages
      */
-    protected $_availableLocales = array('fr');
+    protected $availableLocales = array('fr');
 
     /**
      * @var string lang directory
      */
-    protected $_languagePath;
+    protected $languagePath;
 
     /**
      * @var array Required fields
@@ -62,8 +62,8 @@ class Translator extends Component
      */
     protected function _init($config)
     {
-        $this->_locale = $config['locale'];
-        $this->_languagePath = $config['language_path'];
+        $this->locale = $config['locale'];
+        $this->languagePath = $config['language_path'];
     }
 
 
@@ -75,12 +75,12 @@ class Translator extends Component
      */
     public static function getInstance($config = null)
     {
-        if (!self::$_instance instanceOf Translator) {
+        if (!self::$instance instanceOf Translator) {
             Logger::log('['.__CLASS__.'] new instance', Logger::LOG_DEBUG);
-            self::$_instance = new Translator($config);
+            self::$instance = new Translator($config);
         }
 
-        return self::$_instance;
+        return self::$instance;
     }
 
 
@@ -91,7 +91,7 @@ class Translator extends Component
      */
     public function setLocale($locale)
     {
-        $this->_locale = $locale;
+        $this->locale = $locale;
     }
 
 
@@ -102,7 +102,7 @@ class Translator extends Component
      */
     public function getLocale()
     {
-        return $this->_locale;
+        return $this->locale;
     }
 
 
@@ -113,7 +113,7 @@ class Translator extends Component
      */
     public function setFallbackLocale($locale)
     {
-        $this->_fallbackLocale = (array)$locale;
+        $this->fallbackLocale = (array)$locale;
     }
 
 
@@ -124,7 +124,7 @@ class Translator extends Component
      */
     public function setFallbackCatalogue($catalogue)
     {
-        $this->_fallbackCatalogue = (array)$catalogue;
+        $this->fallbackCatalogue = (array)$catalogue;
     }
 
 
@@ -135,7 +135,7 @@ class Translator extends Component
      */
     public function setAvailableLocales($locales)
     {
-        $this->_availableLocales = (array)$locales;
+        $this->availableLocales = (array)$locales;
     }
 
 
@@ -150,17 +150,17 @@ class Translator extends Component
      */
     public static function translate($id, array $parameters = array(), $catalogue = 'messages', $locale = null)
     {
-        $_instance = self::getInstance();
+        $instance = self::getInstance();
 
         if (!isset($locale)) {
-            $locale = $_instance->getLocale();
+            $locale = $instance->getLocale();
         }
 
-        if (!isset($_instance->_catalogues[$catalogue])) {
-            $catalogue = $_instance->_loadCatalogue($catalogue);
+        if (!isset($instance->catalogues[$catalogue])) {
+            $catalogue = $instance->_loadCatalogue($catalogue);
         }
 
-        return strtr($_instance->_translate($id, $locale, $catalogue), $parameters);
+        return strtr($instance->_translate($id, $locale, $catalogue), $parameters);
     }
 
 
@@ -173,18 +173,18 @@ class Translator extends Component
      */
     public static function translateCatalogue($catalogue = 'messages', $locale = null)
     {
-        $_instance = self::getInstance();
+        $instance = self::getInstance();
 
         if (!isset($locale)) {
-            $locale = $_instance->getLocale();
+            $locale = $instance->getLocale();
         }
 
-        if (!isset($_instance->_catalogues[$catalogue])) {
-            $catalogue = $_instance->_loadCatalogue($catalogue);
+        if (!isset($instance->catalogues[$catalogue])) {
+            $catalogue = $instance->_loadCatalogue($catalogue);
         }
 
         $fullCatalogue = array();
-        foreach ($_instance->_catalogues[$catalogue]->message as $message) {
+        foreach ($instance->catalogues[$catalogue]->message as $message) {
             $fullCatalogue[(string)$message['id']] = (string)$message->$locale;
         }
 
@@ -204,7 +204,7 @@ class Translator extends Component
     protected function _translate($id, $locale, $catalogue)
     {
         $query = '/messages/message[@id=\''.$id.'\']';
-        $result = $this->_catalogues[$catalogue]->xpath($query);
+        $result = $this->catalogues[$catalogue]->xpath($query);
 
         if (empty($result)) {
             throw new TranslatorException('Empty translation : '.$id);
@@ -231,12 +231,12 @@ class Translator extends Component
      */
     protected function _loadCatalogue($catalogue)
     {
-        $file = rtrim($this->_languagePath, '/').'/'.$catalogue.'.xml';
+        $file = rtrim($this->languagePath, '/').'/'.$catalogue.'.xml';
 
         if (file_exists($file)) {
-            $this->_catalogues[$catalogue] = simplexml_load_file($file);
+            $this->catalogues[$catalogue] = simplexml_load_file($file);
         } else if ($this->fallbackCatalogue !== $catalogue) {
-            if (!isset($this->_catalogues[$this->fallbackCatalogue])) {
+            if (!isset($this->catalogues[$this->fallbackCatalogue])) {
                 $this->_loadCatalogue($this->fallbackCatalogue);
             }
 

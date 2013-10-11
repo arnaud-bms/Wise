@@ -15,22 +15,22 @@ class File extends Component
     /**
      * @var string Path to move uploaded file
      */
-    private $_uploadedFilePath;
+    private $uploadedFilePath;
 
     /**
      * @var array Extension available for upload
      */
-    private $_uploadedFileExt = array();
+    private $uploadedFileExt = array();
 
     /**
      * @var int|array Max size
      */
-    private $_maxSize;
+    private $maxSize;
 
     /**
      * @var string Current ext uploaded
      */
-    private $_currentExt;
+    private $currentExt;
 
 
     /**
@@ -45,7 +45,7 @@ class File extends Component
     /**
      * @var array mime types
      */
-    private $_mimeTypes = array(
+    private $mimeTypes = array(
         '3gp'   => 'audio/mpeg',
         'gif'   => 'image/gif',
         'jpeg'  => 'image/jpeg',
@@ -61,10 +61,10 @@ class File extends Component
      */
     protected function _init($config)
     {
-        $this->_uploadedFilePath = $config['path'];
-        $this->_uploadedFileExt  = explode(',', $config['ext']);
+        $this->uploadedFilePath = $config['path'];
+        $this->uploadedFileExt  = explode(',', $config['ext']);
         if (isset($config['max_size'])) {
-            $this->_maxSize = $config['max_size'];
+            $this->maxSize = $config['max_size'];
         }
     }
 
@@ -120,16 +120,16 @@ class File extends Component
     {
         $fileInfos = pathinfo($file['name']);
 
-        if (empty($fileInfos['extension']) || !in_array(strtolower($fileInfos['extension']), $this->_uploadedFileExt)) {
+        if (empty($fileInfos['extension']) || !in_array(strtolower($fileInfos['extension']), $this->uploadedFileExt)) {
             throw new FileUploadedException("Extension not allowed", 6);
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        if (isset($this->_mimeTypes[$fileInfos['extension']]) && $this->_mimeTypes[$fileInfos['extension']] !== finfo_file($finfo, $file['tmp_name'])) {
+        if (isset($this->mimeTypes[$fileInfos['extension']]) && $this->mimeTypes[$fileInfos['extension']] !== finfo_file($finfo, $file['tmp_name'])) {
             throw new FileUploadedException("Extension not allowed", 6);
         }
 
-        $this->_currentExt = $fileInfos['extension'];
+        $this->currentExt = $fileInfos['extension'];
     }
 
 
@@ -141,14 +141,14 @@ class File extends Component
      */
     private function _checkMaxSize($file)
     {
-        if ($this->_maxSize === null) {
+        if ($this->maxSize === null) {
             return true;
         }
 
-        if (is_array($this->_maxSize) && isset($this->_maxSize[$this->_currentExt])) {
-            $maxSize = $this->_maxSize[$this->_currentExt];
+        if (is_array($this->maxSize) && isset($this->maxSize[$this->currentExt])) {
+            $maxSize = $this->maxSize[$this->currentExt];
         } else {
-            $maxSize = $this->_maxSize;
+            $maxSize = $this->maxSize;
         }
 
         if ($file['size'] > $maxSize) {
@@ -166,9 +166,9 @@ class File extends Component
      */
     private function _moveUploadedFile($file)
     {
-        $filenameUploaded = $this->_uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid().'.'. $this->_currentExt;
-        if (!is_dir($this->_uploadedFilePath)) {
-            mkdir($this->_uploadedFilePath, 0775, true);
+        $filenameUploaded = $this->uploadedFilePath.'/'.date('Y-m-d').'_'.uniqid().'.'. $this->currentExt;
+        if (!is_dir($this->uploadedFilePath)) {
+            mkdir($this->uploadedFilePath, 0775, true);
         }
 
         if (!move_uploaded_file($file['tmp_name'], $filenameUploaded)) {

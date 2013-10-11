@@ -14,27 +14,27 @@ class Paginator extends ComponentStatic
     /**
      * @var int Current page
      */
-    protected static $_currentPage;
+    protected static $currentPage;
 
     /**
      * @var int Total page
      */
-    protected static $_totalPages;
+    protected static $totalPages;
 
     /**
      * @var int Total items
      */
-    protected static $_totalItems;
+    protected static $totalItems;
 
     /**
      * @var int Item per page
      */
-    protected static $_stepItems;
+    protected static $stepItems;
 
     /**
      * @var int Number links around current page
      */
-    protected static $_around = 4;
+    protected static $around = 4;
 
 
     /**
@@ -70,10 +70,10 @@ class Paginator extends ComponentStatic
      */
     private static function _initMembers($current, $totalItems, $stepItem = 10)
     {
-        self::$_currentPage = $current;
-        self::$_totalItems  = $totalItems;
-        self::$_stepItems   = $stepItem;
-        self::$_totalPages  = ceil($totalItems / $stepItem);
+        self::$currentPage = $current;
+        self::$totalItems  = $totalItems;
+        self::$stepItems   = $stepItem;
+        self::$totalPages  = ceil($totalItems / $stepItem);
     }
 
     /**
@@ -94,7 +94,7 @@ class Paginator extends ComponentStatic
      */
     private static function _getPrevious()
     {
-        return self::$_currentPage > 1 ? self::$_currentPage - 1 : null;
+        return self::$currentPage > 1 ? self::$currentPage - 1 : null;
     }
 
 
@@ -105,19 +105,19 @@ class Paginator extends ComponentStatic
      */
     private static function _getLinksAround()
     {
-        if (self::$_currentPage > self::$_totalPages) {
-            return self::$_currentPage = self::$_totalPages;
+        if (self::$currentPage > self::$totalPages) {
+            return self::$currentPage = self::$totalPages;
         }
-        if (self::$_currentPage <= self::$_around) {
+        if (self::$currentPage <= self::$around) {
             $i      = 1;
-            $limit = self::$_totalPages > (self::$_around + self::$_currentPage) ? self::$_around + self::$_currentPage : self::$_totalPages;
+            $limit = self::$totalPages > (self::$around + self::$currentPage) ? self::$around + self::$currentPage : self::$totalPages;
         } else {
-            $i      = self::$_currentPage - self::$_around;
-            $limit = self::$_totalPages > (self::$_currentPage + self::$_around) ? self::$_currentPage + self::$_around : self::$_totalPages ;
+            $i      = self::$currentPage - self::$around;
+            $limit = self::$totalPages > (self::$currentPage + self::$around) ? self::$currentPage + self::$around : self::$totalPages ;
         }
 
-        if ($limit <= (self::$_around * 2 + 1) && (self::$_around * 2 + 1) < self::$_totalPages) {
-            $limit = self::$_around * 2 + 1;
+        if ($limit <= (self::$around * 2 + 1) && (self::$around * 2 + 1) < self::$totalPages) {
+            $limit = self::$around * 2 + 1;
         }
 
         $linksAround = range($i, $limit);
@@ -133,7 +133,7 @@ class Paginator extends ComponentStatic
      */
     private static function _getCurrent()
     {
-        return self::$_currentPage;
+        return self::$currentPage;
     }
 
 
@@ -144,7 +144,7 @@ class Paginator extends ComponentStatic
      */
     private static function _getNext()
     {
-        $next = (self::$_currentPage + 1) <= self::$_totalPages ? self::$_currentPage + 1 : null;
+        $next = (self::$currentPage + 1) <= self::$totalPages ? self::$currentPage + 1 : null;
 
         return $next;
     }
@@ -157,7 +157,7 @@ class Paginator extends ComponentStatic
      */
     private static function _getLast()
     {
-        return self::$_totalPages;
+        return self::$totalPages;
     }
 
 
@@ -168,6 +168,6 @@ class Paginator extends ComponentStatic
      */
     public static function setAround($around)
     {
-        self::$_around = $around;
+        self::$around = $around;
     }
 }

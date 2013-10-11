@@ -20,7 +20,7 @@ class Redis extends Component
     /**
      * @var handle Ref to Redis
      */
-    protected $_redis;
+    protected $redis;
 
 
     /**
@@ -30,11 +30,11 @@ class Redis extends Component
      */
     protected function _init($config)
     {
-        $this->_redis = new \Redis();
+        $this->redis = new \Redis();
 
         $port    = isset($config['port']) ? $config['port'] : null;
         $timeout = isset($config['timeout']) ? $config['timeout'] : null;
-        $this->_redis->connect($config['host'], $port, $timeout);
+        $this->redis->connect($config['host'], $port, $timeout);
 
         if (isset($config['prefix'])) {
             $this->setOption(\Redis::OPT_PREFIX, $config['prefix']);
@@ -50,7 +50,7 @@ class Redis extends Component
      */
     public function setOption($name, $value)
     {
-        return $this->_redis->setOption($name, $value);
+        return $this->redis->setOption($name, $value);
     }
 
 
@@ -62,7 +62,7 @@ class Redis extends Component
      */
     public function getOption($name)
     {
-        return $this->_redis->getOption($name);
+        return $this->redis->getOption($name);
     }
 
 
@@ -73,7 +73,7 @@ class Redis extends Component
      */
     public function ping()
     {
-        return $this->_redis->ping();
+        return $this->redis->ping();
     }
 
 
@@ -87,7 +87,7 @@ class Redis extends Component
      */
     public function setex($key, $value, $ttl)
     {
-        return $this->_redis->setex($key, $value, $ttl);
+        return $this->redis->setex($key, $value, $ttl);
     }
 
 
@@ -101,7 +101,7 @@ class Redis extends Component
      */
     public function psetex($key, $value, $ttl)
     {
-        return $this->_redis->psetex($key, $value, $ttl);
+        return $this->redis->psetex($key, $value, $ttl);
     }
 
 
@@ -114,7 +114,7 @@ class Redis extends Component
      */
     public function setnx($key, $value)
     {
-        return $this->_redis->setnx($key, $value);
+        return $this->redis->setnx($key, $value);
     }
 
 
@@ -126,7 +126,7 @@ class Redis extends Component
      */
     public function delete($key)
     {
-        return $this->_redis->delete((array)$key);
+        return $this->redis->delete((array)$key);
     }
 
 
@@ -139,7 +139,7 @@ class Redis extends Component
      */
     public function set($key, $value)
     {
-        $this->_redis->set($key, $value);
+        $this->redis->set($key, $value);
     }
 
 
@@ -151,7 +151,7 @@ class Redis extends Component
      */
     public function get($key)
     {
-        return $this->_redis->get($key);
+        return $this->redis->get($key);
     }
 
 
@@ -160,6 +160,6 @@ class Redis extends Component
      */
     public function __destruct()
     {
-        $this->_redis->close();
+        $this->redis->close();
     }
 }

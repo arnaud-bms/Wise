@@ -22,52 +22,52 @@ class FrontController extends ComponentStatic
     /**
      * @var string Uniq id generate by route informations
      */
-    protected static $_routeId;
+    protected static $routeId;
 
     /**
      * @var string Route name
      */
-    protected static $_routeName;
+    protected static $routeName;
 
     /**
      * @var string Pattern matches
      */
-    protected static $_pattern;
+    protected static $pattern;
 
     /**
      * @var string Controller class name
      */
-    protected static $_controller;
+    protected static $controller;
 
     /**
      * @var string Method call on controller
      */
-    protected static $_method;
+    protected static $method;
 
     /**
      * @var array Args to pass to controller
      */
-    protected static $_argv = array();
+    protected static $argv = array();
 
     /**
      * @var array Plugins call
      */
-    protected static $_plugins = array();
+    protected static $plugins = array();
 
     /**
      * @var array Ref to plugin loaded
      */
-    protected static $_pluginsLoaded = array();
+    protected static $pluginsLoaded = array();
 
     /**
      * @var boolean Interrupt request
      */
-    protected static $_interrupRequest = false;
+    protected static $interrupRequest = false;
 
     /**
      * @var string Response
      */
-    protected static $_response;
+    protected static $response;
 
     /**
      * Run application
@@ -109,34 +109,34 @@ class FrontController extends ComponentStatic
      */
     protected static function _setRouteInfos($routeInfos)
     {
-        self::$_routeId    = md5(serialize($routeInfos));
-        self::$_routeName  = $routeInfos['name'];
-        self::$_pattern    = $routeInfos['pattern'];
-        self::$_argv       = $routeInfos['argv'];
+        self::$routeId    = md5(serialize($routeInfos));
+        self::$routeName  = $routeInfos['name'];
+        self::$pattern    = $routeInfos['pattern'];
+        self::$argv       = $routeInfos['argv'];
 
         if (isset($routeInfos['controller'])) {
             if (strpos($routeInfos['controller'], '::') !== false) {
-                list(self::$_controller, self::$_method) = explode('::', $routeInfos['controller']);
+                list(self::$controller, self::$method) = explode('::', $routeInfos['controller']);
             } else {
-                self::$_controller = $routeInfos['controller'];
-                self::$_method     = $routeInfos['method'];
+                self::$controller = $routeInfos['controller'];
+                self::$method     = $routeInfos['method'];
             }
         }
 
         if (isset($routeInfos['precall'])) {
-            self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $routeInfos['precall']);
+            self::$plugins[self::PLUGIN_PRECALL] = explode(';', $routeInfos['precall']);
         } elseif ($precall = Conf::getConfig('plugin.default_precall')) {
-            self::$_plugins[self::PLUGIN_PRECALL] = explode(';', $precall);
+            self::$plugins[self::PLUGIN_PRECALL] = explode(';', $precall);
         } else {
-            self::$_plugins[self::PLUGIN_PRECALL] = array();
+            self::$plugins[self::PLUGIN_PRECALL] = array();
         }
 
         if (isset($routeInfos['postcall'])) {
-            self::$_plugins[self::PLUGIN_POSTCALL] = explode(';', $routeInfos['postcall']);
+            self::$plugins[self::PLUGIN_POSTCALL] = explode(';', $routeInfos['postcall']);
         } elseif ($precall = Conf::getConfig('plugin.default_postcall')) {
-            self::$_plugins[self::PLUGIN_POSTCALL] = explode(';', $precall);
+            self::$plugins[self::PLUGIN_POSTCALL] = explode(';', $precall);
         } else {
-            self::$_plugins[self::PLUGIN_POSTCALL] = array();
+            self::$plugins[self::PLUGIN_POSTCALL] = array();
         }
     }
 
@@ -160,25 +160,25 @@ class FrontController extends ComponentStatic
     protected static function _executePlugins($method)
     {
         Logger::log('['.__CLASS__.'] excute '.$method.' plugins', Logger::LOG_DEBUG);
-        if (!self::$_interrupRequest) {
-            foreach (self::$_plugins[$method] as $plugin) {
+        if (!self::$interrupRequest) {
+            foreach (self::$plugins[$method] as $plugin) {
                 if (empty($plugin)) {
                     continue;
                 }
                 
-                if (!isset(self::$_pluginsLoaded[$plugin])) {
-                    self::$_pluginsLoaded[$plugin] = new $plugin();
+                if (!isset(self::$pluginsLoaded[$plugin])) {
+                    self::$pluginsLoaded[$plugin] = new $plugin();
                 }
 
                 if ($method === self::PLUGIN_PRECALL) {
-                    self::$_pluginsLoaded[$plugin]->precall();
+                    self::$pluginsLoaded[$plugin]->precall();
                 } else {
-                    self::$_pluginsLoaded[$plugin]->postCall();
+                    self::$pluginsLoaded[$plugin]->postCall();
                 }
 
                 Logger::log('['.__CLASS__.'] excute plugin -> '.$plugin, Logger::LOG_DEBUG);
 
-                if (self::$_interrupRequest) {
+                if (self::$interrupRequest) {
                     Logger::log('['.__CLASS__.'] interrup request', Logger::LOG_DEBUG);
                     break;
                 }
@@ -192,20 +192,20 @@ class FrontController extends ComponentStatic
      */
     protected static function _executeAction()
     {
-        if (!self::$_interrupRequest && self::$_controller !== null) {
+        if (!self::$interrupRequest && self::$controller !== null) {
             Logger::log(
                 '['.__CLASS__.'] excute action -> '
-                .self::$_controller.'::'.self::$_method.'('.implode(',', self::$_argv).')',
+                .self::$controller.'::'.self::$method.'('.implode(',', self::$argv).')',
                 Logger::LOG_DEBUG
             );
 
-            $controller = new self::$_controller();
-            self::$_response = call_user_func_array(
-                array($controller, self::$_method),
-                self::$_argv
+            $controller = new self::$controller();
+            self::$response = call_user_func_array(
+                array($controller, self::$method),
+                self::$argv
             );
         } else {
-            self::$_response = array();
+            self::$response = array();
         }
     }
 
@@ -215,7 +215,7 @@ class FrontController extends ComponentStatic
      */
     public static function interruptRequest()
     {
-        self::$_interrupRequest = true;
+        self::$interrupRequest = true;
     }
 
 
@@ -226,7 +226,7 @@ class FrontController extends ComponentStatic
      */
     public static function getRouteId()
     {
-        return self::$_routeId;
+        return self::$routeId;
     }
 
 
@@ -237,7 +237,7 @@ class FrontController extends ComponentStatic
      */
     public static function getRouteName()
     {
-        return self::$_routeName;
+        return self::$routeName;
     }
 
 
@@ -248,7 +248,7 @@ class FrontController extends ComponentStatic
      */
     public static function getResponse()
     {
-        return self::$_response;
+        return self::$response;
     }
 
 
@@ -259,6 +259,6 @@ class FrontController extends ComponentStatic
      */
     public static function setResponse($response)
     {
-        self::$_response = $response;
+        self::$response = $response;
     }
 }

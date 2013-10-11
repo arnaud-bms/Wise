@@ -14,12 +14,12 @@ class Server extends Component
     /**
      * @var array server parameters
      */
-    protected $_parameters;
+    protected $parameters;
 
     /**
      * @var array server parameters
      */
-    protected $_requestMethods = array(
+    protected $requestMethods = array(
         'post' => array(),
         'get'  => array(),
         'head' => array()
@@ -29,7 +29,7 @@ class Server extends Component
     /**
      * @var string current request methods
      */
-    protected $_requestMethod = '';
+    protected $requestMethod = '';
 
 
     /**
@@ -39,9 +39,9 @@ class Server extends Component
      */
     protected function _init($config)
     {
-        $this->_requestMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+        $this->requestMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 
-        $this->_parameters = $_REQUEST;
+        $this->parameters = $_REQUEST;
     }
 
 
@@ -52,8 +52,8 @@ class Server extends Component
      */
     public function getParameter($key)
     {
-        if (array_key_exists($key, $this->_parameters)) {
-            return $this->_parameters[$key];
+        if (array_key_exists($key, $this->parameters)) {
+            return $this->parameters[$key];
         }
 
         return null;
@@ -65,6 +65,6 @@ class Server extends Component
      */
     public function getParameters()
     {
-        return $this->_parameters;
+        return $this->parameters;
     }
 }

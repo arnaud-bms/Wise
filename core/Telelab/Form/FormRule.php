@@ -15,22 +15,22 @@ class FormRule
     /**
      * @var Array The value of the Element analysed
      */
-    protected $_elementValue;
+    protected $elementValue;
 
     /**
      * @var int The number of errors occured
      */
-    protected $_countErrors = 0;
+    protected $countErrors = 0;
 
     /**
      * @var array Contains all the Errors
      */
-    protected $_errors = array();
+    protected $errors = array();
 
     /**
      * @var array Contains all the rules
      */
-    protected $_rules = array();
+    protected $rules = array();
 
     /**
      * Prepare an element for the specifics rules
@@ -49,7 +49,7 @@ class FormRule
             }
 
             if (is_array($from[$element])) {
-                $this->_elementValue = $from[$element];
+                $this->elementValue = $from[$element];
             } elseif (is_string($element)) {
                 $sSElts = explode($delimiter, $element);
                 $toElement = $from;
@@ -62,7 +62,7 @@ class FormRule
                         break;
                     }
                 }
-                $this->_elementValue = $toElement;
+                $this->elementValue = $toElement;
             } else {
                 throw new FormRuleException("Element must be a String or an Array");
             }
@@ -96,11 +96,11 @@ class FormRule
         }
 
         while ($rule = array_shift($ruleName)) {
-            if (Filter::$rule($this->_elementValue, $params, $errorMsg)) {
+            if (Filter::$rule($this->elementValue, $params, $errorMsg)) {
                 break;
             } elseif (empty($ruleName)) {
-                $this->_countErrors++;
-                $this->_errors[] = $errorMsg;
+                $this->countErrors++;
+                $this->errors[] = $errorMsg;
             }
         }
     }
@@ -113,7 +113,7 @@ class FormRule
      */
     public function __toString()
     {
-        return (is_array($this->_elementValue) ? reset($this->_elementValue) : (string)$this->_elementValue);
+        return (is_array($this->elementValue) ? reset($this->elementValue) : (string)$this->elementValue);
     }
 
 
@@ -127,22 +127,22 @@ class FormRule
      */
     public function getValue($keyValue = null, $byValue = false)
     {
-        if (is_string($this->_elementValue)) {
-            return $this->_elementValue;
+        if (is_string($this->elementValue)) {
+            return $this->elementValue;
         } else {
             if ($keyValue !== null) {
                 if (!is_string($keyValue) || !is_int($keyValue)) {
                     throw new FormRuleException("KeyValue must be a String or an Integer");
                 }
 
-                if (array_key_exists($keyValue, $this->_elementValue)) {
-                    return $this->_elementValue[$keyValue];
+                if (array_key_exists($keyValue, $this->elementValue)) {
+                    return $this->elementValue[$keyValue];
                 }
             } elseif ($byValue !== false) {
-                $keyArray = array_search($keyValue, $this->_elementValue);
-                return $this->_elementValue[$keyArray];
+                $keyArray = array_search($keyValue, $this->elementValue);
+                return $this->elementValue[$keyArray];
             } else {
-                return $this->_elementValue;
+                return $this->elementValue;
             }
         }
     }
@@ -155,7 +155,7 @@ class FormRule
      */
     public function isValid ()
     {
-        return ($this->_countErrors === 0);
+        return ($this->countErrors === 0);
     }
 
 
@@ -171,11 +171,11 @@ class FormRule
             throw new FormRuleException("Errno must be an Int';");
         }
 
-        if ($errno >= count($this->_errors)) {
+        if ($errno >= count($this->errors)) {
             throw new FormRuleException("Index '$errno' does not exist");
         }
 
-        return $this->_errors[$errno];
+        return $this->errors[$errno];
     }
 
 
@@ -186,7 +186,7 @@ class FormRule
      */
     public function getAllErrors ()
     {
-        return $this->_errors;
+        return $this->errors;
     }
 
 
@@ -203,10 +203,10 @@ class FormRule
         }
 
         if (is_callable($method)) {
-            if (is_array($this->_elementValue) && array_key_exists($index, $this->_elementValue)) {
-                $this->_elementValue[$index] = call_user_func($method, $this->_elementValue[$index]);
-            } elseif (is_string($this->_elementValue)) {
-                $this->_elementValue = call_user_func($method, $this->_elementValue);
+            if (is_array($this->elementValue) && array_key_exists($index, $this->elementValue)) {
+                $this->elementValue[$index] = call_user_func($method, $this->elementValue[$index]);
+            } elseif (is_string($this->elementValue)) {
+                $this->elementValue = call_user_func($method, $this->elementValue);
             }
         } else {
             throw new FormRuleException("Function $method apparently not exists");

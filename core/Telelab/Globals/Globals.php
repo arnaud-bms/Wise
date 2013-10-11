@@ -14,7 +14,7 @@ class Globals extends ComponentStatic
     /**
      * @var array list params
      */
-    private static $_params = array();
+    private static $params = array();
 
 
     /**
@@ -33,14 +33,14 @@ class Globals extends ComponentStatic
 
 
     /**
-     * Set arg to _params
+     * Set arg to params
      *
      * @param string $name
      * @param mixed $value
      */
     public static function set($name, $value)
     {
-        self::$_params[$name] = $value;
+        self::$params[$name] = $value;
     }
 
 
@@ -52,8 +52,8 @@ class Globals extends ComponentStatic
      */
     public static function get($name)
     {
-        if (array_key_exists($name, self::$_params)) {
-            return self::$_params[$name];
+        if (array_key_exists($name, self::$params)) {
+            return self::$params[$name];
         }
     }
 }

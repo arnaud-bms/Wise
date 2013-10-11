@@ -13,7 +13,7 @@ class Format extends Component
     /**
      * @var array Format valid
      */
-    protected $_formatAvailable = array(
+    protected $formatAvailable = array(
         'json', 'xml', 'csv', 'serialize'
     );
 

@@ -16,14 +16,14 @@ class Cache extends Plugin
     /**
      * @var Cache Ref to \Telelab\Cache\Cache
      */
-    private $_cache = null;
+    private $cache = null;
 
     /**
      * Init Plugin Cache
      */
     public function _init($config)
     {
-        $this->_cache = new \Telelab\Cache\Cache();
+        $this->cache = new \Telelab\Cache\Cache();
     }
 
     /**
@@ -33,7 +33,7 @@ class Cache extends Plugin
     {
         $cacheId = FrontController::getRouteId()
                  . '.' . Str::url(FrontController::getRouteName(), '.');
-        if ($content = $this->_cache->getCache($cacheId)) {
+        if ($content = $this->cache->getCache($cacheId)) {
             FrontController::interruptRequest();
             echo $content;
         }
@@ -47,6 +47,6 @@ class Cache extends Plugin
     {
         $cacheId = FrontController::getRouteId()
                  . '.' . Str::url(FrontController::getRouteName(), '.');
-        $this->_cache->setCache($cacheId, FrontController::getResponse());
+        $this->cache->setCache($cacheId, FrontController::getResponse());
     }
 }

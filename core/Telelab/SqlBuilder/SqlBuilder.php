@@ -14,12 +14,12 @@ class SqlBuilder extends Component
     /**
      * @var DB
      */
-    protected $_db;
+    protected $db;
 
     /**
      * @var string table name
      */
-    protected $_table;
+    protected $table;
 
 
     /**
@@ -29,8 +29,8 @@ class SqlBuilder extends Component
      */
     public function _init($table)
     {
-        $this->_table = $table;
-        $this->_db = DB::getInstance();
+        $this->table = $table;
+        $this->db = DB::getInstance();
     }
 
 
@@ -43,7 +43,7 @@ class SqlBuilder extends Component
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->_db, $method), $args);
+        return call_user_func_array(array($this->db, $method), $args);
     }
 
 
@@ -68,12 +68,12 @@ class SqlBuilder extends Component
         $query = sprintf(
             $query,
             $ignore,
-            $this->_table,
+            $this->table,
             implode(',', $fields),
             implode(',', $values)
         );
 
-        return $this->_db->exec($query);
+        return $this->db->exec($query);
     }
 
 
@@ -106,12 +106,12 @@ class SqlBuilder extends Component
         $query = sprintf(
             $query,
             $ignore,
-            $this->_table,
+            $this->table,
             implode(',', $fields),
             rtrim($queryValues, ', ')
         );
 
-        return $this->_db->exec($query);
+        return $this->db->exec($query);
     }
 
 
@@ -131,10 +131,10 @@ class SqlBuilder extends Component
         $whereQuery = $this->_queryAssign($where, 'AND');
 
         $query = sprintf(
-            $query, $ignore, $this->_table, $setQuery, $whereQuery
+            $query, $ignore, $this->table, $setQuery, $whereQuery
         );
 
-        return $this->_db->exec($query);
+        return $this->db->exec($query);
     }
 
 
@@ -150,11 +150,11 @@ class SqlBuilder extends Component
         $whereQuery = $this->_queryAssign($where, 'AND');
         $query = sprintf(
             $query,
-            $this->_table,
+            $this->table,
             $whereQuery
         );
 
-        return $this->_db->exec($query);
+        return $this->db->exec($query);
     }
 
 
@@ -186,7 +186,7 @@ class SqlBuilder extends Component
             $whereQuery = '1';
         }
 
-        $query = sprintf($query, $selectQuery, $this->_table, $whereQuery);
+        $query = sprintf($query, $selectQuery, $this->table, $whereQuery);
 
         /**
          * @todo Optimize order by
@@ -203,7 +203,7 @@ class SqlBuilder extends Component
             $query.= $offset !== null ? ' LIMIT '.(int)$offset.', '.(int)$limit : ' LIMIT '.(int)$limit;
         }
 
-        return $this->_db->query($query);
+        return $this->db->query($query);
     }
 
 
@@ -266,7 +266,7 @@ class SqlBuilder extends Component
         if (is_int($value) || is_float($value)) {
             return $value;
         }
-        return $this->_db->escape($value);
+        return $this->db->escape($value);
     }
 
 
@@ -275,6 +275,6 @@ class SqlBuilder extends Component
      */
     public function closeConnection()
     {
-        $this->_db->close();
+        $this->db->close();
     }
 }

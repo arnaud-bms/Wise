@@ -21,17 +21,17 @@ class Mailer extends ComponentStatic
     /**
      * @var array Ref to PhpMailer
      */
-    private static $_phpMailer;
+    private static $phpMailer;
 
     /**
      * @var string Ip default host
      */
-    private static $_hostDefault;
+    private static $hostDefault;
 
     /**
      * @var string Ip attachments host
      */
-    private static $_hostAttachments;
+    private static $hostAttachments;
 
 
     /**
@@ -42,9 +42,9 @@ class Mailer extends ComponentStatic
     public static function _init($config)
     {
         require_once ROOT_DIR.'/vendor/phpmailer/class.phpmailer.php';
-        self::$_phpMailer       = new \PHPMailer();
-        self::$_hostDefault     = $config['host_default'];
-        self::$_hostAttachments = $config['host_attachments'];
+        self::$phpMailer       = new \PHPMailer();
+        self::$hostDefault     = $config['host_default'];
+        self::$hostAttachments = $config['host_attachments'];
     }
 
 
@@ -65,25 +65,25 @@ class Mailer extends ComponentStatic
     public static function sendMail($from = '', $fromName = '', $to = '', $subject = '',
             $msgHtml = '', $msgTxt = '', $attachments = null, $utf8 = false, $replyTo = null)
     {
-        self::$_phpMailer->IsSMTP();
+        self::$phpMailer->IsSMTP();
 
         if (is_array($attachments)) {
-            self::$_phpMailer->Host = self::$_hostDefault;
+            self::$phpMailer->Host = self::$hostDefault;
         } else {
-            self::$_phpMailer->Host = self::$_hostAttachments;
+            self::$phpMailer->Host = self::$hostAttachments;
         }
-        self::$_phpMailer->SMTPAuth = false;
-        self::$_phpMailer->From = $from;
-        self::$_phpMailer->FromName = $fromName;
+        self::$phpMailer->SMTPAuth = false;
+        self::$phpMailer->From = $from;
+        self::$phpMailer->FromName = $fromName;
 
-        self::$_phpMailer->AddAddress($to);
+        self::$phpMailer->AddAddress($to);
 
         if (!empty($replyTo)) {
-            self::$_phpMailer->AddReplyTo(strtolower($replyTo), '');
+            self::$phpMailer->AddReplyTo(strtolower($replyTo), '');
         }
 
         if ($utf8) {
-            self::$_phpMailer->CharSet = "UTF-8";
+            self::$phpMailer->CharSet = "UTF-8";
         }
 
         if (!$utf8 && mb_detect_encoding($msgHtml) === 'UTF-8')
@@ -92,10 +92,10 @@ class Mailer extends ComponentStatic
         if (!$utf8 && mb_detect_encoding($subject) === 'UTF-8')
             $subject = utf8_decode($subject);
 
-        self::$_phpMailer->Subject = $subject;
+        self::$phpMailer->Subject = $subject;
 
-        self::$_phpMailer->AltBody = $msgTxt;
-        self::$_phpMailer->Body = $msgHtml;
+        self::$phpMailer->AltBody = $msgTxt;
+        self::$phpMailer->Body = $msgHtml;
 
         if (is_array($attachments)) {
             if (array_key_exists('path', $attachments)) {
@@ -111,10 +111,10 @@ class Mailer extends ComponentStatic
                         $attachment['path'] = utf8_decode($attachment['path']);
                     }
 
-                    self::$_phpMailer->AddAttachment($attachment['path'], $attachment['name']);
+                    self::$phpMailer->AddAttachment($attachment['path'], $attachment['name']);
                 }
             }
         }
-        return self::$_phpMailer->Send();
+        return self::$phpMailer->Send();
     }
 }

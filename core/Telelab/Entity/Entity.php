@@ -16,32 +16,32 @@ abstract class Entity extends Component
     /**
      * @var string Table name of the entity
      */
-    protected $_tableName;
+    protected $tableName;
 
     /**
      * @var SqlBuilder
      */
-    protected $_sqlBuilder;
+    protected $sqlBuilder;
 
     /**
      * @var array $field
      */
-    protected $_field = array();
+    protected $field = array();
 
     /**
      * @var array $fieldChanged
      */
-    protected $_fieldChanged = array();
+    protected $fieldChanged = array();
 
     /**
      * @var boolean Check if is new
      */
-    protected $_isNew = true;
+    protected $isNew = true;
 
     /**
      * @var mixed string or array for multiple keys
      */
-    protected $_primaryKey = 'id';
+    protected $primaryKey = 'id';
 
 
     /**
@@ -53,11 +53,11 @@ abstract class Entity extends Component
     {
         $this->_initTableName();
         if ($row !== null && is_array($row)) {
-            $this->_isNew = false;
+            $this->isNew = false;
             $this->_hydrate($row);
         }
 
-        $this->_sqlBuilder = new SqlBuilder($this->_tableName);
+        $this->sqlBuilder = new SqlBuilder($this->tableName);
     }
 
 
@@ -69,7 +69,7 @@ abstract class Entity extends Component
     protected function _hydrate($row)
     {
         foreach ($row as $key => $value) {
-            $this->_field[$key] = $value;
+            $this->field[$key] = $value;
         }
     }
 
@@ -80,10 +80,10 @@ abstract class Entity extends Component
     private function _initTableName()
     {
         if (!empty($this->_table)) {
-            $this->_tableName = $this->_table;
+            $this->tableName = $this->_table;
         } else {
             preg_match('#([a-zA-Z]+)Entity$#', get_called_class(), $matches);
-            $this->_tableName = strtolower($matches[1]);
+            $this->tableName = strtolower($matches[1]);
         }
     }
 
@@ -96,10 +96,10 @@ abstract class Entity extends Component
      */
     public function __get($key)
     {
-        if (array_key_exists($key, $this->_field)) {
-            return $this->_field[$key];
-        } elseif (array_key_exists($key, $this->_fieldChanged)) {
-            return $this->_fieldChanged[$key];
+        if (array_key_exists($key, $this->field)) {
+            return $this->field[$key];
+        } elseif (array_key_exists($key, $this->fieldChanged)) {
+            return $this->fieldChanged[$key];
         }
 
         return null;
@@ -114,8 +114,8 @@ abstract class Entity extends Component
      */
     public function __set($key, $value)
     {
-        if (!array_key_exists($key, $this->_field) || ((string)$value !== $this->_field[$key]) && $value !== $this->_field[$key]) {
-            $this->_fieldChanged[$key] = is_object($value) ? (string)$value : $value;
+        if (!array_key_exists($key, $this->field) || ((string)$value !== $this->field[$key]) && $value !== $this->field[$key]) {
+            $this->fieldChanged[$key] = is_object($value) ? (string)$value : $value;
         }
     }
 
@@ -132,13 +132,13 @@ abstract class Entity extends Component
         $key = Str::camelcaseToUnderscores(substr($method, 3));
 
         if ($prefix === 'get') {
-            if (array_key_exists($key, $this->_field)) {
-                return $this->_field[$key];
+            if (array_key_exists($key, $this->field)) {
+                return $this->field[$key];
             } else {
                 return null;
             }
         } elseif ($prefix === 'set') {
-            $this->_fieldChanged[$key] = $argv[0];
+            $this->fieldChanged[$key] = $argv[0];
         } else {
             throw new \Exception("Undefined method '$method'");
         }
@@ -152,7 +152,7 @@ abstract class Entity extends Component
      */
     public function getAll()
     {
-        return $this->_field;
+        return $this->field;
     }
 
 
@@ -164,32 +164,32 @@ abstract class Entity extends Component
      */
     public function save($setPrimaryKey = false, $criteria = array())
     {
-        if ($this->_isNew) {
-            $rowAffected = $this->_sqlBuilder->insert($this->_fieldChanged);
+        if ($this->isNew) {
+            $rowAffected = $this->sqlBuilder->insert($this->fieldChanged);
             if ($rowAffected > 0 && $setPrimaryKey) {
-                $this->_fieldChanged[$this->getPrimaryKey()] = $this->_sqlBuilder->getLastIdInsert();
+                $this->fieldChanged[$this->getPrimaryKey()] = $this->sqlBuilder->getLastIdInsert();
             }
-            $this->_isNew = false;
-            $this->_field = $this->_fieldChanged;
+            $this->isNew = false;
+            $this->field = $this->fieldChanged;
         } else {
             if (empty($criteria)) {
                 $primaryKey = (array)$this->getPrimaryKey();
                 foreach ($primaryKey as $key) {
-                    $criteria[$key] = $this->_field[$key];
+                    $criteria[$key] = $this->field[$key];
                 }
             }
             
-            if (!empty($this->_fieldChanged)) {
-                $rowAffected = $this->_sqlBuilder->update($this->_fieldChanged, $criteria);
-                foreach ($this->_fieldChanged as $newField => $value) {
-                    $this->_field[$newField] = $value;
+            if (!empty($this->fieldChanged)) {
+                $rowAffected = $this->sqlBuilder->update($this->fieldChanged, $criteria);
+                foreach ($this->fieldChanged as $newField => $value) {
+                    $this->field[$newField] = $value;
                 }
             } else {
                 $rowAffected = 0;
             }
         }
 
-        $this->_fieldChanged = array();
+        $this->fieldChanged = array();
 
         return $rowAffected;
     }
@@ -205,10 +205,10 @@ abstract class Entity extends Component
         $criteria = new Criteria();
         $primaryKey = (array)$this->getPrimaryKey();
         foreach ($primaryKey as $key) {
-            $criteria->add($key, $this->_field[$key], Criteria::EQUAL);
+            $criteria->add($key, $this->field[$key], Criteria::EQUAL);
         }
 
-        return $this->_sqlBuilder->delete($criteria);
+        return $this->sqlBuilder->delete($criteria);
     }
 
 
@@ -219,7 +219,7 @@ abstract class Entity extends Component
      */
     public function hasChanged()
     {
-        return !empty($this->_fieldChanged);
+        return !empty($this->fieldChanged);
     }
 
 
@@ -230,7 +230,7 @@ abstract class Entity extends Component
      */
     public function setIsNew($isNew)
     {
-        $this->_isNew = (boolean)$isNew;
+        $this->isNew = (boolean)$isNew;
     }
 
 
@@ -252,6 +252,6 @@ abstract class Entity extends Component
      */
     public function getPrimaryKey()
     {
-        return $this->_primaryKey;
+        return $this->primaryKey;
     }
 }

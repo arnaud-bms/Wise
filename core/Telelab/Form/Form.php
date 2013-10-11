@@ -13,17 +13,17 @@ class Form extends Component
     /**
      * @var Array Contain all the rules
      */
-    protected $_rules = array ();
+    protected $rules = array ();
 
     /**
      * @var String Contain the first error occured
      */
-    protected $_errors = array();
+    protected $errors = array();
 
     /**
      * @var mixed Callback
      */
-    protected $_callback = array();
+    protected $callback = array();
 
     /**
      * Add one or more rule (instances of formRule)
@@ -35,8 +35,8 @@ class Form extends Component
      */
     public function addRule($name, $from = null, $delimiter = '.')
     {
-        $this->_rules[$name] = new FormRule($name, $from, $delimiter);
-        return $this->_rules[$name];
+        $this->rules[$name] = new FormRule($name, $from, $delimiter);
+        return $this->rules[$name];
     }
 
 
@@ -50,7 +50,7 @@ class Form extends Component
     {
         $callback['method'] = $callback;
         $callback['error']  = $error;
-        $this->_callback[] = $callback;
+        $this->callback[] = $callback;
     }
 
 
@@ -61,26 +61,26 @@ class Form extends Component
      */
     public function validate()
     {
-        foreach ($this->_rules as $ruleName => $rule) {
+        foreach ($this->rules as $ruleName => $rule) {
             if (!$rule->isValid()) {
-                $this->_errors[$ruleName] = $rule->getError();
+                $this->errors[$ruleName] = $rule->getError();
             }
         }
 
-        if (empty($this->_errors) && !empty($this->_callback)) {
-            foreach ($this->_callback as $callback) {
+        if (empty($this->errors) && !empty($this->callback)) {
+            foreach ($this->callback as $callback) {
                 if (is_callable($callback['method'])) {
                     if (is_array($callback['method'])) {
                         $object = $callback['method'][0];
                         $method = $callback['method'][1];
-                        $return = $object->$method($this->_rules, $callback['error']);
+                        $return = $object->$method($this->rules, $callback['error']);
                     } else {
                         $function = $callback['method'];
-                        $return = $function($this->_rules, $callback['error']);
+                        $return = $function($this->rules, $callback['error']);
                     }
 
                     if (!$return) {
-                        $this->_errors['form'] = $callback['error'];
+                        $this->errors['form'] = $callback['error'];
                         break;
                     }
                 } else {
@@ -89,7 +89,7 @@ class Form extends Component
             }
         }
 
-        return empty($this->_errors);
+        return empty($this->errors);
     }
 
     /**
@@ -99,6 +99,6 @@ class Form extends Component
      */
     public function getErrors()
     {
-        return $this->_errors;
+        return $this->errors;
     }
 }
