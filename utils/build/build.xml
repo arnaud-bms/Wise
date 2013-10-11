@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TestJenkins" default="ci" basedir=".">
+<project name="telelab" default="ci" basedir=".">
     <property name="source" value="src" />
 
     <target name="ci"
@@ -33,6 +33,7 @@
         <phingcall target="phpcs" />
         <phingcall target="phpcb" />
         <phingcall target="atoum" />
+        <!--<phingcall target="apigen" />-->
     </target>
     
     <target name="pdepend">
@@ -73,6 +74,10 @@
     </target>
     
     <target name="phpcb">
-        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/www' --output '${project.basedir}/build/code-browser'" escape="false" />
+        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/core' --output '${project.basedir}/build/code-browser'" escape="false" />
+    </target>
+    
+    <target name="apigen">
+        <exec logoutput="true" command="apigen --source '${project.basedir}/core' --destination '${project.basedir}/build/logs' --source '${project.basedir}/www''" escape="false" />
     </target>
 </project>

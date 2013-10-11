@@ -9,8 +9,6 @@
     },
     "require": {
         "monolog/monolog": "1.2.*",
-        "atoum/atoum": "dev-master",
-        "apigen/apigen": "dev-master",
         "smarty/smarty": "dev-master",
         "twig/twig":"1.*",
         "phpmailer/phpmailer": "dev-master",
