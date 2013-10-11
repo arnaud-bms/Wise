@@ -13,7 +13,7 @@ class Autoloader
     /**
      * @var array List alias
      */
-    private static $_alias = array();
+    private static $alias = array();
 
     /**
      * Register autoload
@@ -24,7 +24,7 @@ class Autoloader
     public static function loadClass($class)
     {
         list($alias) = explode('\\', $class);
-        foreach (self::$_alias as $prefix => $path) {
+        foreach (self::$alias as $prefix => $path) {
             if ($alias === $prefix) {
                 $class = substr($class, strlen($prefix)+1);
                 $file  = $path.'/'.strtr($class, '\\', '/').'.class.php';
@@ -46,7 +46,7 @@ class Autoloader
      */
     public static function setAlias($alias)
     {
-        self::$_alias = $alias;
+        self::$alias = $alias;
     }
 
 
@@ -57,6 +57,6 @@ class Autoloader
      */
     public static function addAlias($alias)
     {
-        self::$_alias = array_merge(self::$_alias, $alias);
+        self::$alias = array_merge(self::$alias, $alias);
     }
 }
