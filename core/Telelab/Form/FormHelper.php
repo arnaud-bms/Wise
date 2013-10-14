@@ -103,11 +103,6 @@ class FormHelper extends Component
             $selectTag .= '<label id="label_'.$for.'" for="'.$for.'">'.$options['label'].'</label>';
         }
 
-        // Parent input tag
-        if ($options['parent']['input']['active'] == true) {
-            $tag .= '<'.$options['parent']['input']['tag'].Html::tagOptions($options['parent']['input']['attributes']).'>';
-        }
-
         $selectTag .= '<select'.Html::tagOptions($options['attributes']).'>';
 
         $tagOptions = array();

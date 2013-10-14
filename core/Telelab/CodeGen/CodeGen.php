@@ -41,7 +41,7 @@ class CodeGen extends ComponentStatic
         self::$chars['0-9'] = array_map('chr', range(48, 57));
         self::$chars['A-Z'] = array_map('chr', range(65, 90));
         self::$chars['a-z'] = array_map('chr', range(97, 122));
-        
+
         parent::init($config);
     }
 
@@ -74,7 +74,7 @@ class CodeGen extends ComponentStatic
     private static function getCharsToUsed($chars)
     {
         $charsUsedToGenerate = array();
-        foreach (self::$chars as $key => $listChars) {
+        foreach (array_keys(self::$chars) as $key) {
             if (strpos($chars, $key) !== false) {
                 $charsUsedToGenerate = array_merge($charsUsedToGenerate, self::$chars[$key]);
             }

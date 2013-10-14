@@ -35,7 +35,7 @@ class File extends Driver
     protected function init($config)
     {
         $this->file = $config['file'];
-        
+
         parent::init($config);
     }
 
@@ -53,25 +53,6 @@ class File extends Driver
         }
 
         file_put_contents($this->file, $message, FILE_APPEND);
-        // Temporary comment because the logrotate lose handle
-        /*$this->initHandle();
-        if ($this->handle) {
-            fwrite($this->handle, $message);
-        }*/
-    }
-
-
-    /**
-     * Init handle
-     */
-    private function initHandle()
-    {
-        if (!$this->handle) {
-            if (!is_dir(dirname($this->file))) {
-                mkdir(dirname($this->file), 0755, true);
-            }
-            $this->handle = fopen($this->file, 'a+');
-        }
     }
 
 
