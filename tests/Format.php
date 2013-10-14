@@ -45,4 +45,17 @@ class Format extends atoum
         $this->assert->string($this->_format->formatData('serialize', $this->_data))
                      ->isEqualTo(serialize($this->_data));
     }
+    
+    public function testCSV()
+    {
+        $this->assert->string($this->_format->formatData('csv', $this->_data))
+                     ->isEqualTo('');
+    }
+    
+    public function testException()
+    {
+        $myObject = $this;
+        $this->assert->exception(function() use($myObject) { $myObject->_format->formatData('csvs', $myObject->_data); })
+                     ->hasCode(0);
+    }
 }

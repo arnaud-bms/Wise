@@ -102,4 +102,17 @@ class Format extends Component
     {
         return serialize($data);
     }
+    
+    
+    /**
+     * Format array to csv format
+     * 
+     * @todo
+     * @param array $data Data to format in csv
+     * @return Data formated in csv
+     */
+    protected function arrayToCsv($data)
+    {
+        return '';
+    }
 }
