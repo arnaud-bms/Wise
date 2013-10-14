@@ -19,7 +19,7 @@ class Format extends atoum
     public function beforeTestMethod($testMethod)
     {
         $this->_format = new \Telelab\Format\Format();
-        $this->_data  = array('key_one' => 'value_one', 'key_two' => 'value_two');
+        $this->_data  = array(0 => array('child1'), 'key_one' => 'value_one', 'key_two' => 'value_two');
     }
 
 
@@ -33,7 +33,7 @@ class Format extends atoum
     public function testXML()
     {
         $stdout    = '<?xml version="1.0" encoding="utf-8"?>'."\n".
-                     '<xml><key_one>value_one</key_one><key_two>value_two</key_two></xml>'."\n";
+                     '<xml><node><node>child1</node></node><key_one>value_one</key_one><key_two>value_two</key_two></xml>'."\n";
 
         $this->assert->string($this->_format->formatData('xml', $this->_data))
                      ->isEqualTo($stdout);
