@@ -33,7 +33,7 @@
         <phingcall target="phpcs" />
         <phingcall target="phpcb" />
         <phingcall target="atoum" />
-        <!--<phingcall target="apigen" />-->
+        <phingcall target="apigen" />
     </target>
     
     <target name="pdepend">
@@ -78,6 +78,12 @@
     </target>
     
     <target name="apigen">
-        <exec logoutput="true" command="apigen --source '${project.basedir}/core' --destination '${project.basedir}/build/logs' --source '${project.basedir}/www''" escape="false" />
+        <apigen
+            source="${project.basedir}/core"
+            destination="${project.basedir}/build/api"
+            title="Telelab"
+            deprecated="true"
+            todo="true"
+        />
     </target>
 </project>
