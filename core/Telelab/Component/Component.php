@@ -32,6 +32,6 @@ abstract class Component extends AbstractComponent
      */
     protected function init($config)
     {
-echo;
+        
     }
 }
