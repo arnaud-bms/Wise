@@ -114,7 +114,9 @@ abstract class Entity extends Component
      */
     public function __set($key, $value)
     {
-        if (!array_key_exists($key, $this->field) || ((string)$value !== $this->field[$key]) && $value !== $this->field[$key]) {
+        if (!array_key_exists($key, $this->field)
+            || ((string)$value !== $this->field[$key])
+            && $value !== $this->field[$key]) {
             $this->fieldChanged[$key] = is_object($value) ? (string)$value : $value;
         }
     }

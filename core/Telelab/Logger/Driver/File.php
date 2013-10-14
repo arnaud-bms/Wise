@@ -20,12 +20,12 @@ class File extends Driver
     /**
      * @var string Path to cache folder
      */
-    protected $_file;
+    protected $file;
 
     /**
      * @var handle
      */
-    protected $_handle;
+    protected $handle;
 
     /**
      * Init File driver
@@ -34,7 +34,7 @@ class File extends Driver
      */
     protected function init($config)
     {
-        $this->_file = $config['file'];
+        $this->file = $config['file'];
         
         parent::init($config);
     }
@@ -48,15 +48,15 @@ class File extends Driver
      */
     public function log($message, $level)
     {
-        if (!is_dir(dirname($this->_file))) {
-            mkdir(dirname($this->_file), 0755, true);
+        if (!is_dir(dirname($this->file))) {
+            mkdir(dirname($this->file), 0755, true);
         }
 
-        file_put_contents($this->_file, $message, FILE_APPEND);
+        file_put_contents($this->file, $message, FILE_APPEND);
         // Temporary comment because the logrotate lose handle
         /*$this->initHandle();
-        if ($this->_handle) {
-            fwrite($this->_handle, $message);
+        if ($this->handle) {
+            fwrite($this->handle, $message);
         }*/
     }
 
@@ -66,11 +66,11 @@ class File extends Driver
      */
     private function initHandle()
     {
-        if (!$this->_handle) {
-            if (!is_dir(dirname($this->_file))) {
-                mkdir(dirname($this->_file), 0755, true);
+        if (!$this->handle) {
+            if (!is_dir(dirname($this->file))) {
+                mkdir(dirname($this->file), 0755, true);
             }
-            $this->_handle = fopen($this->_file, 'a+');
+            $this->handle = fopen($this->file, 'a+');
         }
     }
 
@@ -80,8 +80,8 @@ class File extends Driver
      */
     public function __destruct()
     {
-        if ($this->_handle !== null) {
-            fclose($this->_handle);
+        if ($this->handle !== null) {
+            fclose($this->handle);
         }
     }
 }

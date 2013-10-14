@@ -14,7 +14,7 @@ class MySQLiStatement extends Statement
     /**
      * @var MySQLiStatement Ref
      */
-    protected $_mySQLiStatement = null;
+    protected $mySQLiStatement = null;
 
     /**
      * Init MySQLiStatement
@@ -23,7 +23,7 @@ class MySQLiStatement extends Statement
      */
     public function __construct($resource)
     {
-        $this->_mySQLiStatement = $resource;
+        $this->mySQLiStatement = $resource;
     }
 
 
@@ -65,13 +65,13 @@ class MySQLiStatement extends Statement
     {
         switch($type) {
             case Statement::FETCH_OBJECT:
-                $row = $this->_mySQLiStatement->fetch_object();
+                $row = $this->mySQLiStatement->fetch_object();
                 break;
             case Statement::FETCH_NUM:
-                $row = $this->_mySQLiStatement->fetch_array();
+                $row = $this->mySQLiStatement->fetch_array();
                 break;
             case Statement::FETCH_ASSOC:
-                $row = $this->_mySQLiStatement->fetch_assoc();
+                $row = $this->mySQLiStatement->fetch_assoc();
                 break;
         }
 

@@ -178,7 +178,7 @@ class FormHelper extends Component
         $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $options['message']).'<div class="clearfix"></div><div class="captcha_items">';
 
         $elementsCodes = array();
-        for ($i = 0 ; $i < sizeof($elementsShuffle); $i++) {
+        for ($i = 0; $i < sizeof($elementsShuffle); $i++) {
             $elementsCodes[$i] = mt_rand();
 
             $keyShuffle = $elementsShuffle[$i];

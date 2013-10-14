@@ -22,7 +22,7 @@ class Html extends Component
 
         $html = '';
         foreach ($options as $key => $value) {
-          $html .= ' '.$key.'="'.Str::escapeOnce($value).'"';
+            $html.= ' '.$key.'="'.Str::escapeOnce($value).'"';
         }
         return $html;
     }
@@ -48,16 +48,20 @@ class Html extends Component
      */
     public static function stringToArray($string = '')
     {
-        preg_match_all('/
+        preg_match_all(
+            '/
             \s*(\w+)              # key                               \\1
             \s*=\s*               # =
             (\'|")?               # values may be included in \' or " \\2
             (.*?)                 # value                             \\3
             (?(2) \\2)            # matching \' or " if needed        \\4
             \s*(?:
-                (?=\w+\s*=) | \s*$  # followed by another key= or the end of the string
+            (?=\w+\s*=) | \s*$  # followed by another key= or the end of the string
             )
-            /x', $string, $matches, PREG_SET_ORDER
+            /x',
+            $string,
+            $matches,
+            PREG_SET_ORDER
         );
 
         $attributes = array();

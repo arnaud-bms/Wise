@@ -14,7 +14,7 @@ class MySQLStatement extends Statement
     /**
      * @var MySQLStatement Ref
      */
-    protected $_mySQLStatement = null;
+    protected $mySQLStatement = null;
 
     /**
      * Init PDO
@@ -23,7 +23,7 @@ class MySQLStatement extends Statement
      */
     public function __construct($resource)
     {
-        $this->_mySQLStatement = $resource;
+        $this->mySQLStatement = $resource;
     }
 
 
@@ -65,13 +65,13 @@ class MySQLStatement extends Statement
     {
         switch($type) {
             case Statement::FETCH_OBJECT:
-                $row = mysql_fetch_object($this->_mySQLStatement);
+                $row = mysql_fetch_object($this->mySQLStatement);
                 break;
             case Statement::FETCH_NUM:
-                $row = mysql_fetch_array($this->_mySQLStatement, MYSQL_NUM);
+                $row = mysql_fetch_array($this->mySQLStatement, MYSQL_NUM);
                 break;
             case Statement::FETCH_ASSOC:
-                $row = mysql_fetch_assoc($this->_mySQLStatement);
+                $row = mysql_fetch_assoc($this->mySQLStatement);
                 break;
         }
 

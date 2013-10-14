@@ -125,7 +125,8 @@ class File extends Component
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        if (isset($this->mimeTypes[$fileInfos['extension']]) && $this->mimeTypes[$fileInfos['extension']] !== finfo_file($finfo, $file['tmp_name'])) {
+        if (isset($this->mimeTypes[$fileInfos['extension']])
+            && $this->mimeTypes[$fileInfos['extension']] !== finfo_file($finfo, $file['tmp_name'])) {
             throw new FileUploadedException("Extension not allowed", 6);
         }
 

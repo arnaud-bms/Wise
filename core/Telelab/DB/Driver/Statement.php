@@ -12,6 +12,6 @@ abstract class Statement
     const FETCH_NUM    = 1;
     const FETCH_ASSOC  = 2;
 
-    abstract function fetch($type);
-    abstract function fetchAll($type);
+    abstract public function fetch($type);
+    abstract public function fetchAll($type);
 }

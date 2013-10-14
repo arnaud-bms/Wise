@@ -289,6 +289,7 @@ abstract class Repository extends Component
             case 4;
                 return $this->$method(array($field => $argv[0]), $argv[1], $argv[2], $argv[3]);
             default:
+                return false;
         }
     }
 

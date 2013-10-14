@@ -14,7 +14,7 @@ class MySQLi implements Driver
     /**
      * @var handle Ref to MySQLi
      */
-    private $_mysqli;
+    private $mysqli;
 
     /**
      * Init MySQLi Driver
@@ -42,7 +42,7 @@ class MySQLi implements Driver
      */
     private function initLink()
     {
-        $this->_mysqli = new \mysqli($this->_host, $this->_user, $this->_password, $this->_dbname);
+        $this->mysqli = new \mysqli($this->_host, $this->_user, $this->_password, $this->_dbname);
     }
 
     /**
@@ -54,7 +54,7 @@ class MySQLi implements Driver
     public function query($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        if ($resource = $this->_mysqli->query($query)) {
+        if ($resource = $this->mysqli->query($query)) {
             return new MySQLiStatement($resource);
         }
 
@@ -73,8 +73,8 @@ class MySQLi implements Driver
     public function exec($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        if ($this->_mysqli->query($query)) {
-            return $this->_mysqli->affected_rows;
+        if ($this->mysqli->query($query)) {
+            return $this->mysqli->affected_rows;
         }
 
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
@@ -90,7 +90,7 @@ class MySQLi implements Driver
      */
     public function setCharset($charset)
     {
-        $this->_mysqli->set_charset($charset);
+        $this->mysqli->set_charset($charset);
     }
 
 
@@ -102,7 +102,7 @@ class MySQLi implements Driver
      */
     public function escape($string)
     {
-        return "'".$this->_mysqli->real_escape_string($string)."'";
+        return "'".$this->mysqli->real_escape_string($string)."'";
     }
 
 
@@ -113,7 +113,7 @@ class MySQLi implements Driver
      */
     public function getLastIdInsert()
     {
-        return $this->_mysqli->insert_id;
+        return $this->mysqli->insert_id;
     }
 
 
@@ -122,7 +122,7 @@ class MySQLi implements Driver
      */
     public function close()
     {
-        $this->_mysqli->close();
+        $this->mysqli->close();
     }
 
     

@@ -58,7 +58,8 @@ class DB extends Component
                 break;
             default:
                 throw new DBException(
-                    "Driver '{$config['driver']}' does'nt exists", 400
+                    "Driver '{$config['driver']}' does'nt exists",
+                    400
                 );
         }
 
@@ -84,7 +85,7 @@ class DB extends Component
      */
     public static function getInstance($config = null)
     {
-        if (!self::$instance instanceOf DB) {
+        if (!self::$instance instanceof DB) {
             Logger::log('['.__CLASS__.'] new instance', Logger::LOG_DEBUG);
             self::$instance = new DB($config);
         }
@@ -111,9 +112,9 @@ class DB extends Component
      */
     public static function reset()
     {
-       self::$driver->reset();
+        self::$driver->reset();
        
-       if (self::$charset !== null) {
+        if (self::$charset !== null) {
             self::$driver->setCharset(self::$charset);
         }
     }

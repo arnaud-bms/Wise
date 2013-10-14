@@ -15,7 +15,7 @@ class PDO implements Driver
     /**
      * @var PDO Ref to PDO
      */
-    private $_pdo;
+    private $pdo;
 
     /**
      * Init PDO Driver
@@ -30,8 +30,8 @@ class PDO implements Driver
     {
         $dsn      = sprintf('mysql:host=%s;dbname=%s;', $host, $dbname);
         try {
-            $this->_pdo = new \PDO($dsn, $user, $password);
-        } catch(\PDOException $e) {
+            $this->pdo = new \PDO($dsn, $user, $password);
+        } catch (\PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode());
         }
     }
@@ -46,7 +46,7 @@ class PDO implements Driver
     public function query($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        if ($resource = $this->_pdo->query($query)) {
+        if ($resource = $this->pdo->query($query)) {
             return new PDOStatement($resource);
         }
 
@@ -65,7 +65,7 @@ class PDO implements Driver
     public function exec($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        if ($resource = $this->_pdo->exec($query)) {
+        if ($resource = $this->pdo->exec($query)) {
             return $resource;
         }
 
@@ -82,7 +82,7 @@ class PDO implements Driver
      */
     public function setCharset($charset)
     {
-        $this->_pdo->exec('SET NAMES "'.$charset.'"');
+        $this->pdo->exec('SET NAMES "'.$charset.'"');
     }
 
 
@@ -94,7 +94,7 @@ class PDO implements Driver
      */
     public function escape($string)
     {
-        return $this->_pdo->quote($string);
+        return $this->pdo->quote($string);
     }
 
 
@@ -105,7 +105,7 @@ class PDO implements Driver
      */
     public function getLastIdInsert()
     {
-        return $this->_pdo->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
 
@@ -114,7 +114,7 @@ class PDO implements Driver
      */
     public function close()
     {
-        unset($this->_pdo);
+        unset($this->pdo);
     }
 
 

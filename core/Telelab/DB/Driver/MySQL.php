@@ -14,7 +14,7 @@ class MySQL implements Driver
     /**
      * @var handle Ref to link
      */
-    private $_link;
+    private $link;
 
     /**
      * Init link MySQL
@@ -42,8 +42,8 @@ class MySQL implements Driver
      */
     public function initLink($new = false)
     {
-        $this->_link = mysql_connect($this->_host, $this->_user, $this->_password, $new);
-        mysql_select_db($this->_dbname, $this->_link);
+        $this->link = mysql_connect($this->_host, $this->_user, $this->_password, $new);
+        mysql_select_db($this->_dbname, $this->link);
     }
 
 
@@ -56,7 +56,7 @@ class MySQL implements Driver
     public function query($query)
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-        if ($resource = mysql_query($query, $this->_link)) {
+        if ($resource = mysql_query($query, $this->link)) {
             return new MySQLStatement($resource);
         }
         
@@ -76,7 +76,7 @@ class MySQL implements Driver
     {
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
 
-        if (mysql_query($query, $this->_link)) {
+        if (mysql_query($query, $this->link)) {
             return mysql_affected_rows();
         }
 
@@ -116,7 +116,7 @@ class MySQL implements Driver
      */
     public function getLastIdInsert()
     {
-        return mysql_insert_id($this->_link);
+        return mysql_insert_id($this->link);
     }
 
 
@@ -125,7 +125,7 @@ class MySQL implements Driver
      */
     public function close()
     {
-        mysql_close($this->_link);
+        mysql_close($this->link);
     }
 
 

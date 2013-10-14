@@ -14,7 +14,7 @@ class PDOStatement extends Statement
     /**
      * @var PDOStatement Ref
      */
-    protected $_pdoStatement = null;
+    protected $pdoStatement = null;
 
     /**
      * Init PDO
@@ -23,7 +23,7 @@ class PDOStatement extends Statement
      */
     public function __construct(\PDOStatement $pdoStatement)
     {
-        $this->_pdoStatement = $pdoStatement;
+        $this->pdoStatement = $pdoStatement;
     }
 
 

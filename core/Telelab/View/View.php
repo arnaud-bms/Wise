@@ -39,9 +39,7 @@ class View extends Component
                 $driver = 'Telelab\View\Driver\Php';
                 break;
             default:
-                throw new ViewException(
-                    "Driver '{$config['driver']}' does'nt exists", 400
-                );
+                throw new ViewException("Driver '{$config['driver']}' does'nt exists", 400);
         }
 
         $driverConfig = isset($config[$config['driver']])

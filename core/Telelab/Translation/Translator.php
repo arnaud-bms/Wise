@@ -75,7 +75,7 @@ class Translator extends Component
      */
     public static function getInstance($config = null)
     {
-        if (!self::$instance instanceOf Translator) {
+        if (!self::$instance instanceof Translator) {
             Logger::log('['.__CLASS__.'] new instance', Logger::LOG_DEBUG);
             self::$instance = new Translator($config);
         }
@@ -235,7 +235,7 @@ class Translator extends Component
 
         if (file_exists($file)) {
             $this->catalogues[$catalogue] = simplexml_load_file($file);
-        } else if ($this->fallbackCatalogue !== $catalogue) {
+        } elseif ($this->fallbackCatalogue !== $catalogue) {
             if (!isset($this->catalogues[$this->fallbackCatalogue])) {
                 $this->loadCatalogue($this->fallbackCatalogue);
             }

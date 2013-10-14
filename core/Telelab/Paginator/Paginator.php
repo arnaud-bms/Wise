@@ -110,10 +110,14 @@ class Paginator extends ComponentStatic
         }
         if (self::$currentPage <= self::$around) {
             $i      = 1;
-            $limit = self::$totalPages > (self::$around + self::$currentPage) ? self::$around + self::$currentPage : self::$totalPages;
+            $limit = self::$totalPages > (self::$around + self::$currentPage)
+                ? self::$around + self::$currentPage
+                : self::$totalPages;
         } else {
             $i      = self::$currentPage - self::$around;
-            $limit = self::$totalPages > (self::$currentPage + self::$around) ? self::$currentPage + self::$around : self::$totalPages ;
+            $limit = self::$totalPages > (self::$currentPage + self::$around)
+                ? self::$currentPage + self::$around
+                : self::$totalPages;
         }
 
         if ($limit <= (self::$around * 2 + 1) && (self::$around * 2 + 1) < self::$totalPages) {

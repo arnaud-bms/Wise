@@ -130,9 +130,7 @@ class SqlBuilder extends Component
         $setQuery   = $this->queryAssign($rows, ',');
         $whereQuery = $this->queryAssign($where, 'AND');
 
-        $query = sprintf(
-            $query, $ignore, $this->table, $setQuery, $whereQuery
-        );
+        $query = sprintf($query, $ignore, $this->table, $setQuery, $whereQuery);
 
         return $this->db->exec($query);
     }

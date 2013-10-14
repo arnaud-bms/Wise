@@ -17,6 +17,8 @@ class Session extends Component
     protected function init($config)
     {
         session_start();
+        
+        parent::init($config);
     }
 
 
@@ -29,9 +31,7 @@ class Session extends Component
      * @param boolean $secure
      * @param boolean $httpOnly
      */
-    public function setCookieParams(
-            $lifeTime, $path = null, $domain = null,
-            $secure = false, $httpOnly = false)
+    public function setCookieParams($lifeTime, $path = null, $domain = null, $secure = false, $httpOnly = false)
     {
         session_set_cookie_params($lifeTime, $path, $domain, $secure, $httpOnly);
     }
@@ -45,9 +45,13 @@ class Session extends Component
         $_SESSION = array();
         $params = session_get_cookie_params();
         setcookie(
-            session_name(), '', time() - 10,
-            $params["path"], $params["domain"],
-            $params["secure"], $params["httponly"]
+            session_name(),
+            '',
+            time() - 10,
+            $params["path"],
+            $params["domain"],
+            $params["secure"],
+            $params["httponly"]
         );
         session_destroy();
     }

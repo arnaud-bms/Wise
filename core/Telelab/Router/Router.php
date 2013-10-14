@@ -177,9 +177,7 @@ class Router extends Component
     {
         foreach ($this->requiredFieldsRoute as $field) {
             if (!array_key_exists($field, $route)) {
-                throw new RouterException(
-                    "The field '$field' is required in route", 407
-                );
+                throw new RouterException("The field '$field' is required in route", 407);
             }
         }
     }
@@ -235,9 +233,7 @@ class Router extends Component
     {
         foreach ($this->requiredFieldsRouteApp as $field) {
             if (!array_key_exists($field, $routeApp)) {
-                throw new RouterException(
-                    "The field '$field' is required in routeApp", 406
-                );
+                throw new RouterException("The field '$field' is required in routeApp", 406);
             }
         }
     }
@@ -261,9 +257,7 @@ class Router extends Component
         if (file_exists($bootstrapFile)) {
             require $bootstrapFile;
         } else {
-            throw new RouterException(
-                "Require bootstrap.php for '{$routeApp['app']}' application", 410
-            );
+            throw new RouterException("Require bootstrap.php for '{$routeApp['app']}' application", 410);
         }
     }
 }
