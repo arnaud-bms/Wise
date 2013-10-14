@@ -30,7 +30,7 @@ abstract class Component extends AbstractComponent
      *
      * @param mixed $config
      */
-    protected function init()
+    protected function init($config)
     {
 
     }

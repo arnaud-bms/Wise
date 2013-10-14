@@ -31,7 +31,7 @@ abstract class ComponentStatic extends AbstractComponent
      *
      * @param mixed $config
      */
-    protected static function init()
+    protected static function init($config)
     {
 
     }
