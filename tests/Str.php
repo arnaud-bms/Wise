@@ -146,4 +146,11 @@ class Str extends atoum
         $this->assert->string(\Telelab\Str\Str::checkAddslashes('C\'est un test'))
                      ->isEqualTo('C\\\'est un test');
     }
+    
+    
+    public function testMbUnserialize()
+    {
+        $this->assert->array(\Telelab\Str\Str::mbUnserialize(serialize(array('tést'))))
+                     ->contains('tést');
+    }
 }
