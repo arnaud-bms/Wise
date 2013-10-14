@@ -56,6 +56,6 @@ class Format extends atoum
     {
         $myObject = $this;
         $this->assert->exception(function() use($myObject) { $myObject->_format->formatData('csvs', $myObject->_data); })
-                     ->hasCode(0);
+                     ->hasCode(400);
     }
 }
