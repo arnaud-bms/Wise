@@ -4,7 +4,7 @@
 
     <target name="ci"
         description="Tâche principale d'intégration continue"
-        depends="clean,qa"
+        depends="clean,init,qa"
     />
 
     <target name="clean" description="Vide les répertoires d'artefacts">
@@ -21,8 +21,10 @@
         <mkdir dir="${project.basedir}/build/coverage" />
         <mkdir dir="${project.basedir}/build/logs" />
         <mkdir dir="${project.basedir}/build/pdepend" />
-        
-        <exec logoutput="true" dir="${project.basedir}" command="composer install" escape="false" />
+    </target>
+
+    <target name="init" description="Initialisation du projet">
+        <exec logoutput="true" dir="${project.basedir}" command="composer --no-interaction install" escape="false" />
     </target>
 
     <target name="qa" description="Lance les outils d'analyse">
@@ -35,7 +37,7 @@
         <phingcall target="atoum" />
         <phingcall target="apigen" />
     </target>
-    
+
     <target name="pdepend">
         <phpdepend file="${project.basedir}/core">
             <logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
@@ -49,17 +51,17 @@
             <formatter type="xml" outfile="${project.basedir}/build/phpmd.xml" />
         </phpmd>
     </target>
-    
+
     <target name="phpcpd">
         <phpcpd file="${project.basedir}/core">
             <formatter type="pmd" outfile="${project.basedir}/build/logs/pmd-cpd.xml"/>
         </phpcpd>
     </target>
-    
+
     <target name="phploc">
         <exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/build/logs/phploc.csv' '${project.basedir}/core'" escape="false" />
     </target>
-    
+
     <target name="phpcs">
         <phpcodesniffer standard="PSR2">
             <fileset dir="${project.basedir}/core">
@@ -68,15 +70,15 @@
             <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
         </phpcodesniffer>
     </target>
-    
+
     <target name="atoum">
         <exec logoutput="true" dir="${project.basedir}/tests" command="atoum -f * -bf bootstrap.php" escape="false" />
     </target>
-    
+
     <target name="phpcb">
         <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/core' --output '${project.basedir}/build/code-browser'" escape="false" />
     </target>
-    
+
     <target name="apigen">
         <apigen
             source="${project.basedir}/core"
