@@ -21,7 +21,7 @@ abstract class ComponentStatic extends AbstractComponent
         if ($config !== null && is_array($config) && isset($class::$requiredFields)) {
             self::checkRequiredFields($class::$requiredFields, $config);
         }
-        
+
         self::init($config);
     }
 
