@@ -7,7 +7,7 @@ use Telelab\SqlBuilder\SqlBuilder;
 /**
  * Entity
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class EntityManager extends Component
 {

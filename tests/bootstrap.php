@@ -1,6 +1,8 @@
 <?php
 /**
  * Default configuration for UnitTests
+ *
+ * @author Guillaume Dievart <dievartg@gmail.com>
  */
 
 define('ROOT_DIR', __DIR__.'/../');

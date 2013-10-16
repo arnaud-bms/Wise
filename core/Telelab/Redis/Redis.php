@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Connector to redis
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Redis extends Component
 {

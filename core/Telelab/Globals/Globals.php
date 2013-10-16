@@ -6,7 +6,7 @@ use Telelab\Component\ComponentStatic;
 /**
  * Global is used for pass var from plugin to controller
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Globals extends ComponentStatic
 {

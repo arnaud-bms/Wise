@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * FormatException
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class LoggerException extends ComponentException
 {

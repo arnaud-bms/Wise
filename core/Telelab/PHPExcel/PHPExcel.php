@@ -6,7 +6,7 @@ use Telelab\Component\ComponentStatic;
 /**
  * PHPExcel: read and write files excel document, pdf, html ....
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class PHPExcel extends ComponentStatic
 {

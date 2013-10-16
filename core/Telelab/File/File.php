@@ -7,7 +7,7 @@ use Telelab\File\FileUploadedException;
 /**
  * File: Manage files, upload, check extensions ...
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class File extends Component
 {

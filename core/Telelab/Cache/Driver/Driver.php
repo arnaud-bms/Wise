@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Driver: Abstract cache driver
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Driver extends Component
 {

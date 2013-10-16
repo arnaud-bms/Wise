@@ -6,7 +6,7 @@ use Telelab\Component\ComponentStatic;
 /**
  * CodeGen: Generate code, password, token ...
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class CodeGen extends ComponentStatic
 {

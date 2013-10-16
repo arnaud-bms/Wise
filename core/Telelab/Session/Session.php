@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Manage session
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Session extends Component
 {

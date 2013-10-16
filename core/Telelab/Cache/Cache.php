@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Cache: Set and get cache
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Cache extends Component
 {

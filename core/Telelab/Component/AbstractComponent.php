@@ -7,7 +7,7 @@ use Telelab\Conf\Conf;
  * AbstractComponent: Base class of components
  * This class load configuration component
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class AbstractComponent
 {

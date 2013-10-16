@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * FormException
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class FormException extends ComponentException
 {

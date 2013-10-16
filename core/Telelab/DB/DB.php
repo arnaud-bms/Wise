@@ -7,7 +7,7 @@ use Telelab\Logger\Logger;
 /**
  * DB: Connector to database
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class DB extends Component
 {

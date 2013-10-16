@@ -6,7 +6,7 @@ use \Telelab\Component\Component;
 /**
  * Format: data from array to csv, json, xml, serialize ...
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Format extends Component
 {

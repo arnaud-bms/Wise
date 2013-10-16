@@ -9,7 +9,7 @@ use Telelab\Logger\Logger;
 /**
  * Router extract informations from route
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Router extends Component
 {

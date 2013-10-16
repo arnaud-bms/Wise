@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Abstract class Plugin
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Plugin extends Component
 {

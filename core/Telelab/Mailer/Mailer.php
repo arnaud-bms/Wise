@@ -6,7 +6,7 @@ use Telelab\Component\ComponentStatic;
  /**
   * Class Mailer
   *
-  * @author gdievart <g.dievart@telemaque.fr>
+  * @author gdievart <dievartg@gmail.com>
   */
 class Mailer extends ComponentStatic
 {

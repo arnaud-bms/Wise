@@ -6,7 +6,7 @@ use Telelab\Component\Component;
  /**
   * Curl
   *
-  * @author gdievart <g.dievart@telemaque.fr>
+  * @author gdievart <dievartg@gmail.com>
   */
 class Curl extends Component
 {

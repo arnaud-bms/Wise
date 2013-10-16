@@ -8,7 +8,7 @@ use Telelab\Autoloader\AutoloaderException;
 /**
  * Default method to request database
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Repository extends Component
 {

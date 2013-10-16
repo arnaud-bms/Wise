@@ -6,7 +6,7 @@ use \Telelab\Component\ComponentStatic;
 /**
  * String
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Str extends ComponentStatic
 {

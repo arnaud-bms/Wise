@@ -6,7 +6,7 @@ use Telelab\Component\ComponentException;
 /**
  * FileUploadedException
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class FileUploadedException extends ComponentException
 {

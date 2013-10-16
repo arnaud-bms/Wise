@@ -6,7 +6,7 @@ use Telelab\View\Driver\Driver;
 /**
  * Driver Smarty
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Smarty extends Driver
 {

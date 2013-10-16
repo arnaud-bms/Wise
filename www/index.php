@@ -2,7 +2,7 @@
 /**
  * FrontController of the application
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 
 use Telelab\Conf\Conf;

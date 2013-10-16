@@ -6,7 +6,7 @@ use {{app_name}}\{{app_name}}Controller;
 /**
  * Description of Main
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Main extends {{app_name}}Controller 
 {

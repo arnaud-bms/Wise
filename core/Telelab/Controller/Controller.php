@@ -8,7 +8,7 @@ use Telelab\Server\Server;
 /**
  * Controller: Base class for controller
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Controller extends Component
 {

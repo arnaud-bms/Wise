@@ -8,7 +8,7 @@ use Telelab\Logger\Logger;
 /**
  * Conf: Configuration Class from files
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Conf extends ComponentStatic
 {

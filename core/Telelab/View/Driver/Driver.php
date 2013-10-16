@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * AbstractDriver
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Driver extends Component
 {

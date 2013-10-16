@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Form: Check form
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Form extends Component
 {

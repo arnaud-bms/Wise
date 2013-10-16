@@ -6,7 +6,7 @@ use atoum;
 /**
  * Test  \Telelab\Format
  *
- * @author Guillaume Dievart <g.dievart@telemaque.fr>
+ * @author Guillaume Dievart <dievartg@gmail.com>
  */
 class Format extends atoum
 {

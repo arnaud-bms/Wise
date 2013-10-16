@@ -9,7 +9,7 @@ use Telelab\Criteria\Criteria;
 /**
  * Entity
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class Entity extends Component
 {

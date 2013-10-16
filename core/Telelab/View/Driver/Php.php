@@ -6,7 +6,7 @@ use Telelab\View\Driver\Driver;
 /**
  * Driver Php
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Php extends Driver
 {

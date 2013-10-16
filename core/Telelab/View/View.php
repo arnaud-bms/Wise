@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * View component
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class View extends Component
 {

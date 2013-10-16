@@ -8,7 +8,7 @@ use Telelab\Logger\Logger;
 /**
  * Connector to database
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class PDO implements Driver
 {

@@ -4,7 +4,7 @@ namespace Telelab\Component;
 /**
  * ComponentStatic: Base of static components
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 abstract class ComponentStatic extends AbstractComponent
 {

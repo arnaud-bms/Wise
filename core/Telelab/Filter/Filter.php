@@ -6,7 +6,7 @@ use Telelab\Component\Component;
 /**
  * Filter: Check value from data
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class Filter extends Component
 {

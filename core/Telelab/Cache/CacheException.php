@@ -6,7 +6,7 @@ use \Telelab\Exception\Exception;
 /**
  * CacheException
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class CacheException extends Exception
 {

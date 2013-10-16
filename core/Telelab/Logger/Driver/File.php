@@ -6,7 +6,7 @@ use Telelab\Logger\Driver\Driver;
 /**
  * File driver for Logger
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class File extends Driver
 {

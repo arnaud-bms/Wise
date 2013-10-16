@@ -8,7 +8,7 @@ use Telelab\Conf\Conf;
 /**
  * Plugin HydrateView Add informations to view
  *
- * @author gdievart <g.dievart@telemaque.fr>
+ * @author gdievart <dievartg@gmail.com>
  */
 class HydrateView extends Plugin
 {
