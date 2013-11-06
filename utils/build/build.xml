@@ -90,4 +90,13 @@
             todo="true"
         />
     </target>
+    
+    <target name="phpdoc">
+        <phpdoc2 title="API Documentation"
+            destdir="${project.basedir}/build/doc">
+             <fileset dir="${project.basedir}/core">
+                <include name="**/*.php" />
+             </fileset>
+        </phpdoc2>
+    </target>
 </project>
