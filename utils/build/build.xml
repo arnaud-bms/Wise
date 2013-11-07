@@ -36,7 +36,7 @@
             <phingcall target="phpcs" />
             <phingcall target="phpcb" />
             <phingcall target="atoum" />
-            <phingcall target="apigen" />
+            <phingcall target="phpdoc" />
         </parallel>
     </target>
 
