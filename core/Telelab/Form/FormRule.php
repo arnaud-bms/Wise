@@ -35,9 +35,9 @@ class FormRule
     /**
      * Prepare an element for the specifics rules
      *
-     * @param String or Array $element : if it's an array, separated by $delimiter
-     * @param Array $from : Array where the Element is
-     * @param String $delimiter (default : '.') : Delimiter for array Elements
+     * @param String or Array $element   : if it's an array, separated by $delimiter
+     * @param Array           $from      : Array where the Element is
+     * @param String          $delimiter (default : '.') : Delimiter for array Elements
      */
     public function __construct($element, $from = null, $delimiter = '.')
     {
@@ -74,7 +74,7 @@ class FormRule
      * Magic function to call functions from Filter class if it's exists !
      *
      * @param String $name : Name of the function
-     * @param Array $args : Array of parameters
+     * @param Array  $args : Array of parameters
      */
     public function __call($name, $args)
     {
@@ -85,7 +85,7 @@ class FormRule
             $ruleName[] = substr($oldRuleName, 0, $pos);
             $ruleName[] = strtolower(substr($oldRuleName, $pos+2, 1)).substr($oldRuleName, $pos+3);
         }
-        $ruleName = (array)$ruleName;
+        $ruleName = (array) $ruleName;
 
         if (count($args) === 2) {
             $errorMsg = $args[1];
@@ -105,7 +105,6 @@ class FormRule
         }
     }
 
-
     /**
      * Magic function of php to return the first value when the object is written
      *
@@ -113,16 +112,15 @@ class FormRule
      */
     public function __toString()
     {
-        return (is_array($this->elementValue) ? reset($this->elementValue) : (string)$this->elementValue);
+        return (is_array($this->elementValue) ? reset($this->elementValue) : (string) $this->elementValue);
     }
-
 
     /**
      * Return the values if first parameter is set, or, a an array containing all values
      * if it's an array, or a string
      *
-     * @param String or Int $keyValue : The Value or Key in the Element
-     * @param Boolean $byValue : Search by Value (true) or by key (default, false)
+     * @param  String or Int $keyValue : The Value or Key in the Element
+     * @param  Boolean       $byValue  : Search by Value (true) or by key (default, false)
      * @return mixed
      */
     public function getValue($keyValue = null, $byValue = false)
@@ -140,6 +138,7 @@ class FormRule
                 }
             } elseif ($byValue !== false) {
                 $keyArray = array_search($keyValue, $this->elementValue);
+
                 return $this->elementValue[$keyArray];
             } else {
                 return $this->elementValue;
@@ -153,7 +152,7 @@ class FormRule
      *
      * @return boolean
      */
-    public function isValid ()
+    public function isValid()
     {
         return ($this->countErrors === 0);
     }
@@ -162,8 +161,8 @@ class FormRule
     /**
      * Return the error given by $errno or the first
      *
-     * @param integer $errno : The number of the error
-     * @return String : The error or null
+     * @param  integer $errno : The number of the error
+     * @return String  : The error or null
      */
     public function getError($errno = 0)
     {
@@ -184,7 +183,7 @@ class FormRule
      *
      * @return Array
      */
-    public function getAllErrors ()
+    public function getAllErrors()
     {
         return $this->errors;
     }
@@ -194,9 +193,9 @@ class FormRule
      * Transform value to the return of the called function
      *
      * @param Mixed $method : The called function in (String) or Array ("class", "function");
-     * @param Mixed $index : Index in the array of values (default 0) Could be Int or String
+     * @param Mixed $index  : Index in the array of values (default 0) Could be Int or String
      */
-    public function callFunction ($method, $index = 0)
+    public function callFunction($method, $index = 0)
     {
         if (!is_int($index) || is_string($index)) {
             throw new FormRuleException("Argument '$index' must be a String or an Integer");

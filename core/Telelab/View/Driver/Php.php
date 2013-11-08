@@ -27,7 +27,6 @@ class Php extends Driver
         'template_dir',
     );
 
-
     /**
      * Init view
      *
@@ -39,18 +38,16 @@ class Php extends Driver
         $this->tplDir   = $config['template_dir'];
     }
 
-
     /**
      * Set data to view driver
      *
      * @param string $field
-     * @param mixed $content
+     * @param mixed  $content
      */
     public function setData($field, $content)
     {
         $this->viewData->$field = $content;
     }
-
 
     /**
      * Get data setted
@@ -62,7 +59,6 @@ class Php extends Driver
         return $this->viewData->$field;
     }
 
-
     /**
      * Return content to stdout
      *
@@ -73,11 +69,10 @@ class Php extends Driver
 
     }
 
-
     /**
      * Return content from view
      *
-     * @param type $template
+     * @param  type   $template
      * @return string
      */
     public function fetch($template)

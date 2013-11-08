@@ -14,7 +14,7 @@ class Str extends ComponentStatic
     /**
      * Lower
      *
-     * @param type $string
+     * @param  type   $string
      * @return string
      */
     public static function lower($string)
@@ -22,11 +22,10 @@ class Str extends ComponentStatic
         return strtolower($string);
     }
 
-
     /**
      * Upper
      *
-     * @param type $string
+     * @param  type   $string
      * @return string
      */
     public static function upper($string)
@@ -34,11 +33,10 @@ class Str extends ComponentStatic
         return strtoupper($string);
     }
 
-
     /**
      * UcFirst
      *
-     * @param type $string
+     * @param  type   $string
      * @return string
      */
     public static function ucfirst($string)
@@ -46,11 +44,10 @@ class Str extends ComponentStatic
         return ucfirst($string);
     }
 
-
     /**
      * Url
      *
-     * @param type $string
+     * @param  type   $string
      * @return string
      */
     public static function url($string, $separator = '-')
@@ -63,12 +60,11 @@ class Str extends ComponentStatic
         return strtolower($string);
     }
 
-
     /**
      * Check if the string is utf8
      *
      * @see http://fr2.php.net/manual/fr/function.mb-detect-encoding.php#68607
-     * @param string $string
+     * @param  string $string
      * @return bool
      */
     public static function isUtf8($string)
@@ -87,11 +83,10 @@ class Str extends ComponentStatic
         ) === 1;
     }
 
-
     /**
      * Accent
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function removeAccent($string)
@@ -99,16 +94,16 @@ class Str extends ComponentStatic
         if (!self::isUtf8($string)) {
             $string = utf8_encode($string);
         }
-        
+
         $string = htmlentities($string, ENT_NOQUOTES, 'UTF-8');
+
         return preg_replace('#&([a-zA-Z])[a-zA-Z]+;#', '$1', $string);
     }
-
 
     /**
      * Hash string
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function hash($string)
@@ -119,9 +114,9 @@ class Str extends ComponentStatic
                 $string = md5($string);
             }
         }
+
         return $string;
     }
-
 
     /**
      * Normalize phone number
@@ -136,9 +131,8 @@ class Str extends ComponentStatic
             $number = '33'.substr($number, 1);
         }
 
-        return (int)$number;
+        return (int) $number;
     }
-
 
     /**
      * Convert string to literalize string (on|off|yes|no|1|'')
@@ -166,11 +160,10 @@ class Str extends ComponentStatic
         return $value;
     }
 
-
     /**
      * escape string with special chars
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function escapeOnce($string)
@@ -178,11 +171,10 @@ class Str extends ComponentStatic
         return self::fixDoubleEscape(htmlspecialchars($string, ENT_COMPAT, 'UTF-8'));
     }
 
-
     /**
      * fix string double escape
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function fixDoubleEscape($string)
@@ -190,11 +182,10 @@ class Str extends ComponentStatic
         return preg_replace('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $string);
     }
 
-
     /**
      * convert string to camelcase format (e.g. "this_method_name" -> "ThisMethodName")
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function camelcase($string)
@@ -202,18 +193,16 @@ class Str extends ComponentStatic
         return preg_replace('/(?:^|_)(.?)/e', "self::upper('$1')", self::lower($string));
     }
 
-
     /**
      * Convert camel case string to underscore format
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function camelcaseToUnderscores($string)
     {
         return self::lower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $string));
     }
-
 
     /**
      * Add slashes to string if doesn't exists
@@ -228,12 +217,12 @@ class Str extends ComponentStatic
 
         return $string;
     }
-    
-    
+
+
     /**
      * Unserialize for multibytes
-     * 
-     * @param string $string
+     *
+     * @param  string $string
      * @return array
      */
     public static function mbUnserialize($string)

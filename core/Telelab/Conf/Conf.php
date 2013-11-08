@@ -34,7 +34,6 @@ class Conf extends ComponentStatic
         self::$config = self::getConfFromFile($fileConf);
     }
 
-
     /**
      * Overwrite main config
      *
@@ -49,7 +48,6 @@ class Conf extends ComponentStatic
         );
     }
 
-
     /**
      * Init cache system if the section confcache exist
      */
@@ -60,11 +58,10 @@ class Conf extends ComponentStatic
         }
     }
 
-
     /**
      * Retrieve conf from file
      *
-     * @param string $fileConf
+     * @param  string        $fileConf
      * @throws ConfException If is invalid configuration file
      * @return array
      */
@@ -73,11 +70,12 @@ class Conf extends ComponentStatic
         $cacheId = 'telelab:conf:'.md5($fileConf);
         if (self::$cache !== null && $config = self::$cache->getCache($cacheId)) {
             Logger::log('['.__CLASS__.'] conf file from cache -> '.$fileConf, Logger::LOG_DEBUG);
+
             return $config;
         }
 
         $typeFile = substr($fileConf, strrpos($fileConf, '.')+1);
-        switch($typeFile) {
+        switch ($typeFile) {
             case 'json':
                 if (!$config = @json_decode(file_get_contents($fileConf), true)) {
                     throw new ConfException("Json file '$fileConf' is not valid", 401);
@@ -86,6 +84,11 @@ class Conf extends ComponentStatic
             case 'ini':
                 if (!$config = @parse_ini_file($fileConf, true)) {
                     throw new ConfException("Ini file '$fileConf' is not valid", 402);
+                }
+                break;
+            case 'php':
+                if (!$config = @include $fileConf) {
+                    throw new ConfException("PHP file '$fileConf' is not valid", 402);
                 }
                 break;
             default:
@@ -99,11 +102,10 @@ class Conf extends ComponentStatic
         return $config;
     }
 
-
     /**
      * Retrieve config
      *
-     * @param string $section
+     * @param  string $section
      * @return mixed
      */
     public static function getConfig($section = null)
@@ -115,15 +117,15 @@ class Conf extends ComponentStatic
                 $config = isset($config[$field]) ? $config[$field] : false;
             }
         }
+
         return $config;
     }
-
 
     /**
      * Retrieve config
      *
      * @param string $section
-     * @param mixed $newConfig
+     * @param mixed  $newConfig
      */
     public static function setConfig($section, $newConfig)
     {
@@ -139,11 +141,10 @@ class Conf extends ComponentStatic
         $config = $newConfig;
     }
 
-
     /**
      * Browse array to rewrite config into multi depth array (recursive method)
      *
-     * @param array $config
+     * @param  array $config
      * @return array $newConfig
      */
     public static function rewriteConfig($config)

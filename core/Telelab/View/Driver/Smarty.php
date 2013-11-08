@@ -23,7 +23,6 @@ class Smarty extends Driver
      */
     private $smarty;
 
-
     /**
      * Init Smarty driver
      *
@@ -37,18 +36,16 @@ class Smarty extends Driver
         $this->smarty->compile_dir  = $config['compile_dir'];
     }
 
-
     /**
      * Set data to view driver
      *
      * @param string $field
-     * @param mixed $content
+     * @param mixed  $content
      */
     public function setData($field, $content)
     {
         $this->smarty->assign($field, $content);
     }
-
 
     /**
      * Get data setted
@@ -60,7 +57,6 @@ class Smarty extends Driver
         return $this->smarty->getTemplateVars($field);
     }
 
-
     /**
      * Return contentto stdout
      *
@@ -71,11 +67,10 @@ class Smarty extends Driver
 
     }
 
-
     /**
      * Return content from view
      *
-     * @param type $template
+     * @param  type   $template
      * @return string
      */
     public function fetch($template)

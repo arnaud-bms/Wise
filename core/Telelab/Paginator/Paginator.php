@@ -36,13 +36,12 @@ class Paginator extends ComponentStatic
      */
     protected static $around = 4;
 
-
     /**
      * Get pagination
      *
-     * @param int $current
-     * @param int $totalItems
-     * @param int $stepItem
+     * @param  int   $current
+     * @param  int   $totalItems
+     * @param  int   $stepItem
      * @return array first previous current links next end
      */
     public static function getPagination($current, $totalItems, $stepItem = 10)
@@ -59,7 +58,6 @@ class Paginator extends ComponentStatic
 
         return $pagination;
     }
-
 
     /**
      * Init paginator
@@ -86,7 +84,6 @@ class Paginator extends ComponentStatic
         return 1;
     }
 
-
     /**
      * Get previous link
      *
@@ -96,7 +93,6 @@ class Paginator extends ComponentStatic
     {
         return self::$currentPage > 1 ? self::$currentPage - 1 : null;
     }
-
 
     /**
      * Get linkAround
@@ -129,7 +125,6 @@ class Paginator extends ComponentStatic
         return $linksAround;
     }
 
-
     /**
      * Get current page
      *
@@ -139,7 +134,6 @@ class Paginator extends ComponentStatic
     {
         return self::$currentPage;
     }
-
 
     /**
      * Get next link
@@ -153,7 +147,6 @@ class Paginator extends ComponentStatic
         return $next;
     }
 
-
     /**
      * Get last link
      *
@@ -163,7 +156,6 @@ class Paginator extends ComponentStatic
     {
         return self::$totalPages;
     }
-
 
     /**
      * Set link around current

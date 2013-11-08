@@ -20,14 +20,14 @@ class Format extends Component
     /**
      * Format array
      *
-     * @param string $format
-     * @param array $data
+     * @param  string          $format
+     * @param  array           $data
      * @throws FormatException If format does'nt exists
      * @return string
      */
     public function formatData($format, $data)
     {
-        switch($format) {
+        switch ($format) {
             case 'json':
                 $return = $this->arrayToJson($data);
                 break;
@@ -51,7 +51,7 @@ class Format extends Component
     /**
      * Format array to XML
      *
-     * @param type $data
+     * @param  type   $data
      * @return string XML
      */
     protected function arrayToXml($data, $sxe = null, $rootNode = 'xml')
@@ -84,7 +84,7 @@ class Format extends Component
     /**
      * Format array to Json
      *
-     * @param array $data
+     * @param  array  $data
      * @return string json
      */
     protected function arrayToJson($data)
@@ -102,14 +102,14 @@ class Format extends Component
     {
         return serialize($data);
     }
-    
-    
+
+
     /**
      * Format array to csv format
-     * 
+     *
      * @todo
-     * @param array $data Data to format in csv
-     * @return Data formated in csv
+     * @param  array $data Data to format in csv
+     * @return Data  formated in csv
      */
     protected function arrayToCsv($data)
     {

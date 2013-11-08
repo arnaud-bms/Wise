@@ -33,7 +33,6 @@ class Mailer extends ComponentStatic
      */
     private static $hostAttachments;
 
-
     /**
      * Create a new mail
      *
@@ -47,19 +46,18 @@ class Mailer extends ComponentStatic
         self::$hostAttachments = $config['host_attachments'];
     }
 
-
     /**
      * Sendmail
      *
-     * @param string $from Expiditor
-     * @param string $fromName
-     * @param string $to
-     * @param string $subject
-     * @param string $msgHtml
-     * @param string $msgTxt
-     * @param array $attachments
-     * @param string $utf8
-     * @param string $replyTo
+     * @param  string  $from        Expiditor
+     * @param  string  $fromName
+     * @param  string  $to
+     * @param  string  $subject
+     * @param  string  $msgHtml
+     * @param  string  $msgTxt
+     * @param  array   $attachments
+     * @param  string  $utf8
+     * @param  string  $replyTo
      * @return boolean
      */
     public static function sendMail(
@@ -126,6 +124,7 @@ class Mailer extends ComponentStatic
                 }
             }
         }
+
         return self::$phpMailer->Send();
     }
 }

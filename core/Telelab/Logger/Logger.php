@@ -61,10 +61,10 @@ class Logger extends ComponentStatic
     protected static function init($config)
     {
         $loggerName = isset($config['name']) ? $config['name'] : 'logger';
-        self::$loggerConf[$loggerName]['enable'] = (boolean)$config['enable'];
+        self::$loggerConf[$loggerName]['enable'] = (boolean) $config['enable'];
 
         if (isset($config['output'])) {
-            self::$loggerConf[$loggerName]['output'] = (boolean)$config['output'];
+            self::$loggerConf[$loggerName]['output'] = (boolean) $config['output'];
         }
 
         if (isset($config['log_level'])) {
@@ -79,7 +79,6 @@ class Logger extends ComponentStatic
             }
         }
 
-
         self::$loggerConf[$loggerName]['driverLoaded'] = false;
         self::$loggerConf[$loggerName]['driverToLoad'] = $config['driver'];
         self::$loggerConf[$loggerName]['driverConfig'] = isset($config[$config['driver']])
@@ -87,12 +86,11 @@ class Logger extends ComponentStatic
                 : null;
     }
 
-
     /**
      * Write message
      *
      * @param string $message
-     * @param int $level
+     * @param int    $level
      */
     public static function log($message, $level = self::LOG_INFO, $loggerName = 'logger')
     {
@@ -112,7 +110,6 @@ class Logger extends ComponentStatic
             }
         }
     }
-
 
     /**
      * Load driver Logger

@@ -22,7 +22,6 @@ class Redis extends Component
      */
     protected $redis;
 
-
     /**
      * Open connection with redis
      *
@@ -41,11 +40,10 @@ class Redis extends Component
         }
     }
 
-
     /**
      * Set option
      *
-     * @param int $name
+     * @param int  $name
      * @param type $value
      */
     public function setOption($name, $value)
@@ -53,18 +51,16 @@ class Redis extends Component
         return $this->redis->setOption($name, $value);
     }
 
-
     /**
      * Get option value
      *
-     * @param type $name
+     * @param  type   $name
      * @return string
      */
     public function getOption($name)
     {
         return $this->redis->getOption($name);
     }
-
 
     /**
      * @throw RedisException if connection is lost
@@ -76,13 +72,12 @@ class Redis extends Component
         return $this->redis->ping();
     }
 
-
     /**
      * Set key with ttl in second
      *
-     * @param string $key
-     * @param string $value
-     * @param int $ttl
+     * @param  string  $key
+     * @param  string  $value
+     * @param  int     $ttl
      * @return boolean
      */
     public function setex($key, $value, $ttl)
@@ -90,13 +85,12 @@ class Redis extends Component
         return $this->redis->setex($key, $value, $ttl);
     }
 
-
     /**
      * Set key with ttl in millisecond
      *
-     * @param string $key
-     * @param string $value
-     * @param int $ttl
+     * @param  string  $key
+     * @param  string  $value
+     * @param  int     $ttl
      * @return boolean
      */
     public function psetex($key, $value, $ttl)
@@ -104,19 +98,17 @@ class Redis extends Component
         return $this->redis->psetex($key, $value, $ttl);
     }
 
-
     /**
      * Set key if not exists already
      *
-     * @param string $key
-     * @param string $value
+     * @param  string  $key
+     * @param  string  $value
      * @return boolean True if is set, or false if key exists already
      */
     public function setnx($key, $value)
     {
         return $this->redis->setnx($key, $value);
     }
-
 
     /**
      * Delete key from Redis
@@ -126,15 +118,14 @@ class Redis extends Component
      */
     public function delete($key)
     {
-        return $this->redis->delete((array)$key);
+        return $this->redis->delete((array) $key);
     }
-
 
     /**
      * Set data
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string $key
+     * @param  mixed  $value
      * @return mixed
      */
     public function set($key, $value)
@@ -142,18 +133,16 @@ class Redis extends Component
         $this->redis->set($key, $value);
     }
 
-
     /**
      * Retrieve data
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function get($key)
     {
         return $this->redis->get($key);
     }
-
 
     /**
      * Close connection with Redis

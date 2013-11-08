@@ -49,7 +49,6 @@ class Router extends Component
      */
     private $cache;
 
-
     /**
      * Init Router
      *
@@ -63,7 +62,6 @@ class Router extends Component
         Logger::log('['.__CLASS__.'] call by sapi -> '.$this->sapiName, Logger::LOG_DEBUG);
     }
 
-
     /**
      * Init cache system if the section routercache exist
      */
@@ -74,7 +72,6 @@ class Router extends Component
         }
     }
 
-
     /**
      * Get route app name
      */
@@ -82,7 +79,6 @@ class Router extends Component
     {
         return self::$routeAppLoaded;
     }
-
 
     /**
      * Set route app loaded
@@ -94,11 +90,10 @@ class Router extends Component
         self::$routeAppLoaded = $routeName;
     }
 
-
     /**
      * Extract route informatios from argv
      *
-     * @param string $route
+     * @param  string $route
      * @return array
      */
     public function getRouteInfos($route = null)
@@ -117,11 +112,10 @@ class Router extends Component
         return $this->_getRouteInfos($route);
     }
 
-
     /**
      * Extract informations from route
      *
-     * @param string $route
+     * @param  string $route
      * @return array
      */
     private function _getRouteInfos($route)
@@ -133,6 +127,7 @@ class Router extends Component
         $cacheId = 'telelab:router:'.md5($route.$httpMethod);
         if ($this->cache !== null && $routeInfos = $this->cache->getCache($cacheId)) {
             Logger::log('['.__CLASS__.'] route from cache -> '.$route, Logger::LOG_DEBUG);
+
             return $routeInfos;
         } else {
             foreach ($routing as $routeName => $routeTest) {
@@ -167,7 +162,6 @@ class Router extends Component
         return $routeInfos;
     }
 
-
     /**
      * Check require fields for routeApp
      *
@@ -182,11 +176,10 @@ class Router extends Component
         }
     }
 
-
     /**
      * Extract informations from main routing
      *
-     * @param string $route
+     * @param  string $route
      * @return array
      */
     private function getRoutingApp($route)
@@ -200,7 +193,7 @@ class Router extends Component
                 $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
                 $matchHostname = (empty($routeApp['host_pattern']) && empty($routeApp['host'])) || $this->sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
                 $matchType     = empty($routeApp['type']) || $routeApp['type'] === $this->sapiName;
-                
+
                 Logger::log('['.__CLASS__.'] test route app -> '.$routeName, Logger::LOG_DEBUG);
                 if ($matchType && $matchHostname && $matchPrefix) {
                     Logger::log('['.__CLASS__.'] route matches -> '.$routeName, Logger::LOG_DEBUG);
@@ -223,7 +216,6 @@ class Router extends Component
         return $routing;
     }
 
-
     /**
      * Check require fields for routeApp
      *
@@ -237,7 +229,6 @@ class Router extends Component
             }
         }
     }
-
 
     /**
      * Load bootstrap application

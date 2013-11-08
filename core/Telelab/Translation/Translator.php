@@ -58,7 +58,7 @@ class Translator extends Component
     /**
      * Constructor.
      *
-     * @param string $locale   The locale
+     * @param string $locale The locale
      */
     protected function init($config)
     {
@@ -66,11 +66,10 @@ class Translator extends Component
         $this->languagePath = $config['language_path'];
     }
 
-
     /**
      * Get instance Translator
      *
-     * @param array $config
+     * @param  array      $config
      * @return Translator
      */
     public static function getInstance($config = null)
@@ -83,7 +82,6 @@ class Translator extends Component
         return self::$instance;
     }
 
-
     /**
      * Set default locale
      *
@@ -93,7 +91,6 @@ class Translator extends Component
     {
         $this->locale = $locale;
     }
-
 
     /**
      * Return default locale
@@ -105,7 +102,6 @@ class Translator extends Component
         return $this->locale;
     }
 
-
     /**
      * Sets the fallback locale(s).
      *
@@ -113,9 +109,8 @@ class Translator extends Component
      */
     public function setFallbackLocale($locale)
     {
-        $this->fallbackLocale = (array)$locale;
+        $this->fallbackLocale = (array) $locale;
     }
-
 
     /**
      * Sets the fallback locale(s).
@@ -124,9 +119,8 @@ class Translator extends Component
      */
     public function setFallbackCatalogue($catalogue)
     {
-        $this->fallbackCatalogue = (array)$catalogue;
+        $this->fallbackCatalogue = (array) $catalogue;
     }
-
 
     /**
      * Set availables locales
@@ -135,17 +129,16 @@ class Translator extends Component
      */
     public function setAvailableLocales($locales)
     {
-        $this->availableLocales = (array)$locales;
+        $this->availableLocales = (array) $locales;
     }
-
 
     /**
      * Return translation for an id
      *
-     * @param string $id
-     * @param array  $parameters
-     * @param string $domain
-     * @param string $locale
+     * @param  string $id
+     * @param  array  $parameters
+     * @param  string $domain
+     * @param  string $locale
      * @return string
      */
     public static function translate($id, array $parameters = array(), $catalogue = 'messages', $locale = null)
@@ -163,12 +156,11 @@ class Translator extends Component
         return strtr($instance->_translate($id, $locale, $catalogue), $parameters);
     }
 
-
     /**
      * Translate all catalogue
      *
-     * @param stringt $catalogue
-     * @param string $locale
+     * @param  stringt $catalogue
+     * @param  string  $locale
      * @return array
      */
     public static function translateCatalogue($catalogue = 'messages', $locale = null)
@@ -185,21 +177,20 @@ class Translator extends Component
 
         $fullCatalogue = array();
         foreach ($instance->catalogues[$catalogue]->message as $message) {
-            $fullCatalogue[(string)$message['id']] = (string)$message->$locale;
+            $fullCatalogue[(string) $message['id']] = (string) $message->$locale;
         }
 
         return $fullCatalogue;
     }
 
-
     /**
      * Extract translate from catalogue
      *
-     * @param string $id
-     * @param string $locale
-     * @param string $catalogue
+     * @param  string                $id
+     * @param  string                $locale
+     * @param  string                $catalogue
      * @throws TranslationException: empty translation
-     * @return string translation
+     * @return string                translation
      */
     protected function _translate($id, $locale, $catalogue)
     {
@@ -221,13 +212,12 @@ class Translator extends Component
         return (string) $result[0]->$locale;
     }
 
-
     /**
      * Load catalogue
      *
-     * @param string $catalogue
+     * @param  string                $catalogue
      * @throws TranslationException: empty catalogue
-     * @return string translation
+     * @return string                translation
      */
     protected function loadCatalogue($catalogue)
     {

@@ -26,24 +26,22 @@ class PDOStatement extends Statement
         $this->pdoStatement = $pdoStatement;
     }
 
-
     /**
      * Return current row
      *
-     * @param string $type
-     * @return mixed Result of the current request
+     * @param  string $type
+     * @return mixed  Result of the current request
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
         return $this->getTypeStatement($type);
     }
 
-
     /**
      * Return all rows
      *
-     * @param string $type
-     * @return array List result
+     * @param  string $type
+     * @return array  List result
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
@@ -55,16 +53,15 @@ class PDOStatement extends Statement
         return $rows;
     }
 
-
     /**
      * Return PDO::FETCH_*
      *
-     * @param string $type
+     * @param  string $type
      * @return mixed
      */
     protected function getTypeStatement($type)
     {
-        switch($type) {
+        switch ($type) {
             case Statement::FETCH_OBJECT:
                 $pdoFetch = \PDO::FETCH_OBJ;
                 break;

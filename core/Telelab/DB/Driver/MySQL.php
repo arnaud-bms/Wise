@@ -34,7 +34,6 @@ class MySQL implements Driver
         $this->initLink();
     }
 
-
     /**
      * Init link
      *
@@ -46,11 +45,10 @@ class MySQL implements Driver
         mysql_select_db($this->_dbname, $this->link);
     }
 
-
     /**
      * Execute query and return result
      *
-     * @param string $query
+     * @param  string         $query
      * @return MySQLStatement
      */
     public function query($query)
@@ -59,18 +57,17 @@ class MySQL implements Driver
         if ($resource = mysql_query($query, $this->link)) {
             return new MySQLStatement($resource);
         }
-        
+
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
 
         return false;
     }
 
-
     /**
      * Execute query and return rows affected
      *
-     * @param string $query
-     * @return int Rows affected
+     * @param  string $query
+     * @return int    Rows affected
      */
     public function exec($query)
     {
@@ -81,14 +78,13 @@ class MySQL implements Driver
         }
 
         Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
-  
+
         return 0;
     }
-    
-    
+
     /**
      * Set charset
-     * 
+     *
      * @param string $charset
      */
     public function setCharset($charset)
@@ -96,18 +92,16 @@ class MySQL implements Driver
         mysql_query('SET NAMES "'.$charset.'"');
     }
 
-
     /**
      * Execute query and return rows affected
      *
-     * @param string $query
+     * @param  string $query
      * @return string
      */
     public function escape($string)
     {
         return "'".mysql_real_escape_string($string)."'";
     }
-
 
     /**
      * Get last id insert
@@ -119,7 +113,6 @@ class MySQL implements Driver
         return mysql_insert_id($this->link);
     }
 
-
     /**
      * Close connection with database
      */
@@ -127,7 +120,6 @@ class MySQL implements Driver
     {
         mysql_close($this->link);
     }
-
 
     /**
      * Set connection with database

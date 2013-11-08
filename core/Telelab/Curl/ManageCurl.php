@@ -52,7 +52,6 @@ class ManageCurl extends Component
         return $this->addCurl(new Curl($url));
     }
 
-
     /**
      * Execute multi_exec
      */
@@ -63,11 +62,10 @@ class ManageCurl extends Component
         $this->readResponseRequest($multiHandle);
     }
 
-
     /**
      * Add Curl to execute on multi
      *
-     * @param Curl $curl
+     * @param  Curl   $curl
      * @return string Request id
      */
     public function addCurl(Curl $curl)
@@ -75,9 +73,9 @@ class ManageCurl extends Component
         $uniqId = uniqid();
         $this->listCurl[$uniqId] = $curl;
         $this->execCurl($uniqId);
+
         return $uniqId;
     }
-
 
     /**
      * Init multi_handle
@@ -91,9 +89,9 @@ class ManageCurl extends Component
             $curl = $this->getCurl($uniqId);
             curl_multi_add_handle($multiHandle, $curl->getHandle());
         }
+
         return $multiHandle;
     }
-
 
     /**
      * Execute curl in multi
@@ -108,7 +106,6 @@ class ManageCurl extends Component
             curl_multi_exec($multiHandle, $running);
         } while ($running != 0 && (microtime(true) < $startTime + $this->timeout));
     }
-
 
     /**
      * Read response to request
@@ -131,13 +128,12 @@ class ManageCurl extends Component
         }
     }
 
-
     /**
      * Method called in call back
      *
      * @param string $content
      * @param string $uniqId
-     * @param array $infos
+     * @param array  $infos
      */
     private function callBack($content, $uniqId, array $infos)
     {
@@ -145,11 +141,10 @@ class ManageCurl extends Component
         $this->listResponse[$uniqId] = $content;
     }
 
-
     /**
      * Add callback for handle
      *
-     * @param Curl $curl
+     * @param Curl   $curl
      * @param string $uniqId
      */
     private function addToCallback(Curl $curl, $uniqId)
@@ -161,7 +156,6 @@ class ManageCurl extends Component
             $curl->getInfo()
         );
     }
-
 
     /**
      * Execute request Curl
@@ -178,11 +172,10 @@ class ManageCurl extends Component
         }
     }
 
-
     /**
      * Return response to request
      *
-     * @param string $uniqId
+     * @param  string $uniqId
      * @return string
      */
     public function getResponse($uniqId)
@@ -192,11 +185,10 @@ class ManageCurl extends Component
         }
     }
 
-
     /**
      * Return informations about request
      *
-     * @param string $uniqId
+     * @param  string $uniqId
      * @return array
      */
     public function getInfos($uniqId)
@@ -204,13 +196,12 @@ class ManageCurl extends Component
         return $this->listInfos[$uniqId];
     }
 
-
     /**
      * Set option to Curl
      *
      * @param string $uniqId
-     * @param int $option
-     * @param mixed $value
+     * @param int    $option
+     * @param mixed  $value
      */
     public function setOpt($uniqId, $option, $value)
     {
@@ -218,19 +209,17 @@ class ManageCurl extends Component
         $curl->setOpt($option, $value);
     }
 
-
     /**
      * Set list options to Curl
      *
      * @param string $uniqId
-     * @param array $listOptions
+     * @param array  $listOptions
      */
     public function setOptArray($uniqId, array $listOptions)
     {
         $curl = $this->getCurl($uniqId);
         $curl->setOptArray($listOptions);
     }
-
 
     /**
      * Set auto exec
@@ -242,7 +231,6 @@ class ManageCurl extends Component
         $this->autoExec = $autoExec;
     }
 
-
     /**
      * Set timeout
      *
@@ -253,11 +241,10 @@ class ManageCurl extends Component
         $this->timeout = $second;
     }
 
-
     /**
      * Return ref on Curl
      *
-     * @param string $uniqId
+     * @param  string        $uniqId
      * @throws CurlException If uniq id does'nt exists
      * @return Curl
      */

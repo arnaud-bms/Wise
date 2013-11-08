@@ -16,7 +16,6 @@ class Globals extends ComponentStatic
      */
     private static $params = array();
 
-
     /**
      * Init Globals component
      *
@@ -31,23 +30,21 @@ class Globals extends ComponentStatic
         }
     }
 
-
     /**
      * Set arg to params
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public static function set($name, $value)
     {
         self::$params[$name] = $value;
     }
 
-
     /**
      * Get arg from $_SESSION
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
     public static function get($name)

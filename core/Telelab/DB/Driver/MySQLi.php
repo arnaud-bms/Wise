@@ -30,11 +30,10 @@ class MySQLi implements Driver
         $this->_dbname   = $dbname;
         $this->_user     = $user;
         $this->_password = $password;
-        
+
         $this->initLink();
     }
 
-    
     /**
      * Init link
      *
@@ -48,7 +47,7 @@ class MySQLi implements Driver
     /**
      * Execute query and return result
      *
-     * @param string $query
+     * @param  string          $query
      * @return MySQLiStatement
      */
     public function query($query)
@@ -63,12 +62,11 @@ class MySQLi implements Driver
         return false;
     }
 
-
     /**
      * Execute query and return rows affected
      *
-     * @param string $query
-     * @return int Rows affected
+     * @param  string $query
+     * @return int    Rows affected
      */
     public function exec($query)
     {
@@ -81,11 +79,10 @@ class MySQLi implements Driver
 
         return 0;
     }
-    
-    
+
     /**
      * Set charset
-     * 
+     *
      * @param string $charset
      */
     public function setCharset($charset)
@@ -93,18 +90,16 @@ class MySQLi implements Driver
         $this->mysqli->set_charset($charset);
     }
 
-
     /**
      * Execute query and return rows affected
      *
-     * @param string $query
+     * @param  string $query
      * @return string
      */
     public function escape($string)
     {
         return "'".$this->mysqli->real_escape_string($string)."'";
     }
-
 
     /**
      * Get last id insert
@@ -116,7 +111,6 @@ class MySQLi implements Driver
         return $this->mysqli->insert_id;
     }
 
-
     /**
      * Close connection with database
      */
@@ -125,7 +119,6 @@ class MySQLi implements Driver
         $this->mysqli->close();
     }
 
-    
     /**
      * Set connection with database
      */

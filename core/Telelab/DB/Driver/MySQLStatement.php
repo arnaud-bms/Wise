@@ -26,7 +26,6 @@ class MySQLStatement extends Statement
         $this->mySQLStatement = $resource;
     }
 
-
     /**
      * Return current row
      *
@@ -37,12 +36,11 @@ class MySQLStatement extends Statement
         return $this->getTypeStatement($type);
     }
 
-
     /**
      * Return all rows
      *
-     * @param string $type
-     * @return array List result
+     * @param  string $type
+     * @return array  List result
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
@@ -54,16 +52,15 @@ class MySQLStatement extends Statement
         return $rows;
     }
 
-
     /**
      * Return row
      *
-     * @param string $type
+     * @param  string $type
      * @return mixed
      */
     protected function getTypeStatement($type)
     {
-        switch($type) {
+        switch ($type) {
             case Statement::FETCH_OBJECT:
                 $row = mysql_fetch_object($this->mySQLStatement);
                 break;

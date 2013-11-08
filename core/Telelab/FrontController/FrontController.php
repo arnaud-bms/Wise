@@ -73,11 +73,10 @@ class FrontController extends ComponentStatic
         self::executeRoute();
     }
 
-
     /**
      * Get routes informations from Router
      *
-     * @param string $route
+     * @param  string $route
      * @return array
      */
     private static function getRouteInfos($route)
@@ -95,7 +94,6 @@ class FrontController extends ComponentStatic
 
         return $routeInfos;
     }
-
 
     /**
      * Set informations from routeInfos
@@ -118,22 +116,21 @@ class FrontController extends ComponentStatic
         }
 
         if (isset($routeInfos[self::PLUGIN_PRECALL])) {
-            self::$plugins[self::PLUGIN_PRECALL] = explode(';', $routeInfos[self::PLUGIN_PRECALL]);
+            self::$plugins[self::PLUGIN_PRECALL] = $routeInfos[self::PLUGIN_PRECALL];
         } elseif ($precall = Conf::getConfig('plugin.default_precall')) {
-            self::$plugins[self::PLUGIN_PRECALL] = explode(';', $precall);
+            self::$plugins[self::PLUGIN_PRECALL] = $precall;
         } else {
             self::$plugins[self::PLUGIN_PRECALL] = array();
         }
 
         if (isset($routeInfos[self::PLUGIN_POSTCALL])) {
-            self::$plugins[self::PLUGIN_POSTCALL] = explode(';', $routeInfos[self::PLUGIN_POSTCALL]);
+            self::$plugins[self::PLUGIN_POSTCALL] = $routeInfos[self::PLUGIN_POSTCALL];
         } elseif ($precall = Conf::getConfig('plugin.default_postcall')) {
-            self::$plugins[self::PLUGIN_POSTCALL] = explode(';', $precall);
+            self::$plugins[self::PLUGIN_POSTCALL] = $precall;
         } else {
             self::$plugins[self::PLUGIN_POSTCALL] = array();
         }
     }
-
 
     /**
      * Execute route
@@ -144,7 +141,6 @@ class FrontController extends ComponentStatic
         self::executeAction();
         self::executePlugins(self::PLUGIN_POSTCALL);
     }
-
 
     /**
      * Execute plugins
@@ -159,7 +155,7 @@ class FrontController extends ComponentStatic
                 if (empty($plugin)) {
                     continue;
                 }
-                
+
                 if (!isset(self::$pluginsLoaded[$plugin])) {
                     self::$pluginsLoaded[$plugin] = new $plugin();
                 }
@@ -179,7 +175,6 @@ class FrontController extends ComponentStatic
             }
         }
     }
-
 
     /**
      * Execute controller
@@ -203,7 +198,6 @@ class FrontController extends ComponentStatic
         }
     }
 
-
     /**
      * Interrupt request and return response
      */
@@ -211,7 +205,6 @@ class FrontController extends ComponentStatic
     {
         self::$interrupRequest = true;
     }
-
 
     /**
      * Retrieve route id
@@ -223,7 +216,6 @@ class FrontController extends ComponentStatic
         return self::$routeId;
     }
 
-
     /**
      * Retrieve route name
      *
@@ -234,7 +226,6 @@ class FrontController extends ComponentStatic
         return self::$routeName;
     }
 
-
     /**
      * Retrieve response
      *
@@ -244,7 +235,6 @@ class FrontController extends ComponentStatic
     {
         return self::$response;
     }
-
 
     /**
      * Set response

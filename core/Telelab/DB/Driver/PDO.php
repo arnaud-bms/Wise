@@ -20,10 +20,10 @@ class PDO implements Driver
     /**
      * Init PDO Driver
      *
-     * @param type $host
-     * @param type $dbname
-     * @param type $user
-     * @param type $password
+     * @param  type        $host
+     * @param  type        $dbname
+     * @param  type        $user
+     * @param  type        $password
      * @throws DBException
      */
     public function __construct($host, $dbname, $user, $password)
@@ -36,11 +36,10 @@ class PDO implements Driver
         }
     }
 
-
     /**
      * Execute query and return result
      *
-     * @param string $query
+     * @param  string       $query
      * @return PDOStatement
      */
     public function query($query)
@@ -55,11 +54,10 @@ class PDO implements Driver
         return false;
     }
 
-
     /**
      * Execute query and return rows affected
      *
-     * @param string $query
+     * @param  string $query
      * @return int
      */
     public function exec($query)
@@ -73,11 +71,10 @@ class PDO implements Driver
 
         return false;
     }
-    
-    
+
     /**
      * Set charset
-     * 
+     *
      * @param string $charset
      */
     public function setCharset($charset)
@@ -85,18 +82,16 @@ class PDO implements Driver
         $this->pdo->exec('SET NAMES "'.$charset.'"');
     }
 
-
     /**
      * Execute query and return rows affected
      *
-     * @param string $query
+     * @param  string $query
      * @return string
      */
     public function escape($string)
     {
         return $this->pdo->quote($string);
     }
-
 
     /**
      * Get last id insert
@@ -108,7 +103,6 @@ class PDO implements Driver
         return $this->pdo->lastInsertId();
     }
 
-
     /**
      * Close connection with database
      */
@@ -116,7 +110,6 @@ class PDO implements Driver
     {
         unset($this->pdo);
     }
-
 
     /**
      * Close connection with database

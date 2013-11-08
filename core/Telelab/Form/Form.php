@@ -29,21 +29,21 @@ class Form extends Component
      * Add one or more rule (instances of formRule)
      *
      * @param formRule 1-xxx : One or more instance of formRule
-     * @param Array $from : Array where the Element is
-     * @param String $delimiter (default : '.') : Delimiter for array Elements
+     * @param  Array    $from      : Array where the Element is
+     * @param  String   $delimiter (default : '.') : Delimiter for array Elements
      * @return FormRule
      */
     public function addRule($name, $from = null, $delimiter = '.')
     {
         $this->rules[$name] = new FormRule($name, $from, $delimiter);
+
         return $this->rules[$name];
     }
-
 
     /**
      * Call functino or method after validate all rules
      *
-     * @param mixed $callback Array or string
+     * @param mixed  $callback Array or string
      * @param string $error
      */
     public function addCallback($callback, $error)
@@ -52,7 +52,6 @@ class Form extends Component
         $callback['error']  = $error;
         $this->callback[] = $callback;
     }
-
 
     /**
      * Check if the rules are valid

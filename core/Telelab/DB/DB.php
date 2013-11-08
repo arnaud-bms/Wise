@@ -20,7 +20,7 @@ class DB extends Component
      * @var Connection to DB
      */
     private static $driver = null;
-    
+
     /**
      * @var String Charset to use
      */
@@ -37,16 +37,15 @@ class DB extends Component
         'password'
     );
 
-
     /**
      * Init DB
      *
-     * @param array $config
+     * @param  array       $config
      * @throws DBException
      */
     protected function init($config)
     {
-        switch($config['driver']) {
+        switch ($config['driver']) {
             case 'pdo':
                 $driver = 'Telelab\DB\Driver\PDO';
                 break;
@@ -76,11 +75,10 @@ class DB extends Component
         }
     }
 
-
     /**
      * Get instance DB
      *
-     * @param array $config
+     * @param  array $config
      * @return DB
      */
     public static function getInstance($config = null)
@@ -93,12 +91,11 @@ class DB extends Component
         return self::$instance;
     }
 
-
     /**
      * Call method on driver
      *
-     * @param string $method
-     * @param array $argv
+     * @param  string $method
+     * @param  array  $argv
      * @return mixed
      */
     public function __call($method, $argv)
@@ -106,19 +103,17 @@ class DB extends Component
         return call_user_func_array(array(self::$driver, $method), $argv);
     }
 
-
     /**
      * Reset connection with database
      */
     public static function reset()
     {
         self::$driver->reset();
-       
+
         if (self::$charset !== null) {
             self::$driver->setCharset(self::$charset);
         }
     }
-
 
     /**
      * Close connection on driver and remove ref to driver

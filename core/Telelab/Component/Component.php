@@ -24,7 +24,6 @@ abstract class Component extends AbstractComponent
         $this->init($config);
     }
 
-
     /**
      * Init component
      *
@@ -32,6 +31,6 @@ abstract class Component extends AbstractComponent
      */
     protected function init($config)
     {
-        
+
     }
 }

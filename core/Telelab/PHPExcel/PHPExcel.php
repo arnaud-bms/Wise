@@ -14,16 +14,16 @@ class PHPExcel extends ComponentStatic
     /**
      * Load file
      *
-     * @param string $file
+     * @param  string                    $file
      * @throws PHPExcel_Reader_Exception Unable to identify a reader for this file
      * @return PHPExcel
      */
     public static function load($file)
     {
         require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel/IOFactory.php';
+
         return \PHPExcel_IOFactory::load($file);
     }
-
 
     /**
      * Return ref to PHPExcel
@@ -34,6 +34,7 @@ class PHPExcel extends ComponentStatic
     {
         require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel.php';
         require_once ROOT_DIR.'/vendor/phpexcel/Classes/PHPExcel/IOFactory.php';
+
         return new \PHPExcel();
     }
 }

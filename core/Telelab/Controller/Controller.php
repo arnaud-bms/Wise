@@ -23,7 +23,6 @@ abstract class Controller extends Component
      */
     private static $server = null;
 
-
     /**
      * Init Controller
      *
@@ -32,7 +31,7 @@ abstract class Controller extends Component
     protected function initAuto($config)
     {
         self::$server = new Server();
-        
+
         parent::initAuto($config);
     }
 
@@ -47,11 +46,10 @@ abstract class Controller extends Component
         FrontController::interruptRequest();
     }
 
-
     /**
      * Get ref to repository
      *
-     * @param string $repository
+     * @param  string     $repository
      * @return Repository
      */
     public function getRepository($repository)
@@ -63,12 +61,11 @@ abstract class Controller extends Component
         return $this->repositoryLoaded[$repository];
     }
 
-
     /**
      * Call method on server
      *
-     * @param string $method
-     * @param array $argv
+     * @param  string $method
+     * @param  array  $argv
      * @return mixed
      */
     public function __call($method, $argv)

@@ -43,7 +43,6 @@ abstract class Entity extends Component
      */
     protected $primaryKey = 'id';
 
-
     /**
      * Init members of DAO
      *
@@ -60,7 +59,6 @@ abstract class Entity extends Component
         $this->sqlBuilder = new SqlBuilder($this->tableName);
     }
 
-
     /**
      * Init properties of DAO
      *
@@ -72,7 +70,6 @@ abstract class Entity extends Component
             $this->field[$key] = $value;
         }
     }
-
 
     /**
      * Init table name from entity
@@ -87,11 +84,10 @@ abstract class Entity extends Component
         }
     }
 
-
     /**
      * Get value
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function __get($key)
@@ -105,7 +101,6 @@ abstract class Entity extends Component
         return null;
     }
 
-
     /**
      * Set value
      *
@@ -115,18 +110,17 @@ abstract class Entity extends Component
     public function __set($key, $value)
     {
         if (!array_key_exists($key, $this->field)
-            || ((string)$value !== $this->field[$key])
+            || ((string) $value !== $this->field[$key])
             && $value !== $this->field[$key]) {
-            $this->fieldChanged[$key] = is_object($value) ? (string)$value : $value;
+            $this->fieldChanged[$key] = is_object($value) ? (string) $value : $value;
         }
     }
-
 
     /**
      * Handle getter and setter method calls
      *
      * @param string $method
-     * @param array $argv
+     * @param array  $argv
      */
     public function __call($method, $argv)
     {
@@ -146,7 +140,6 @@ abstract class Entity extends Component
         }
     }
 
-
     /**
      * Retrieve all properties of the entity in array
      *
@@ -157,11 +150,10 @@ abstract class Entity extends Component
         return $this->field;
     }
 
-
     /**
      * Save insert or update entity
      *
-     * @param boolean $setPrimaryKey Set primary_key after insert
+     * @param  boolean $setPrimaryKey Set primary_key after insert
      * @return boolean
      */
     public function save($setPrimaryKey = false, $criteria = array())
@@ -175,12 +167,12 @@ abstract class Entity extends Component
             $this->field = $this->fieldChanged;
         } else {
             if (empty($criteria)) {
-                $primaryKey = (array)$this->getPrimaryKey();
+                $primaryKey = (array) $this->getPrimaryKey();
                 foreach ($primaryKey as $key) {
                     $criteria[$key] = $this->field[$key];
                 }
             }
-            
+
             if (!empty($this->fieldChanged)) {
                 $rowAffected = $this->sqlBuilder->update($this->fieldChanged, $criteria);
                 foreach ($this->fieldChanged as $newField => $value) {
@@ -196,7 +188,6 @@ abstract class Entity extends Component
         return $rowAffected;
     }
 
-
     /**
      * Delete entity
      *
@@ -205,14 +196,13 @@ abstract class Entity extends Component
     public function delete()
     {
         $criteria = new Criteria();
-        $primaryKey = (array)$this->getPrimaryKey();
+        $primaryKey = (array) $this->getPrimaryKey();
         foreach ($primaryKey as $key) {
             $criteria->add($key, $this->field[$key], Criteria::EQUAL);
         }
 
         return $this->sqlBuilder->delete($criteria);
     }
-
 
     /**
      * Check if the entity has changed
@@ -224,7 +214,6 @@ abstract class Entity extends Component
         return !empty($this->fieldChanged);
     }
 
-
     /**
      * Set flag new
      *
@@ -232,9 +221,8 @@ abstract class Entity extends Component
      */
     public function setIsNew($isNew)
     {
-        $this->isNew = (boolean)$isNew;
+        $this->isNew = (boolean) $isNew;
     }
-
 
     /**
      * Get repository class name
@@ -245,7 +233,6 @@ abstract class Entity extends Component
     {
         return str_replace('Entity', 'Repository', get_called_class());
     }
-
 
     /**
      * Get table primary key

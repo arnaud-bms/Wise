@@ -26,7 +26,6 @@ class Curl extends Component
      */
     private $timeout = 3;
 
-
     /**
      * Construct Curl
      *
@@ -40,7 +39,6 @@ class Curl extends Component
         $this->setOpt(CURLOPT_RETURNTRANSFER, 1);
     }
 
-
     /**
      * Execute query
      *
@@ -52,9 +50,9 @@ class Curl extends Component
         if (($return = curl_exec($this->curl)) === false) {
             throw new CurlException(curlerror($this->curl));
         }
+
         return $return;
     }
-
 
     /**
      * Return handle on resource curl
@@ -66,7 +64,6 @@ class Curl extends Component
         return $this->curl;
     }
 
-
     /**
      * Return info about request
      *
@@ -77,7 +74,6 @@ class Curl extends Component
         return curl_getinfo($this->curl);
     }
 
-
     /**
      * Return last error
      *
@@ -87,7 +83,6 @@ class Curl extends Component
     {
         return $this->error;
     }
-
 
     /**
      * Set property url
@@ -101,18 +96,16 @@ class Curl extends Component
         }
     }
 
-
     /**
      * Set option curl
      *
-     * @param int $option
+     * @param int   $option
      * @param mixed $value
      */
     public function setOpt($option, $value)
     {
         curl_setopt($this->curl, $option, $value);
     }
-
 
     /**
      * Set list options curl
@@ -123,7 +116,6 @@ class Curl extends Component
     {
         curl_setopt_array($this->curl, $listOptions);
     }
-
 
     /**
      * Close curl

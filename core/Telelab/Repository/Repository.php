@@ -39,7 +39,6 @@ abstract class Repository extends Component
      */
     private $resultType = self::RETURN_ENTITY;
 
-
     /**
      * Init repository
      *
@@ -51,7 +50,6 @@ abstract class Repository extends Component
         $this->initTableName();
         $this->_sqlBuilder = new SqlBuilder($this->tableName);
     }
-
 
     /**
      * Check if entity DAO exists and set members
@@ -70,7 +68,6 @@ abstract class Repository extends Component
         }
     }
 
-
     /**
      * Init table name from entity
      */
@@ -84,27 +81,26 @@ abstract class Repository extends Component
         }
     }
 
-
     /**
      * Find entity by id
      *
-     * @param int $id
+     * @param  int   $id
      * @return mixed
      */
     public function find($id)
     {
-        $where = array('id' => (int)$id);
+        $where = array('id' => (int) $id);
         if ($stmt = $this->_sqlBuilder->select('*', $where, 1)) {
             return $this->getResult($stmt->fetch());
         }
+
         return false;
     }
-
 
     /**
      * Find all entities
      *
-     * @param array $select
+     * @param  array $select
      * @return array List rows
      */
     public function findAll($select)
@@ -112,15 +108,14 @@ abstract class Repository extends Component
         return $this->findBy($select, array());
     }
 
-
     /**
      * Find by dynamic
      *
-     * @param array $select
-     * @param array $criteria
-     * @param array $order
-     * @param int $limit
-     * @param int $offset
+     * @param  array $select
+     * @param  array $criteria
+     * @param  array $order
+     * @param  int   $limit
+     * @param  int   $offset
      * @return array List rows
      */
     public function findBy($select, $criteria, $order = null, $limit = null, $offset = null)
@@ -137,7 +132,6 @@ abstract class Repository extends Component
         return false;
     }
 
-
     /**
      * Find by dynamic
      *
@@ -151,15 +145,15 @@ abstract class Repository extends Component
         if ($stmt = $this->_sqlBuilder->select($select, $criteria, $order, 1)) {
             return $this->getResult($stmt->fetch());
         }
+
         return false;
     }
-
 
     /**
      * Execute query
      *
-     * @param string $query
-     * @return array List rows
+     * @param  string $query
+     * @return array  List rows
      */
     public function query($query)
     {
@@ -175,23 +169,21 @@ abstract class Repository extends Component
         return false;
     }
 
-
     /**
      * Execute query
      *
-     * @param string $query
-     * @return int Rows affected
+     * @param  string $query
+     * @return int    Rows affected
      */
     public function exec($query)
     {
         return $this->_sqlBuilder->exec($query);
     }
 
-
     /**
      * Escape string
      *
-     * @param string $string
+     * @param  string $string
      * @return string $string
      */
     public function escape($string)
@@ -199,49 +191,46 @@ abstract class Repository extends Component
         return $this->_sqlBuilder->escape($string);
     }
 
-
     /**
      * Return count(*)
      *
-     * @param array $criteria
+     * @param  array $criteria
      * @return int
      */
     public function count($criteria)
     {
         if ($stmt = $this->_sqlBuilder->select(array('nb' => 'count(*)'), $criteria)) {
             if ($result = $stmt->fetch()) {
-                return (int)$result['nb'];
+                return (int) $result['nb'];
             }
 
         }
+
         return false;
     }
-
 
     /**
      * Insert multiple rows
      *
-     * @param array $rows
-     * @param boolean $ignore
-     * @return int rows affected
+     * @param  array   $rows
+     * @param  boolean $ignore
+     * @return int     rows affected
      */
     public function insertMultiple($rows, $ignore = false)
     {
         return $this->_sqlBuilder->insertMultiple($rows, $ignore);
     }
 
-
     /**
      * Delete rows
      *
-     * @param array $criteria
-     * @return int rows affected
+     * @param  array $criteria
+     * @return int   rows affected
      */
     public function delete($criteria)
     {
         return $this->_sqlBuilder->delete($criteria);
     }
-
 
     /**
     * Update rows table
@@ -255,12 +244,11 @@ abstract class Repository extends Component
         return $this->_sqlBuilder->update($rows, $where, $ignore);
     }
 
-
     /**
      * Create find dynamic request
      *
-     * @param string $method
-     * @param array $argv
+     * @param  string $method
+     * @param  array  $argv
      * @return mixed
      */
     public function __call($method, $argv)
@@ -287,12 +275,12 @@ abstract class Repository extends Component
             case 3:
                 return $this->$method(array($field => $argv[0]), $argv[1], $argv[2]);
             case 4;
+
                 return $this->$method(array($field => $argv[0]), $argv[1], $argv[2], $argv[3]);
             default:
                 return false;
         }
     }
-
 
     /**
      * Set type result to return
@@ -308,11 +296,10 @@ abstract class Repository extends Component
         }
     }
 
-
     /**
      * Create entity DAO if exists
      *
-     * @param array $row
+     * @param  array $row
      * @return mixed
      */
     protected function getResult($row)
