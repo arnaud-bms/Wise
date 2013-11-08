@@ -21,7 +21,6 @@ class SqlBuilder extends Component
      */
     protected $table;
 
-
     /**
      * Init repository
      *
@@ -33,19 +32,17 @@ class SqlBuilder extends Component
         $this->db = DB::getInstance();
     }
 
-
     /**
      * Call method on DB
      *
-     * @param string $method
-     * @param array $args
+     * @param  string $method
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
     {
         return call_user_func_array(array($this->db, $method), $args);
     }
-
 
     /**
      * Insert row into table
@@ -55,7 +52,7 @@ class SqlBuilder extends Component
      */
     public function insert($rows, $ignore = false)
     {
-        $rows   = (array)$rows;
+        $rows   = (array) $rows;
         $query  = "INSERT %s INTO %s (%s) VALUES(%s)";
         $ignore = $ignore ? 'IGNORE' : '';
         $fields = array_keys($rows);
@@ -75,7 +72,6 @@ class SqlBuilder extends Component
 
         return $this->db->exec($query);
     }
-
 
     /**
      * Insert rows into table
@@ -114,7 +110,6 @@ class SqlBuilder extends Component
         return $this->db->exec($query);
     }
 
-
     /**
     * Update rows table
     *
@@ -135,7 +130,6 @@ class SqlBuilder extends Component
         return $this->db->exec($query);
     }
 
-
     /**
     * Delete from table
     *
@@ -155,7 +149,6 @@ class SqlBuilder extends Component
         return $this->db->exec($query);
     }
 
-
     /**
     * Simple select on table
     *
@@ -169,7 +162,7 @@ class SqlBuilder extends Component
         $query = "SELECT %s FROM %s WHERE %s";
 
         $selectQuery = '';
-        foreach ((array)$select as $alias => $field) {
+        foreach ((array) $select as $alias => $field) {
             if (!is_int($alias)) {
                 $selectQuery.= $field.' as '.$alias.',';
             } else {
@@ -198,12 +191,11 @@ class SqlBuilder extends Component
         }
 
         if ($limit !== null) {
-            $query.= $offset !== null ? ' LIMIT '.(int)$offset.', '.(int)$limit : ' LIMIT '.(int)$limit;
+            $query.= $offset !== null ? ' LIMIT '.(int) $offset.', '.(int) $limit : ' LIMIT '.(int) $limit;
         }
 
         return $this->db->query($query);
     }
-
 
     /**
     * Construct field = value $sep
@@ -236,11 +228,10 @@ class SqlBuilder extends Component
         return rtrim($query, $separator.' ');
     }
 
-
     /**
      * Escape list values
      *
-     * @param array $valueList
+     * @param  array $valueList
      * @return array
      */
     public function escapeValues($valueList)
@@ -252,11 +243,10 @@ class SqlBuilder extends Component
         return $valueList;
     }
 
-
     /**
      * Escape value if is string
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return mixed
      */
     public function escape($value)
@@ -264,9 +254,9 @@ class SqlBuilder extends Component
         if (is_int($value) || is_float($value)) {
             return $value;
         }
+
         return $this->db->escape($value);
     }
-
 
     /**
      * Reset connection with database

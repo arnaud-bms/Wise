@@ -29,16 +29,15 @@ class Cache extends Component
         'driver'
     );
 
-
     /**
      * Init Cache
      *
-     * @param array $config
+     * @param  array          $config
      * @throws CacheException If driver does'nt exists
      */
     protected function init($config)
     {
-        switch($config['driver']) {
+        switch ($config['driver']) {
             case 'file':
                 $driver = 'Telelab\Cache\Driver\File';
                 break;
@@ -52,14 +51,13 @@ class Cache extends Component
         $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
         $this->driver = new $driver($driverConfig);
 
-        $this->enable = (boolean)$config['enable'];
+        $this->enable = (boolean) $config['enable'];
     }
-
 
     /**
      * Retrieve cache
      *
-     * @param string $uniqId Request id
+     * @param  string $uniqId Request id
      * @return string Content's request
      */
     public function getCache($uniqId)
@@ -71,13 +69,12 @@ class Cache extends Component
         return false;
     }
 
-
     /**
      * Set content to Cache
      *
      * @param string $uniqId
      * @param string $content
-     * @param int $ttl
+     * @param int    $ttl
      */
     public function setCache($uniqId, $content, $ttl = null)
     {

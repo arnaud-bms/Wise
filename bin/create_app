@@ -32,9 +32,9 @@ cp $CURRENT_DIR"/tpl_app/AppController.php" $APP_PATH$APP_NAME"/"$APP_NAME"Contr
 cp $CURRENT_DIR"/tpl_app/AppRepository.php" $APP_PATH$APP_NAME"/Models/AppRepository.php";
 cp $CURRENT_DIR"/tpl_app/Main.php" $APP_PATH$APP_NAME"/Controllers/Main.php";
 cp $CURRENT_DIR"/tpl_app/bootstrap.php" $APP_PATH$APP_NAME"/bootstrap.php";
-cp $CURRENT_DIR"/tpl_app/config.ini" $APP_PATH$APP_NAME"/etc/config.ini";
-cp $CURRENT_DIR"/tpl_app/routing.ini" $APP_PATH$APP_NAME"/etc/routing.ini";
-cp $CURRENT_DIR"/tpl_app/view.ini" $APP_PATH$APP_NAME"/etc/view.ini";
+cp $CURRENT_DIR"/tpl_app/config.php" $APP_PATH$APP_NAME"/etc/config.php";
+cp $CURRENT_DIR"/tpl_app/routing.php" $APP_PATH$APP_NAME"/etc/routing.php";
+cp $CURRENT_DIR"/tpl_app/view.php" $APP_PATH$APP_NAME"/etc/view.php";
 cp $CURRENT_DIR"/tpl_app/main.php" $APP_PATH$APP_NAME"/tpl/main.php";
 
 sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/"$APP_NAME"Controller.php";
@@ -49,8 +49,8 @@ sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/Controllers/Main.php";
 sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/bootstrap.php";
 sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/bootstrap.php";
 
-sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/etc/config.ini";
-sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/etc/config.ini";
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/etc/config.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/etc/config.php";
 
-sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/etc/routing.ini";
-sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/etc/routing.ini";
+sed -i s/{{app_name}}/$APP_NAME/g $APP_PATH$APP_NAME"/etc/routing.php";
+sed -i s/{{user}}/$USER/g $APP_PATH$APP_NAME"/etc/routing.php";

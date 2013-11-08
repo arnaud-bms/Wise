@@ -39,12 +39,11 @@ class File extends Driver
         parent::init($config);
     }
 
-
     /**
      * Retrieve valid cache
      *
      * @param string $message
-     * @param int  $level
+     * @param int    $level
      */
     public function log($message, $level)
     {
@@ -54,7 +53,6 @@ class File extends Driver
 
         file_put_contents($this->file, $message, FILE_APPEND);
     }
-
 
     /**
      * Close file

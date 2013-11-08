@@ -25,12 +25,10 @@ class Server extends Component
         'head' => array()
     );
 
-
     /**
      * @var string current request methods
      */
     protected $requestMethod = '';
-
 
     /**
      * Init View
@@ -43,7 +41,6 @@ class Server extends Component
 
         $this->parameters = $_REQUEST;
     }
-
 
     /**
      * retrieve parameter
@@ -58,7 +55,6 @@ class Server extends Component
 
         return null;
     }
-
 
     /**
      * retrieve parameters

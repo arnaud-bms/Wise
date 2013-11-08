@@ -39,11 +39,10 @@ class File extends Driver
         $this->ttl  = $config['ttl'];
     }
 
-
     /**
      * Retrieve valid cache
      *
-     * @param type $uniqId
+     * @param  type   $uniqId
      * @return string Content, if the request's cache exists
      */
     public function getCache($uniqId)

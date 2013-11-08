@@ -23,7 +23,6 @@ class View extends Component
         'driver'
     );
 
-
     /**
      * Init View
      *
@@ -31,7 +30,7 @@ class View extends Component
      */
     protected function init($config)
     {
-        switch($config['driver']) {
+        switch ($config['driver']) {
             case 'smarty':
                 $driver = 'Telelab\View\Driver\Smarty';
                 break;
@@ -42,11 +41,9 @@ class View extends Component
                 throw new ViewException("Driver '{$config['driver']}' does'nt exists", 400);
         }
 
-        $driverConfig = isset($config[$config['driver']])
-                      ? $config[$config['driver']] : null;
+        $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
         $this->driver = new $driver($driverConfig);
     }
-
 
     /**
      * Set data list
@@ -58,30 +55,27 @@ class View extends Component
         $this->driver->setDataList($dataList);
     }
 
-
     /**
      * Set data to view
      *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setData($field, $value)
     {
         $this->driver->setData($field, $value);
     }
 
-
     /**
      * Get data
      *
-     * @param type $field
+     * @param  type $field
      * @return type
      */
     public function getData($field)
     {
         return $this->driver->getData($field);
     }
-
 
     /**
      * Return content to stdout
@@ -93,11 +87,10 @@ class View extends Component
         $this->driver->display($template);
     }
 
-
     /**
      * Return content from view
      *
-     * @param type $template
+     * @param  type   $template
      * @return string
      */
     public function fetch($template)

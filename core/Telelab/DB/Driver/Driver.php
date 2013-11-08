@@ -1,7 +1,6 @@
 <?php
 namespace Telelab\DB\Driver;
 
-
 /**
  * Abstract class driver
  *
@@ -12,10 +11,10 @@ interface Driver
     /**
      * Init driver
      *
-     * @param string $host
-     * @param string $dbname
-     * @param stirng $user
-     * @param string $password
+     * @param  string      $host
+     * @param  string      $dbname
+     * @param  stirng      $user
+     * @param  string      $password
      * @throws DBException
      */
     public function __construct($host, $dbname, $user, $password);
@@ -31,14 +30,14 @@ interface Driver
     /**
      * Execute query and return row affected
      *
-     * @param string $query
+     * @param  string $query
      * @return int
      */
     public function exec($query);
-    
+
     /**
      * Set charset
-     * 
+     *
      * @param string $charset
      */
     public function setCharset($charset);
@@ -46,7 +45,7 @@ interface Driver
     /**
      * Escape string
      *
-     * @param string $query
+     * @param  string $query
      * @return int
      */
     public function escape($query);

@@ -21,11 +21,10 @@ class TranslatorHelper extends Component
         parent::init($config);
     }
 
-
     /**
      * Get instance Translator
      *
-     * @param string $lang
+     * @param  string     $lang
      * @return Translator
      */
     public static function handle($lang)

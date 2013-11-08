@@ -17,7 +17,7 @@ class FormHelper extends Component
     /**
      * Generate html tag
      *
-     * @param array $options
+     * @param  array  $options
      * @return string html
      */
     public static function createTag($options = array())
@@ -70,11 +70,10 @@ class FormHelper extends Component
         return $tag;
     }
 
-
     /**
      * Generate html Select tag
      *
-     * @param array $options
+     * @param  array  $options
      * @return string html
      */
     public static function createSelectTag($options)
@@ -112,7 +111,7 @@ class FormHelper extends Component
                 $tagOptions['selected'] = 'selected';
             }
 
-            $disabled = (array)$options['disabled'];
+            $disabled = (array) $options['disabled'];
             if (in_array($value, $disabled)) {
                 $tagOptions['disabled'] = 'disabled';
             }
@@ -132,7 +131,6 @@ class FormHelper extends Component
 
         return $selectTag;
     }
-
 
     /**
      * Generate captcha HTML code
@@ -169,7 +167,6 @@ class FormHelper extends Component
 
         $captcha .= '<input type="hidden" id="captcha" name="captcha" data-type="captcha" data-required="true" />';
 
-
         $captcha .= '<label for="captcha">'.str_replace(array('#DET#', '#OBJ#'), $element, $options['message']).'<div class="clearfix"></div><div class="captcha_items">';
 
         $elementsCodes = array();
@@ -196,7 +193,7 @@ class FormHelper extends Component
     /**
      * Check captcha code
      *
-     * @param array $options Array
+     * @param  array   $options Array
      * @return boolean
      */
     public static function isValidCaptcha($code = null)

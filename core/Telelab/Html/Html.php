@@ -24,14 +24,14 @@ class Html extends Component
         foreach ($options as $key => $value) {
             $html.= ' '.$key.'="'.Str::escapeOnce($value).'"';
         }
+
         return $html;
     }
-
 
     /**
      * Convert attributes to array attributes
      *
-     * @param string $options
+     * @param  string $options
      * @return mixed
      */
     protected static function parseAttributes($string)
@@ -39,11 +39,10 @@ class Html extends Component
         return is_array($string) ? $string : self::stringToArray($string);
     }
 
-
     /**
      * Convert string tag with attributes to an array
      *
-     * @param string $string
+     * @param  string $string
      * @return array
      */
     public static function stringToArray($string = '')

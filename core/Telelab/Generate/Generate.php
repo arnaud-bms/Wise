@@ -27,7 +27,6 @@ class Generate extends Component
      */
     protected $aliasFile = array();
 
-
     /**
      * Init generate
      *
@@ -41,7 +40,6 @@ class Generate extends Component
         }
     }
 
-
     /**
      * Set alias files
      *
@@ -51,7 +49,6 @@ class Generate extends Component
     {
         $this->aliasFile = $alias;
     }
-
 
     /**
      * Generate file

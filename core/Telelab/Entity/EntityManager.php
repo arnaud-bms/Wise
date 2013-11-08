@@ -32,11 +32,10 @@ class EntityManager extends Component
         $this->sqlBuilder = new SqlBuilder($this->_tableName);
     }
 
-
     /**
      * Create entity
      *
-     * @param string $entityName
+     * @param  string $entityName
      * @return Entity
      */
     public function createEntity($entityName)
@@ -46,7 +45,6 @@ class EntityManager extends Component
 
         return $entity;
     }
-
 
     /**
      * Save all entities

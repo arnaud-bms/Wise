@@ -32,7 +32,6 @@ class File extends Component
      */
     private $currentExt;
 
-
     /**
      * @var array Required fields
      */
@@ -40,7 +39,6 @@ class File extends Component
         'path',
         'ext',
     );
-
 
     /**
      * @var array mime types
@@ -68,7 +66,6 @@ class File extends Component
         }
     }
 
-
     /**
      * Check uploaded file and return new file path
      *
@@ -79,20 +76,20 @@ class File extends Component
         $this->checkFileUploaded($file);
         $this->checkExtension($file);
         $this->checkMaxSize($file);
+
         return $this->moveUploadedFile($file);
     }
-
 
     /**
      * Check if the file is uploaded
      *
      * @throws FileUploadedException If an error on upload file
-     * @param array $file
+     * @param  array                 $file
      */
     private function checkFileUploaded($file)
     {
         if (!is_uploaded_file($file['tmp_name'])) {
-            switch($file['error']){
+            switch ($file['error']) {
                 case 0:
                     throw new FileUploadedException("An error occurred while sending the file", $file['error']);
                 case 1:
@@ -109,12 +106,11 @@ class File extends Component
         }
     }
 
-
     /**
      * Check if the file is uploaded
      *
      * @throws FileUploadedException If extension is not available
-     * @param array $file
+     * @param  array                 $file
      */
     private function checkExtension($file)
     {
@@ -133,12 +129,11 @@ class File extends Component
         $this->currentExt = $fileInfos['extension'];
     }
 
-
     /**
      * Check if the size file
      *
      * @throws FileUploadedException If size is too large
-     * @param array $file
+     * @param  array                 $file
      */
     private function checkMaxSize($file)
     {
@@ -157,12 +152,11 @@ class File extends Component
         }
     }
 
-
     /**
      * Move uploaded file
      *
      * @throws FileUploadedException If an error on move file
-     * @param array $file
+     * @param  array                 $file
      * @return filename
      */
     private function moveUploadedFile($file)
@@ -178,7 +172,6 @@ class File extends Component
 
         return $filenameUploaded;
     }
-
 
     /**
      * Write file

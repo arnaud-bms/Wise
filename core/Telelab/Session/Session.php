@@ -17,17 +17,16 @@ class Session extends Component
     protected function init($config)
     {
         session_start();
-        
+
         parent::init($config);
     }
-
 
     /**
      * Set cookie params
      *
-     * @param int $lifeTime
-     * @param string $path
-     * @param string $domain
+     * @param int     $lifeTime
+     * @param string  $path
+     * @param string  $domain
      * @param boolean $secure
      * @param boolean $httpOnly
      */
@@ -35,7 +34,6 @@ class Session extends Component
     {
         session_set_cookie_params($lifeTime, $path, $domain, $secure, $httpOnly);
     }
-
 
     /**
      * Destroy session
@@ -56,23 +54,21 @@ class Session extends Component
         session_destroy();
     }
 
-
     /**
      * Set arg to $_SESSION
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function __set($name, $value)
     {
         $_SESSION[$name] = $value;
     }
 
-
     /**
      * Get arg from $_SESSION
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)

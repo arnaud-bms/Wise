@@ -4,27 +4,23 @@
  *
  * @author gdievart <dievartg@gmail.com>
  */
-
 use Telelab\Conf\Conf;
 use Telelab\FrontController\FrontController;
 use Telelab\Globals\Globals;
 use Telelab\Logger\Logger;
 
 define('ROOT_DIR', realpath(__DIR__.'/..').'/');
-$loader = require ROOT_DIR.'vendor/autoload.php';
-$loader->add('Plugin', ROOT_DIR.'plugins');
+require ROOT_DIR.'vendor/autoload.php';
 
 // Load the default configuration
-Conf::loadConfig(ROOT_DIR.'app/etc/app.ini');
+Conf::loadConfig(ROOT_DIR.'app/etc/app.php');
 
 // Load the file which contains routes
-Conf::mergeConfig(ROOT_DIR.'app/etc/routing.ini');
+Conf::mergeConfig(ROOT_DIR.'app/etc/routing.php');
 
 // Set exception handler if exists
 if ($handlerConfig = Conf::getConfig('exception_handler')) {
-    set_exception_handler(
-        array($handlerConfig['class'], $handlerConfig['method'])
-    );
+    set_exception_handler(array($handlerConfig['class'], $handlerConfig['method']));
 }
 
 // Set error handler if exists

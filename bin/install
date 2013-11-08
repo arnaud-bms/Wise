@@ -10,8 +10,8 @@ APP_PATH=$TELELAB_PATH"app/";
 
 # Create files configuration
 show_action "Création des fichiers de configuration";
-cp -v $APP_PATH"etc/"{_,}app.ini;
-cp -v $APP_PATH"etc/"{_,}routing.ini;
+cp -v $APP_PATH"etc/"{_,}app.php;
+cp -v $APP_PATH"etc/"{_,}routing.php;
 
 # Create log directory
 create_dir $TELELAB_PATH"var/log";
@@ -33,8 +33,8 @@ fi
 $CURRENT_DIR"create_app" $app;
 
 show_action "Configuration du routage applicatif";
-echo $APP_PATH$app"/etc/routing.ini";
-sed -i s/{{app_name}}/$app/g $APP_PATH"/etc/routing.ini";
+echo $APP_PATH$app"/etc/routing.php";
+sed -i s/{{app_name}}/$app/g $APP_PATH"/etc/routing.php";
 
 show_action "Configuration du serveur http";
 echo "* Voir le fichier $APP_PATH"etc/"apache_configuration";

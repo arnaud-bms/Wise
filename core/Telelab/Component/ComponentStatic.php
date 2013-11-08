@@ -25,7 +25,6 @@ abstract class ComponentStatic extends AbstractComponent
         self::init($config);
     }
 
-
     /**
      * Init component
      *
