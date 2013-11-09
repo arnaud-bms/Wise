@@ -3,7 +3,7 @@ namespace Wise\Cache\Driver;
 
 /**
  * Class \Wise\Cache\Driver\Cache
- * 
+ *
  * This cache system stores the data on the memcached server
  * Datas store in memcached are not persistent
  *
@@ -13,14 +13,14 @@ class Memcache extends \Wise\Component\Component implements \Wise\Cache\Driver\C
 {
     /**
      * Reference to \Memcache instance
-     * 
+     *
      * @var MemCache
      */
     protected $memcache;
 
     /**
      * Time to left before the datas are deleted
-     * 
+     *
      * @var int
      */
     protected $ttl;
@@ -58,25 +58,26 @@ class Memcache extends \Wise\Component\Component implements \Wise\Cache\Driver\C
     public function set($key, $content, $ttl = null)
     {
         $ttl = $ttl === null ? $this->ttl : $ttl;
-        $this->memcache->set($key, $content, false, $ttl);
+
+        return $this->memcache->set($key, $content, false, $ttl);
     }
-    
+
     /**
      * {@inherit}
      */
     public function delete($key)
     {
-        $this->memcache->delete($key);
+        return $this->memcache->delete($key);
     }
-    
+
     /**
      * {@inherit}
      */
     public function flush()
     {
-        $this->memcache->flush();
+        return $this->memcache->flush();
     }
-    
+
     /**
      * {@inherit}
      */
@@ -84,7 +85,7 @@ class Memcache extends \Wise\Component\Component implements \Wise\Cache\Driver\C
     {
        return $this->memcache->decrement($key, $value);
     }
-    
+
     /**
      * {@inherit}
      */

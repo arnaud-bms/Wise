@@ -3,7 +3,7 @@ namespace Wise\Cache\Driver;
 
 /**
  * File: File driver of the cache system
- * 
+ *
  * This cache system stores the data on the file system
  * It is more slow than Memcache but the data is persistent
  *
@@ -21,14 +21,14 @@ class File extends \Wise\Component\Component implements \Wise\Cache\Driver\Cache
 
     /**
      * Path to directory where the datas are write
-     * 
+     *
      * @var string Path to cache folder
      */
     protected $path;
 
     /**
      * Time to left before the datas are deleted
-     * 
+     *
      * @var int
      */
     protected $ttl;
@@ -55,6 +55,7 @@ class File extends \Wise\Component\Component implements \Wise\Cache\Driver\Cache
                 unlink($file);
             }
         }
+
         return false;
     }
 
@@ -67,26 +68,30 @@ class File extends \Wise\Component\Component implements \Wise\Cache\Driver\Cache
         if (!is_dir(dirname($file))) {
             mkdir(dirname($file), 0775, true);
         }
-        file_put_contents($file, $content);
+
+        return file_put_contents($file, $content) > 0;
     }
-    
+
     /**
      * {@inherit}
      */
     public function delete($key)
     {
         $file = $this->path.'/'.$key.'.cache';
-        @unlink($file);
+
+        return @unlink($file);
     }
-    
+
     /**
      * {@inherit}
      */
     public function flush()
     {
         array_map('unlink', glob($this->path.'/*.cache'));
+
+        return true;
     }
-    
+
     /**
      * {@inherit}
      */
@@ -95,12 +100,13 @@ class File extends \Wise\Component\Component implements \Wise\Cache\Driver\Cache
         if ($content = $this->get($key)) {
             $content-= $value;
             $this->set($key, $content);
-            
+
             return $content;
         }
+
         return false;
     }
-    
+
     /**
      * {@inherit}
      */
