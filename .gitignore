@@ -1,8 +1,1 @@
-!/app/
-/app/*
-!/app/etc/
-/app/etc/*
-!/app/etc/_*
-
-/var/
 /vendor/
