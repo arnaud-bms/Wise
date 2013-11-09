@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "minimum-stability": "dev",
     "autoload": {
-        "psr-0": {"Wise": "core/"}
+        "psr-0": {"Wise": "src/"}
     },
     "require": {
         "monolog/monolog": "1.2.*",
