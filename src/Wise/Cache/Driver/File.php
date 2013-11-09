@@ -1,17 +1,18 @@
 <?php
 namespace Wise\Cache\Driver;
 
-use Wise\Cache\Driver\Driver;
-
 /**
  * File: File driver of the cache system
+ * 
+ * This cache system stores the data on the file system
+ * It is more slow than Memcache but the data is persistent
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class File extends Driver
+class File extends \Wise\Component\Component implements \Wise\Cache\Driver\Cache
 {
     /**
-     * @var array Required fields
+     * {@inherit}
      */
     protected $requiredFields = array(
         'path',
@@ -19,19 +20,21 @@ class File extends Driver
     );
 
     /**
+     * Path to directory where the datas are write
+     * 
      * @var string Path to cache folder
      */
     protected $path;
 
     /**
-     * @var int ttl
+     * Time to left before the datas are deleted
+     * 
+     * @var int
      */
     protected $ttl;
 
     /**
-     * Init File driver
-     *
-     * @param array $config
+     * {@inherit}
      */
     public function init($config)
     {
@@ -40,14 +43,11 @@ class File extends Driver
     }
 
     /**
-     * Retrieve valid cache
-     *
-     * @param  type   $uniqId
-     * @return string Content, if the request's cache exists
+     * {@inherit}
      */
-    public function getCache($uniqId)
+    public function get($key)
     {
-        $file = $this->path.'/'.$uniqId.'.cache';
+        $file = $this->path.'/'.$key.'.cache';
         if (file_exists($file)) {
             if (filemtime($file) > (time() - $this->ttl)) {
                 return file_get_contents($file);
@@ -55,21 +55,57 @@ class File extends Driver
                 unlink($file);
             }
         }
+        return false;
     }
 
-
     /**
-     * Set cache
-     *
-     * @param type $uniqId
-     * @param type $content
+     * {@inherit}
      */
-    public function setCache($uniqId, $content, $ttl = null)
+    public function set($key, $content, $ttl = null)
     {
-        $file = $this->path.'/'.$uniqId.'.cache';
+        $file = $this->path.'/'.$key.'.cache';
         if (!is_dir(dirname($file))) {
             mkdir(dirname($file), 0775, true);
         }
         file_put_contents($file, $content);
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function delete($key)
+    {
+        $file = $this->path.'/'.$key.'.cache';
+        @unlink($file);
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function flush()
+    {
+        array_map('unlink', glob($this->path.'/*.cache'));
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function decrement($key, $value = 1)
+    {
+        if ($content = $this->get($key)) {
+            $content-= $value;
+            $this->set($key, $content);
+            
+            return $content;
+        }
+        return false;
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function increment($key, $value = 1)
+    {
+        return $this->decrement($key, -$value);
     }
 }

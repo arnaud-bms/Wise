@@ -2,9 +2,12 @@
 namespace Wise\Cache;
 
 use Wise\Component\Component;
+use Wise\Cache\Exception;
 
 /**
- * Cache: Set and get cache
+ * Class  \Wise\Cache\Cache
+ * 
+ * This class is the interface of cache system
  *
  * @author gdievart <dievartg@gmail.com>
  */
@@ -12,17 +15,21 @@ class Cache extends Component
 {
 
     /**
-     * @var CacheDriver Driver used by cache system
+     * Driver loaded
+     * 
+     * @var Cache\Driver
      */
     protected $driver;
 
     /**
-     * @var boolean Enable Cache
+     * Enable or disable the cache system
+     * 
+     * @var boolean
      */
     protected $enable;
 
     /**
-     * @var array Required fields
+     * {@inherit}
      */
     protected $requiredFields = array(
         'enable',
@@ -30,56 +37,82 @@ class Cache extends Component
     );
 
     /**
-     * Init Cache
-     *
-     * @param  array          $config
-     * @throws CacheException If driver does'nt exists
+     * {@inherit}
+     * @throws \Wise\Cache\Exception if the driver does not exist or if does not implement \Wise\Cache\Driver\Cache
      */
     protected function init($config)
     {
-        switch ($config['driver']) {
-            case 'file':
-                $driver = 'Wise\Cache\Driver\File';
-                break;
-            case 'memcache':
-                $driver = 'Wise\Cache\Driver\Memcache';
-                break;
-            default:
-                throw new CacheException("Driver '{$config['driver']}' does'nt exists", 400);
+        $classname = 'Wise\Cache\Driver\\'.ucfirst((string) $config['driver']);
+        if(!class_exists($classname, true) || !in_array('Wise\Cache\Driver\Cache', class_implements($classname, true))) {
+            throw new Exception('The driver "'.$classname.'" is not valid', 0);
         }
-
-        $driverConfig = isset($config[$config['driver']]) ? $config[$config['driver']] : null;
-        $this->driver = new $driver($driverConfig);
-
+        
+        $driverConfig = !empty($config[$config['driver']]) ? $config[$config['driver']] : null;
+        $driver = new \ReflectionClass($classname);
+        $this->driver = $driver->newInstance($driverConfig);
         $this->enable = (boolean) $config['enable'];
     }
 
     /**
-     * Retrieve cache
-     *
-     * @param  string $uniqId Request id
-     * @return string Content's request
+     * @see \Wise\Cache\Driver\Cache
      */
-    public function getCache($uniqId)
+    public function get($key)
     {
         if ($this->enable) {
-            return $this->driver->getCache($uniqId);
+            return $this->driver->get($key);
         }
 
         return false;
     }
 
     /**
-     * Set content to Cache
-     *
-     * @param string $uniqId
-     * @param string $content
-     * @param int    $ttl
+     * @see \Wise\Cache\Driver\Cache
      */
-    public function setCache($uniqId, $content, $ttl = null)
+    public function set($key, $content, $ttl = null)
     {
         if ($this->enable) {
-            $this->driver->setCache($uniqId, $content, $ttl);
+            $this->driver->set($key, $content, $ttl);
+        }
+    }
+    
+    
+    /**
+     * @see \Wise\Cache\Driver\Cache
+     */
+    public function delete($key)
+    {
+        if ($this->enable) {
+            $this->driver->delete($key);
+        }
+    }
+    
+    /**
+     * @see \Wise\Cache\Driver\Cache
+     */
+    public function flush()
+    {
+        if ($this->enable) {
+            $this->driver->flush();
+        }
+    }
+    
+    /**
+     * @see \Wise\Cache\Driver\Cache
+     */
+    public function decrement($key, $value = 1)
+    {
+        if ($this->enable) {
+            $this->driver->decrement($key, $value);
+        }
+    }
+    
+    /**
+     * @see \Wise\Cache\Driver\Cache
+     */
+    public function increment($key, $value = 1)
+    {
+        if ($this->enable) {
+            $this->driver->increment($key, $value);
         }
     }
 }

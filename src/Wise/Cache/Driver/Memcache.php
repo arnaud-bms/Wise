@@ -1,28 +1,32 @@
 <?php
 namespace Wise\Cache\Driver;
 
-use Wise\Cache\Driver\Driver;
-
 /**
- * Driver Cache with memcached
+ * Class \Wise\Cache\Driver\Cache
+ * 
+ * This cache system stores the data on the memcached server
+ * Datas store in memcached are not persistent
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Memcache extends Driver
+class Memcache extends \Wise\Component\Component implements \Wise\Cache\Driver\Cache
 {
-
     /**
+     * Reference to \Memcache instance
+     * 
      * @var MemCache
      */
     protected $memcache;
 
     /**
-     * @var int ttl
+     * Time to left before the datas are deleted
+     * 
+     * @var int
      */
     protected $ttl;
 
     /**
-     * @var array Required fields
+     * {@inherit}
      */
     protected $requiredFields = array(
         'host',
@@ -31,9 +35,7 @@ class Memcache extends Driver
     );
 
     /**
-     * Init memcached driver
-     *
-     * @param array $config
+     * {@inherit}
      */
     protected function init($config)
     {
@@ -43,25 +45,51 @@ class Memcache extends Driver
     }
 
     /**
-     * Retrieve valid cache
-     *
-     * @param  type   $uniqId
-     * @return string Content, if the request's cache exists
+     * {@inherit}
      */
-    public function getCache($uniqId)
+    public function get($key)
     {
-        return $this->memcache->get($uniqId);
+        return $this->memcache->get($key);
     }
 
     /**
-     * Set cache
-     *
-     * @param string $uniqId
-     * @param string $content
+     * {@inherit}
      */
-    public function setCache($uniqId, $content, $ttl = null)
+    public function set($key, $content, $ttl = null)
     {
         $ttl = $ttl === null ? $this->ttl : $ttl;
-        $this->memcache->set($uniqId, $content, false, $ttl);
+        $this->memcache->set($key, $content, false, $ttl);
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function delete($key)
+    {
+        $this->memcache->delete($key);
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function flush()
+    {
+        $this->memcache->flush();
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function decrement($key, $value = 1)
+    {
+       return $this->memcache->decrement($key, $value);
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function increment($key, $value = 1)
+    {
+        return $this->decrement($key, -$value);
     }
 }
