@@ -10,7 +10,6 @@
     },
     "require": {
         "monolog/monolog": "1.2.*",
-        "smarty/smarty": "dev-master",
         "twig/twig":"1.*"
     },
     "extra": {
