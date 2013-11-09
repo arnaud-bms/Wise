@@ -4,7 +4,7 @@
     "type"       : "library",
     "php": ">=5.3.0",
     "version": "1.0.0",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-0": {"Wise": "core/"}
     },
