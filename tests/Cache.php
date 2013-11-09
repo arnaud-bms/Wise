@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\Cache\tests\units;
+namespace Wise\Cache\tests\units;
 
 use atoum;
 
@@ -33,7 +33,7 @@ class Cache extends atoum
                     );
                     break;
             }
-            $this->cache = new \Telelab\Cache\Cache($config);
+            $this->cache = new \Wise\Cache\Cache($config);
         }
         
         return $this->cache;

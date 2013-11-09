@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Plugin;
+namespace Wise\Plugin;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Abstract class Plugin

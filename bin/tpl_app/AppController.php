@@ -1,7 +1,7 @@
 <?php
 namespace {{app_name}};
 
-use Telelab\Controller\Controller;
+use Wise\Controller\Controller;
 
 /**
  * Abstract controller of the app {{app_name}}

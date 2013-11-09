@@ -1,10 +1,10 @@
 <?php
-namespace Telelab\FrontController\tests\units;
+namespace Wise\FrontController\tests\units;
 
 use atoum;
 
 /**
- * Test  \Telelab\FrontController
+ * Test  \Wise\FrontController
  *
  * @author Guillaume Dievart <dievartg@gmail.com>
  */

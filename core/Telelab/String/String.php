@@ -1,14 +1,12 @@
 <?php
-namespace Telelab\Str;
-
-use \Telelab\Component\ComponentStatic;
+namespace Wise\String;
 
 /**
  * String
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Str extends ComponentStatic
+class String extends \Wise\Component\ComponentStatic
 {
 
     /**
@@ -119,29 +117,13 @@ class Str extends ComponentStatic
     }
 
     /**
-     * Normalize phone number
-     *
-     * @param string $number
-     * @return $number
-     */
-    public static function normalizePhoneNumber($number)
-    {
-        $number = preg_replace('/([^0-9]+)/', '', $number);
-        if (substr($number, 0, 1) == '0' && substr($number, 0, 2) !== '00') {
-            $number = '33'.substr($number, 1);
-        }
-
-        return (int) $number;
-    }
-
-    /**
      * Convert string to literalize string (on|off|yes|no|1|'')
      *
      * @param mixed $value
+     * @return mixed
      */
     public static function literalize($value)
     {
-        // lowercase our value for comparison
         $value  = trim($value);
         $lvalue = strtolower($value);
 
@@ -202,33 +184,5 @@ class Str extends ComponentStatic
     public static function camelcaseToUnderscores($string)
     {
         return self::lower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $string));
-    }
-
-    /**
-     * Add slashes to string if doesn't exists
-     *
-     * @param string $string
-     */
-    public static function checkAddslashes($string)
-    {
-        if (strpos(str_replace("\'", "", " $string"), "'") != false) {
-            $string = addslashes($string);
-        }
-
-        return $string;
-    }
-
-
-    /**
-     * Unserialize for multibytes
-     *
-     * @param  string $string
-     * @return array
-     */
-    public static function mbUnserialize($string)
-    {
-        $string = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $string);
-
-        return unserialize($string);
     }
 }

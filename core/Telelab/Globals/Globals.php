@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Globals;
+namespace Wise\Globals;
 
-use Telelab\Component\ComponentStatic;
+use Wise\Component\ComponentStatic;
 
 /**
  * Global is used for pass var from plugin to controller

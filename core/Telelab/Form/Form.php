@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Form;
+namespace Wise\Form;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Form: Check form

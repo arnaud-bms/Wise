@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Translation;
+namespace Wise\Translation;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * TranslatorHelper: i18n & l10n
@@ -29,7 +29,7 @@ class TranslatorHelper extends Component
      */
     public static function handle($lang)
     {
-        $html = '<script type="text/javascript" src="/js/telelab/telelab.lang.js"></script>'
+        $html = '<script type="text/javascript" src="/js/wise/wise.lang.js"></script>'
               . '<script type="text/javascript">'
               . 'lang.load('.$lang.');'
               . '</script>';

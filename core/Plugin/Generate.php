@@ -1,9 +1,9 @@
 <?php
 namespace Plugin;
 
-use Telelab\FrontController\FrontController;
-use Telelab\Globals\Globals;
-use Telelab\Plugin\Plugin;
+use Wise\FrontController\FrontController;
+use Wise\Globals\Globals;
+use Wise\Plugin\Plugin;
 
 /**
  * Plugin generate
@@ -29,7 +29,7 @@ class Generate extends Plugin
     public function postcall()
     {
         if ($alias = Globals::get('generate')) {
-            $generate = new \Telelab\Generate\Generate();
+            $generate = new \Wise\Generate\Generate();
             $generate->generateFile($alias, FrontController::getResponse());
         }
     }

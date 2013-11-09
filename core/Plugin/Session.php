@@ -1,11 +1,11 @@
 <?php
 namespace Plugin;
 
-use Telelab\Plugin\Plugin;
-use Telelab\Globals\Globals;
+use Wise\Plugin\Plugin;
+use Wise\Globals\Globals;
 
 /**
- * Plugin Session, use Telelab\Session
+ * Plugin Session, use Wise\Session
  *
  * @author gdievart
  */
@@ -17,7 +17,7 @@ class Session extends Plugin
      */
     public function init($config)
     {
-        Globals::set('session', new \Telelab\Session\Session());
+        Globals::set('session', new \Wise\Session\Session());
         
         parent::init($config);
     }

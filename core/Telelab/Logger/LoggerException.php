@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Logger;
+namespace Wise\Logger;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * FormatException

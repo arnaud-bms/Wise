@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Router;
+namespace Wise\Router;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * RouterException

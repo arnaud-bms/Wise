@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\SqlBuilder;
+namespace Wise\SqlBuilder;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * SqlBuilderException

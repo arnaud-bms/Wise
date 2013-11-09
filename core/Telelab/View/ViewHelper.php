@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\View;
+namespace Wise\View;
 
-use Telelab\Component\Component;
-use Telelab\Html\Html;
+use Wise\Component\Component;
+use Wise\Html\Html;
 
 /**
  * ViewHelper: Helper that generate view component (styles & scripts & meta? html) and handle it

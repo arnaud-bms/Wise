@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Repository;
+namespace Wise\Repository;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * RepositoryException

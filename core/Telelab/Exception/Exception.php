@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\Exception;
+namespace Wise\Exception;
 
 /**
  * Exception

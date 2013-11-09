@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Logger;
+namespace Wise\Logger;
 
-use Telelab\Component\ComponentStatic;
+use Wise\Component\ComponentStatic;
 
 /**
  * Format data from array to csv, json, xml, serialize ...
@@ -117,7 +117,7 @@ class Logger extends ComponentStatic
     protected static function loadDriver($loggerName)
     {
         if (empty(self::$loggerConf[$loggerName]['driver']) || self::$loggerConf[$loggerName]['driverToLoad'] === false) {
-            $class = 'Telelab\Logger\Driver\\'.ucfirst(self::$loggerConf[$loggerName]['driverToLoad']);
+            $class = 'Wise\Logger\Driver\\'.ucfirst(self::$loggerConf[$loggerName]['driverToLoad']);
             self::$loggerConf[$loggerName]['driver'] = new $class(self::$loggerConf[$loggerName]['driverConfig']);
             self::$loggerConf[$loggerName]['driverLoaded'] = true;
         }

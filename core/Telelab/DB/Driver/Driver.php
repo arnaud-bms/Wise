@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\DB\Driver;
+namespace Wise\DB\Driver;
 
 /**
  * Abstract class driver

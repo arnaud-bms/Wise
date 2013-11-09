@@ -1,10 +1,10 @@
 <?php
-namespace Telelab\Format\tests\units;
+namespace Wise\Format\tests\units;
 
 use atoum;
 
 /**
- * Test  \Telelab\Format
+ * Test  \Wise\Format
  *
  * @author Guillaume Dievart <dievartg@gmail.com>
  */
@@ -18,7 +18,7 @@ class Format extends atoum
 
     public function beforeTestMethod($testMethod)
     {
-        $this->_format = new \Telelab\Format\Format();
+        $this->_format = new \Wise\Format\Format();
         $this->_data  = array(0 => array('child1'), 'key_one' => 'value_one', 'key_two' => 'value_two');
     }
 

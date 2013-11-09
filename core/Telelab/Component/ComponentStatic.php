@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\Component;
+namespace Wise\Component;
 
 /**
  * ComponentStatic: Base of static components

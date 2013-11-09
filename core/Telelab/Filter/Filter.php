@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Filter;
+namespace Wise\Filter;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Filter: Check value from data

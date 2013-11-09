@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Curl;
+namespace Wise\Curl;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
  /**
   * Curl

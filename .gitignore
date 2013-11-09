@@ -3,9 +3,6 @@
 !/app/etc/
 /app/etc/*
 !/app/etc/_*
-!/app/Example
 
 /var/
 /vendor/
-/app/Example/var
-/nbproject/private/

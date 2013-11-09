@@ -1,10 +1,10 @@
 <?php
 namespace Plugin;
 
-use Telelab\Plugin\Plugin;
-use Telelab\Conf\Conf;
-use Telelab\FrontController\FrontController;
-use Telelab\Globals\Globals;
+use Wise\Plugin\Plugin;
+use Wise\Conf\Conf;
+use Wise\FrontController\FrontController;
+use Wise\Globals\Globals;
 
 /**
  * Plugin Firewall: This method is called for check if the user is authorized

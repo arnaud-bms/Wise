@@ -5,7 +5,7 @@
  * @author {{user}}
  */
 
-use Telelab\Conf\Conf;
+use Wise\Conf\Conf;
 
 $loader = require ROOT_DIR.'/vendor/autoload.php';
 $loader->add('{{app_name}}', ROOT_DIR.'/app');

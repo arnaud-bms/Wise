@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Redis;
+namespace Wise\Redis;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Connector to redis

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Generate;
+namespace Wise\Generate;
 
-use \Telelab\Component\Component;
+use \Wise\Component\Component;
 
 /**
  * Generate file

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\DB;
+namespace Wise\DB;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * DBException

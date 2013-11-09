@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Server;
+namespace Wise\Server;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Server: browser kit and server parameters

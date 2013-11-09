@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Component;
+namespace Wise\Component;
 
-use \Telelab\Exception\Exception;
+use \Wise\Exception\Exception;
 
 /**
  * ComponentException

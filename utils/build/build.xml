@@ -80,7 +80,7 @@
         <apigen
             source="${project.basedir}/core"
             destination="${project.basedir}/build/api"
-            title="Telelab"
+            title="Wise"
             deprecated="true"
             todo="true"
         />

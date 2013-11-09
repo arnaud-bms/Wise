@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Logger\Driver;
+namespace Wise\Logger\Driver;
 
-use Telelab\Logger\Driver\Driver;
+use Wise\Logger\Driver\Driver;
 
 /**
  * File driver for Logger

@@ -4,8 +4,7 @@ return array(
     'routing' => array(
         'home' => array(
             'pattern' => '/',
-            'controller' => '/',
-            'method' => '/',
+            'controller' => '{{app_name}}\Controller\Main::index',
             'precall' => array(
                 
             ),

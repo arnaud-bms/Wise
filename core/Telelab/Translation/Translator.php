@@ -1,9 +1,9 @@
 <?php
-namespace Telelab\Translation;
+namespace Wise\Translation;
 
-use Telelab\Component\Component;
-use Telelab\Logger\Logger;
-use Telelab\Translation\TranslatorException;
+use Wise\Component\Component;
+use Wise\Logger\Logger;
+use Wise\Translation\TranslatorException;
 
 /**
  * Translator: i18n & l10n

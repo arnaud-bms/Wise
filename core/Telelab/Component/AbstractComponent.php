@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Component;
+namespace Wise\Component;
 
-use Telelab\Conf\Conf;
+use Wise\Conf\Conf;
 
 /**
  * AbstractComponent: Base class of components
@@ -22,11 +22,11 @@ abstract class AbstractComponent
     protected static function getComponentConfig($class, $config)
     {
         if ($config === null) {
-            $configName = substr($class, strlen('Telelab\\'));
+            $configName = substr($class, strlen('Wise\\'));
             $configName = substr($configName, 0, strpos($configName, '\\'));
             $configName = strtolower($configName);
 
-            if ($componentConfig = Conf::getConfig($configName)) {
+            if ($componentConfig = Conf::get($configName)) {
                 $config = $componentConfig;
             }
         }

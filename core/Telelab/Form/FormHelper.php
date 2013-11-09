@@ -1,11 +1,11 @@
 <?php
-namespace Telelab\Form;
+namespace Wise\Form;
 
-use Telelab\Component\Component;
-use Telelab\Globals\Globals;
-use Telelab\View\ViewHelper;
-use Telelab\Html\Html;
-use Telelab\Type\ArrayType;
+use Wise\Component\Component;
+use Wise\Globals\Globals;
+use Wise\View\ViewHelper;
+use Wise\Html\Html;
+use Wise\Type\ArrayType;
 
 /**
  * FormHelper: Helper that generate form components (html) and handle it

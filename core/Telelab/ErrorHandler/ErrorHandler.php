@@ -1,9 +1,9 @@
 <?php
-namespace Telelab\ErrorHandler;
+namespace Wise\ErrorHandler;
 
-use Telelab\Component\Component;
-use Telelab\Conf\Conf;
-use Telelab\Logger\Logger;
+use Wise\Component\Component;
+use Wise\Conf\Conf;
+use Wise\Logger\Logger;
 
 /**
  * Catch all error and log

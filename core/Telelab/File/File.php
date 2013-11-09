@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\File;
+namespace Wise\File;
 
-use Telelab\Component\Component;
-use Telelab\File\FileUploadedException;
+use Wise\Component\Component;
+use Wise\File\FileUploadedException;
 
 /**
  * File: Manage files, upload, check extensions ...

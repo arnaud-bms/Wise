@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\Curl;
+namespace Wise\Curl;
 
-use Telelab\Component\Component;
-use Telelab\Curl\CurlException;
+use Wise\Component\Component;
+use Wise\Curl\CurlException;
 
  /**
   * Class ManageCurl

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\CodeGen;
+namespace Wise\CodeGen;
 
-use Telelab\Component\ComponentStatic;
+use Wise\Component\ComponentStatic;
 
 /**
  * CodeGen: Generate code, password, token ...

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Paginator;
+namespace Wise\Paginator;
 
-use Telelab\Component\ComponentStatic;
+use Wise\Component\ComponentStatic;
 
  /**
   * Paginator: Pagination

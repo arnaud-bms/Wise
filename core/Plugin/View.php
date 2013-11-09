@@ -1,13 +1,12 @@
 <?php
 namespace Plugin;
 
-use Telelab\Globals\Globals;
-use Telelab\FrontController\FrontController;
-use Telelab\Plugin\Plugin;
-use Telelab\Conf\Conf;
+use Wise\Globals\Globals;
+use Wise\Plugin\Plugin;
+use Wise\Conf\Conf;
 
 /**
- * Plugin View, use Telelab\View
+ * Plugin View, use Wise\View
  *
  * @author gdievart
  */
@@ -28,20 +27,20 @@ class View extends Plugin
      */
     public function postcall()
     {
-        if (is_array(FrontController::getResponse())) {
+        if (is_array(\Wise\Dispatcher\Dispatcher::getResponse())) {
             $responseFormat = Globals::get('format');
             if ($responseFormat !== null && $responseFormat !== 'html') {
-                $format = new \Telelab\Format\Format();
-                FrontController::setResponse(
+                $format = new \Wise\Format\Format();
+                \Wise\Dispatcher\Dispatcher::setResponse(
                     $format->formatData(
                         $responseFormat,
-                        FrontController::getResponse()
+                        \Wise\Dispatcher\Dispatcher::getResponse()
                     )
                 );
             } else {
-                $view = new \Telelab\View\View();
-                $view->setDataList(FrontController::getResponse());
-                FrontController::setResponse(
+                $view = new \Wise\View\View();
+                $view->setDataList(\Wise\Dispatcher\Dispatcher::getResponse());
+                \Wise\Dispatcher\Dispatcher::setResponse(
                     $view->fetch(Conf::getConfig('view.default_template'))
                 );
             }

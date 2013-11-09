@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Cache;
+namespace Wise\Cache;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Cache: Set and get cache
@@ -39,10 +39,10 @@ class Cache extends Component
     {
         switch ($config['driver']) {
             case 'file':
-                $driver = 'Telelab\Cache\Driver\File';
+                $driver = 'Wise\Cache\Driver\File';
                 break;
             case 'memcache':
-                $driver = 'Telelab\Cache\Driver\Memcache';
+                $driver = 'Wise\Cache\Driver\Memcache';
                 break;
             default:
                 throw new CacheException("Driver '{$config['driver']}' does'nt exists", 400);

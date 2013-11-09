@@ -1,5 +1,5 @@
 <?php
-namespace Telelab\Component;
+namespace Wise\Component;
 
 /**
  * Component: Base of the dynamic component

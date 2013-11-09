@@ -1,9 +1,8 @@
 <?php
-namespace Telelab\Controller;
+namespace Wise\Controller;
 
-use Telelab\FrontController\FrontController;
-use Telelab\Component\Component;
-use Telelab\Server\Server;
+use Wise\Component\Component;
+use Wise\Server\Server;
 
 /**
  * Controller: Base class for controller
@@ -42,8 +41,8 @@ abstract class Controller extends Component
      */
     protected function redirect($route)
     {
-        FrontController::run($route);
-        FrontController::interruptRequest();
+        \Wise\Dispatcher\Dispatcher::run($route);
+        \Wise\Dispatcher\Dispatcher::interruptRequest();
     }
 
     /**

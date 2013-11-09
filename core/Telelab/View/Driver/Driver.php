@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\View\Driver;
+namespace Wise\View\Driver;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * AbstractDriver

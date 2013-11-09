@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\DB\Driver;
+namespace Wise\DB\Driver;
 
-use Telelab\DB\Driver\Statement;
+use Wise\DB\Driver\Statement;
 
 /**
  * MySQLiStatement

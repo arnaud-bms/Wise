@@ -1,9 +1,9 @@
 <?php
-namespace Telelab\ExceptionHandler;
+namespace Wise\ExceptionHandler;
 
-use Telelab\Component\Component;
-use Telelab\Conf\Conf;
-use Telelab\Logger\Logger;
+use Wise\Component\Component;
+use Wise\Conf\Conf;
+use Wise\Logger\Logger;
 use Exception;
 
 /**
@@ -18,7 +18,7 @@ class ExceptionHandler extends Component
      *
      * @param Exception $e
      */
-    public static function catchException(Exception $e)
+    public static function uncaught(Exception $e)
     {
         if ((boolean) Conf::getConfig('logger.enable')) {
             Logger::initStatic();

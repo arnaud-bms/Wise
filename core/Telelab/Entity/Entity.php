@@ -1,10 +1,10 @@
 <?php
-namespace Telelab\Entity;
+namespace Wise\Entity;
 
-use Telelab\Component\Component;
-use Telelab\SqlBuilder\SqlBuilder;
-use Telelab\Str\Str;
-use Telelab\Criteria\Criteria;
+use Wise\Component\Component;
+use Wise\SqlBuilder\SqlBuilder;
+use Wise\Str\Str;
+use Wise\Criteria\Criteria;
 
 /**
  * Entity

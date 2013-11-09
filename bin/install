@@ -5,8 +5,8 @@ CURRENT_DIR=$(dirname $BASH_SOURCE)/;
 source $CURRENT_DIR/functions;
 
 # Init vars
-TELELAB_PATH=$(dirname CURRENT_DIR)/;
-APP_PATH=$TELELAB_PATH"app/";
+WISE_PATH=$(dirname CURRENT_DIR)/;
+APP_PATH=$WISE_PATH"app/";
 
 # Create files configuration
 show_action "Création des fichiers de configuration";
@@ -14,12 +14,12 @@ cp -v $APP_PATH"etc/"{_,}app.php;
 cp -v $APP_PATH"etc/"{_,}routing.php;
 
 # Create log directory
-create_dir $TELELAB_PATH"var/log";
-chmod 777 $TELELAB_PATH"var/log";
+create_dir $WISE_PATH"var/log";
+chmod 777 $WISE_PATH"var/log";
 
 show_action "Installation des librairies externe";
 curl -sS https://getcomposer.org/installer | php -- --install-dir=bin
-$TELELAB_PATH/bin/composer.phar install
+$WISE_PATH/bin/composer.phar install
 
 show_action "Création d'une application";
 echo -n "Nom de l'application: ";

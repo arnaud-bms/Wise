@@ -8,11 +8,11 @@ return array(
         '404' => '/404'
     ),
     'exception_handler' => array(
-        'class' => 'Telelab\ExceptionHandler\ExceptionHandler',
+        'class' => 'Wise\ExceptionHandler\ExceptionHandler',
         'method' => 'catchException',
     ),
     'error_handler' => array(
-        'class' => 'Telelab\ErrorHandler\ErrorHandler',
+        'class' => 'Wise\ErrorHandler\ErrorHandler',
         'method' => 'catchError',
     ),
     'db' => array(

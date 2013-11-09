@@ -1,7 +1,7 @@
 <?php
 namespace {{app_name}}\Models;
 
-use Telelab\Repository\Repository;
+use Wise\Repository\Repository;
 
 /**
  * Description of Test

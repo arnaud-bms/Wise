@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\Entity;
+namespace Wise\Entity;
 
-use Telelab\Component\Component;
-use Telelab\SqlBuilder\SqlBuilder;
+use Wise\Component\Component;
+use Wise\SqlBuilder\SqlBuilder;
 
 /**
  * Entity

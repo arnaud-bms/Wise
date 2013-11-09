@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\Html;
+namespace Wise\Html;
 
-use Telelab\Component\Component;
-use Telelab\Str\Str;
+use Wise\Component\Component;
+use Wise\Str\Str;
 
 /**
  * Html: basics methods and helpers for HTML

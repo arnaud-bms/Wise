@@ -1,9 +1,8 @@
 <?php
 namespace Plugin;
 
-use Telelab\Plugin\Plugin;
-use Telelab\FrontController\FrontController;
-use Telelab\Conf\Conf;
+use Wise\Plugin\Plugin;
+use Wise\Conf\Conf;
 
 /**
  * Plugin HydrateView Add informations to view
@@ -26,14 +25,13 @@ class HydrateView extends Plugin
      */
     public function postcall()
     {
-        list($routeApp, $route) = explode(':', FrontController::getRouteName());
-
+        list($routeApp, $route) = explode(':', \Wise\Dispatcher\Dispatcher::getRouteName());
         $configToMerge = $this->getConfigView($route);
         
-        $response = array_merge($configToMerge, FrontController::getResponse());
+        $response = array_merge($configToMerge, \Wise\Dispatcher\Dispatcher::getResponse());
         
 
-        FrontController::setResponse($response);
+        \Wise\Dispatcher\Dispatcher::setResponse($response);
     }
 
 
@@ -45,11 +43,11 @@ class HydrateView extends Plugin
     private function getConfigView($route)
     {
         $configToMerge = array();
-        if ($configRoute = Conf::getConfig('hydrate_view.'.$route)) {
+        if ($configRoute = Conf::get('hydrate_view.'.$route)) {
             foreach ($configRoute as $directive => $config) {
                 if (preg_match('/^[A-Z_]+$/', $config)) {
                     try {
-                        $tmpConfig = \Telelab\Translation\Translator::translate($config);
+                        $tmpConfig = \Wise\Translation\Translator::translate($config);
                     } catch(\Exception $e) {
                         $tmpConfig = $config;
                     }

@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\Form;
+namespace Wise\Form;
 
-use Telelab\Form\FormRuleException;
-use Telelab\Filter\Filter;
+use Wise\Form\FormRuleException;
+use Wise\Filter\Filter;
 
 /**
  * Form: Apply rule to form element

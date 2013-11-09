@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Format;
+namespace Wise\Format;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * FormatException

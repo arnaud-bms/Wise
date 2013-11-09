@@ -1,34 +1,20 @@
 <?php
-/**
- * FrontController of the application
- *
- * @author gdievart <dievartg@gmail.com>
- */
-use Telelab\Conf\Conf;
-use Telelab\FrontController\FrontController;
-use Telelab\Globals\Globals;
-use Telelab\Logger\Logger;
 
 define('ROOT_DIR', realpath(__DIR__.'/..').'/');
 require ROOT_DIR.'vendor/autoload.php';
+require ROOT_DIR.'core/Wise/Core/Core.php';
 
-// Load the default configuration
-Conf::loadConfig(ROOT_DIR.'app/etc/app.php');
+/*\Wise\Conf\Conf::set(
+    'route_apps',
+    array('test' => array(
+        'prefix' => '/',
+        'app' => 'Test',
+    ))
+);*/
 
-// Load the file which contains routes
-Conf::mergeConfig(ROOT_DIR.'app/etc/routing.php');
+\Wise\Conf\Conf::load(ROOT_DIR.'app/etc/core.php');
+\Wise\Conf\Conf::load(ROOT_DIR.'app/etc/route_apps.php');
 
-// Set exception handler if exists
-if ($handlerConfig = Conf::getConfig('exception_handler')) {
-    set_exception_handler(array($handlerConfig['class'], $handlerConfig['method']));
-}
-
-// Set error handler if exists
-if ($errorConfig = Conf::getConfig('error_handler')) {
-    set_error_handler(array($errorConfig['class'], $errorConfig['method']));
-}
-
-Globals::initStatic();
-Logger::initStatic();
-FrontController::initStatic();
-FrontController::run();
+$router = new Wise\Router\Router();
+$dispatcher = new Wise\Dispatcher\Dispatcher($router);
+$dispatcher->run();

@@ -1,12 +1,12 @@
 <?php
 namespace Plugin;
 
-use Telelab\FrontController\FrontController;
-use Telelab\Plugin\Plugin;
-use Telelab\Str\Str;
+use Wise\FrontController\FrontController;
+use Wise\Plugin\Plugin;
+use Wise\Str\Str;
 
 /**
- * Plugin Cache, use Telelab\Cache
+ * Plugin Cache, use Wise\Cache
  * This plugins must be call before and after the action of the controller
  *
  * @author gdievart
@@ -14,7 +14,7 @@ use Telelab\Str\Str;
 class Cache extends Plugin
 {
     /**
-     * @var Cache Ref to \Telelab\Cache\Cache
+     * @var Cache Ref to \Wise\Cache\Cache
      */
     private $cache = null;
 
@@ -22,7 +22,7 @@ class Cache extends Plugin
      * Init Plugin Cache
      */
     public function init($config) {
-        $this->cache = new \Telelab\Cache\Cache();
+        $this->cache = new \Wise\Cache\Cache();
         parent::init($config);
     }
 

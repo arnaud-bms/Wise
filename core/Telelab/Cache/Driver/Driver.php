@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Cache\Driver;
+namespace Wise\Cache\Driver;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Driver: Abstract cache driver

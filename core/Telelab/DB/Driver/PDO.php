@@ -1,9 +1,9 @@
 <?php
-namespace Telelab\DB\Driver;
+namespace Wise\DB\Driver;
 
-use Telelab\DB\DBException;
-use Telelab\DB\Driver\PDOStatement;
-use Telelab\Logger\Logger;
+use Wise\DB\DBException;
+use Wise\DB\Driver\PDOStatement;
+use Wise\Logger\Logger;
 
 /**
  * Connector to database

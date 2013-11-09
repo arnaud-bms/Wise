@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\DB;
+namespace Wise\DB;
 
-use Telelab\Component\Component;
-use Telelab\Logger\Logger;
+use Wise\Component\Component;
+use Wise\Logger\Logger;
 
 /**
  * DB: Connector to database
@@ -47,13 +47,13 @@ class DB extends Component
     {
         switch ($config['driver']) {
             case 'pdo':
-                $driver = 'Telelab\DB\Driver\PDO';
+                $driver = 'Wise\DB\Driver\PDO';
                 break;
             case 'mysql':
-                $driver = 'Telelab\DB\Driver\MySQL';
+                $driver = 'Wise\DB\Driver\MySQL';
                 break;
             case 'mysqli':
-                $driver = 'Telelab\DB\Driver\MySQLi';
+                $driver = 'Wise\DB\Driver\MySQLi';
                 break;
             default:
                 throw new DBException(

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\File;
+namespace Wise\File;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * FileUploadedException

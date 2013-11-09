@@ -1,8 +1,7 @@
 <?php
 namespace Plugin;
 
-use Telelab\FrontController\FrontController;
-use Telelab\Plugin\Plugin;
+use Wise\Plugin\Plugin;
 
 /**
  * Plugin output, the plugin is used to write on stdout
@@ -26,6 +25,13 @@ class Output extends Plugin
      */
     public function postcall()
     {
-        echo FrontController::getResponse();
+        $response = \Wise\Dispatcher\Dispatcher::getResponse();
+        if (is_array($response)) {
+            print_r($response);
+        } elseif(is_object($response)) {
+            var_dump($response);
+        } else {
+            echo $response;
+        }
     }
 }

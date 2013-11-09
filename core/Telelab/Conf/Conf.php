@@ -1,16 +1,14 @@
 <?php
-namespace Telelab\Conf;
+namespace Wise\Conf;
 
-use Telelab\Component\ComponentStatic;
-use Telelab\Conf\ConfException;
-use Telelab\Logger\Logger;
+use Wise\Conf\ConfException;
 
 /**
- * Conf: Configuration Class from files
+ * Class \Wise\Conf\Conf
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class Conf extends ComponentStatic
+class Conf
 {
 
     /**
@@ -19,18 +17,12 @@ class Conf extends ComponentStatic
     protected static $config = array();
 
     /**
-     * @var Cache
-     */
-    protected static $cache;
-
-    /**
      * Set config
      *
      * @param string $fileConf
      */
-    public static function loadConfig($fileConf)
+    public static function load($fileConf)
     {
-        self::initCache();
         self::$config = self::getConfFromFile($fileConf);
     }
 
@@ -39,23 +31,12 @@ class Conf extends ComponentStatic
      *
      * @param string $fileConf
      */
-    public static function mergeConfig($fileConf)
+    public static function merge($fileConf)
     {
-        self::initCache();
         self::$config = array_merge(
             self::$config,
             self::getConfFromFile($fileConf)
         );
-    }
-
-    /**
-     * Init cache system if the section confcache exist
-     */
-    private static function initCache()
-    {
-        if (self::$cache === null && $cacheConf = self::getConfig('confcache')) {
-            self::$cache = new \Telelab\Cache\Cache($cacheConf);
-        }
     }
 
     /**
@@ -67,13 +48,6 @@ class Conf extends ComponentStatic
      */
     private static function getConfFromFile($fileConf)
     {
-        $cacheId = 'telelab:conf:'.md5($fileConf);
-        if (self::$cache !== null && $config = self::$cache->getCache($cacheId)) {
-            Logger::log('['.__CLASS__.'] conf file from cache -> '.$fileConf, Logger::LOG_DEBUG);
-
-            return $config;
-        }
-
         $typeFile = substr($fileConf, strrpos($fileConf, '.')+1);
         switch ($typeFile) {
             case 'json':
@@ -87,16 +61,10 @@ class Conf extends ComponentStatic
                 }
                 break;
             case 'php':
-                if (!$config = @include $fileConf) {
-                    throw new ConfException("PHP file '$fileConf' is not valid", 402);
-                }
+                $config = @include $fileConf;
                 break;
             default:
                 throw new ConfException("File '$fileConf' it's not valid", 400);
-        }
-
-        if (self::$cache !== null) {
-            self::$cache->setCache($cacheId, $config);
         }
 
         return $config;
@@ -108,7 +76,7 @@ class Conf extends ComponentStatic
      * @param  string $section
      * @return mixed
      */
-    public static function getConfig($section = null)
+    public static function get($section = null)
     {
         $config = self::$config;
         if ($section !== null) {
@@ -117,7 +85,7 @@ class Conf extends ComponentStatic
                 $config = isset($config[$field]) ? $config[$field] : false;
             }
         }
-
+        
         return $config;
     }
 
@@ -127,16 +95,15 @@ class Conf extends ComponentStatic
      * @param string $section
      * @param mixed  $newConfig
      */
-    public static function setConfig($section, $newConfig)
+    public static function set($section, $newConfig)
     {
         $config =& self::$config;
         $section = explode('.', $section);
         foreach ($section as $field) {
-            if (isset($config[$field])) {
-                $config =& $config[$field];
-            } else {
+            if (!array_key_exists($field, $config)) {
                 $config[$field] = null;
             }
+            $config =& $config[$field];
         }
         $config = $newConfig;
     }
@@ -147,7 +114,7 @@ class Conf extends ComponentStatic
      * @param  array $config
      * @return array $newConfig
      */
-    public static function rewriteConfig($config)
+    public static function rewrite($config)
     {
         foreach ($config as $options => $value) {
             $optionsDepth = explode('.', $options);

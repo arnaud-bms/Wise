@@ -1,9 +1,9 @@
 <?php
-namespace Telelab\Repository;
+namespace Wise\Repository;
 
-use Telelab\Component\Component;
-use Telelab\SqlBuilder\SqlBuilder;
-use Telelab\Autoloader\AutoloaderException;
+use Wise\Component\Component;
+use Wise\SqlBuilder\SqlBuilder;
+use Wise\Autoloader\AutoloaderException;
 
 /**
  * Default method to request database

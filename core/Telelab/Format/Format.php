@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Format;
+namespace Wise\Format;
 
-use \Telelab\Component\Component;
+use \Wise\Component\Component;
 
 /**
  * Format: data from array to csv, json, xml, serialize ...
@@ -113,6 +113,6 @@ class Format extends Component
      */
     protected function arrayToCsv($data)
     {
-        return '';
+        return;
     }
 }

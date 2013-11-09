@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\SqlBuilder;
+namespace Wise\SqlBuilder;
 
-use Telelab\Component\Component;
-use Telelab\DB\DB;
+use Wise\Component\Component;
+use Wise\DB\DB;
 
 /**
  * Build sql request

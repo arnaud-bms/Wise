@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Translation;
+namespace Wise\Translation;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * TranslatorException

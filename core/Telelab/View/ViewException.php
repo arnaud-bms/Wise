@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\View;
+namespace Wise\View;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * ViewException

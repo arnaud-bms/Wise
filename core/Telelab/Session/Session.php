@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Session;
+namespace Wise\Session;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Manage session

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Conf;
+namespace Wise\Conf;
 
-use Telelab\Component\ComponentException;
+use Wise\Component\ComponentException;
 
 /**
  * ConfException

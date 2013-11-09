@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Logger\Driver;
+namespace Wise\Logger\Driver;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * Driver logger

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\Cache\Driver;
+namespace Wise\Cache\Driver;
 
-use Telelab\Cache\Driver\Driver;
+use Wise\Cache\Driver\Driver;
 
 /**
  * File: File driver of the cache system

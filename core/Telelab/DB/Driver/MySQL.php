@@ -1,8 +1,8 @@
 <?php
-namespace Telelab\DB\Driver;
+namespace Wise\DB\Driver;
 
-use Telelab\DB\Driver\MySQLStatement;
-use Telelab\Logger\Logger;
+use Wise\DB\Driver\MySQLStatement;
+use Wise\Logger\Logger;
 
 /**
  * Connector to database

@@ -1,7 +1,7 @@
 <?php
-namespace Telelab\View;
+namespace Wise\View;
 
-use Telelab\Component\Component;
+use Wise\Component\Component;
 
 /**
  * View component
@@ -32,10 +32,10 @@ class View extends Component
     {
         switch ($config['driver']) {
             case 'smarty':
-                $driver = 'Telelab\View\Driver\Smarty';
+                $driver = 'Wise\View\Driver\Smarty';
                 break;
             case 'php':
-                $driver = 'Telelab\View\Driver\Php';
+                $driver = 'Wise\View\Driver\Php';
                 break;
             default:
                 throw new ViewException("Driver '{$config['driver']}' does'nt exists", 400);
