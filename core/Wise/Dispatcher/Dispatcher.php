@@ -54,7 +54,7 @@ class Dispatcher extends \Wise\Component\Component
     /**
      * @var boolean Flag to interrupt the request
      */
-    protected static $interrupRequest = false;
+    protected static $interruptRequest = false;
 
     /**
      * @var string Response
@@ -135,7 +135,7 @@ class Dispatcher extends \Wise\Component\Component
     protected function executePlugins($method)
     {
         foreach ($this->plugins[$method] as $plugin) {
-            if(self::$interrupRequest) {
+            if(self::$interruptRequest) {
                 break;
             }
 
@@ -160,7 +160,7 @@ class Dispatcher extends \Wise\Component\Component
      */
     protected function executeAction()
     {
-        if (!self::$interrupRequest && $this->controller !== null) {
+        if (!self::$interruptRequest && $this->controller !== null) {
             $controller = new $this->controller();
             self::$response = call_user_func_array(array($controller, $this->method), $this->argv);
         } else {
@@ -173,7 +173,7 @@ class Dispatcher extends \Wise\Component\Component
      */
     public static function interruptRequest()
     {
-        self::$interrupRequest = true;
+        self::$interruptRequest = true;
     }
 
     /**

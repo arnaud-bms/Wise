@@ -1,7 +1,6 @@
 <?php
 namespace Plugin;
 
-use Wise\FrontController\FrontController;
 use Wise\Globals\Globals;
 use Wise\Plugin\Plugin;
 
@@ -30,7 +29,7 @@ class Generate extends Plugin
     {
         if ($alias = Globals::get('generate')) {
             $generate = new \Wise\Generate\Generate();
-            $generate->generateFile($alias, FrontController::getResponse());
+            $generate->generateFile($alias, \Wise\Dispatcher\Dispatcher::getResponse());
         }
     }
 }

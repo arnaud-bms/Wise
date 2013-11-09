@@ -1,7 +1,6 @@
 <?php
 namespace Plugin;
 
-use Wise\FrontController\FrontController;
 use Wise\Plugin\Plugin;
 use Wise\Str\Str;
 
@@ -31,10 +30,10 @@ class Cache extends Plugin
      */
     public function precall()
     {
-        $cacheId = FrontController::getRouteId()
-                 . '.' . Str::url(FrontController::getRouteName(), '.');
+        $cacheId = \Wise\Dispatcher\Dispatcher::getRouteId()
+                 . '.' . Str::url(\Wise\Dispatcher\Dispatcher::getRouteName(), '.');
         if ($content = $this->cache->getCache($cacheId)) {
-            FrontController::interruptRequest();
+            \Wise\Dispatcher\Dispatcher::interruptRequest();
             echo $content;
         }
     }
@@ -45,8 +44,8 @@ class Cache extends Plugin
      */
     public function postcall()
     {
-        $cacheId = FrontController::getRouteId()
-                 . '.' . Str::url(FrontController::getRouteName(), '.');
-        $this->cache->setCache($cacheId, FrontController::getResponse());
+        $cacheId = \Wise\Dispatcher\Dispatcher::getRouteId()
+                 . '.' . Str::url(\Wise\Dispatcher\Dispatcher::getRouteName(), '.');
+        $this->cache->setCache($cacheId, \Wise\Dispatcher\Dispatcher::getResponse());
     }
 }

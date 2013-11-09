@@ -3,7 +3,6 @@ namespace Plugin;
 
 use Wise\Plugin\Plugin;
 use Wise\Conf\Conf;
-use Wise\FrontController\FrontController;
 use Wise\Globals\Globals;
 
 /**
@@ -43,8 +42,8 @@ class Firewall extends Plugin
     {
         if ($this->isProtectedRoute($config)) {
             if (Conf::getConfig($config.'.redirect_type') == 'bg') {
-                FrontController::run(Conf::getConfig($config.'.redirect'));
-                FrontController::interruptRequest();
+                \Wise\Dispatcher\Dispatcher::run(Conf::getConfig($config.'.redirect'));
+                \Wise\Dispatcher\Dispatcher::interruptRequest();
             } else {
                 header('Location: '.Conf::getConfig($config.'.redirect'));
                 exit(0);
@@ -60,7 +59,7 @@ class Firewall extends Plugin
      */
     private function isProtectedRoute($config)
     {
-        list($module, $route) = explode(':', FrontController::getRouteName());
+        list($module, $route) = explode(':', \Wise\Dispatcher\Dispatcher::getRouteName());
         $routes = Conf::getConfig($config.'.route');
         $isProtected = false;
 
