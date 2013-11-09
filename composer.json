@@ -1,5 +1,5 @@
 {
-    "name"       : "wise",
+    "name"       : "wise/wise",
     "description": "The Wise Framework",
     "type"       : "library",
     "php": ">=5.3.0",
