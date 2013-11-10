@@ -4,9 +4,9 @@ namespace Wise\Conf\File;
 use Wise\Conf\File\File;
 
 /**
- * Interface Wise\Conf\File\File
+ * Class \Wise\Conf\File\Ini
  *
- * This interface must be implement by the type file configuration
+ * This class loads the configuration from an ini file
  *
  * @author gdievart <dievartg@gmail.com>
  */

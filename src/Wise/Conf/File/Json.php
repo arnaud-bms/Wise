@@ -4,9 +4,9 @@ namespace Wise\Conf\File;
 use Wise\Conf\File\File;
 
 /**
- * Interface Wise\Conf\File\File
+ * Class \Wise\Conf\File\Json
  *
- * This interface must be implement by the type file configuration
+ * This class loads the configuration from a json file
  *
  * @author gdievart <dievartg@gmail.com>
  */
