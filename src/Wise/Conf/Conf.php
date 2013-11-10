@@ -1,77 +1,93 @@
 <?php
 namespace Wise\Conf;
 
-use Wise\Conf\ConfException;
+use Wise\Component\ComponentStatic;
+use Wise\Conf\Exception;
 
 /**
  * Class \Wise\Conf\Conf
  *
+ * This class loads and manages the configuration
+ *
  * @author gdievart <dievartg@gmail.com>
  */
-class Conf
+class Conf extends ComponentStatic
 {
-
     /**
-     * @var array List config setted
+     * Configuration loaded
+     *
+     * @var array
      */
     protected static $config = array();
 
     /**
-     * Set config
+     * Load a file configuration
      *
-     * @param string $fileConf
+     * @param mixed $conf
      */
-    public static function load($fileConf)
+    public static function load($conf)
     {
-        self::$config = self::getConfFromFile($fileConf);
+        if (is_string($conf)) {
+            $conf = self::getConfFromFile((string) $conf);
+        }
+        self::getConfFromArray($conf);
+
+        return self::$config;
     }
 
     /**
-     * Overwrite main config
+     * Load configuration from array
      *
-     * @param string $fileConf
+     * @param  array $config
+     * @return array $newConfig
      */
-    public static function merge($fileConf)
+    private static function getConfFromArray($config)
+    {
+        foreach ($config as $key => $value) {
+            self::set($key, $value);
+        }
+    }
+
+    /**
+     * Extract the configuration from a file
+     *
+     * @param  string    $file
+     * @throws Exception If the file is invalid
+     * @return array
+     */
+    private static function getConfFromFile($file)
+    {
+        if (!file_exists($file) || !is_readable($file)) {
+            throw new Exception('The file "'.$file.'" is not readable', 0);
+        }
+        $typeFile = substr($file, strrpos($file, '.')+1);
+
+        $classname = '\Wise\Conf\File\\'.ucfirst((string) $typeFile);
+        if (!class_exists($classname, true) || !in_array('Wise\Conf\File\File', class_implements($classname, true))) {
+            throw new Exception('The type file "'.$typeFile.'" is not valid', 0);
+        }
+
+        $class = new \ReflectionClass($classname);
+        $class = $class->newInstance();
+
+        return $class->extract($file);
+    }
+
+    /**
+     * Merge the configuration with a new file
+     *
+     * @param mixed $conf
+     */
+    public static function merge($conf)
     {
         self::$config = array_merge(
             self::$config,
-            self::getConfFromFile($fileConf)
+            self::load($conf)
         );
     }
 
     /**
-     * Retrieve conf from file
-     *
-     * @param  string        $fileConf
-     * @throws ConfException If is invalid configuration file
-     * @return array
-     */
-    private static function getConfFromFile($fileConf)
-    {
-        $typeFile = substr($fileConf, strrpos($fileConf, '.')+1);
-        switch ($typeFile) {
-            case 'json':
-                if (!$config = @json_decode(file_get_contents($fileConf), true)) {
-                    throw new ConfException("Json file '$fileConf' is not valid", 401);
-                }
-                break;
-            case 'ini':
-                if (!$config = @parse_ini_file($fileConf, true)) {
-                    throw new ConfException("Ini file '$fileConf' is not valid", 402);
-                }
-                break;
-            case 'php':
-                $config = @include $fileConf;
-                break;
-            default:
-                throw new ConfException("File '$fileConf' it's not valid", 400);
-        }
-
-        return $config;
-    }
-
-    /**
-     * Retrieve config
+     * Get configuration
      *
      * @param  string $section
      * @return mixed
@@ -85,12 +101,12 @@ class Conf
                 $config = isset($config[$field]) ? $config[$field] : false;
             }
         }
-        
+
         return $config;
     }
 
     /**
-     * Retrieve config
+     * Set configuration
      *
      * @param string $section
      * @param mixed  $newConfig
@@ -100,36 +116,11 @@ class Conf
         $config =& self::$config;
         $section = explode('.', $section);
         foreach ($section as $field) {
-            if (!array_key_exists($field, $config)) {
+            if ($config === null || !array_key_exists($field, $config)) {
                 $config[$field] = null;
             }
             $config =& $config[$field];
         }
         $config = $newConfig;
-    }
-
-    /**
-     * Browse array to rewrite config into multi depth array (recursive method)
-     *
-     * @param  array $config
-     * @return array $newConfig
-     */
-    public static function rewrite($config)
-    {
-        foreach ($config as $options => $value) {
-            $optionsDepth = explode('.', $options);
-            if (count($optionsDepth) === 1) {
-                if (is_array($value)) {
-                    $configToMerge[$options] = self::rewriteConfig($value);
-                } else {
-                    $configToMerge[$options] = $value;
-                }
-            } else {
-                $firstDepth = array_shift($optionsDepth);
-                $configToMerge[$firstDepth] = self::rewriteConfig(array(implode('.', $optionsDepth) => $value));
-            }
-        }
-
-        return $configToMerge;
     }
 }
