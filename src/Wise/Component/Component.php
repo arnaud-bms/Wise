@@ -2,7 +2,9 @@
 namespace Wise\Component;
 
 /**
- * Component: Base of the dynamic component
+ * Class \Wise\Component\Component
+ *
+ * This class must be extended by all dynamic components
  *
  * @author gdievart <dievartg@gmail.com>
  */
@@ -10,7 +12,7 @@ abstract class Component extends AbstractComponent
 {
 
     /**
-     * Construct Component
+     * Component construct is a final method
      *
      * @param mixed $config
      */
@@ -25,12 +27,12 @@ abstract class Component extends AbstractComponent
     }
 
     /**
-     * Init component
+     * This method is called after __construct
      *
      * @param mixed $config
      */
     protected function init($config)
     {
-
+        return;
     }
 }

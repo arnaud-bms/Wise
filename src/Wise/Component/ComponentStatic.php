@@ -18,15 +18,15 @@ abstract class ComponentStatic extends AbstractComponent
     {
         $class = get_called_class();
         $config = self::getComponentConfig($class, $config);
-        if ($config !== null && is_array($config) && isset($class::$requiredFields)) {
-            self::checkRequiredFields($class::$requiredFields, $config);
+        if ($config !== null && is_array($config) && isset(static::$requiredFields)) {
+            self::checkRequiredFields(static::$requiredFields, $config);
         }
 
         self::init($config);
     }
 
     /**
-     * Init component
+     * This method is called after __construct
      *
      * @param mixed $config
      */
