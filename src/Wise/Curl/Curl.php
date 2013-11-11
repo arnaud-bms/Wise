@@ -4,7 +4,9 @@ namespace Wise\Curl;
 use Wise\Component\Component;
 
  /**
-  * Curl
+  * Class \Wise\Curl\Curl
+  * 
+  * This class in used to send requests with cURL
   *
   * @author gdievart <dievartg@gmail.com>
   */
@@ -12,46 +14,43 @@ class Curl extends Component
 {
 
     /**
-     * @var resource Handle on cUrl
+     * Handle on cUrl
+     * 
+     * @var resource
      */
      private $curl;
 
     /**
-     * @var string Last error generated
+     * {@inherit}
      */
-    private $error = null;
-
-    /**
-     * @var int Timeout
-     */
-    private $timeout = 3;
-
-    /**
-     * Construct Curl
-     *
-     * @param string $url
-     */
-    protected function init($url)
+    protected function init($config)
     {
+        if (!extension_loaded('curl')) {
+            throw new Exception('The extension cUrl is not installed', 0);
+        }
         $this->curl = curl_init();
-        $this->setUrl($url);
-        $this->setOpt(CURLOPT_TIMEOUT, $this->timeout);
-        $this->setOpt(CURLOPT_RETURNTRANSFER, 1);
+        
+        if (!empty($config['options']) && is_array($config['options'])) {
+            foreach ($config['options'] as $option => $value) {
+                $option = constant('CURLOPT_'.  \Wise\String\String::upper($option));
+                $this->setOpt($option, $value);
+            }
+        }
     }
 
     /**
-     * Execute query
+     * Execute the query
      *
      * @throws CurlException Return curlerror
      * @return mixed
      */
     public function exec()
     {
-        if (($return = curl_exec($this->curl)) === false) {
-            throw new CurlException(curlerror($this->curl));
+        if (false === $response = curl_exec($this->curl)) {
+            throw new Exception(curlerror($this->curl));
         }
 
-        return $return;
+        return $response;
     }
 
     /**
@@ -65,7 +64,7 @@ class Curl extends Component
     }
 
     /**
-     * Return info about request
+     * Return the infos about the last request
      *
      * @return array
      */
@@ -75,29 +74,17 @@ class Curl extends Component
     }
 
     /**
-     * Return last error
-     *
-     * @return string
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Set property url
+     * Set the property url
      *
      * @param string $url
      */
     public function setUrl($url)
     {
-        if ($url !== null) {
-            $this->setOpt(CURLOPT_URL, $url);
-        }
+        $this->setOpt(CURLOPT_URL, $url);
     }
 
     /**
-     * Set option curl
+     * Set option
      *
      * @param int   $option
      * @param mixed $value
@@ -108,17 +95,17 @@ class Curl extends Component
     }
 
     /**
-     * Set list options curl
+     * Set list options
      *
-     * @param int $listOptions
+     * @param array $listOptions
      */
-    public function setOptArray(array $listOptions)
+    public function setOptArray(array $options)
     {
-        curl_setopt_array($this->curl, $listOptions);
+        curl_setopt_array($this->curl, $options);
     }
 
     /**
-     * Close curl
+     * Close cURL
      */
     public function __destruct()
     {
