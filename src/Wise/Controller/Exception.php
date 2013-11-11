@@ -1,8 +1,8 @@
 <?php
-namespace Wise\Conf;
+namespace Wise\Controller;
 
 /**
- * Class \Wise\Conf\Exception
+ * Class \Wise\Controller\Exception
  *
  * @author gdievart <dievartg@gmail.com>
  */

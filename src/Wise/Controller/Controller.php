@@ -2,77 +2,39 @@
 namespace Wise\Controller;
 
 use Wise\Component\Component;
-use Wise\Server\Server;
 
 /**
- * Controller: Base class for controller
+ * Class \Wise\Controller\Controller
+ * 
+ * This class must be extended by the controllers of apps
  *
  * @author gdievart <dievartg@gmail.com>
  */
 abstract class Controller extends Component
 {
-
     /**
-     * @var array Repository loaded
+     * References to the repositories loaded
+     * 
+     * @var array \Wise\Repository\Repository
      */
     protected $repositoryLoaded = array();
 
     /**
-     * @var Server instance
-     */
-    private static $server = null;
-
-    /**
-     * Init Controller
+     * Return repositories
      *
-     * @param array $config
+     * @param  string     $repository The classname of the repository to load
+     * @return \Wise\Repository\Repository
      */
-    protected function initAuto($config)
+    public function getRepository($classname)
     {
-        self::$server = new Server();
-
-        parent::initAuto($config);
-    }
-
-    /**
-     * Redirect
-     *
-     * @param string $route
-     */
-    protected function redirect($route)
-    {
-        \Wise\Dispatcher\Dispatcher::run($route);
-        \Wise\Dispatcher\Dispatcher::interruptRequest();
-    }
-
-    /**
-     * Get ref to repository
-     *
-     * @param  string     $repository
-     * @return Repository
-     */
-    public function getRepository($repository)
-    {
-        if (!isset($this->repositoryLoaded[$repository])) {
-            $this->repositoryLoaded[$repository] = new $repository();
+        if (empty($this->repositoryLoaded[$classname])) {
+            if (!class_exists($classname, true) || !is_subclass_of($classname, '\Wise\Repository\Repository')) {
+                throw new Exception('The repository "'.$classname.'" is not valid', 0);
+            }
+            $repository = new \ReflectionClass($classname);
+            $this->repositoryLoaded[$classname] = $repository->newInstance();
         }
 
-        return $this->repositoryLoaded[$repository];
-    }
-
-    /**
-     * Call method on server
-     *
-     * @param  string $method
-     * @param  array  $argv
-     * @return mixed
-     */
-    public function __call($method, $argv)
-    {
-        if (method_exists(self::$server, $method)) {
-            return call_user_func_array(array(self::$server, $method), $argv);
-        }
-
-        return null;
+        return $this->repositoryLoaded[$classname];
     }
 }
