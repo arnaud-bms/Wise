@@ -4,32 +4,30 @@ namespace Wise\DB\Driver;
 use Wise\DB\Driver\Statement;
 
 /**
- * MySQLiStatement
+ * Class \Wise\DB\Driver\MySQLStatement
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class MySQLiStatement extends Statement
+class MysqlStatement extends Statement
 {
 
     /**
-     * @var MySQLiStatement Ref
+     * Reference to the MySQLStatement
+     *
+     * @var MySQLStatement
      */
-    protected $mySQLiStatement = null;
+    protected $mySQLStatement = null;
 
     /**
-     * Init MySQLiStatement
-     *
-     * @param handle $resource
+     * {@inherit}
      */
     public function __construct($resource)
     {
-        $this->mySQLiStatement = $resource;
+        $this->mySQLStatement = $resource;
     }
 
     /**
-     * Return current row
-     *
-     * @param string $type
+     * {@inherit}
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
@@ -37,10 +35,7 @@ class MySQLiStatement extends Statement
     }
 
     /**
-     * Return all rows
-     *
-     * @param  string $type
-     * @return array  List result
+     * {@inherit}
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
@@ -53,22 +48,19 @@ class MySQLiStatement extends Statement
     }
 
     /**
-     * Return row
-     *
-     * @param  string $type
-     * @return mixed
+     * {@inherit}
      */
     protected function getTypeStatement($type)
     {
         switch ($type) {
             case Statement::FETCH_OBJECT:
-                $row = $this->mySQLiStatement->fetch_object();
+                $row = mysql_fetch_object($this->mySQLStatement);
                 break;
             case Statement::FETCH_NUM:
-                $row = $this->mySQLiStatement->fetch_array();
+                $row = mysql_fetch_array($this->mySQLStatement, MYSQL_NUM);
                 break;
             case Statement::FETCH_ASSOC:
-                $row = $this->mySQLiStatement->fetch_assoc();
+                $row = mysql_fetch_assoc($this->mySQLStatement);
                 break;
         }
 

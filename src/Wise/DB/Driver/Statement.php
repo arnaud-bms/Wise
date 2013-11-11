@@ -2,7 +2,7 @@
 namespace Wise\DB\Driver;
 
 /**
- * Statement query
+ * AbstractClass \Wise\DB\Driver\Statement
  *
  * @author gdievart <dievartg@gmail.com>
  */

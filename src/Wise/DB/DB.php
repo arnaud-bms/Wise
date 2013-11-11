@@ -2,32 +2,39 @@
 namespace Wise\DB;
 
 use Wise\Component\Component;
-use Wise\Logger\Logger;
 
 /**
- * DB: Connector to database
+ * Class \Wise\DB\DB
+ *
+ * This class is used to communicate with a database
  *
  * @author gdievart <dievartg@gmail.com>
  */
 class DB extends Component
 {
     /**
-     * @var DB
+     * Reference on the singleton
+     *
+     * @var \Wise\DB\DB
      */
     private static $instance = null;
 
     /**
-     * @var Connection to DB
+     * The driver used to connect the database
+     *
+     * @var \Wise\DB\Driver
      */
     private static $driver = null;
 
     /**
-     * @var String Charset to use
+     * Charset to use
+     *
+     * @var String
      */
     private static $charset = null;
 
     /**
-     * @var array Required fields
+     * {@inherit}
      */
     protected $requiredFields = array(
         'driver',
@@ -38,37 +45,16 @@ class DB extends Component
     );
 
     /**
-     * Init DB
-     *
-     * @param  array       $config
-     * @throws DBException
+     * {@inherit}
      */
     protected function init($config)
     {
-        switch ($config['driver']) {
-            case 'pdo':
-                $driver = 'Wise\DB\Driver\PDO';
-                break;
-            case 'mysql':
-                $driver = 'Wise\DB\Driver\MySQL';
-                break;
-            case 'mysqli':
-                $driver = 'Wise\DB\Driver\MySQLi';
-                break;
-            default:
-                throw new DBException(
-                    "Driver '{$config['driver']}' does'nt exists",
-                    400
-                );
+        $classname = 'Wise\DB\Driver\\'.ucfirst((string) $config['driver']);
+        if (!class_exists($classname, true) || !in_array('Wise\DB\Driver\DB', class_implements($classname, true))) {
+            throw new Exception('The driver "'.$classname.'" is not valid', 0);
         }
 
-        self::$driver = new $driver(
-            $config['host'],
-            $config['dbname'],
-            $config['user'],
-            $config['password']
-        );
-
+        self::$driver = new $classname($config['host'], $config['dbname'], $config['user'], $config['password']);
         if (isset($config['charset']) && $config['charset'] !== null) {
             self::$charset = $config['charset'];
             self::$driver->setCharset($config['charset']);
@@ -76,15 +62,14 @@ class DB extends Component
     }
 
     /**
-     * Get instance DB
+     * Get instance to DB
      *
-     * @param  array $config
-     * @return DB
+     * @param  array       $config
+     * @return \Wise\DB\DB
      */
     public static function getInstance($config = null)
     {
         if (!self::$instance instanceof DB) {
-            Logger::log('['.__CLASS__.'] new instance', Logger::LOG_DEBUG);
             self::$instance = new DB($config);
         }
 
@@ -104,6 +89,46 @@ class DB extends Component
     }
 
     /**
+     * @see \Wise\DB\Driver\DB
+     */
+    public function query($query)
+    {
+        return self::$driver->query($query);
+    }
+
+    /**
+     * @see \Wise\DB\Driver\DB
+     */
+    public function exec($query)
+    {
+        return self::$driver->exec($query);
+    }
+
+    /**
+     * @see \Wise\DB\Driver\DB
+     */
+    public function setCharset($charset)
+    {
+        return self::$driver->setCharset($charset);
+    }
+
+    /**
+     * @see \Wise\DB\Driver\DB
+     */
+    public function escape($query)
+    {
+        return self::$driver->escape($query);
+    }
+
+    /**
+     * @see \Wise\DB\Driver\DB
+     */
+    public function getLastIdInsert()
+    {
+        return self::$driver->getLastIdInsert();
+    }
+
+    /**
      * Reset connection with database
      */
     public static function reset()
@@ -116,9 +141,7 @@ class DB extends Component
     }
 
     /**
-     * Close connection on driver and remove ref to driver
-     *
-     * @return Driver
+     * Close connection on the driver and remove the reference to singleton
      */
     public function close()
     {

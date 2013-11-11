@@ -4,32 +4,30 @@ namespace Wise\DB\Driver;
 use Wise\DB\Driver\Statement;
 
 /**
- * MySQLStatement
+ * Class \Wise\DB\Driver\MySQLiStatement
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class MySQLStatement extends Statement
+class MysqliStatement extends Statement
 {
 
     /**
-     * @var MySQLStatement Ref
+     * MySQLiStatement Reference
+     *
+     * @var MySQLiStatement
      */
-    protected $mySQLStatement = null;
+    protected $mySQLiStatement = null;
 
     /**
-     * Init PDO
-     *
-     * @param handle $resource
+     * {@inherit}
      */
     public function __construct($resource)
     {
-        $this->mySQLStatement = $resource;
+        $this->mySQLiStatement = $resource;
     }
 
     /**
-     * Return current row
-     *
-     * @param string $type
+     * {@inherit}
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
@@ -37,10 +35,7 @@ class MySQLStatement extends Statement
     }
 
     /**
-     * Return all rows
-     *
-     * @param  string $type
-     * @return array  List result
+     * {@inherit}
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
@@ -53,22 +48,19 @@ class MySQLStatement extends Statement
     }
 
     /**
-     * Return row
-     *
-     * @param  string $type
-     * @return mixed
+     * {@inherit}
      */
     protected function getTypeStatement($type)
     {
         switch ($type) {
             case Statement::FETCH_OBJECT:
-                $row = mysql_fetch_object($this->mySQLStatement);
+                $row = $this->mySQLiStatement->fetch_object();
                 break;
             case Statement::FETCH_NUM:
-                $row = mysql_fetch_array($this->mySQLStatement, MYSQL_NUM);
+                $row = $this->mySQLiStatement->fetch_array();
                 break;
             case Statement::FETCH_ASSOC:
-                $row = mysql_fetch_assoc($this->mySQLStatement);
+                $row = $this->mySQLiStatement->fetch_assoc();
                 break;
         }
 

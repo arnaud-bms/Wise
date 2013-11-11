@@ -4,44 +4,38 @@ namespace Wise\DB\Driver;
 use Wise\DB\Driver\Statement;
 
 /**
- * Description of PDOStatement
+ * Class \Wise\DB\Driver\PDOStatement
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class PDOStatement extends Statement
+class PdoStatement extends Statement
 {
 
     /**
-     * @var PDOStatement Ref
+     * Reference to PDOStatement
+     *
+     * @var reference
      */
     protected $pdoStatement = null;
 
     /**
-     * Init PDO
-     *
-     * @param PDOStatement $pdoStatement
+     * {@inherit}
      */
-    public function __construct(\PDOStatement $pdoStatement)
+    public function __construct(\PdoStatement $pdoStatement)
     {
         $this->pdoStatement = $pdoStatement;
     }
 
     /**
-     * Return current row
-     *
-     * @param  string $type
-     * @return mixed  Result of the current request
+     * {@inherit}
      */
     public function fetch($type = Statement::FETCH_ASSOC)
     {
-        return $this->getTypeStatement($type);
+        return $this->pdoStatement->fetch($this->getTypeStatement($type));
     }
 
     /**
-     * Return all rows
-     *
-     * @param  string $type
-     * @return array  List result
+     * {@inherit}
      */
     public function fetchAll($type = Statement::FETCH_ASSOC)
     {
@@ -54,10 +48,7 @@ class PDOStatement extends Statement
     }
 
     /**
-     * Return PDO::FETCH_*
-     *
-     * @param  string $type
-     * @return mixed
+     * {@inherit}
      */
     protected function getTypeStatement($type)
     {

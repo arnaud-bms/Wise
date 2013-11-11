@@ -1,28 +1,24 @@
 <?php
 namespace Wise\DB\Driver;
 
-use Wise\DB\Driver\MySQLStatement;
-use Wise\Logger\Logger;
+use Wise\DB\Driver\MysqlStatement;
 
 /**
- * Connector to database
+ * Class \Wise\DB\Driver\MySQL
  *
  * @author gdievart <dievartg@gmail.com>
  */
-class MySQL implements Driver
+class Mysql implements DB
 {
     /**
-     * @var handle Ref to link
+     * Link to the connection
+     *
+     * @var handle
      */
     private $link;
 
     /**
-     * Init link MySQL
-     *
-     * @param string $host
-     * @param string $dbname
-     * @param string $user
-     * @param string $password
+     * {@inherit}
      */
     public function __construct($host, $dbname, $user, $password)
     {
@@ -35,9 +31,7 @@ class MySQL implements Driver
     }
 
     /**
-     * Init link
-     *
-     * @param boolean $new New link
+     * {@inherit}
      */
     public function initLink($new = false)
     {
@@ -46,46 +40,31 @@ class MySQL implements Driver
     }
 
     /**
-     * Execute query and return result
-     *
-     * @param  string         $query
-     * @return MySQLStatement
+     * {@inherit}
      */
     public function query($query)
     {
-        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
         if ($resource = mysql_query($query, $this->link)) {
-            return new MySQLStatement($resource);
+            return new MysqlStatement($resource);
         }
-
-        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
 
         return false;
     }
 
     /**
-     * Execute query and return rows affected
-     *
-     * @param  string $query
-     * @return int    Rows affected
+     * {@inherit}
      */
     public function exec($query)
     {
-        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_DEBUG);
-
         if (mysql_query($query, $this->link)) {
             return mysql_affected_rows();
         }
-
-        Logger::log('['.__CLASS__.'] '.$query, Logger::LOG_ERROR);
 
         return 0;
     }
 
     /**
-     * Set charset
-     *
-     * @param string $charset
+     * {@inherit}
      */
     public function setCharset($charset)
     {
@@ -93,10 +72,7 @@ class MySQL implements Driver
     }
 
     /**
-     * Execute query and return rows affected
-     *
-     * @param  string $query
-     * @return string
+     * {@inherit}
      */
     public function escape($string)
     {
@@ -104,9 +80,7 @@ class MySQL implements Driver
     }
 
     /**
-     * Get last id insert
-     *
-     * @return int
+     * {@inherit}
      */
     public function getLastIdInsert()
     {
@@ -114,7 +88,7 @@ class MySQL implements Driver
     }
 
     /**
-     * Close connection with database
+     * {@inherit}
      */
     public function close()
     {
@@ -122,7 +96,7 @@ class MySQL implements Driver
     }
 
     /**
-     * Set connection with database
+     * {@inherit}
      */
     public function reset()
     {
