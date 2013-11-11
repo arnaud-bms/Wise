@@ -19,8 +19,8 @@ abstract class Component extends AbstractComponent
     final public function __construct($config = null)
     {
         $config = self::getComponentConfig(get_called_class(), $config);
-        if ($config !== null && is_array($config) && isset($this->requiredFields)) {
-            self::checkRequiredFields($this->requiredFields, $config);
+        if (isset($this->requiredFields)) {
+            self::checkRequiredFields($this->requiredFields, (array)$config);
         }
 
         $this->init($config);

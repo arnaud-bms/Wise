@@ -46,7 +46,7 @@ abstract class AbstractComponent
     {
         foreach ($requiredFields as $field) {
             if (!array_key_exists($field, $config)) {
-                throw new ComponentException("The field '$field' is required", 0);
+                throw new Exception("The field '$field' is required", 0);
             }
         }
     }
