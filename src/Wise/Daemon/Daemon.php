@@ -41,7 +41,7 @@ abstract class Daemon extends Component
     /**
      * This method is called on constructor
      */
-    abstract public function initDaemon($config);
+    abstract protected function initDaemon($config);
     
     /**
      * This method is called on each cycle
@@ -96,8 +96,12 @@ abstract class Daemon extends Component
     
     /**
      * Method call on sigChld
+     * 
+     * @param int Sig receive from the child
+     * @param int $pid Pid of the child process
+     * @param int $status status of the child
      */
-    protected function sigChld()
+    protected function sigChld($signo, $pid = null, $status = null)
     {
         return;
     }
