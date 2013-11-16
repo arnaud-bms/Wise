@@ -153,7 +153,7 @@ class Redis extends Component
      */
     public function __call($method, $args) 
     {
-        return call_user_func_array(array($this->redis, $method));
+        return call_user_func_array(array($this->redis, $method), $args);
     }
 
     /**
