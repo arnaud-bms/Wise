@@ -1,8 +1,8 @@
 <?php
-namespace Wise\DB;
+namespace Wise\Dispatcher;
 
 /**
- * Class \Wise\DB\Exception
+ * Class \Wise\Dispatcher\Exception
  *
  * @author gdievart <dievartg@gmail.com>
  */
