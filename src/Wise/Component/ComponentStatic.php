@@ -21,7 +21,7 @@ abstract class ComponentStatic extends AbstractComponent
             self::checkRequiredFields(static::$requiredFields, $config);
         }
 
-        self::init($config);
+        static::init($config);
     }
 
     /**
