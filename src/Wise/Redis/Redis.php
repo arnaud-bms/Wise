@@ -130,7 +130,7 @@ class Redis extends Component
      */
     public function set($key, $value)
     {
-        $this->redis->set($key, $value);
+        return $this->redis->set($key, $value);
     }
 
     /**
@@ -142,6 +142,18 @@ class Redis extends Component
     public function get($key)
     {
         return $this->redis->get($key);
+    }
+    
+    /**
+     * Call the methods ont implemented
+     * 
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call($method, $args) 
+    {
+        return call_user_func_array(array($this->redis, $method));
     }
 
     /**
