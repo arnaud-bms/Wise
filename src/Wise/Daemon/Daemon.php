@@ -101,7 +101,7 @@ abstract class Daemon extends Component
      * @param int $pid Pid of the child process
      * @param int $status status of the child
      */
-    protected function sigChld($signo, $pid = null, $status = null)
+    public function sigChld($signo, $pid = null, $status = null)
     {
         return;
     }
@@ -109,7 +109,7 @@ abstract class Daemon extends Component
     /**
      * Method call on sigTerm
      */
-    protected function sigTerm()
+    public function sigTerm()
     {
         $this->stopped = true;
         
@@ -119,7 +119,7 @@ abstract class Daemon extends Component
     /**
      * Method call on sigCont
      */
-    protected function sigCont()
+    public function sigCont()
     {
         $this->pause = !$this->pause;
         
