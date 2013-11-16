@@ -47,7 +47,7 @@ class Curl extends Component
     public function exec()
     {
         if (false === $response = curl_exec($this->curl)) {
-            throw new Exception(curlerror($this->curl));
+            throw new Exception(curl_error($this->curl));
         }
 
         return $response;
