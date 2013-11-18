@@ -33,6 +33,9 @@ class Curl extends Component
         if (!empty($config['options']) && is_array($config['options'])) {
             foreach ($config['options'] as $option => $value) {
                 $option = constant('CURLOPT_'.  \Wise\String\String::upper($option));
+                if (!defined($option)) {
+                    throw new Exception('The constant "'.$option.'" does not exist');
+                }
                 $this->setOpt($option, $value);
             }
         }
