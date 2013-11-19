@@ -10,44 +10,44 @@ use atoum;
  */
 class Conf extends atoum
 {
-    public function testLoadPhpConf()
+    public function _testLoadPhpConf()
     {
         file_put_contents();
     }
     
-    public function testLoadJsonConf()
+    public function _testLoadJsonConf()
     {
         
     }
     
-    public function testLoadIniConf()
+    public function _testLoadIniConf()
     {
         
     }
     
-    protected function testLoadConf($file)
+    protected function _testLoadConf($file)
     {
         $this->assert->boolean(\Wise\Conf\Conf::load($file))
             ->isTrue();
     }
     
     
-    public function testMergeConf()
+    public function _testMergeConf()
     {
         
     }
     
-    public function testGetConf()
+    public function _testGetConf()
     {
         
     }
     
-    public function testSetConf()
+    public function _testSetConf()
     {
         
     }
     
-    public function testRewriteConf()
+    public function _testRewriteConf()
     {
         
     }

@@ -9,11 +9,11 @@ use \mageekguy\atoum;
 
 $script->addDefaultReport();
 
-$cloverWriter = new atoum\writers\file(__DIR__.'/../build/logs/atoum.coverage.xml');
+$cloverWriter = new atoum\writers\file(__DIR__.'/../../build/logs/atoum.coverage.xml');
 $cloverReport = new atoum\reports\asynchronous\clover();
 $cloverReport->addWriter($cloverWriter);
 
-$xunitWriter = new atoum\writers\file(__DIR__.'/../build/logs/atoum.xunit.xml');
+$xunitWriter = new atoum\writers\file(__DIR__.'/../../build/logs/atoum.xunit.xml');
 $xunit = new atoum\reports\asynchronous\xunit();
 $xunit->addWriter($xunitWriter);
 

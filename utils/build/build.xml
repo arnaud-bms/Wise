@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="telelab" default="ci" basedir=".">
-    <property name="source" value="src" />
+    <property name="source" value="${project.basedir}/src" />
+    <property name="build" value="${project.basedir}/build" />
 
     <target name="ci"
         description="Tâche principale d'intégration continue"
@@ -8,77 +9,75 @@
     />
 
     <target name="clean" description="Vide les répertoires d'artefacts">
-        <delete dir="${project.basedir}/build" />
+        <delete dir="${build}" />
     </target>
 
     <target name="init" description="Initialisation du projet">
-        <mkdir dir="${project.basedir}/build" />
-        <mkdir dir="${project.basedir}/build/doc" />
-        <mkdir dir="${project.basedir}/build/code-browser" />
-        <mkdir dir="${project.basedir}/build/coverage" />
-        <mkdir dir="${project.basedir}/build/logs" />
-        <mkdir dir="${project.basedir}/build/pdepend" />
+        <mkdir dir="${build}" />
+        <mkdir dir="${build}/doc" />
+        <mkdir dir="${build}/code-browser" />
+        <mkdir dir="${build}/coverage" />
+        <mkdir dir="${build}/logs" />
+        <mkdir dir="${build}/pdepend" />
         <exec logoutput="true" dir="${project.basedir}" command="composer --no-interaction install" escape="false" />
     </target>
 
     <target name="qa" description="Lance les outils d'analyse">
-        <parallel threadCount="2">
-            <phingcall target="pdepend" />
-            <phingcall target="phpmd" />
-            <phingcall target="phpcpd" />
-            <phingcall target="phploc" />
-            <phingcall target="phpcs" />
-            <phingcall target="phpcb" />
-            <phingcall target="atoum" />
-            <phingcall target="phpdoc" />
-        </parallel>
+        <phingcall target="pdepend" />
+        <phingcall target="phpmd" />
+        <phingcall target="phpcpd" />
+        <phingcall target="phploc" />
+        <phingcall target="phpcs" />
+        <phingcall target="phpcb" />
+        <phingcall target="atoum" />
+        <phingcall target="phpdoc" />
     </target>
 
     <target name="pdepend">
-        <phpdepend file="${project.basedir}/src">
-            <logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
-            <logger type="jdepend-chart" outfile="${project.basedir}/build/pdepend/dependencies.svg" />
-            <logger type="overview-pyramid" outfile="${project.basedir}/build/pdepend/overview-pyramid.svg" />
+        <phpdepend file="${source}">
+            <logger type="jdepend-xml" outfile="${build}/logs/jdepend.xml" />
+            <logger type="jdepend-chart" outfile="${build}/pdepend/dependencies.svg" />
+            <logger type="overview-pyramid" outfile="${build}/pdepend/overview-pyramid.svg" />
         </phpdepend>
     </target>
 
     <target name="phpmd">
-        <phpmd file="${project.basedir}/src">
-            <formatter type="xml" outfile="${project.basedir}/build/phpmd.xml" />
+        <phpmd file="${source}">
+            <formatter type="xml" outfile="${build}/phpmd.xml" />
         </phpmd>
     </target>
 
     <target name="phpcpd">
-        <phpcpd file="${project.basedir}/src">
-            <formatter type="pmd" outfile="${project.basedir}/build/logs/pmd-cpd.xml"/>
+        <phpcpd file="${source}">
+            <formatter type="pmd" outfile="${build}/logs/pmd-cpd.xml"/>
         </phpcpd>
     </target>
 
     <target name="phploc">
-        <exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/build/logs/phploc.csv' '${project.basedir}/src'" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${build}/logs/phploc.csv' '${source}'" escape="false" />
     </target>
 
     <target name="phpcs">
         <phpcodesniffer standard="PSR2">
-            <fileset dir="${project.basedir}/src">
+            <fileset dir="${source}">
                 <include name="**/*.php"/>
             </fileset>
-            <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
+            <formatter type="checkstyle" outfile="${build}/logs/checkstyle.xml"/>
         </phpcodesniffer>
     </target>
 
     <target name="atoum">
-        <exec logoutput="true" dir="${project.basedir}/tests" command="atoum -f * -bf bootstrap.php" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/tests/units" command="atoum -f * -bf bootstrap.php" escape="false" />
     </target>
 
     <target name="phpcb">
-        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/src' --output '${project.basedir}/build/code-browser'" escape="false" />
+        <exec logoutput="true" command="phpcb --log '${build}/logs' --source '${source}' --output '${build}/code-browser'" escape="false" />
     </target>
 
     <target name="apigen">
         <apigen
-            source="${project.basedir}/src"
-            destination="${project.basedir}/build/api"
+            source="${source}"
+            destination="${build}/api"
             title="Wise"
             deprecated="true"
             todo="true"
@@ -87,8 +86,8 @@
     
     <target name="phpdoc">
         <phpdoc2 title="API Documentation"
-            destdir="${project.basedir}/build/doc">
-             <fileset dir="${project.basedir}/src">
+            destdir="${build}/doc">
+             <fileset dir="${source}">
                 <include name="**/*.php" />
              </fileset>
         </phpdoc2>

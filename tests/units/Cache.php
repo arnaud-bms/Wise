@@ -45,17 +45,17 @@ class Cache extends atoum
         return $this->cache;
     }
     
-    public function testFlushWithFileDriver()
+    public function _testFlushWithFileDriver()
     {
         $this->testIncrement('file');
     }
     
-    public function testFlushWithMemcacheDriver()
+    public function _testFlushWithMemcacheDriver()
     {
         $this->testIncrement('memcache');
     }
     
-    protected function testFlush($driver)
+    protected function _testFlush($driver)
     {
         $this->getCache($driver)->set('flush', 5);
         $this->getCache($driver)->flush();
@@ -63,31 +63,31 @@ class Cache extends atoum
                      ->isFalse(6);
     }
 
-    public function testGetDisable()
+    public function _testGetDisable()
     {
         $this->getCache('memcache', false)->set('disable', 'content');
         $this->assert->boolean($this->getCache('memcache', false)->get('disable'))
             ->isFalse();
     }
     
-    public function testGetWithMemcacheDriver()
+    public function _testGetWithMemcacheDriver()
     {
         $this->testGet('memcache');
     }
 
-    public function testGetWithFileDriver()
+    public function _testGetWithFileDriver()
     {
         $this->testGet('file');
     }
     
-    protected function testGet($driver)
+    protected function _testGet($driver)
     {
         $this->getCache($driver)->set('get', 'content');
         $this->assert->string($this->getCache($driver)->get('get'))
             ->isEqualTo('content');
     }
     
-    public function testgetWithFakeDriver()
+    public function _testgetWithFakeDriver()
     {
         $this->exception(function() {
             $this->getCache('fake');
@@ -95,17 +95,17 @@ class Cache extends atoum
             ->isInstanceOf('\Wise\Cache\Exception');
     }
     
-    public function testDeleteWithFileDriver()
+    public function _testDeleteWithFileDriver()
     {
         $this->testDelete('file');
     }
     
-    public function testDeleteWithMemcacheDriver()
+    public function _testDeleteWithMemcacheDriver()
     {
         $this->testDelete('memcache');
     }
     
-    protected function testDelete($driver)
+    protected function _testDelete($driver)
     {
         $this->getCache($driver)->set('delete', 'content');
         $this->getCache($driver)->delete('delete');
@@ -113,17 +113,17 @@ class Cache extends atoum
                      ->isFalse();
     }
     
-    public function testDecrementWithFileDriver()
+    public function _testDecrementWithFileDriver()
     {
         $this->testDecrement('file');
     }
     
-    public function testDecrementWithMemcacheDriver()
+    public function _testDecrementWithMemcacheDriver()
     {
         $this->testDecrement('memcache');
     }
     
-    protected function testDecrement($driver)
+    protected function _testDecrement($driver)
     {
         $this->getCache($driver)->set('decrement', 5);
         $this->getCache($driver)->decrement('decrement');
@@ -131,17 +131,17 @@ class Cache extends atoum
                      ->isEqualTo(4);
     }
     
-    public function testIncrementWithFileDriver()
+    public function _testIncrementWithFileDriver()
     {
         $this->testIncrement('file');
     }
     
-    public function testIncrementWithMemcacheDriver()
+    public function _testIncrementWithMemcacheDriver()
     {
         $this->testIncrement('memcache');
     }
     
-    protected function testIncrement($driver)
+    protected function _testIncrement($driver)
     {
         $this->getCache($driver)->set('increment', 5);
         $this->getCache($driver)->increment('increment');
