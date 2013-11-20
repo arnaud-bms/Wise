@@ -4,7 +4,9 @@ namespace Wise\Cache\tests\units;
 use atoum;
 
 /**
- * Tests on the Cache component
+ * Class \Wise\Cache\tests\units\Cache
+ * 
+ * This class tests the Cache component
  *
  * @author Guillaume Dievart <dievartg@gmail.com>
  */
@@ -12,6 +14,11 @@ class Cache extends atoum
 {
     private $cache;
     
+    /**
+     * Create a mock
+     * 
+     * @return \Wise\Cache\Cache
+     */
     private function getCache()
     {
         if ($this->cache === null) {
