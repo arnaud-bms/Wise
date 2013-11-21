@@ -6,6 +6,13 @@ use Wise\Daemon\Exception;
 
 declare(ticks = 1);
 
+/**
+ * Class \Wise\Daemon\Daemon
+ *
+ * This class must be is extended by all Daemon component
+ *
+ * @author gdievart <dievartg@gmail.com>
+ */
 abstract class Daemon extends Component
 {
     /**
