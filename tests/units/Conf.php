@@ -10,45 +10,64 @@ use atoum;
  */
 class Conf extends atoum
 {
-    public function _testLoadPhpConf()
-    {
-        file_put_contents();
-    }
     
-    public function _testLoadJsonConf()
+    public function testLoadConf()
     {
+        $config1 = array('test.foo' => 'bar');
+        $config2 = array('test' => array('foo' => 'bar'));
         
-    }
-    
-    public function _testLoadIniConf()
-    {
+        $this->assert->array(\Wise\Conf\Conf::load($config1))
+                     ->isIdenticalTo($config2);
         
-    }
-    
-    protected function _testLoadConf($file)
-    {
-        $this->assert->boolean(\Wise\Conf\Conf::load($file))
-            ->isTrue();
+        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
+                     ->isEqualTo('bar');
     }
     
     
-    public function _testMergeConf()
+    public function testMergeConf()
     {
+        $config1 = array('test.foo' => 'bar');
+        $config2 = array('test.foo' => 'over');
+        $config3 = array('test' => array('foo' => 'bar'));
+        $config4 = array('test' => array('foo' => 'over'));
         
+        $this->assert->array(\Wise\Conf\Conf::load($config1))
+                     ->isIdenticalTo($config3);
+        
+        $this->assert->array(\Wise\Conf\Conf::merge($config2))
+                     ->isEqualTo($config4);
     }
     
-    public function _testGetConf()
+    public function testGetConf()
     {
+        $config1 = array('test.foo' => 'bar');
+        $config2 = array('test' => array('foo' => 'bar'));
         
+        $this->assert->array(\Wise\Conf\Conf::load($config1))
+                     ->isIdenticalTo($config2);
+        
+        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
+                     ->isEqualTo('bar');
+        
+        $this->assert->array(\Wise\Conf\Conf::get('test'))
+                     ->isIdenticalTo($config2['test']);
     }
     
-    public function _testSetConf()
+    public function testSetConf()
     {
+        $config1 = array('test.foo' => 'bar');
+        $config2 = array('test' => array('foo' => 'bar'));
         
-    }
-    
-    public function _testRewriteConf()
-    {
+        $this->assert->array(\Wise\Conf\Conf::load($config1))
+                     ->isIdenticalTo($config2);
         
+        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
+                     ->isEqualTo('bar');
+        
+        $this->assert->boolean(\Wise\Conf\Conf::set('test.foo', 'over'))
+                     ->isTrue();
+        
+        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
+                     ->isEqualTo('over');
     }
 }

@@ -84,6 +84,8 @@ class Conf extends ComponentStatic
             self::$config,
             self::load($conf)
         );
+        
+        return self::$config;
     }
 
     /**
@@ -122,5 +124,7 @@ class Conf extends ComponentStatic
             $config =& $config[$field];
         }
         $config = $newConfig;
+        
+        return true;
     }
 }
