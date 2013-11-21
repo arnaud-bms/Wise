@@ -9,7 +9,6 @@
         "psr-0": {"Wise": "src/"}
     },
     "require": {
-        "monolog/monolog": "1.2.*",
         "twig/twig":"1.*"
     },
     "extra": {
