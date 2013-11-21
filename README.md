@@ -5,13 +5,13 @@ Wise
 
 Wise est un ensemble de librairie PHP.
 
-
 Installation
 ============
+L'installation se fait via composer
+
 composer.json
-{
+
     "require": {
         "wise/wise": "dev-master"
     }
-}
 
