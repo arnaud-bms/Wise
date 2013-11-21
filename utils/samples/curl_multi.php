@@ -1,15 +1,14 @@
 <?php
 
 /**
- * examples \Wise\String\String
+ * examples \Wise\Curl\Multi
  * 
- * Examples of use of the String component
+ * Examples of use of the \Wise\Curl\Multi component
  * 
  * @author gdievart <dievartg@gmail.com>
  */
-define('ROOT_DIR', realpath(__DIR__).'/../');
+define('ROOT_DIR', realpath(__DIR__).'/../../');
 require ROOT_DIR.'vendor/autoload.php';
-
 
 $conf = array('timeout' => 3);
 $multi = new \Wise\Curl\Multi($conf);
@@ -22,8 +21,8 @@ $conf = array(
     )
 );
 
-$curlId_1 = $multi->addRequest('http://www.avis-site.com', $conf);
-$curlId_2 = $multi->addRequest('http://www.avis-site.com', $conf);
+$curlId_1 = $multi->addRequest('http://www.google.com', $conf);
+$curlId_2 = $multi->addRequest('http://www.google.com', $conf);
 
 $multi->request();
 
