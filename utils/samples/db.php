@@ -14,7 +14,7 @@ $config = array(
     'driver'   => 'pdo',
     'host'     => '127.0.0.1',
     'user'     => 'root',
-    'password' => 'Malaki16.gd',
+    'password' => '*********',
     'dbname'   => 'test',
 );
 $db = new \Wise\DB\DB($config);
