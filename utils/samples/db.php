@@ -7,20 +7,19 @@
  * 
  * @author gdievart <dievartg@gmail.com>
  */
-define('ROOT_DIR', realpath(__DIR__).'/../');
+define('ROOT_DIR', realpath(__DIR__).'/../../');
 require ROOT_DIR.'vendor/autoload.php';
 
 $config = array(
-    'driver'   => 'pdo',
-    'host'     => '127.0.0.1',
+    'driver'   => 'mysqli',
+    'host'     => 'localhost',
     'user'     => 'root',
-    'password' => '*********',
+    'password' => '**********',
     'dbname'   => 'test',
 );
-$db = new \Wise\DB\DB($config);
+$db = new \Wise\Db\Db($config);
 
-$stmt = $db->query('select * from employee2');
+$stmt = $db->query('SELECT * FROM employee LIMIT 2');
 while($row = $stmt->fetch()) {
     print_r($row);
-    die;
 }
