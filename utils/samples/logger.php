@@ -21,7 +21,7 @@ $config = array(
             'log_level' => 'error'
         ),
         array(
-            'type'      => 'test',
+            'type'      => 'stream',
             'options'   => '/tmp/debug',
             'log_level' => 'debug'
         )
@@ -38,5 +38,5 @@ $logger->addProcessor(function($record) {
 });
 
 // write log
-$logger->debug('test');
+$logger->debug('Bonjour {prenom}', array('prenom' => 'Guillaume'));
 $logger->error('test');

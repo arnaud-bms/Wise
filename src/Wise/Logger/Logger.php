@@ -136,7 +136,7 @@ class Logger extends Component
      */
     public function emergency($message, $context = array())
     {
-        $this->logger->addEmergency($message, $context);
+        $this->logger->addEmergency($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -147,7 +147,7 @@ class Logger extends Component
      */
     public function alert($message, $context = array())
     {
-        $this->logger->addAlert($message, $context);
+        $this->logger->addAlert($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -158,7 +158,7 @@ class Logger extends Component
      */
     public function critical($message, $context = array())
     {
-        $this->logger->addCritical($message, $context);
+        $this->logger->addCritical($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -169,7 +169,7 @@ class Logger extends Component
      */
     public function error($message, $context = array())
     {
-        $this->logger->addError($message, $context);
+        $this->logger->addError($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -180,7 +180,7 @@ class Logger extends Component
      */
     public function warning($message, $context = array())
     {
-        $this->logger->addWarning($message, $context);
+        $this->logger->addWarning($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -191,7 +191,7 @@ class Logger extends Component
      */
     public function notice($message, $context = array())
     {
-        $this->logger->addNotice($message, $context);
+        $this->logger->addNotice($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -202,7 +202,7 @@ class Logger extends Component
      */
     public function info($message, $context = array())
     {
-        $this->logger->addInfo($message, $context);
+        $this->logger->addInfo($this->psrLog($message, $context), $context);
     }
     
     /**
@@ -213,6 +213,29 @@ class Logger extends Component
      */
     public function debug($message, $context = array())
     {
-        $this->logger->addDebug($message, $context);
+        $this->logger->addDebug($this->psrLog($message, $context), $context);
+    }
+    
+    /**
+     * Temporary method (wait the processor PsrLogMessageProcessor)
+     * 
+     * @param string $message
+     * @param array  $context
+     * @return string Message
+     */
+    private function psrLog($message, $context)
+    {
+        if (false === strpos($message, '{')) {
+            return $message;
+        }
+
+        $replacements = array();
+        foreach ($context as $key => $val) {
+            $replacements['{'.$key.'}'] = $val;
+        }
+
+        $message = strtr($message, $replacements);
+
+        return $message;
     }
 }
