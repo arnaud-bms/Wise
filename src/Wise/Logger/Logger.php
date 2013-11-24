@@ -1,125 +1,218 @@
 <?php
 namespace Wise\Logger;
 
-use Wise\Component\ComponentStatic;
+use Wise\Component\Component;
 
 /**
- * Format data from array to csv, json, xml, serialize ...
- *
+ * Class \Wise\Logger\Logger
+ * 
+ * This class is an interface of Monolog
+ * 
  * @author gdievart <dievartg@gmail.com>
  */
-class Logger extends ComponentStatic
+class Logger extends Component
 {
     /**
-     * @staticvar int Log level
-     */
-    const LOG_DEBUG = 0;
-    const LOG_INFO = 1;
-    const LOG_ERROR = 2;
-    const LOG_CRIT = 3;
-
-    /**
-     * @var array list level
-     */
-    protected static $listLevel = array(
-        0 => 'DEBUG',
-        1 => 'INFO',
-        2 => 'ERROR',
-        3 => 'CRIT'
-    );
-
-    /**
-     * @var array Required fields
-     */
-    protected static $requiredFields = array(
-        'driver',
-        'enable',
-    );
-
-    /**
-     * @var array Logger configuration
-     */
-    protected static $loggerConf = array(
-        'logger' => array(
-            'to_load'    => null,
-            'loaded'    => null,
-            'config'    => null,
-            'driver'    => null,
-            'enable'    => false,
-            'output'    => false,
-            'prefix'    => null,
-            'prefix'    => null,
-            'log_level' => self::LOG_INFO,
-        )
-    );
-
-    /**
-     * Init logger
+     * Reference to Monolog
      *
-     * @param array $config
+     * @var \Monolog\Logger
      */
-    protected static function init($config)
+    private $logger;
+    
+    /**
+     * Log format
+     *
+     * @var \Monolog\Formatter\LineFormatter
+     */
+    private $formatter;
+    
+    /**
+     * List log level
+     *
+     * @var array
+     */
+    private $logLevel = array(
+        'debug'     => \Monolog\Logger::DEBUG,
+        'info'      => \Monolog\Logger::INFO,
+        'notice'    => \Monolog\Logger::NOTICE,
+        'warning'   => \Monolog\Logger::WARNING,
+        'error'     => \Monolog\Logger::ERROR,
+        'critical'  => \Monolog\Logger::CRITICAL,
+        'alert'     => \Monolog\Logger::ALERT,
+        'emergency' => \Monolog\Logger::EMERGENCY,
+    );
+    
+    /**
+     * {@inherit}
+     */
+    protected $requiredFields = array(
+        'name',
+        'handler',
+        'date_format',
+        'format'
+    );
+    
+    /**
+     * {@inherit}
+     */
+    protected function init($config)
     {
-        $loggerName = isset($config['name']) ? $config['name'] : 'logger';
-        self::$loggerConf[$loggerName]['enable'] = (boolean) $config['enable'];
-
-        if (isset($config['output'])) {
-            self::$loggerConf[$loggerName]['output'] = (boolean) $config['output'];
-        }
-
-        if (isset($config['log_level'])) {
-            self::$loggerConf[$loggerName]['logLevel'] = array_search($config['log_level'], self::$listLevel);
-        }
-
-        if (isset($config['callback'])) {
-            foreach ($config['callback'] as $level => $callback) {
-                if ($key = array_search($level, self::$listLevel)) {
-                    self::$loggerConf[$loggerName]['callback'][$key] = $callback;
-                }
-            }
-        }
-
-        self::$loggerConf[$loggerName]['driverLoaded'] = false;
-        self::$loggerConf[$loggerName]['driverToLoad'] = $config['driver'];
-        self::$loggerConf[$loggerName]['driverConfig'] = isset($config[$config['driver']])
-                ? $config[$config['driver']]
-                : null;
+        $this->logger    = new \Monolog\Logger($config['name']);
+        $this->formatter = new \Monolog\Formatter\LineFormatter(
+            (string) $config['format'],
+            (string) $config['date_format']
+        );
+        
+        $this->initHandler($config['handler']);
     }
-
+    
     /**
-     * Write message
-     *
-     * @param string $message
-     * @param int    $level
+     * Initialize the handlers
+     * 
+     * @param array $handlers
      */
-    public static function log($message, $level = self::LOG_INFO, $loggerName = 'logger')
+    private function initHandler($handlers)
     {
-        if (self::$loggerConf[$loggerName]['enable'] && $level >= self::$loggerConf[$loggerName]['logLevel']) {
-            self::loadDriver($loggerName);
-
-            $message = date('Y-m-d H:i:s')
-                     . ' ['.self::$listLevel[$level].'] '.$message.PHP_EOL;
-            self::$loggerConf[$loggerName]['driver']->log($message, $level);
-
-            if (self::$loggerConf[$loggerName]['output']) {
-                echo $message;
+        foreach ($handlers as $handler) {
+            if (empty($handler['type']) || empty($handler['log_level'])) {
+                throw new Exception('The handler require the fiels "type" and "log_level"', 0);
             }
-
-            if (!empty(self::$loggerConf[$loggerName]['callback'][$level])) {
-                call_user_func(self::$loggerConf[$loggerName]['callback'][$level], $message);
-            }
+            
+            $options = !empty($handler['options']) ? $handler['options'] : array();
+            $this->addHandler($handler['type'], $handler['log_level'], $options);
         }
     }
-
+    
     /**
-     * Load driver Logger
+     * Add a Monolog\Handler
+     * 
+     * @param string $handler
+     * @param string $logLevel
+     * @param array  $options
+     * @throws Exception If the handler or the logLevel don't exist
      */
-    protected static function loadDriver($loggerName)
+    public function addHandler($handler, $logLevel, $options = null)
     {
-        if (empty(self::$loggerConf[$loggerName]['driver']) || self::$loggerConf[$loggerName]['driverToLoad'] === false) {
-            $class = 'Wise\Logger\Driver\\'.ucfirst(self::$loggerConf[$loggerName]['driverToLoad']);
-            self::$loggerConf[$loggerName]['driver'] = new $class(self::$loggerConf[$loggerName]['driverConfig']);
-            self::$loggerConf[$loggerName]['driverLoaded'] = true;
+        $logLevel  = \Wise\String\String::lower($logLevel);
+        $classname = '\Monolog\Handler\\'.ucfirst($handler).'Handler';
+        if (!class_exists($classname, true)) {
+            throw new Exception('The handler "'.$handler.'" is not valid', 0);
         }
+        
+        if (empty($this->logLevel[$logLevel])) {
+            throw new Exception('The log level "'.$logLevel.'" is not valid', 0);
+        }
+        
+        $handler = new \ReflectionClass($classname);
+        
+        $args = (array) $options;
+        $args[] = $this->logLevel[$logLevel];
+        $handler = $handler->newInstanceArgs($args);
+        
+        $handler->setFormatter($this->formatter);
+        
+        $this->logger->pushHandler($handler); 
+    }
+    
+    /**
+     * Add a callable who is call after a log write
+     * 
+     * @param callable $processor
+     */
+    public function addProcessor($processor)
+    {
+        if (!is_callable($processor)) {
+            throw new Exception('The "'.var_export($processor, true).'" is not callable', 0);
+        }
+        
+        $this->logger->pushProcessor($processor);
+    }
+    
+    /**
+     * Write an emergency message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function emergency($message, $context = array())
+    {
+        $this->logger->addEmergency($message, $context);
+    }
+    
+    /**
+     * Write an alert message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function alert($message, $context = array())
+    {
+        $this->logger->addAlert($message, $context);
+    }
+    
+    /**
+     * Write a critical message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function critical($message, $context = array())
+    {
+        $this->logger->addCritical($message, $context);
+    }
+    
+    /**
+     * Write an error message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function error($message, $context = array())
+    {
+        $this->logger->addError($message, $context);
+    }
+    
+    /**
+     * Write a warning message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function warning($message, $context = array())
+    {
+        $this->logger->addWarning($message, $context);
+    }
+    
+    /**
+     * Write a notice message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function notice($message, $context = array())
+    {
+        $this->logger->addNotice($message, $context);
+    }
+    
+    /**
+     * Write an info message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function info($message, $context = array())
+    {
+        $this->logger->addInfo($message, $context);
+    }
+    
+    /**
+     * Write a debug message
+     * 
+     * @param string $message Message to write
+     * @param array  $context Context
+     */
+    public function debug($message, $context = array())
+    {
+        $this->logger->addDebug($message, $context);
     }
 }

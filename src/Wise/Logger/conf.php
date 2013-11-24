@@ -1,13 +1,19 @@
 <?php
 
 return array(
-    'logger' => array(
-        'enable' => true,
-        'driver' => 'file',
-        'output' => false,
-        'log_level' => 'DEBUG',
-        'file' => array(
-            'file' => ROOT_DIR."var/log/core.log"
+    'name'        => 'DEFAULT',
+    'date_format' => 'Y-m-d H:i:s',
+    'format'      => "[%datetime%] [%channel%] [%level_name%] %message% %context% %extra%\n",
+    'handler'     => array(
+        array(
+            'type'      => 'stream',
+            'options'   => '/tmp/alerting',
+            'log_level' => 'error'
+        ),
+        array(
+            'type'      => 'stream',
+            'options'   => '/tmp/debug',
+            'log_level' => 'debug'
         )
     )
 );
