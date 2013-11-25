@@ -22,8 +22,7 @@ class Cache extends atoum
     private function getCache()
     {
         if ($this->cache === null) {
-            $this->mockGenerator->generate('\Wise\Cache\Driver\Cache', '\Wise\Cache\Driver', 'Mock')
-                                ->overload(new atoum\mock\php\method('__construct'));
+            $this->mockGenerator->generate('\Wise\Cache\Driver\Cache', '\Wise\Cache\Driver', 'Mock');
 
             $controller = new \atoum\mock\controller();
             $controller->__construct = function() { $this->cache = array(); };
@@ -36,8 +35,7 @@ class Cache extends atoum
 
             $config = array(
                 'enable' => true,
-                'driver' => 'mock',
-                'mock'   => $controller
+                'driver' => 'mock'
             );
 
             $this->cache = new \Wise\Cache\Cache($config);
