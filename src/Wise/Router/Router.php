@@ -2,11 +2,11 @@
 namespace Wise\Router;
 
 use Wise\Component\Component;
-use Wise\Router\RouterException;
-use Wise\Conf\Conf;
 
 /**
- * Router extract informations from route
+ * class \Wise\Router\Router
+ * 
+ * This class is use to extract the routes args (plugins, controller)
  *
  * @author gdievart <dievartg@gmail.com>
  */
@@ -19,71 +19,75 @@ class Router extends Component
     const SAPI_CGI = 'cgi';
 
     /**
-     * @var string current sapi_name
+     * The current sapi
+     * 
+     * @var string
      */
-    private $sapiName = null;
-
+    private $sapiName;
+    
     /**
-     * @var string Name of route app loaded
-     */
-    protected static $routeAppLoaded = null;
-
-    /**
-     * @var array Required fields to route app
-     */
-    private $requiredFieldsRouteApp = array(
-        'prefix',
-        'app'
-    );
-
-    /**
-     * @var array Required fields to route
-     */
-    private $requiredFieldsRoute = array(
-        'pattern'
-    );
-
-    /**
-     * @var Cache
-     */
-    private $cache;
-
-    /**
-     * Init Router
+     * Default values
      *
-     * @param array $config
+     * @var array
+     */
+    private $default = array();
+    
+    /**
+     * Routes
+     *
+     * @var array
+     */
+    private $routes = array();
+
+    /**
+     * {@inherit}
+     */
+    protected $requiredFieldsRoute = array(
+        'routes'
+    );
+
+    /**
+     * {@inherit}
      */
     protected function init($config)
     {
         $this->sapiName = php_sapi_name();
-        $this->setRouteAppLoaded(null);
+        $this->default  = !empty($config['default']) ? $config['default'] : array();
+        $this->routes   = $this->loadRoutes($config['routes']);
     }
-
+    
     /**
-     * Get route app name
+     * Load the routes from the config
+     * 
+     * @param array $routes
+     * @return array the routes informations
      */
-    public static function getRouteAppLoaded()
+    protected function loadRoutes($routes)
     {
-        return self::$routeAppLoaded;
+        $routesLoaded = array();
+        foreach ($routes as $routeName => $infos) {
+            if (!array_key_exists('pattern', $infos)) {
+                throw new Exception('The field "pattern" is missed for the route "'.$routeName.'"', 0);
+            }
+            
+            if (false !== strpos($routeName, '.')) {
+                list($app, $route) = explode('.', $routeName);
+                $defaultValues = !empty($this->default[$app]) ? $this->default[$app] : array();
+            }
+            
+            $routesLoaded[$routeName] = array_merge($defaultValues, $infos);
+        }
+        
+        return $routesLoaded;
     }
-
+    
     /**
-     * Set route app loaded
-     *
-     * @param string $routeName
-     */
-    public static function setRouteAppLoaded($routeName)
-    {
-        self::$routeAppLoaded = $routeName;
-    }
-
-    /**
-     * Extract route informatios from argv
+     * Extract the route informations from argv
      *
      * @param  string $route
-     * @return array
+     * @return array The route informations
      */
-    public function getRouteInfos($route = null)
+    public function getRoute($route = null)
     {
         if ($route === null) {
             if ($this->sapiName === self::SAPI_CLI) {
@@ -94,7 +98,7 @@ class Router extends Component
             }
         }
 
-        return $this->_getRouteInfos($route);
+        return $this->getRouteInfos($route);
     }
 
     /**
@@ -103,119 +107,63 @@ class Router extends Component
      * @param  string $route
      * @return array
      */
-    private function _getRouteInfos($route)
+    private function getRouteInfos($route)
     {
         $routeInfos = false;
-        $routing = $this->getRoutingApp($route);
-        $httpMethod = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
-
-        $cacheId = 'wise:router:'.md5($route.$httpMethod);
-        if ($this->cache !== null && $routeInfos = $this->cache->getCache($cacheId)) {
-
-            return $routeInfos;
-        } else {
-            foreach ($routing as $routeName => $routeTest) {
-                $this->checkFieldsRoute($routeTest);
-                $pattern = '#^'.$routeTest['pattern'].'$#';
-                if (preg_match($pattern, $route, $argv)
-                    && (empty($routeTest['http_method'])
-                        || strtolower($routeTest['http_method']) === strtolower($httpMethod))
-                ) {
-                    $routeInfos = $routeTest;
+        foreach ($this->routes as $routeName => $routeRules) {
+            if (preg_match('/^'.str_replace('/', '\/', $routeRules['pattern']).'$/', $route, $argv)) {
+                if ($this->isRightRules($routeRules)) {
+                    $routeInfos = $routeRules;
                     array_shift($argv);
                     $routeInfos['argv'] = $argv;
-                    $routeInfos['name'] = $this->getRouteAppLoaded().':'.$routeName;
+                    $routeInfos['name'] = $routeName;
                     break;
                 }
             }
         }
 
         if ($routeInfos === false) {
-            throw new RouterException("Route '$route' not matches", 404);
+            throw new Exception('The route "'.$route.'" not matches', 0);
         }
 
         return $routeInfos;
     }
-
+    
     /**
-     * Check require fields for routeApp
-     *
-     * @param array $routeApp
+     * Check the route rules
      */
-    private function checkFieldsRoute($route)
+    protected function isRightRules($routeRules)
     {
-        foreach ($this->requiredFieldsRoute as $field) {
-            if (!array_key_exists($field, $route)) {
-                throw new RouterException("The field '$field' is required in route", 407);
+        list($host, $method) = $this->getServerInfos();
+        
+        if (!empty($routeRules['sapi']) && $this->sapiName !== $routeRules['sapi']) {
+            return false;
+        }
+        
+        if (!empty($routeRules['method']) && $method !== \Wise\String\String::lower($routeRules['method'])) {
+            return false;
+        }
+        
+        if (!empty($routeRules['host'])) {
+            $hostPattern = str_replace('\*', '.+', preg_quote($routeRules['host'], '/'));
+            if (!preg_match('/^'.$hostPattern.'$/', $routeRules['host'])) {
+                return false;
             }
         }
+                
+        return true;
     }
-
+    
     /**
-     * Extract informations from main routing
-     *
-     * @param  string $route
+     * Retrieve the server informations
+     * 
      * @return array
      */
-    private function getRoutingApp($route)
+    protected function getServerInfos()
     {
-        $routing = false;
-        if ($routeConfig = Conf::get('route_apps')) {
-            foreach ($routeConfig as $routeName => $routeApp) {
-                $this->checkFieldsRouteApp($routeApp);
-
-                $matchPrefix   = preg_match('/^'.preg_quote($routeApp['prefix'], '/').'/', $route);
-                $hostname      = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-                $matchHostname = (empty($routeApp['host_pattern']) && empty($routeApp['host'])) || $this->sapiName === self::SAPI_CLI || (!empty($routeApp['host']) && ($routeApp['host'] === $hostname)) || (!empty($routeApp['host_pattern']) && preg_match('/^'.$routeApp['host_pattern'].'$/', $hostname));
-                $matchType     = empty($routeApp['type']) || $routeApp['type'] === $this->sapiName;
-
-                if ($matchType && $matchHostname && $matchPrefix) {
-                    $this->loadApp($routeApp);
-                    $routing = Conf::get('routing');
-                    $this->setRouteAppLoaded($routeName);
-                    break;
-                }
-            }
-        }
-
-        if ($routing === false) {
-            throw new RouterException("Route app '$route' not matches", 404);
-        }
-
-        return $routing;
-    }
-
-    /**
-     * Check require fields for routeApp
-     *
-     * @param array $routeApp
-     */
-    private function checkFieldsRouteApp($routeApp)
-    {
-        foreach ($this->requiredFieldsRouteApp as $field) {
-            if (!array_key_exists($field, $routeApp)) {
-                throw new RouterException("The field '$field' is required in routeApp", 406);
-            }
-        }
-    }
-
-    /**
-     * Load bootstrap application
-     *
-     * @param array $routeApp
-     */
-    private function loadApp($routeApp)
-    {
-        if (isset($routeApp['path'])) {
-            $bootstrapFile = $routeApp['path'].'/bootstrap.php';
-        } else {
-            $bootstrapFile = ROOT_DIR.'app/'.$routeApp['app'].'/bootstrap.php';
-        }
-
-        if (file_exists($bootstrapFile)) {
-            require $bootstrapFile;
-        } else {
-            throw new RouterException("Require bootstrap.php for '{$routeApp['app']}' application", 410);
-        }
+        $host   = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+        $method = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+        
+        return array($host, $method);
     }
 }
