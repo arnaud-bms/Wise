@@ -94,7 +94,7 @@ class Router extends Component
                 array_shift($_SERVER['argv']);
                 $route = implode($_SERVER['argv'], ' ');
             } else {
-                $route = $_SERVER['REQUEST_URI'];
+                $route = $_SERVER['SCRIPT_NAME'];
             }
         }
 
