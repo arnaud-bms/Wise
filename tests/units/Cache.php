@@ -48,14 +48,14 @@ class Cache extends atoum
     {
         $this->getCache()->set('flush', 5);
         $this->getCache()->flush();
-        $this->assert->boolean($this->getCache()->get('flush'))
+        $this->boolean($this->getCache()->get('flush'))
                      ->isFalse(6);
     }
     
     public function testGet()
     {
         $this->getCache()->set('get', 'content');
-        $this->assert->string($this->getCache()->get('get'))
+        $this->string($this->getCache()->get('get'))
                      ->isEqualTo('content');
     }
     
@@ -63,7 +63,7 @@ class Cache extends atoum
     {
         $this->getCache()->set('delete', 'content');
         $this->getCache()->delete('delete');
-        $this->assert->boolean($this->getCache()->get('delete'))
+        $this->boolean($this->getCache()->get('delete'))
                      ->isFalse();
     }
     
@@ -71,7 +71,7 @@ class Cache extends atoum
     {
         $this->getCache()->set('decrement', 5);
         $this->getCache()->decrement('decrement');
-        $this->assert->integer((int)$this->getCache()->get('decrement'))
+        $this->integer((int)$this->getCache()->get('decrement'))
                      ->isEqualTo(4);
     }
     
@@ -79,7 +79,7 @@ class Cache extends atoum
     {
         $this->getCache()->set('increment', 5);
         $this->getCache()->increment('increment');
-        $this->assert->integer((int)$this->getCache()->get('increment'))
+        $this->integer((int)$this->getCache()->get('increment'))
                      ->isEqualTo(6);
     }
 }

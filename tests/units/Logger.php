@@ -13,7 +13,7 @@ use atoum;
 class Logger extends atoum
 {
     
-    private function getLogger()
+    public function getLogger()
     {
         $controller = new \atoum\mock\controller();
         $controller->write = function($record) { echo $record['message']; };
@@ -37,37 +37,26 @@ class Logger extends atoum
     
     public function testProcessor()
     {
-        $logger = $this->getLogger();
-        
-        $logger->addProcessor(function($record) { echo "process "; return $record; });
-        
-        $this->assert->output($logger->debug('debug'))
-                     ->isEqualTo('process debug');
+        $this
+            ->if($logger = $this->getLogger())
+            ->and($logger->addProcessor(function($record) { echo "process "; return $record; }))
+            ->then
+                ->output(function() use ($logger) { $logger->debug('debug'); })->isEqualTo('process debug')
+        ;
     }
     
     public function testLog()
     {
-        $logger = $this->getLogger();
-        
-        $this->assert->output($logger->debug('debug'))
-                     ->isEqualTo('debug');
-        
-        $this->assert->output($logger->info('info'))
-                     ->isEqualTo('info');
-        
-        $this->assert->output($logger->notice('notice'))
-                     ->isEqualTo('notice');
-        
-        $this->assert->output($logger->warning('warning'))
-                     ->isEqualTo('warning');
-        
-        $this->assert->output($logger->critical('critical'))
-                     ->isEqualTo('critical');
-        
-        $this->assert->output($logger->alert('alert'))
-                     ->isEqualTo('alert');
-        
-        $this->assert->output($logger->emergency('emergency'))
-                     ->isEqualTo('emergency');
+        $this
+            ->if($logger = $this->getLogger())
+            ->then
+                ->output(function() use ($logger) { $logger->debug('debug'); })->isEqualTo('debug')
+                ->output(function() use ($logger) { $logger->info('info'); })->isEqualTo('info')
+                ->output(function() use ($logger) { $logger->notice('notice'); })->isEqualTo('notice')
+                ->output(function() use ($logger) { $logger->warning('warning'); })->isEqualTo('warning')
+                ->output(function() use ($logger) { $logger->critical('critical'); })->isEqualTo('critical')
+                ->output(function() use ($logger) { $logger->alert('alert'); })->isEqualTo('alert')
+                ->output(function() use ($logger) { $logger->emergency('emergency'); })->isEqualTo('emergency')
+        ;
     }
 }

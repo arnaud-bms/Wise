@@ -16,11 +16,9 @@ class Conf extends atoum
         $config1 = array('test.foo' => 'bar');
         $config2 = array('test' => array('foo' => 'bar'));
         
-        $this->assert->array(\Wise\Conf\Conf::load($config1))
-                     ->isIdenticalTo($config2);
+        $this->array(\Wise\Conf\Conf::load($config1))->isIdenticalTo($config2);
         
-        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
-                     ->isEqualTo('bar');
+        $this->string(\Wise\Conf\Conf::get('test.foo'))->isEqualTo('bar');
     }
     
     
@@ -31,11 +29,9 @@ class Conf extends atoum
         $config3 = array('test' => array('foo' => 'bar'));
         $config4 = array('test' => array('foo' => 'over'));
         
-        $this->assert->array(\Wise\Conf\Conf::load($config1))
-                     ->isIdenticalTo($config3);
+        $this->array(\Wise\Conf\Conf::load($config1))->isIdenticalTo($config3);
         
-        $this->assert->array(\Wise\Conf\Conf::merge($config2))
-                     ->isEqualTo($config4);
+        $this->array(\Wise\Conf\Conf::merge($config2))->isEqualTo($config4);
     }
     
     public function testGetConf()
@@ -43,14 +39,11 @@ class Conf extends atoum
         $config1 = array('test.foo' => 'bar');
         $config2 = array('test' => array('foo' => 'bar'));
         
-        $this->assert->array(\Wise\Conf\Conf::load($config1))
-                     ->isIdenticalTo($config2);
+        $this->array(\Wise\Conf\Conf::load($config1))->isIdenticalTo($config2);
         
-        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
-                     ->isEqualTo('bar');
+        $this->string(\Wise\Conf\Conf::get('test.foo'))->isEqualTo('bar');
         
-        $this->assert->array(\Wise\Conf\Conf::get('test'))
-                     ->isIdenticalTo($config2['test']);
+        $this->array(\Wise\Conf\Conf::get('test'))->isIdenticalTo($config2['test']);
     }
     
     public function testSetConf()
@@ -58,16 +51,12 @@ class Conf extends atoum
         $config1 = array('test.foo' => 'bar');
         $config2 = array('test' => array('foo' => 'bar'));
         
-        $this->assert->array(\Wise\Conf\Conf::load($config1))
-                     ->isIdenticalTo($config2);
+        $this->array(\Wise\Conf\Conf::load($config1))->isIdenticalTo($config2);
         
-        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
-                     ->isEqualTo('bar');
+        $this->string(\Wise\Conf\Conf::get('test.foo'))->isEqualTo('bar');
         
-        $this->assert->boolean(\Wise\Conf\Conf::set('test.foo', 'over'))
-                     ->isTrue();
+        $this->boolean(\Wise\Conf\Conf::set('test.foo', 'over'))->isTrue();
         
-        $this->assert->string(\Wise\Conf\Conf::get('test.foo'))
-                     ->isEqualTo('over');
+        $this->string(\Wise\Conf\Conf::get('test.foo'))->isEqualTo('over');
     }
 }
