@@ -13,7 +13,7 @@ use atoum;
 class Cache extends atoum
 {
     
-    public function beforeTestMethod($testMethod)
+    public function beforeTestMethod()
     {
         $controller = new \atoum\mock\controller();
         $controller->__construct = function() { $this->cache = array(); };

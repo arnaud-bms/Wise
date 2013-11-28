@@ -13,7 +13,7 @@ use atoum;
 class Conf extends atoum
 {
     
-    public function testLoadConf($testMethod)
+    public function testLoadConf()
     {
         $this
             ->if($config1 = array('test.foo' => 'bar'))
