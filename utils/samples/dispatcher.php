@@ -1,31 +1,40 @@
 <?php
 
 /**
- * examples \Wise\Conf\Conf
+ * examples \Wise\Dispatcher\Dispatcher
  * 
- * Examples of use of the String component
+ * Examples of use of the Dispatcher component
  * 
  * @author gdievart <dievartg@gmail.com>
  */
-define('ROOT_DIR', realpath(__DIR__).'/../');
-require ROOT_DIR.'vendor/autoload.php';
+define('ROOT_DIR', realpath(__DIR__).'/../../');
+$autoload = require ROOT_DIR.'vendor/autoload.php';
 
-$configuration = array(
-  'examples' => array(
-      'first' => 1,
-      'last'  => 10
-  )  
+$autoload->add('WisePlugin', __DIR__.'/../../src');
+
+$config = array(
+    'default' => array(
+        'app_name'      => array(
+            'sapi'      => 'cli'
+        )
+    ),
+    'routes' => array(
+        'app_name.home' => array(
+            'pattern'   => '/',
+            'action'    => function() { echo "Hello World!\n"; },
+        )
+    )
 );
 
-$router = new Wise\Router\Router();
-$dispatcher = new \Wise\Dispatcher\Dispatcher();
+$router = new Wise\Router\Router($config);
 
-// Load the configuration from array
-\Wise\Conf\Conf::load($configuration);
+$router->addRoute(
+    'app_name.test', 
+    array(
+        'pattern' => '/([0-9]+)', 
+        'action' => function($id = null) { echo $id."\n"; }
+    )
+);
 
-// Display the value of examples.first
-echo \Wise\Conf\Conf::get('examples.first')."\n";
-
-// Modify and display the value of examples.first
-\Wise\Conf\Conf::set('examples.first', 2);
-echo \Wise\Conf\Conf::get('examples.first')."\n";
+$dispatcher = new \Wise\Dispatcher\Dispatcher($router);
+$dispatcher->run();
