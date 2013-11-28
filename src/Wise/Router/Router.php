@@ -46,7 +46,9 @@ class Router extends Component
     {
         $this->sapiName = php_sapi_name();
         $this->default  = !empty($config['default']) ? $config['default'] : array();
-        $this->routes   = !empty($config['routes']) ? $this->loadRoutes($config['routes']) : array();
+        if(!empty($config['routes'])) {
+            $this->loadRoutes($config['routes']);
+        }
     }
     
     /**
@@ -100,7 +102,7 @@ class Router extends Component
                 $route = $_SERVER['SCRIPT_NAME'];
             }
         }
-
+        
         return $this->getRouteInfos($route);
     }
     

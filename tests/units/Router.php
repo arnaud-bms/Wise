@@ -23,6 +23,9 @@ class Router extends atoum
                     ->hasKey('name')->contains('app_name@test')
                     ->hasKey('pattern')->contains('/')
                     ->hasKey('sapi')->contains('cli')
+                ->array($router->getRoute('/default'))
+                    ->hasKey('name')->contains('route_name')
+                    ->hasKey('pattern')->contains('/default')
                 ->exception(function() use($router) { $router->getRoute('/test'); })
                     ->hasMessage('The route "/test" not matches')
             ->if($router = new \Wise\Router\Router())
@@ -79,6 +82,11 @@ class Router extends atoum
             'default' => array(
                 'app_name' => array(
                     'sapi' => 'cli'
+                )
+            ),
+            'routes' => array(
+                'route_name' => array(
+                    'pattern' => '/default'
                 )
             )
         );
