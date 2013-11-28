@@ -13,14 +13,17 @@ use atoum;
 class Logger extends atoum
 {
     
-    public function getLogger()
+    public function beforeTestMethod()
     {
         $controller = new \atoum\mock\controller();
         $controller->write = function($record) { echo $record['message']; };
         
         $this->mockGenerator->generate('\Monolog\Handler\AbstractProcessingHandler', '\Monolog\Handler', 'MockHandler');
-        
-        $config = array(
+    }
+    
+    private function getLoggerConfig()
+    {
+        return array(
             'name'        => 'test',
             'date_format' => 'Y-m-d H:i:s',
             'format'      => "[%datetime%] [%channel%] [%level_name%] %message% %context% %extra%\n",
@@ -31,14 +34,13 @@ class Logger extends atoum
                 )
             )
         );
-        
-        return new \Wise\Logger\Logger($config);
     }
     
     public function testProcessor()
     {
         $this
-            ->if($logger = $this->getLogger())
+            ->if($config = $this->getLoggerConfig())
+            ->and($logger = new \Wise\Logger\Logger($config))
             ->and($logger->addProcessor(function($record) { echo "process "; return $record; }))
             ->then
                 ->output(function() use ($logger) { $logger->debug('debug'); })->isEqualTo('process debug')
@@ -48,7 +50,8 @@ class Logger extends atoum
     public function testLog()
     {
         $this
-            ->if($logger = $this->getLogger())
+            ->if($config = $this->getLoggerConfig())
+            ->and($logger = new \Wise\Logger\Logger($config))
             ->then
                 ->output(function() use ($logger) { $logger->debug('debug'); })->isEqualTo('debug')
                 ->output(function() use ($logger) { $logger->info('info'); })->isEqualTo('info')
