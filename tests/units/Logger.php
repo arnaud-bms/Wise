@@ -13,7 +13,7 @@ use atoum;
 class Logger extends atoum
 {
     
-    public function beforeTestMethod()
+    public function beforeTestMethod($testMethod)
     {
         $controller = new \atoum\mock\controller();
         $controller->write = function($record) { echo $record['message']; };
