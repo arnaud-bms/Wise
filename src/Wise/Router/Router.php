@@ -42,18 +42,11 @@ class Router extends Component
     /**
      * {@inherit}
      */
-    protected $requiredFieldsRoute = array(
-        'routes'
-    );
-
-    /**
-     * {@inherit}
-     */
     protected function init($config)
     {
         $this->sapiName = php_sapi_name();
         $this->default  = !empty($config['default']) ? $config['default'] : array();
-        $this->routes   = $this->loadRoutes($config['routes']);
+        $this->routes   = !empty($config['routes']) ? $this->loadRoutes($config['routes']) : array();
     }
     
     /**
@@ -64,21 +57,31 @@ class Router extends Component
      */
     protected function loadRoutes($routes)
     {
-        $routesLoaded = array();
-        foreach ($routes as $routeName => $infos) {
-            if (!array_key_exists('pattern', $infos)) {
-                throw new Exception('The field "pattern" is missed for the route "'.$routeName.'"', 0);
-            }
-            
-            if (false !== strpos($routeName, '.')) {
-                list($app, $route) = explode('.', $routeName);
-                $defaultValues = !empty($this->default[$app]) ? $this->default[$app] : array();
-            }
-            
-            $routesLoaded[$routeName] = array_merge($defaultValues, $infos);
+        foreach ($routes as $name => $route) {
+            $this->addRoute($name, $route);
         }
-        
-        return $routesLoaded;
+    }
+    
+    /**
+     * Add a route
+     * 
+     * @param string $name
+     * @param array  $route The route informations
+     * @throws Exception
+     */
+    public function addRoute($name, $route)
+    {
+        if (!array_key_exists('pattern', $route)) {
+            throw new Exception('The field "pattern" is missed for the route "'.$name.'"', 0);
+        }
+
+        $defaultValues = array();
+        if (false !== strpos($name, '@')) {
+            list($app, $routeName) = explode('@', $name);
+            $defaultValues = !empty($this->default[$app]) ? $this->default[$app] : array();
+        }
+
+        $this->routes[$name] = array_merge($defaultValues, $route);
     }
     
     /**
@@ -99,6 +102,20 @@ class Router extends Component
         }
 
         return $this->getRouteInfos($route);
+    }
+    
+    /**
+     * Delete a route from the router
+     * 
+     * @param string $name Te route name
+     */
+    public function deleteRoute($name)
+    {
+        if (!array_key_exists($name, $this->routes)) {
+            throw new Exception('The route "'.$name.'" does not exist', 0);
+        }
+        
+        unset($this->routes[$name]);
     }
 
     /**
