@@ -2,7 +2,7 @@
 namespace Wise\SqlBuilder;
 
 use Wise\Component\Component;
-use Wise\DB\DB;
+use Wise\Db\Db;
 
 /**
  * Build sql request
@@ -29,11 +29,11 @@ class SqlBuilder extends Component
     public function init($table)
     {
         $this->table = $table;
-        $this->db = DB::getInstance();
+        $this->db = Db::getInstance();
     }
 
     /**
-     * Call method on DB
+     * Call method on Db
      *
      * @param  string $method
      * @param  array  $args
